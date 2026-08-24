@@ -4,88 +4,118 @@
     <meta charset="UTF-8">
     <meta name="keywords" content="">
     <meta name="description" content=" ">
-   <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>Help Needy Customers </title>
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>بنك الطعام المصري - لوحة التحكم</title>
     <style>
+        /* إعدادات الألوان الافتراضية (الوضع الأبيض) */
         :root {
-            --primary-green: #00ff41;
-            --dark-bg: #0d0d0d;
+            --bg-color: #ffffff;
+            --header-bg: linear-gradient(180deg, #f8f9fa, #ffffff);
+            --card-bg: #fdfdfd;
+            --text-main: #1a1a1a;
+            --text-gray: #555555;
+            --primary-green: #00812b;
+            --border-color: #e0e0e0;
+            --status-bg: #f8f9fa;
+        }
+
+        /* إعدادات الألوان عند التحويل (الوضع الليلي) */
+        body.dark-mode {
+            --bg-color: #0d0d0d;
+            --header-bg: linear-gradient(90deg, #000, #1a1a1a);
             --card-bg: #1a1a1a;
+            --text-main: #ffffff;
             --text-gray: #b0b0b0;
+            --primary-green: #00ff41;
+            --border-color: #333;
+            --status-bg: #000;
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: white;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            transition: all 0.3s ease;
         }
 
         header {
-            background: linear-gradient(90deg, #000, #1a1a1a);
-            padding: 30px 20px; /* زيادة مساحة الهيدر */
+            background: var(--header-bg);
+            padding: 30px 20px;
             text-align: center;
-            border-bottom: 2px solid var(--primary-green);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            border-bottom: 3px solid var(--primary-green);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
         }
 
-        /* تنسيق الصورة الجديد ليتماشى مع الثيم */
+        /* تنسيق زر التبديل */
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--primary-green);
+            color: #000;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
         .system-logo {
-            width: 120px; /* حجم مناسب */
+            width: 110px;
             height: auto;
-            border-radius: 8px; /* زوايا منحنية بسيطة */
-            border: 2px solid var(--primary-green); /* برواز أخضر */
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4); /* توهج أخضر حول الصورة */
+            border-radius: 8px;
+            border: 2px solid var(--primary-green);
             margin-bottom: 15px;
-            background: #000;
+            background: #fff;
             padding: 5px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 24px;
-            letter-spacing: 2px;
+            font-size: 22px;
             color: var(--primary-green);
-            text-transform: uppercase;
-        }
-
-        header p {
-            margin: 8px 0 0;
-            font-size: 14px;
-            color: var(--text-gray);
-            font-family: monospace;
+            font-weight: bold;
         }
 
         .container {
             max-width: 1200px;
             margin: 30px auto;
-            padding: 0 20px;
-            padding-bottom: 60px; /* مسافة لكي لا يغطيها شريط الحالة الأسفل */
+            padding: 0 20px 80px 20px;
         }
 
         .section-title {
-            border-right: 4px solid var(--primary-green);
+            border-right: 5px solid var(--primary-green);
             padding-right: 15px;
-            margin: 30px 0 20px;
-            font-size: 18px;
+            margin: 40px 0 20px;
+            font-size: 19px;
             color: var(--primary-green);
-            text-transform: uppercase;
+            font-weight: bold;
         }
 
         .grid-menu {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 20px;
         }
 
         .card {
             background: var(--card-bg);
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 22px;
             text-decoration: none;
-            color: white;
+            color: var(--text-main);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -95,116 +125,99 @@
         .card:hover {
             border-color: var(--primary-green);
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.1);
-            background: #222;
+            box-shadow: 0 8px 20px rgba(0, 129, 43, 0.1);
         }
 
-        .card span {
-            font-size: 16px;
-            font-weight: 500;
+        .card small {
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 11px;
         }
 
         .status-bar {
-            background: #000;
-            padding: 10px;
+            background: var(--status-bg);
+            padding: 12px;
             position: fixed;
             bottom: 0;
             width: 100%;
             font-family: monospace;
-            font-size: 12px;
+            font-size: 13px;
             color: var(--primary-green);
-            border-top: 1px solid #333;
+            border-top: 1px solid var(--border-color);
             z-index: 1000;
         }
 
-        .emergency { border-right: 4px solid #ff4b4b; }
-
+        .emergency { border-right: 5px solid #d93025; }
     </style>
+
 </head>
-<body>
+<body id="pageBody">
 
 <header>
-    <!-- الصورة المعدلة -->
+    <!-- الزر المطلوب هنا -->
+    <button class="theme-toggle-btn" id="themeBtn" onclick="toggleTheme()">الوضع الليلي 🌙</button>
+
     <img src="photo.jpg" alt="Logo" class="system-logo">
-    
-    <h1>EGYPTIAN FOOD BANK | EGYPTIAN FOOD BANK</h1>
-    
+    <h1>EGYPTIAN FOOD BANK | بنك الطعام المصري</h1>
 </header>
 
 <div class="container">
-    
-    <!-- القسم الأول -->
     <div class="section-title">بنك الطعام المصرى - الطلبات</div>
     <div class="grid-menu">
-        <a href="تقديم طلب مستحق.html" class="card emergency">
-            <span>تقديم طلب مستحق</span>
-            <small>دخول</small>
-        </a>
-        <a href="تقديم الجمعيات والمؤسسات.html" class="card emergency">
-            <span>تقديم الجمعيات والمؤسسات</span>
-            <small>دخول</small>
-        </a>
-        <a href="للحالات السودانية.html" class="card emergency">
-            <span>للحالات السودانية</span>
-            <small>دخول</small>
-        </a>
-        <a href="للحالات الموسمية.html" class="card emergency">
-            <span>للحالات الموسمية</span>
-            <small>دخول</small>
-        </a>
+        <a href="تقديم طلب مستحق.html" class="card emergency"><span>تقديم طلب مستحق</span><small>دخول</small></a>
+        <a href="تقديم الجمعيات والمؤسسات.html" class="card emergency"><span>تقديم الجمعيات</span><small>دخول</small></a>
+        <a href="للحالات السودانية.html" class="card emergency"><span>للحالات السودانية</span><small>دخول</small></a>
+        <a href="للحالات الموسمية.html" class="card emergency"><span>للحالات الموسمية</span><small>دخول</small></a>
     </div>
 
-    <!-- القسم الثاني -->
     <div class="section-title">بنك الطعام المصرى - العمليات</div>
     <div class="grid-menu">
-        <a href="الاعطال.html" class="card emergency">
-            <span>الاعطال</span>
-            <small>دخول</small>
-        </a>
-        <a href="الاكواد.html" class="card emergency">
-            <span>الاكواد</span>
-            <small>دخول</small>
-        </a>
-        <a href="الشكاوى.html" class="card emergency">
-            <span>الشكاوى</span>
-            <small>دخول</small>
-        </a>
-        <a href="طلب نقل مساعدة.html" class="card emergency">
-            <span>طلب نقل مساعدة</span>
-            <small>دخول</small>
-        </a>
+        <a href="الاعطال.html" class="card emergency"><span>الأعطال</span><small>دخول</small></a>
+        <a href="الاكواد.html" class="card emergency"><span>الأكواد</span><small>دخول</small></a>
+        <a href="الشكاوى.html" class="card emergency"><span>الشكاوى</span><small>دخول</small></a>
+        <a href="طلب نقل مساعدة.html" class="card emergency"><span>طلب نقل مساعدة</span><small>دخول</small></a>
     </div>
 
-    <!-- القسم الثالث -->
     <div class="section-title">بنك الطعام المصرى - البرامج والروابط</div>
     <div class="grid-menu">
-        <a href="تقديم دور رعاية.html" class="card emergency">
-            <span>تقديم دور رعاية</span>
-            <small>دخول</small>
-        </a>
-        <a href="قسم الروابط الهامة.html" class="card emergency">
-            <span>قسم الروابط الهامة</span>
-            <small>دخول</small>
-        </a>
-        <a href="استفسارات المستحقين.html" class="card emergency">
-            <span>استفسارات المستحقين</span>
-            <small>دخول</small>
-        </a>
-        <a href="برنامج فرى مارت.html" class="card emergency">
-            <span>برنامج فرى مارت</span>
-            <small>دخول</small>
-        </a>
-        <a href="الحالات الفلسطينية.html" class="card emergency">
-            <span>الحالات الفلسطينية</span>
-            <small>دخول</small>
-        </a>
+        <a href="تقديم دور رعاية.html" class="card emergency"><span>تقديم دور رعاية</span><small>دخول</small></a>
+        <a href="قسم الروابط الهامة.html" class="card emergency"><span>الروابط الهامة</span><small>دخول</small></a>
+        <a href="استفسارات المستحقين.html" class="card emergency"><span>استفسارات</span><small>دخول</small></a>
+        <a href="برنامج فرى مارت.html" class="card emergency"><span>فري مارت</span><small>دخول</small></a>
     </div>
-
 </div>
 
 <div class="status-bar">
-    > EGYPTIAN FOOD BANK | النظام جاهز | متصل بنجاح
+    > بنك الطعام المصري | النظام جاهز | متصل بنجاح
 </div>
+
+<script>
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const btn = document.getElementById('themeBtn');
+        
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            btn.innerHTML = "الوضع المضيء ☀️";
+            localStorage.setItem('myTheme', 'dark');
+        } else {
+            btn.innerHTML = "الوضع الليلي 🌙";
+            localStorage.setItem('myTheme', 'light');
+        }
+    }
+
+    // لتذكر الاختيار عند تحديث الصفحة
+    window.onload = () => {
+        const savedTheme = localStorage.getItem('myTheme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeBtn').innerHTML = "الوضع المضيء ☀️";
+        }
+    }
+</script>
 
 </body>
 </html>
