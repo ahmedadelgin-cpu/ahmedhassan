@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<link rel= "stylesheet" href="styles/mystyle.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج تقديم طلب محتاج - بنك الطعام</title>
+    <style>
+        :root {
+            --efb-green: #00a651;
+            --efb-red: #d63031;
+            --soft-blue: #e1f5fe;
+            --bg-white: #ffffff;
+            --text-dark: #2d3436;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        /* رأس الصفحة */
+        header {
+            background: var(--efb-green);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 { margin: 0; font-size: 26px; }
+
+        /* صندوق نص الرد (Script) */
+        .script-box {
+            background: #fff9f9;
+            border: 2px dashed var(--efb-red);
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .script-box::before {
+            content: "نص الرد المقترح للعميل";
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--efb-red);
+            color: white;
+            padding: 2px 15px;
+            font-size: 13px;
+            border-radius: 10px;
+        }
+
+        .script-box p {
+            color: #444;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        /* تنبيه رقم الخط الساخن */
+        .hotline-banner {
+            background: var(--efb-red);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 20px;
+            border-radius: 8px;
+        }
+
+        /* نموذج البيانات */
+        .data-section {
+            padding: 30px;
+        }
+
+        .data-section h2 {
+            color: var(--efb-green);
+            border-bottom: 2px solid var(--efb-green);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .data-item {
+            background: #f9f9f9;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-item span { font-weight: bold; color: var(--efb-green); }
+
+        /* قسم المتابعة */
+        .note-footer {
+            background: var(--soft-blue);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            border-right: 5px solid #0288d1;
+        }
+
+        .note-footer h3 { margin: 0 0 10px 0; color: #0277bd; font-size: 18px; }
+
+        .urgent-tag {
+            color: var(--efb-red);
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>نظام إدارة طلبات المساعدات (تقديم طلب محتاج)</h1>
+    </header>
+
+    <!-- صندوق الرد والاعتذار -->
+    <div class="script-box">
+        <p>"يا فندم وضحت ملحوظة للقسم المختص أن حضرتك كلمتنا أكثر من مرة ولم يتم التواصل حتى الآن لضمان سرعة الرد."</p>
+        <p>"أتفهم تماماً أن الأمر لا يتحمل التأخير.. قمت الآن بعمل استعجال لطلبك بضرورة التواصل معك في أقرب وقت ممكن نظراً لأهمية الطلب."</p>
+        <p>"بنعتذر لحضرتك جداً عن التأخير، وده نتيجة ضغط الطلبات حالياً، وأنا من خلالي هعمل لحضرتك طلب استعجال وإن شاء الله التواصل هيتم في أقرب وقت."</p>
+    </div>
+
+    <!-- تنبيه الخط الساخن -->
+    <div class="hotline-banner">
+        ⚠️ تقديم الطلب يكون من خلال الرقم الخاص بنا16060 فقط
+    </div>
+
+    <!-- نموذج البيانات المطلوبة -->
+    <div class="data-section">
+        <h2>📋 البيانات المطلوبة لسحب الطلب (في التقديم بناخد التفاصيل دي):</h2>
+        <div class="form-grid">
+            <div class="data-item"><span>👤</span> اسم العميل</div>
+            <div class="data-item"><span>📞</span> رقم الهاتف</div>
+            <div class="data-item"><span>📍</span> محافظة إيه؟</div>
+            <div class="data-item"><span>🔍</span> السوال عن مصدر معرفة الرقم</div>
+            <div class="data-item"><span>👨‍👩‍👧‍👦</span> عدد أفراد الأسرة</div>
+            <div class="data-item"><span>🆕</span> الحالة (جديدة / قديمة / كانت موقوفة)</div>
+        </div>
+    </div>
+
+    <!-- قسم السياسات والمتابعة -->
+    <div class="note-footer">
+        <h3>🔄 بخصوص متابعة الطلب:</h3>
+        <p>• يتم متابعة طلب المساعدة <strong>مرة واحدة فقط خلال الشهر</strong>.</p>
+        <p>• <span class="urgent-tag">في حالة استعجال الطلب:</span> يتم توضيح أن الحالة لها طلب ولم يتم التواصل معها حتى الآن،.</p>
+    </div>
+ <!-- قسم السياسات والمتابعة -->
+    <div class="note-footer">
+        <h3>🔄 بخصوص تقديم  الطلب:</h3>
+        <p>     تقديم طلب مستحق دى خاص بة المصريون</p>
+        <p>    تقديم طلبات اهالي غزة خاص با الفلسطينية</p>
+        <p>      </p>
+       <p>      </p>
+        
+    </div>
+ <div class="note-footer">
+        <h3>🔄 بخصوص توجيه محتاج:</h3>
+        <p>   لو  متسجل على السيستم متابعة طلب فى نفس الشهر يتم عمل توجية محتاج بعد المتابعة  </p>
+        <p>   يتم كتابة فى توجية محتاج الحالة لها طلب لم يتم التواصل حتى الان </p>
+
+        <p>      </p>
+       <p>      </p>
+        
+    </div>
+
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

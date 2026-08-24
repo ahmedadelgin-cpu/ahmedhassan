@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<link rel= "stylesheet" href="styles/mystyle.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الشكاوى الموحد - بنك الطعام</title>
+    <style>
+        :root {
+            --primary-red: #d63031;
+            --primary-green: #00a651;
+            --dark-blue: #0984e3;
+            --warning-orange: #f39c12;
+            --bg-white: #ffffff;
+            --light-gray: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 4px solid var(--primary-red);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--primary-red);
+            margin: 0;
+            font-size: 28px;
+        }
+
+        /* 1. المتطلبات الأساسية */
+        .essentials {
+            background: #fff5f5;
+            border: 1px solid #ffcece;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .essentials h2 {
+            color: var(--primary-red);
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        .grid-5 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #eee;
+        }
+
+        /* 2. حالة الجمعيات */
+        .alert-box {
+            background: #fdf6e3;
+            border-right: 5px solid var(--warning-orange);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* 3. أنواع الشكاوى - بطاقات */
+        .complaint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .card-header {
+            padding: 15px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* ألوان الأقسام */
+        .bg-honor { background: #6c5ce7; } /* ميثاق الشرف */
+        .bg-package { background: var(--primary-green); } /* انقطاع الكرتونة */
+        .bg-quality { background: var(--primary-red); } /* الجودة والنقص */
+        .bg-otp { background: var(--dark-blue); } /* القسائم الإلكترونية */
+
+        .list-unstyled {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-unstyled li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 14px;
+        }
+
+        .list-unstyled li:last-child { border: none; }
+
+        .time-badge {
+            display: inline-block;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .danger-note {
+            color: var(--primary-red);
+            font-weight: bold;
+            font-size: 12px;
+            margin-top: 10px;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>دليل تقديم الشكاوى الموحد | Complaints Guide</h1>
+    </header>
+
+    <!-- 1. الأساسيات والجمعيات -->
+    <div class="essentials">
+        <h2>📌 4 بيانات أساسية لتقديم أي شكوى:</h2>
+        <div class="grid-5">
+            <div class="grid-item">اسم المشروع</div>
+            <div class="grid-item">اسم الحالة</div>
+            <div class="grid-item"> تفاصيل الشكوى</div>
+            <div class="grid-item">مدة الانقطاع</div>
+        </div>
+    </div>
+
+    
+
+    <!-- 2. شبكة أنواع الشكاوى -->
+    <div class="complaint-grid">
+        
+        <!-- ميثاق الشرف -->
+        <div class="card">
+            <div class="card-header bg-honor">⚖️ شكاوى ميثاق الشرف</div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li>طلب مبالغ مالية مقابل المساعدة.</li>
+                    <li>سوء سلوك الجمعية مع الحالات.</li>
+                    <li>إجبار الحالة على أعمال نظافة أو تنزيل كراتين.</li>
+                     <br>
+                      <li>الحالة   &nbsp;&nbsp;&nbsp;  من جمعية &nbsp;&nbsp;&nbsp;    تشكو من   &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع   &nbsp;&nbsp;&nbsp;  الحالة تستلم (موسمى)او(شهرى)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- انقطاع الكرتونة -->
+        <div class="card">
+            <div class="card-header bg-package">📦 شكاوى انقطاع الكرتونة</div>
+            <div class="card-body">
+                <div class="time-badge">من 1 شهر إلى 11 شهر:</div>
+                <p style="font-size: 13px; margin: 0;">يتم تسجيل شكوى (توضيح النوع: شهري أو موسمي).</p>
+                <span class="danger-note">🚨 12 شهر أو أكثر: لا تسجل شكوى (تقديم طلب جديد).</span>
+                 <br>
+                <span class="danger-note">الحالة  &nbsp;&nbsp;&nbsp;    من جمعية  &nbsp;&nbsp;&nbsp;    تشكو من انقطاع الكرتونة من شهر  &nbsp;&nbsp;&nbsp;    الى شهر   &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع   &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى)</span>
+            </div>
+        </div>
+
+        <!-- جودة المنتجات ونقص المكونات -->
+        <div class="card">
+            <div class="card-header bg-quality">🍎 الجودة ونقص المكونات</div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><strong>سوء الجودة:</strong> الجودة </li>
+                    <li><strong>سوء الجودة:</strong> وصف حالة المنتج التالف.</li>
+                    <li><strong>سوء الجودة:</strong>الحالة&nbsp;&nbsp;&nbsp;    من جمعية &nbsp;&nbsp;&nbsp;    تشكو من سوء جودة المنتجات  &nbsp;&nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع  &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى) </li>
+                     <br>
+                    <li><strong>:</strong> </li>
+                    <li><strong>نقص المكونات:</strong> يتم التقديم في حالة نقص المكونات الأساسية المتفق عليها بعد مراجعه الاصناف بالكامل مع العميله و معرفه الاصناف التى لم يتم استلامها و كتاتها فى الشكوى بالتفصيل .</li>
+                    <li><strong>نقص المكونات:</strong> الحالة    &nbsp;&nbsp;&nbsp; تشتكى من نقص المكونات والحالة استلمت  &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع  &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- OTP القسائم الإلكترونية -->
+        <div class="card">
+            <div class="card-header bg-otp">📱 شكاوى القسائم (OTP) الخاصه بالحالات الفلسطينية</div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li>عدم استلام الكود لمدة شهر أو أكثر.</li>
+                    <li>يتم التقديم على نفس الرقم المسجل بالحالة.</li>
+                    <li><strong>تأكد:</strong> الحالة تستلم (شهري دائم) وليس (منحة مؤقتة).</li>
+                </ul>
+                <span class="danger-note">❌ لا يتم تسجيل شكوى للمنح المؤقتة (مثل المنحة الفلسطينية).</span>
+                <br>
+                 <li>            الحالة   &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; تشكو عدم ارسال الكود او القسايم الشرائية من شهر.    &nbsp;&nbsp;&nbsp; الى شهر
+
+     </li>
+            </div>
+        </div>
+<!-- OTP القسائم الإلكترونية -->
+        <div class="card">
+            <div class="card-header bg-otp">   استفسارات الشكاوى </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li>                 تم توضيح رد الشكوى     </li>
+                    <li>           العميل له شكوى لم يتم الرد حتى الان      </li>
+                    <li>      العميلة لها شكوى لم يتم الرد حتى الان           </li>
+                    <li>            العميل له شكوى تم متابعة الشكوى     </li>
+                    <li>         العميلة لها شكوى تم متابعة الشكوى        </li>
+                    
+                </ul>
+                
+  
+          </div>
+
+            <div class="card-body">
+                <div class="card-header bg-otp">   شكاوى السودانية </div>
+                <ul class="list-unstyled">
+                    <li>    لو العميلة وضحت تم إيقاف تلقي الطلبات حالياً في جمعيات (الكمال الخيرية، المرأة السودانية، إسناد لدعم المتضررين).        </li>
+                    <li>     يتم  تقديم شكوى  تجاوزات جمعية       </li>
+                    <li>                </li>
+                    <li>             </li>
+                    <li>               </li>  
+                </ul>
+                
+              
+          </div>
+        </div>
+
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 12px;">
+        نظام إدارة الجودة والشكاوى - بنك الطعام المصري © 2024
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<link rel= "stylesheet" href="styles/mystyle.css"
+    <meta charset="UTF-8">
+    <title>استفسارات النيدي | بنك الطعام</title>
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --dark-black: #0a0a0a;
+            --card-bg: #161616;
+            --accent-blue: #00d2ff;
+            --text-gray: #b0b0b0;
+        }
+
+        body {
+            background-color: var(--dark-black);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--neon-green);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.1);
+        }
+
+        .header h1 { color: var(--neon-green); margin: 0; font-size: 28px; }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .category-card:hover { border-color: var(--neon-green); transform: translateY(-5px); }
+
+        .category-title {
+            color: var(--neon-green);
+            font-weight: bold;
+            border-right: 4px solid var(--neon-green);
+            padding-right: 10px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .query-list { list-style: none; padding: 0; margin: 0; }
+
+        .query-item {
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            border-left: 2px solid transparent;
+        }
+
+        .query-item:hover {
+            background: rgba(0, 255, 65, 0.05);
+            border-left-color: var(--accent-blue);
+            cursor: pointer;
+        }
+
+        .query-item::before {
+            content: '>';
+            color: var(--neon-green);
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .status-bar {
+            margin-top: 30px;
+            font-family: monospace;
+            color: var(--text-gray);
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>استفسارات النيدي - مركز الاتصال</h1>
+    <p style="color: var(--text-gray);">قائمة الاستجابات السريعة (v2.0)</p>
+</div>
+
+<div class="grid-container">
+    
+    <!-- القسم 1 -->
+    <div class="category-card">
+        <div class="category-title">التواصل والنظام</div>
+        <div class="query-list">
+            <div class="query-item">هتعاود الاتصال من الرقم المسجل</div>
+            <div class="query-item">لا يوجد بيانات مسجلة على السيستيم</div>
+            <div class="query-item">استفسار بخصوص مكالمة من بنك الطعام</div>
+            <div class="query-item">استفسار بخصوص مكالمة لتحديث البيانات</div>
+            <div class="query-item">استفسار من قسم الأبحاث (تم التوضيح)</div>
+        </div>
+<!-- القسم 1 -->
+    <div class="category-card">
+        <div class="category-title">التواصل والنظام</div>
+        <div class="query-list">
+            <div class="query-item">هتعاود الاتصال من الرقم المسجل</div>
+            <div class="query-item">لا يوجد بيانات مسجلة على السيستيم</div>
+            <div class="query-item">استفسار بخصوص مكالمة من بنك الطعام</div>
+            <div class="query-item">استفسار بخصوص مكالمة لتحديث البيانات</div>
+            <div class="query-item">استفسار من قسم الأبحاث (تم التوضيح)</div>
+        </div>
+    </div>
+
+    <!-- القسم 2 -->
+    <div class="category-card">
+        <div class="category-title">التقديم والبيانات</div>
+        <div class="query-list">
+            <div class="query-item">استفسار بخصوص تقديم طلب (تم التوضيح)</div>
+            <div class="query-item">استفسار بخصوص تقديم طلب من (اللنك)</div>
+            <div class="query-item">استفسار بخصوص تقديم طلب من (الويب سايت)</div>
+            <div class="query-item">تعديل رقم الهاتف (تم التوضيح)</div>
+            <div class="query-item">تحديث البيانات الأساسية (تم التوضيح)</div>
+        </div>
+    </div>
+
+    <!-- القسم 3 -->
+    <div class="category-card">
+        <div class="category-title">البرامج والاستحقاق</div>
+        <div class="query-list">
+            <div class="query-item">النقل من (موسمي) إلى (شهري)</div>
+            <div class="query-item">استفسار بخصوص عدد النقاط المتاحة</div>
+            <div class="query-item">تم التوضيح أن الحالة "تحت الاستهداف"</div>
+            <div class="query-item">الحالة غير مطابقة لشروط بنك الطعام</div>
+            <div class="query-item">استفسار بخصوص نوع البرنامج (موسمي/شهري)</div>
+        </div>
+    </div>
+
+    <!-- القسم 4 -->
+    <div class="category-card">
+        <div class="category-title">الحالات الخاصة والتحويل</div>
+        <div class="query-list">
+            <div class="query-item" style="color: var(--accent-blue);">حالة سودانية: توجيه للجمعية لتقديم طلب</div>
+            <div class="query-item">تم تقديم طلب سابق من جمعية (متابعة)</div>
+            <div class="query-item">تم التحويل إلى: بنك الشفاء المصري</div>
+            <div class="query-item">تم التحويل إلى: معنا لحياة أفضل</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="status-bar">
+    READY > DATABASE_SYNC > AHMED_HASSAN_SYSTEM_ACTIVE
+</div>
+
+</body>
+</html>

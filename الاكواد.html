@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<link rel= "stylesheet" href="styles/mystyle.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل تسليم الأكواد - بنك الطعام</title>
+    <style>
+        :root {
+            --efb-green: #00a651;
+            --efb-red: #d63031;
+            --bg-white: #ffffff;
+            --soft-gray: #f8f9fa;
+            --text-dark: #2d3436;
+            --border: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 4px solid var(--efb-red);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--efb-red);
+            margin: 0;
+            font-size: 28px;
+        }
+
+        /* قسم قواعد التسليم */
+        .rules-section {
+            background: #fffafa;
+            border: 1px solid #ffeded;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .rules-header {
+            color: var(--efb-red);
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f9ecec;
+        }
+
+        .rule-item:last-child { border: none; }
+
+        .icon { font-size: 20px; }
+
+        /* قسم الأكشن (الجدول) */
+        .action-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: var(--efb-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px 8px 0 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            background: var(--soft-gray);
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .action-card {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-card:hover {
+            border-color: var(--efb-green);
+            color: var(--efb-green);
+            transform: translateY(-2px);
+        }
+
+        /* قسم استثناء رقم الهاتف */
+        .phone-exception {
+            background: #e1f5fe;
+            border-right: 6px solid #0288d1;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .exception-header {
+            color: #01579b;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .logic-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .badge-no { background: #ffebee; color: #c62828; }
+        .badge-yes { background: #e8f5e9; color: #2e7d32; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>نظام تسليم الأكواد | Code Delivery System</h1>
+    </header>
+
+    <!-- 1. قواعد التسليم -->
+    <div class="rules-section">
+        <div class="rules-header">⚠️ قواعد هامة جداً قبل التسليم</div>
+        <div class="rule-item"><span class="icon">📱</span> الاتصال من نفس الرقم المسجل.</div>
+        <div class="rule-item"><span class="icon">👤</span> التأكد من الاسم الرباعي الصحيح للحالة.</div>
+        <div class="rule-item"><span class="icon">👪</span> التسليم للحالة أو أقارب درجة أولى (زوج/زوجة/أبناء).</div>
+        <div class="rule-item"><span class="icon">🆔</span> في حالة العزاب: يمكن للأخ/الأخت الاستلام ببطاقة الرقم القومي.</div>
+        <div class="rule-item"><span class="icon">👶</span> الحفيد: يستلم إذا كان يتصل من رقم الحالة + ذكر الاسم الرباعي والرقم القومي.</div>
+    </div>
+
+    <!-- 2. خيارات الأكشن -->
+    <div class="action-section">
+        <div class="section-title">قائمة "الأكشن" عند التسليم</div>
+        <div class="action-grid">
+            <div class="action-card">تم تسليم الكود</div>
+            <div class="action-card">اختلاف في رقم الهاتف</div>
+            <div class="action-card">لم يتم التوضيح (وفاة الحالة)</div>
+            <div class="action-card">الكود الشهري غير متاح حالياً</div>
+            <div class="action-card">الكود الموسمي غير متاح حالياً</div>
+            <div class="action-card">عدم وجود صاحب الكرتونة</div>
+            <div class="action-card">اختلاف في رقم واحد من الهاتف</div>
+            <div class="action-card">هتعاود الاتصال لاستكمال البيانات</div>
+        </div>
+    </div>
+
+    <!-- 3. استثناء رقم الهاتف -->
+    <div class="phone-exception">
+        <div class="exception-header">🔍 حالة خاصة: اختلاف "رقم واحد فقط" في الهاتف</div>
+        
+        <div class="logic-box">
+            <strong>1. مراجعة الأكشن السابق:</strong>
+            <p>إذا وجد أكشن سابق بتنبيه العميل للتوجه للجمعية لتعديل الرقم:</p>
+            <span class="status-badge badge-no">❌ لا يتم تسليم الكود</span>
+        </div>
+
+        <div class="logic-box">
+            <strong>2. في حالة عدم وجود أكشن سابق:</strong>
+            <p>يتم توضيح وتسليم الكود "كاستثناء لأول مرة فقط" مع التنبيه بضرورة التوجه للجمعية لتعديل الرقم.</p>
+            <span class="status-badge badge-yes">✅ يتم التسليم (مرة واحدة)</span>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
+        مركز دعم اتصالات بنك الطعام المصري © 2024
+    </footer>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

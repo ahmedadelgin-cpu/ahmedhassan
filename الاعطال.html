@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<link rel= "stylesheet" href="styles/mystyle.css"
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز الدعم الفني والأعطال - بنك الطعام</title>
+    <style>
+        :root {
+            --efb-red: #d63031;
+            --efb-green: #00a651;
+            --warning-orange: #f39c12;
+            --bg-white: #ffffff;
+            --text-dark: #2d3436;
+            --border-color: #eee;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* رأس الصفحة */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--efb-red);
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--efb-red);
+            margin: 0;
+            font-size: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* نظام البطاقات */
+        .issue-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: 0.3s;
+        }
+
+        .issue-card:hover {
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+            transform: translateY(-3px);
+        }
+
+        .status-icon {
+            font-size: 30px;
+            min-width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff5f5;
+            border-radius: 50%;
+        }
+
+        .issue-details {
+            flex-grow: 1;
+        }
+
+        .issue-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        .action-taken {
+            font-size: 14px;
+            color: var(--efb-green);
+            font-weight: 500;
+        }
+
+        /* صندوق نص الرد الموحد */
+        .response-box {
+            background: #f8f9fa;
+            border-right: 5px solid var(--warning-orange);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .response-box h3 {
+            margin: 0 0 15px 0;
+            color: var(--warning-orange);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .script-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: var(--efb-red);
+            border-radius: 50%;
+            margin-left: 8px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(214, 48, 49, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0); }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1><span class="live-indicator"></span> مـركـز تـقـارير الأعـطـال</h1>
+    </header>
+
+    
+
+    <!-- عطل 2 -->
+    <div class="issue-card">
+        <div class="status-icon">🗄️</div>
+        <div class="issue-details">
+            <div class="issue-title">تحديث قاعدة البيانات (Database Update)</div>
+            <div class="action-taken">يوجد تحديث فى قاعدة البيانات </div>
+        </div>
+    </div>
+
+    <!-- نص الرد للعميل -->
+    <div class="response-box">
+        <h3>💬 نص الرد الموحد للعملاء:</h3>
+        <div class="script-text">
+            "نعتذر لحضرتك، تم توضيح أنه يوجد حالياً تحديثات في قاعدة البيانات الخاصة بالبورتال، وجاري العمل عليها الآن.. سيتم الرد والتواصل مع حضرتك على مدار اليوم بمجرد انتهاء التحديث."
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
+        نظام إدارة الأعطال التقنية - بنك الطعام المصري © 2024
+    </footer>
+</div>
+
+</body>
+</html>

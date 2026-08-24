@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<link rel= "stylesheet" href="styles/mystyle.css"
+    <meta charset="UTF-8">
+    <title>نظام توزيع السلع | بنك الطعام</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+            --header-bg: #1f1f1f;
+            --text-gray: #b0b0b0;
+            --accent-blue: #00d2ff;
+            --orange: #ff9f43;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-header {
+            text-align: center;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border-bottom: 4px solid var(--neon-green);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1);
+        }
+
+        .main-header h1 { color: var(--neon-green); margin: 0; font-size: 24px; }
+        .main-header p { color: var(--text-gray); font-size: 14px; margin-top: 10px; }
+
+        /* تنسيق الجدول */
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow-x: auto;
+            border: 1px solid #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        thead tr {
+            background: var(--header-bg);
+            border-bottom: 2px solid #333;
+        }
+
+        th {
+            padding: 15px;
+            color: var(--accent-blue);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #222;
+            font-size: 14px;
+        }
+
+        tbody tr:hover {
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .item-name {
+            text-align: right;
+            font-weight: bold;
+            color: white;
+            padding-right: 20px;
+        }
+
+        .point-badge {
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--neon-green);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* تنسيق الخلاصة (الشرائح) */
+        .summary-row {
+            background: #252525;
+            font-weight: bold;
+        }
+
+        .points-summary td { color: var(--neon-green); font-size: 16px; padding: 20px 10px; }
+        .money-summary td { color: var(--orange); font-size: 16px; padding: 20px 10px; }
+
+        .label-cell {
+            text-align: left !important;
+            padding-left: 20px !important;
+            color: var(--text-gray);
+        }
+
+        .status-bar {
+            margin-top: 20px;
+            text-align: center;
+            font-family: monospace;
+            color: var(--text-gray);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="main-header">
+        <h1><i class="fa-solid fa-clipboard-list"></i> الحد الأقصى للنقاط والمنتجات حسب عدد الأفراد</h1>
+        <p>برجاء العلم أن لكل عدد أفراد حد أقصى من النقاط والمنتجات كما هو موضح في الجدول أدناه</p>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>الصنف</th>
+                    <th>الوحدة</th>
+                    <th>الكمية</th>
+                    <th>النقاط</th>
+                    <th>للفرد الواحد</th>
+                    <th>للفردين</th>
+                    <th>لـ 3 أفراد</th>
+                    <th>لـ 4 أفراد</th>
+                    <th>لـ 5 أفراد</th>
+                    <th>لـ 6 أفراد</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- الأصناف -->
+                <tr><td class="item-name">أرز</td><td>كيس</td><td>800 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+                <tr><td class="item-name">مكرونة</td><td>كيس</td><td>350 جم</td><td><span class="point-badge">2</span></td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>5</td></tr>
+                <tr><td class="item-name">لوبيا</td><td>كيس</td><td>400 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr>
+                <tr><td class="item-name">سكر</td><td>كيس</td><td>400 جم</td><td><span class="point-badge">3</span></td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
+                <tr><td class="item-name">زيت 600 مل</td><td>زجاجة</td><td>1</td><td><span class="point-badge">8</span></td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
+                <tr><td class="item-name">دقيق</td><td>كجم</td><td>1</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+                <tr><td class="item-name">عدس أصفر</td><td>كيس</td><td>400 جم</td><td><span class="point-badge">4</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+                <tr><td class="item-name">عسل أسود 350 جم</td><td>علبة</td><td>1</td><td><span class="point-badge">4</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+                <tr><td class="item-name">كندبيف 340 جم</td><td>علبة</td><td>1</td><td><span class="point-badge">9</span></td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>4</td></tr>
+                <tr><td class="item-name">جبنة فيتا 250 جم</td><td>علبة</td><td>1</td><td><span class="point-badge">3</span></td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>4</td></tr>
+                <tr><td class="item-name">فاصوليا</td><td>كيس</td><td>400 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr>
+                <tr><td class="item-name">لسان العصفور</td><td>كيس</td><td>350 جم</td><td><span class="point-badge">2</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+                <tr><td class="item-name">صلصة 400 جم</td><td>برطمان</td><td>1</td><td><span class="point-badge">7</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+
+                <!-- خلاصة النقاط -->
+                <tr class="summary-row points-summary">
+                    <td colspan="4" class="label-cell">عدد النقاط لكل شريحة</td>
+                    <td>30</td>
+                    <td>54</td>
+                    <td>78</td>
+                    <td>99</td>
+                    <td>123</td>
+                    <td>147</td>
+                </tr>
+
+                <!-- خلاصة الدعم المادي -->
+                <tr class="summary-row money-summary">
+                    <td colspan="4" class="label-cell">الدعم مقابل (بالجنيه)</td>
+                    <td>200 جنية</td>
+                    <td>400 جنية</td>
+                    <td>600 جنية</td>
+                    <td>800 جنية</td>
+                    <td>1000 جنية</td>
+                    <td>1200 جنية</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="status-bar">
+        DATA SOURCE: EFB_PORTAL_V4 | SYNC_STATUS: STABLE | <i class="fa-solid fa-shield-halved"></i> SECURED
+    </div>
+</div>
+
+</body>
+</html>

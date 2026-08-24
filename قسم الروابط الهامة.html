@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<link rel= "stylesheet" href="styles/mystyle.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روابط وبيانات الدخول - بنك الطعام</title>
+    <!-- استدعاء أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --efb-green: #00a651;
+            --efb-red: #d63031;
+            --bg-gray: #f8f9fa;
+            --text-dark: #2d3436;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            background-color: var(--bg-gray);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            color: var(--text-dark);
+        }
+
+        .dashboard {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: var(--efb-red);
+            font-size: 36px;
+            margin: 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: '';
+            width: 50%;
+            height: 4px;
+            background: var(--efb-green);
+            display: block;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* تنسيق قسم الروابط */
+        .section-title {
+            color: var(--efb-green);
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-right: 5px solid var(--efb-green);
+            padding-right: 15px;
+            font-weight: bold;
+        }
+
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .link-card {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .link-card:hover {
+            border-color: var(--efb-green);
+            transform: translateY(-3px);
+        }
+
+        .link-card i {
+            font-size: 20px;
+            color: var(--efb-green);
+            margin-left: 15px;
+        }
+
+        .link-card span {
+            font-size: 14px;
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        /* تنسيق قسم الحسابات */
+        .accounts-table {
+            width: 100%;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border-collapse: collapse;
+        }
+
+        .accounts-table th {
+            background-color: var(--efb-green);
+            color: white;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .accounts-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .accounts-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .accounts-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--efb-red);
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .password {
+            font-family: monospace;
+            background: #fdf2f2;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: var(--efb-red);
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .links-container { grid-template-columns: 1fr; }
+            .accounts-table { font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <header class="header">
+        <h1>قسم الروابط الهامة</h1>
+    </header>
+
+    <!-- قسم الروابط الهامة -->
+    <div class="section-title">الروابط السريعة</div>
+    <div class="links-container">
+        <a href="https://portal.efb.eg/EFBPortal/HotLine/BeneficiaryHotLine" class="link-card" target="_blank">
+            <i class="fa-solid fa-headset"></i>
+            <span>صفحه البورتال  (Beneficiary)</span>
+        </a>
+        <a href="https://crm.efb.eg/agent-home" class="link-card" target="_blank">
+            <i class="fa-solid fa-users-gear"></i>
+            <span>نظام CRM </span>
+        </a>
+        <a href="https://egyptianfoodbank.my.canva.site/beneficiary" class="link-card" target="_blank">
+            <i class="fa-solid fa-palette"></i>
+            <span>الصفحة الخاصة لبنك المعرفة </span>
+        </a>
+        <a href="https://192.168.60.65/?foodbank" class="link-card" target="_blank">
+            <i class="fa-solid fa-network-wired"></i>
+            <span>رابط Aheeva (Aheeva)</span>
+        </a>
+        
+    </div>
+
+    <!-- قسم بيانات الدخول -->
+    <div class="section-title">يتم فتح البورتال من خلال </div>
+    <table class="accounts-table">
+        <thead>
+            <tr>
+                <th>المستخدم </th>
+                <th>كلمة المرور</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>hotline</td>
+                <td><span class="password">Hh123321@22</span></td>
+            </tr>
+            
+            
+            
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

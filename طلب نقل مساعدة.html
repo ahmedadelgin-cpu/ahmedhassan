@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<link rel= "stylesheet" href="styles/mystyle.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعليمات نقل المساعدة | بنك الطعام</title>
+    <!-- استدعاء أيقونات FontAwesome للمظهر التقني -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+            --danger-red: #ff4b4b;
+            --accent-blue: #00d2ff;
+            --text-gray: #b0b0b0;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+        }
+
+        /* رأس الصفحة */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--neon-green);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .header h1 {
+            color: var(--neon-green);
+            margin: 0;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* الصندوق الرئيسي */
+        .main-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .instruction-text {
+            font-size: 18px;
+            color: var(--accent-blue);
+            margin-bottom: 25px;
+            border-right: 4px solid var(--accent-blue);
+            padding-right: 15px;
+            line-height: 1.6;
+        }
+
+        /* شبكة الحالات */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .case-item {
+            background: #202020;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .case-item:hover {
+            border-color: var(--neon-green);
+            background: #252525;
+            transform: scale(1.01);
+        }
+
+        .case-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--neon-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-left: 20px;
+            flex-shrink: 0;
+        }
+
+        .case-content b {
+            display: block;
+            font-size: 17px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .case-content span {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        /* التذييل التقني */
+        .status-bar {
+            margin-top: 30px;
+            background: #000;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: var(--neon-green);
+            font-size: 12px;
+            text-align: center;
+            border: 1px solid #222;
+        }
+
+        .highlight-red { color: var(--danger-red); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- الهيدر -->
+    <header class="header">
+        <h1><i class="fa-solid fa-truck-ramp-box"></i> بخصوص طلب نقل مساعدة</h1>
+    </header>
+
+    <div class="main-card">
+        <p class="instruction-text">
+            يتم عمل استفسار "طلب نقل مساعدة" للعميل في النظام عند تحقق أي من النقاط التالية:
+        </p>
+
+        <div class="cases-grid">
+            
+            <!-- الحالة الأولى -->
+            <div class="case-item">
+                <div class="case-icon"><i class="fa-solid fa-handshake-slash"></i></div>
+                <div class="case-content">
+                    <b>إنهاء التعامل</b>
+                    <span>في حالة رغبة العميل أو الجمعية في إنهاء التعامل القائم بينهما تماماً.</span>
+                </div>
+            </div>
+
+            <!-- الحالة الثانية -->
+            <div class="case-item">
+                <div class="case-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="case-content">
+                    <b>بُعد المسافة الجغرافية</b>
+                    <span>عند وجود مسافة بعيدة جداً بين مقر سكن المستفيد ومقر الجمعية التابع لها.</span>
+                </div>
+            </div>
+
+            <!-- الحالة الثالثة -->
+            <div class="case-item">
+                <div class="case-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+                <div class="case-content">
+                    <b>تغيير نوع البرنامج</b>
+                    <span>عند طلب العميل النقل من برنامج <span class="highlight-red">الموسمي</span> إلى برنامج <span class="highlight-red">الشهري</span>.</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- شريط النظام السفلي -->
+    <div class="status-bar">
+        > SYSTEM_MODULE: TRANSFER_REQUEST_V1.2 | STATUS: READY_FOR_INPUT
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<link rel= "stylesheet" href="styles/mystyle.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقديم دور الرعاية - بنك الطعام المصري</title>
+    <style>
+        :root {
+            --efb-green: #00a651;
+            --efb-red: #d63031;
+            --bg-gray: #f4f7f6;
+            --text-dark: #2d3436;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-gray);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* الجزء العلوي (الهيدر) */
+        .header-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-top: 8px solid var(--efb-green);
+            margin-bottom: 30px;
+        }
+
+        .header-card h1 {
+            color: var(--efb-red);
+            margin: 0;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .header-card p {
+            font-size: 18px;
+            margin: 15px 0 25px;
+            color: var(--text-dark);
+        }
+
+        .btn-register {
+            background-color: var(--efb-red);
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 8px 15px rgba(214, 48, 49, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(214, 48, 49, 0.4);
+        }
+
+        /* بطاقة المستندات */
+        .docs-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .docs-title {
+            color: var(--efb-green);
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 2px solid var(--efb-green);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* القائمة المرقمة */
+        .docs-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+        .doc-item:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .doc-item:last-child {
+            border-bottom: none;
+        }
+
+        .doc-text {
+            font-size: 16px;
+            color: #444;
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .doc-number {
+            background-color: var(--efb-green);
+            color: var(--white);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        /* تعديلات للموبايل */
+        @media (max-width: 600px) {
+            .docs-card { padding: 20px; }
+            .header-card h1 { font-size: 24px; }
+            .doc-text { font-size: 14px; }
+        }
+
+        .whatsapp-note {
+            background: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- الهيدر (مثل الصورة الأولى) -->
+    <header class="header-card">
+        <h1>تقديم دور الرعاية</h1>
+        <p>الأوراق المطلوبة للاشتراك في برامج بنك الطعام</p>
+        <a href="https://cr.efb-eg.org" class="btn-register">رابط التسجيل: cr.efb-eg.org</a>
+    </header>
+
+    <!-- قائمة المستندات (نفس التصميم مع بيانات الصورة الثانية) -->
+    <section class="docs-card">
+        <div class="docs-title">قائمة المستندات المطلوبة (5 مستندات)</div>
+        
+        <div class="docs-list">
+            <!-- مستند 1 -->
+            <div class="doc-item">
+                <div class="doc-text">صورة من ترخيص الدار / قرار الإسناد.</div>
+                <div class="doc-number">1</div>
+            </div>
+
+            <!-- مستند 2 -->
+            <div class="doc-item">
+                <div class="doc-text">صورة من قرار إشهار الجهة (الجمعية / المؤسسة) التابعة لها الدار.</div>
+                <div class="doc-number">2</div>
+            </div>
+
+            <!-- مستند 3 -->
+            <div class="doc-item">
+                <div class="doc-text">
+                    كشف بيانات السادة أعضاء مجلس الإدارة / الأمناء للجهة موضح (الاسم / الصفة بالجهة / الوظيفة خارج الجهة / التليفون المحمول) مع تحديد مسئول التواصل مع البنك سواء من المجلس أو من الهيكل الإداري للدار.
+                </div>
+                <div class="doc-number">3</div>
+            </div>
+
+            <!-- مستند 4 -->
+            <div class="doc-item">
+                <div class="doc-text">مستند شغل مقر الدار (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق.</div>
+                <div class="doc-number">4</div>
+            </div>
+
+            <!-- مستند 5 -->
+            <div class="doc-item">
+                <div class="doc-text">آخر حساب ختامي لعام كامل معتمد من محاسب قانوني للدار / الجمعية.</div>
+                <div class="doc-number">5</div>
+            </div>
+        </div>
+    </section>
+</div>
+ <!-- معلومات إضافية -->
+    <div class="footer-info">
+        <center>
+        <div class="whatsapp-note">فى حالة سوال العميل عن امكانية ارسال المستندات المطلوبة عن طريق الواتساب يتم توضيح رقم الواتساب 01152888777</div>
+</center>
+    </div>
+
+</body>
+</html>
