@@ -199,7 +199,7 @@
 
 <!-- الزر الجانبي للتحويل بين الأبيض والأسود -->
 <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-    <span>🌙</span> <span id="btnText">الوضع الأسود</span>
+    <span>🌙</span> <span id="btnText">Dark mode 🌙</span>
 </button>
 
 <div class="container">
@@ -285,11 +285,11 @@
         
         if (body.classList.contains('dark-mode')) {
             btn.querySelector('span:first-child').innerText = "☀️";
-            btnText.innerText = "الوضع الأبيض";
+            btnText.innerText = "Night Mode ☀️";
             localStorage.setItem('myTheme', 'dark');
         } else {
             btn.querySelector('span:first-child').innerText = "🌙";
-            btnText.innerText = "الوضع الأسود";
+            btnText.innerText = "Dark mode 🌙";
             localStorage.setItem('myTheme', 'light');
         }
     }
@@ -300,7 +300,7 @@
         if (savedTheme === 'dark') {
             document.getElementById('pageBody').classList.add('dark-mode');
             document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-            document.getElementById('btnText').innerText = "الوضع الأبيض";
+            document.getElementById('btnText').innerText = "Night Mode ☀️";
         }
     }
 </script>
