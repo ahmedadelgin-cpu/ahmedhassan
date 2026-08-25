@@ -1,26 +1,75 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel= "stylesheet" href="styles/mystyle.css"
+    <link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>توجيه الحالات السودانية - بنك الطعام</title>
+<link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>help Needy customer</title>
+   
+
     <style>
+        /* إعدادات ألوان الوضع المضيء (أبيض وأسود) */
         :root {
-            --efb-green: #00a651;
-            --warning-red: #d63031;
-            --bg-white: #ffffff;
-            --light-gray: #f9f9f9;
-            --text-dark: #2d3436;
+            --bg-color: #f4f7f6;
+            --container-bg: #ffffff;
+            --text-main: #000000;
+            --text-sub: #333333;
+            --border-color: #e0e0e0;
+            --card-hover: #f0f0f0;
+            --accent-black: #000000;
+            --btn-bg: #000000;
+            --btn-text: #ffffff;
+            --alert-bg: #f9f9f9;
+        }
+
+        /* إعدادات ألوان الوضع الداكن (أسود وأبيض) */
+        body.dark-mode {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-main: #ffffff;
+            --text-sub: #cccccc;
+            --border-color: #333333;
+            --card-hover: #2a2a2a;
+            --accent-black: #ffffff;
+            --btn-bg: #ffffff;
+            --btn-text: #000000;
+            --alert-bg: #222222;
         }
 
         body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* زر التبديل الجانبي المثبت */
+        .side-theme-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--accent-black);
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .side-theme-btn:hover {
+            transform: scale(1.05);
         }
 
         .container {
@@ -28,25 +77,26 @@
             margin: 0 auto;
         }
 
-        /* قسم التنبيهات الحمراء */
+        /* قسم التنبيهات */
         .alert-section {
-            background-color: #fff5f5;
-            border: 2px solid var(--warning-red);
+            background-color: var(--alert-bg);
+            border: 2px solid var(--accent-black);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 40px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(214, 48, 49, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .alert-section h2 {
-            color: var(--warning-red);
+            color: var(--text-main);
             margin: 0 0 10px 0;
             font-size: 22px;
         }
 
         .alert-section p {
-            color: #c0392b;
+            color: var(--text-sub);
             font-weight: bold;
             margin: 5px 0;
             font-size: 16px;
@@ -55,38 +105,37 @@
         /* عنوان القسم */
         .section-title {
             text-align: center;
-            color: var(--efb-green);
-            border-bottom: 2px solid var(--efb-green);
+            color: var(--text-main);
+            border-bottom: 2px solid var(--accent-black);
             display: table;
             margin: 0 auto 30px;
             padding-bottom: 10px;
             font-size: 24px;
         }
 
-        /* تصميم بطاقات الجمعيات */
+        /* تصميم بطاقات الجمعيات موحد بالكامل بالأبيض والأسود */
         .association-card {
-            background: var(--light-gray);
-            border-right: 8px solid var(--efb-green);
+            background: var(--container-bg);
+            border-right: 8px solid var(--accent-black);
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .association-card:hover {
             transform: scale(1.02);
-            background: #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: var(--card-hover);
         }
 
         .assoc-name {
             font-size: 20px;
             font-weight: bold;
-            color: var(--efb-green);
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -94,7 +143,7 @@
 
         .assoc-address {
             font-size: 16px;
-            color: #555;
+            color: var(--text-sub);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -102,8 +151,9 @@
 
         .province-badge {
             display: inline-block;
-            background: var(--efb-green);
-            color: white;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--accent-black);
             padding: 2px 12px;
             border-radius: 20px;
             font-size: 14px;
@@ -113,9 +163,9 @@
 
         .status-text {
             font-size: 14px;
-            color: #777;
+            color: var(--text-sub);
             font-style: italic;
-            border-top: 1px solid #ddd;
+            border-top: 1px solid var(--border-color);
             padding-top: 10px;
             margin-top: 5px;
         }
@@ -124,7 +174,12 @@
 
     </style>
 </head>
-<body>
+<body id="pageBody">
+
+<!-- الزر الجانبي للتحويل بين الأبيض والأسود -->
+<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
+    <span>🌙</span> <span id="btnText">Dark mode 🌙</span>
+</button>
 
 <div class="container">
     
@@ -151,30 +206,60 @@
     </div>
 
     <!-- الجمعية الثانية -->
-    <div class="association-card" style="border-right-color: #0984e3;">
-        <div class="assoc-name" style="color: #0984e3;">
+    <div class="association-card">
+        <div class="assoc-name">
             <span class="icon">👩</span> جمعية المرأة السودانية
         </div>
         <div class="assoc-address">
             <span class="icon">📍</span> منطقة منشية الجبل الأصفر - 16 شارع جمال عبد الناصر - الخانكة
         </div>
-        <div class="province-badge" style="background: #0984e3;">محافظة القليوبية</div>
+        <div class="province-badge">محافظة القليوبية</div>
         <div class="status-text">توجيه الحالات السودانية لجمعية المرأة السودانية بالخانكة</div>
     </div>
 
     <!-- الجمعية الثالثة -->
-    <div class="association-card" style="border-right-color: #6c5ce7;">
-        <div class="assoc-name" style="color: #6c5ce7;">
+    <div class="association-card">
+        <div class="assoc-name">
             <span class="icon">🏢</span> مؤسسة الكمال الخيرية
         </div>
         <div class="assoc-address">
             <span class="icon">📍</span> منطقة أرض اللواء - 5 شارع الطوخي حسن
         </div>
-        <div class="province-badge" style="background: #6c5ce7;">محافظة الجيزة</div>
+        <div class="province-badge">محافظة الجيزة</div>
         <div class="status-text">توجيه الحالات السودانية لمؤسسة الكمال الخيرية بالجيزة</div>
     </div>
 
 </div>
+
+<script>
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const btnText = document.getElementById('btnText');
+        const btn = document.getElementById('themeBtn');
+        
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            btn.querySelector('span:first-child').innerText = "☀️";
+            btnText.innerText = "Night Mode ☀️";
+            localStorage.setItem('myTheme', 'dark');
+        } else {
+            btn.querySelector('span:first-child').innerText = "🌙";
+            btnText.innerText = "Dark mode 🌙";
+            localStorage.setItem('myTheme', 'light');
+        }
+    }
+
+    // حفظ تفضيل الوضع عند إعادة تحميل الصفحة
+    window.onload = () => {
+        const savedTheme = localStorage.getItem('myTheme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
+            document.getElementById('btnText').innerText = "الوضع الأبيض";
+        }
+    }
+</script>
 
 </body>
 </html>
