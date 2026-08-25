@@ -1,27 +1,73 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel= "stylesheet" href="styles/mystyle.css"
-
+    <link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الدعم الفني والأعطال - بنك الطعام</title>
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>help Needy customer</title>
+
     <style>
+        /* المتغيرات الافتراضية (الوضع المضيء - أبيض وأسود) */
         :root {
-            --efb-red: #d63031;
-            --efb-green: #00a651;
-            --warning-orange: #f39c12;
-            --bg-white: #ffffff;
-            --text-dark: #2d3436;
-            --border-color: #eee;
+            --bg-color: #f4f7f6;
+            --container-bg: #ffffff;
+            --text-main: #000000;
+            --text-sub: #333333;
+            --border-color: #e0e0e0;
+            --card-hover: #f0f0f0;
+            --accent-black: #000000;
+            --btn-bg: #000000;
+            --btn-text: #ffffff;
+            --alert-bg: #f9f9f9;
+        }
+
+        /* المتغيرات عند تفعيل الوضع الداكن (أسود وأبيض) */
+        body.dark-mode {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-main: #ffffff;
+            --text-sub: #cccccc;
+            --border-color: #333333;
+            --card-hover: #2a2a2a;
+            --accent-black: #ffffff;
+            --btn-bg: #ffffff;
+            --btn-text: #000000;
+            --alert-bg: #222222;
         }
 
         body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 40px 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* زر التبديل الجانبي المثبت */
+        .side-theme-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--accent-black);
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .side-theme-btn:hover {
+            transform: scale(1.05);
         }
 
         .container {
@@ -33,12 +79,12 @@
         header {
             text-align: center;
             margin-bottom: 40px;
-            border-bottom: 2px solid var(--efb-red);
+            border-bottom: 2px solid var(--accent-black);
             padding-bottom: 20px;
         }
 
         header h1 {
-            color: var(--efb-red);
+            color: var(--text-main);
             margin: 0;
             font-size: 30px;
             letter-spacing: 1px;
@@ -46,7 +92,7 @@
 
         /* نظام البطاقات */
         .issue-card {
-            background: #fff;
+            background: var(--container-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 20px;
@@ -55,12 +101,14 @@
             align-items: center;
             gap: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            border-right: 5px solid var(--accent-black);
         }
 
         .issue-card:hover {
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             transform: translateY(-3px);
+            background: var(--card-hover);
         }
 
         .status-icon {
@@ -70,8 +118,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fff5f5;
+            background: var(--alert-bg);
             border-radius: 50%;
+            border: 1px solid var(--border-color);
         }
 
         .issue-details {
@@ -81,28 +130,30 @@
         .issue-title {
             font-size: 18px;
             font-weight: bold;
-            color: #444;
+            color: var(--text-main);
             margin-bottom: 5px;
         }
 
         .action-taken {
             font-size: 14px;
-            color: var(--efb-green);
+            color: var(--text-sub);
             font-weight: 500;
         }
 
         /* صندوق نص الرد الموحد */
         .response-box {
-            background: #f8f9fa;
-            border-right: 5px solid var(--warning-orange);
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-right: 5px solid var(--accent-black);
             padding: 25px;
             border-radius: 10px;
             margin-top: 40px;
+            transition: all 0.3s ease;
         }
 
         .response-box h3 {
             margin: 0 0 15px 0;
-            color: var(--warning-orange);
+            color: var(--text-main);
             font-size: 18px;
             display: flex;
             align-items: center;
@@ -112,7 +163,7 @@
         .script-text {
             font-size: 16px;
             line-height: 1.8;
-            color: #555;
+            color: var(--text-sub);
             font-style: italic;
         }
 
@@ -120,28 +171,38 @@
             display: inline-block;
             width: 10px;
             height: 10px;
-            background-color: var(--efb-red);
+            background-color: var(--accent-black);
             border-radius: 50%;
             margin-left: 8px;
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(214, 48, 49, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(150, 150, 150, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(150, 150, 150, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(150, 150, 150, 0); }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-sub);
+            font-size: 13px;
         }
 
     </style>
 </head>
-<body>
+<body id="pageBody">
+
+<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
+<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
+    <span>🌙</span> <span id="btnText">Dark Mode</span>
+</button>
 
 <div class="container">
     <header>
         <h1><span class="live-indicator"></span> مـركـز تـقـارير الأعـطـال</h1>
     </header>
-
-    
 
     <!-- عطل 2 -->
     <div class="issue-card">
@@ -160,10 +221,40 @@
         </div>
     </div>
 
-    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
+    <footer>
         نظام إدارة الأعطال التقنية - بنك الطعام المصري © 2024
     </footer>
 </div>
+
+<script>
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const btnText = document.getElementById('btnText');
+        const btn = document.getElementById('themeBtn');
+        
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            btn.querySelector('span:first-child').innerText = "☀️";
+            btnText.innerText = "Night Mode";
+            localStorage.setItem('myTheme', 'dark');
+        } else {
+            btn.querySelector('span:first-child').innerText = "🌙";
+            btnText.innerText = "Dark Mode";
+            localStorage.setItem('myTheme', 'light');
+        }
+    }
+
+    // حفظ تفضيل الوضع عند إعادة تحميل الصفحة
+    window.onload = () => {
+        const savedTheme = localStorage.getItem('myTheme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
+            document.getElementById('btnText').innerText = "Night Mode";
+        }
+    }
+</script>
 
 </body>
 </html>
