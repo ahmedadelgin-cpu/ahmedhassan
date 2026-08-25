@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
-<link rel= "stylesheet" href="styles/mystyle.css"
+<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تعليمات الحالات الفلسطينية | بنك الطعام</title>
@@ -10,19 +9,66 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            /* الألوان الأصلية (الوضع الفاتح الأساسي) */
             --efb-red: #d63031;
             --efb-green: #00a651;
             --warning-bg: #fff5f5;
             --text-dark: #2d3436;
             --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
+
+            /* متغيرات النظام للتنقل بين الوضعين */
+            --main-bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --main-text-color: var(--text-dark);
+            --footer-bg: #fff;
+            --toggle-btn-bg: #ffffff;
+            --toggle-btn-border: var(--efb-green);
+        }
+
+        /* متغيرات الوضع الداكن Dark Mode (مطابقة لألوانك الأصلية) */
+        [data-theme="dark"] {
+            --main-bg: #0a0a0a;
+            --card-bg: #161616;
+            --main-text-color: #ffffff;
+            --warning-bg: #2a1a1a;
+            --footer-bg: #161616;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            --toggle-btn-bg: #161616;
+            --toggle-btn-border: var(--efb-green);
         }
 
         body {
-            background-color: #f0f2f5;
+            background-color: var(--main-bg);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
-            color: var(--text-dark);
+            color: var(--main-text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* تنسيق وتثبيت زر التبديل */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: var(--toggle-btn-bg);
+            color: var(--main-text-color);
+            border: 2px solid var(--toggle-btn-border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
         }
 
         .container {
@@ -32,13 +78,14 @@
 
         /* رأس الصفحة */
         .header {
-            background: white;
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             text-align: center;
             box-shadow: var(--card-shadow);
             border-bottom: 5px solid var(--efb-red);
             margin-bottom: 25px;
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .header h1 {
@@ -82,14 +129,14 @@
         }
 
         .scenario-card {
-            background: white;
+            background: var(--card-bg);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            box-shadow: var(--card-shadow);
             display: flex;
             align-items: center;
             border-right: 5px solid var(--efb-green);
-            transition: 0.3s;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
         }
 
         .scenario-card:hover {
@@ -114,6 +161,7 @@
         .scenario-text {
             font-size: 15px;
             font-weight: 500;
+            color: var(--main-text-color);
         }
 
         /* التذييل */
@@ -121,19 +169,32 @@
             text-align: center;
             margin-top: 40px;
             padding: 20px;
-            background: #fff;
+            background: var(--footer-bg);
             border-radius: 10px;
             color: var(--efb-green);
             font-weight: bold;
+            transition: background 0.3s;
         }
 
         @media (max-width: 600px) {
             .header h1 { font-size: 22px; }
             .urgent-action p { font-size: 15px; }
+            .theme-toggle-btn {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
+
+<!-- زر التبديل بين المودات -->
+<button id="themeToggle" class="theme-toggle-btn">
+    <span id="themeIcon">🌙</span>
+    <span id="themeText">Dark mode</span>
+</button>
 
 <div class="container">
     <!-- العنوان الرئيسي -->
@@ -159,7 +220,7 @@
         <!-- الحالة 1 -->
         <div class="scenario-card">
             <div class="scenario-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="scenario-text">             فى حالة ان الحالة تستلم اكواد بشكل شهرى و وضحت انها لم تستلم منذ شهر حتى 11 شهر يتم تقديم شكوى قسائم (OTP)    </div>
+            <div class="scenario-text">فى حالة ان الحالة تستلم اكواد بشكل شهرى و وضحت انها لم تستلم منذ شهر حتى 11 شهر يتم تقديم شكوى قسائم (OTP)</div>
         </div>
 
         <!-- الحالة 2 -->
@@ -176,12 +237,39 @@
         </div>
 -->
 
-        
-             
     </div>
 
-    
 </div>
+
+<script>
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+
+    // التحقق من الوضع المحفوظ مسبقاً
+    const savedTheme = localStorage.getItem('efb_theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light mode';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('efb_theme', 'light');
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark mode';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('efb_theme', 'dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light mode';
+        }
+    });
+</script>
 
 </body>
 </html>
