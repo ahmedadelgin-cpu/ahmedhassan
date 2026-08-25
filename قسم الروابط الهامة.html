@@ -2,10 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
 
-<link rel= "stylesheet" href="styles/mystyle.css"
+<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>روابط وبيانات الدخول - بنك الطعام</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>help Needy customer</title>
+
     <!-- استدعاء أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,6 +17,22 @@
             --bg-gray: #f8f9fa;
             --text-dark: #2d3436;
             --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --card-bg: #ffffff;
+            --border-hover: var(--efb-green);
+            --pass-bg: #fdf2f2;
+            --tr-hover: #f1f1f1;
+            --table-border: #eee;
+        }
+
+        /* متغيرات الوضع الداكن Dark Mode */
+        [data-theme="dark"] {
+            --bg-gray: #121212;
+            --text-dark: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --shadow: 0 4px 15px rgba(0,0,0,0.5);
+            --pass-bg: #2d1a1a;
+            --tr-hover: #2a2a2a;
+            --table-border: #333333;
         }
 
         body {
@@ -23,6 +41,32 @@
             margin: 0;
             padding: 40px 20px;
             color: var(--text-dark);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* تثبيت الزرار بجانب الصفحة (عائم في الزاوية) */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: var(--card-bg);
+            color: var(--text-dark);
+            border: 2px solid var(--efb-green);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
         }
 
         .dashboard {
@@ -71,7 +115,7 @@
         }
 
         .link-card {
-            background: #fff;
+            background: var(--card-bg);
             padding: 15px 20px;
             border-radius: 12px;
             box-shadow: var(--shadow);
@@ -84,7 +128,7 @@
         }
 
         .link-card:hover {
-            border-color: var(--efb-green);
+            border-color: var(--border-hover);
             transform: translateY(-3px);
         }
 
@@ -103,11 +147,12 @@
         /* تنسيق قسم الحسابات */
         .accounts-table {
             width: 100%;
-            background: #fff;
+            background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow);
             border-collapse: collapse;
+            transition: background 0.3s;
         }
 
         .accounts-table th {
@@ -119,7 +164,8 @@
 
         .accounts-table td {
             padding: 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--table-border);
+            color: var(--text-dark);
         }
 
         .accounts-table tr:last-child td {
@@ -127,7 +173,7 @@
         }
 
         .accounts-table tr:hover {
-            background-color: #f1f1f1;
+            background-color: var(--tr-hover);
         }
 
         .copy-btn {
@@ -141,7 +187,7 @@
 
         .password {
             font-family: monospace;
-            background: #fdf2f2;
+            background: var(--pass-bg);
             padding: 2px 8px;
             border-radius: 4px;
             color: var(--efb-red);
@@ -151,10 +197,22 @@
         @media (max-width: 600px) {
             .links-container { grid-template-columns: 1fr; }
             .accounts-table { font-size: 13px; }
+            .theme-toggle-btn {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
+
+<!-- زر التبديل بجانب الصفحة -->
+<button id="themeToggle" class="theme-toggle-btn">
+    <span id="themeIcon">🌙</span>
+    <span id="themeText">Dark mode</span>
+</button>
 
 <div class="dashboard">
     <header class="header">
@@ -203,6 +261,26 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark mode';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light mode';
+        }
+    });
+</script>
 
 </body>
 </html>
