@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="stylesheet" href="styles/mystyle.css">
+<link rel="stylesheet" href="styles/mystyle.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
     <title>help Needy customer</title>
-
     <style>
-        /* المتغيرات الافتراضية (الوضع المضيء - أبيض وأسود) */
+        /* المتغيرات للوضع المضيء (الألوان الأصلية) */
         :root {
-            --bg-color: #f4f7f6;
-            --container-bg: #ffffff;
-            --text-main: #000000;
-            --text-sub: #333333;
-            --border-color: #e0e0e0;
-            --card-hover: #f0f0f0;
-            --accent-black: #000000;
-            --btn-bg: #000000;
+            --efb-red: #d63031;
+            --efb-green: #00a651;
+            --warning-orange: #f39c12;
+            --bg-white: #ffffff;
+            --text-dark: #2d3436;
+            --border-color: #eee;
+            --card-bg: #ffffff;
+            --icon-bg: #fff5f5;
+            --response-bg: #f8f9fa;
+            --script-color: #555;
+            --btn-bg: #2d3436;
             --btn-text: #ffffff;
-            --alert-bg: #f9f9f9;
         }
 
-        /* المتغيرات عند تفعيل الوضع الداكن (أسود وأبيض) */
+        /* المتغيرات للوضع الداكن (الاحتفاظ بالألوان الأصلية مع خلفيات داكنة) */
         body.dark-mode {
-            --bg-color: #121212;
-            --container-bg: #1e1e1e;
-            --text-main: #ffffff;
-            --text-sub: #cccccc;
-            --border-color: #333333;
-            --card-hover: #2a2a2a;
-            --accent-black: #ffffff;
+            --efb-red: #d63031;       /* حفظ اللون الأحمر الأصلية */
+            --efb-green: #00a651;     /* حفظ اللون الأخضر الأصلية */
+            --warning-orange: #f39c12;/* حفظ اللون البرتقالي الأصلي */
+            --bg-white: #121212;
+            --text-dark: #f5f6fa;
+            --border-color: #2d3748;
+            --card-bg: #1e1e1e;
+            --icon-bg: #2d1f1f;
+            --response-bg: #1e1e1e;
+            --script-color: #dcdde1;
             --btn-bg: #ffffff;
-            --btn-text: #000000;
-            --alert-bg: #222222;
+            --btn-text: #121212;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-white);
+            color: var(--text-dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 40px 20px;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* زر التبديل الجانبي المثبت */
@@ -53,13 +57,13 @@
             z-index: 9999;
             background: var(--btn-bg);
             color: var(--btn-text);
-            border: 1px solid var(--accent-black);
+            border: 1px solid var(--border-color);
             padding: 10px 18px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: bold;
             font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -79,12 +83,12 @@
         header {
             text-align: center;
             margin-bottom: 40px;
-            border-bottom: 2px solid var(--accent-black);
+            border-bottom: 2px solid var(--efb-red);
             padding-bottom: 20px;
         }
 
         header h1 {
-            color: var(--text-main);
+            color: var(--efb-red);
             margin: 0;
             font-size: 30px;
             letter-spacing: 1px;
@@ -92,7 +96,7 @@
 
         /* نظام البطاقات */
         .issue-card {
-            background: var(--container-bg);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 20px;
@@ -101,14 +105,12 @@
             align-items: center;
             gap: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
-            border-right: 5px solid var(--accent-black);
+            transition: 0.3s;
         }
 
         .issue-card:hover {
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
             transform: translateY(-3px);
-            background: var(--card-hover);
         }
 
         .status-icon {
@@ -118,9 +120,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--alert-bg);
+            background: var(--icon-bg);
             border-radius: 50%;
-            border: 1px solid var(--border-color);
         }
 
         .issue-details {
@@ -130,30 +131,31 @@
         .issue-title {
             font-size: 18px;
             font-weight: bold;
-            color: var(--text-main);
+            color: var(--text-dark);
             margin-bottom: 5px;
         }
 
         .action-taken {
             font-size: 14px;
-            color: var(--text-sub);
+            color: var(--efb-green);
             font-weight: 500;
         }
 
         /* صندوق نص الرد الموحد */
         .response-box {
-            background: var(--container-bg);
-            border: 1px solid var(--border-color);
-            border-right: 5px solid var(--accent-black);
+            background: var(--response-bg);
+            border-right: 5px solid var(--warning-orange);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
             padding: 25px;
             border-radius: 10px;
             margin-top: 40px;
-            transition: all 0.3s ease;
         }
 
         .response-box h3 {
             margin: 0 0 15px 0;
-            color: var(--text-main);
+            color: var(--warning-orange);
             font-size: 18px;
             display: flex;
             align-items: center;
@@ -163,7 +165,7 @@
         .script-text {
             font-size: 16px;
             line-height: 1.8;
-            color: var(--text-sub);
+            color: var(--script-color);
             font-style: italic;
         }
 
@@ -171,30 +173,23 @@
             display: inline-block;
             width: 10px;
             height: 10px;
-            background-color: var(--accent-black);
+            background-color: var(--efb-red);
             border-radius: 50%;
             margin-left: 8px;
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(150, 150, 150, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(150, 150, 150, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(150, 150, 150, 0); }
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-sub);
-            font-size: 13px;
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(214, 48, 49, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0); }
         }
 
     </style>
 </head>
 <body id="pageBody">
 
-<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
+<!-- زر التبديل الجانبي -->
 <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
     <span>🌙</span> <span id="btnText">Dark Mode</span>
 </button>
@@ -221,7 +216,7 @@
         </div>
     </div>
 
-    <footer>
+    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
         نظام إدارة الأعطال التقنية - بنك الطعام المصري © 2024
     </footer>
 </div>
@@ -245,7 +240,7 @@
         }
     }
 
-    // حفظ تفضيل الوضع عند إعادة تحميل الصفحة
+    // استعادة تفضيل الوضع عند تحميل الصفحة
     window.onload = () => {
         const savedTheme = localStorage.getItem('myTheme');
         if (savedTheme === 'dark') {
