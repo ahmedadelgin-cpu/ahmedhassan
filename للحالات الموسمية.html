@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="stylesheet" href="styles/mystyle.css">
+<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
     <title>help Needy customer</title>
 
     <style>
-        /* المتغيرات الافتراضية (الوضع المضيء - أبيض وأسود) */
+        /* المتغيرات الأصلية للوضع المضيء */
         :root {
-            --bg-color: #f4f7f6;
-            --container-bg: #ffffff;
-            --text-main: #000000;
-            --text-sub: #333333;
-            --border-color: #e0e0e0;
-            --card-hover: #f0f0f0;
-            --accent-black: #000000;
+            --efb-green: #00a651;
+            --efb-red: #d63031;
+            --bg-white: #ffffff;
+            --soft-gray: #f8f9fa;
+            --text-dark: #2d3436;
+            --card-bg: #ffffff;
+            --header-bg: #fff5f5;
+            --border-color: #eeeeee;
+            --text-condition: #444444;
+            --footer-text: #999999;
             --btn-bg: #000000;
             --btn-text: #ffffff;
-            --alert-bg: #f9f9f9;
         }
 
-        /* المتغيرات عند تفعيل الوضع الداكن (أسود وأبيض) */
+        /* المتغيرات للوضع الداكن (نظام أبيض وأسود Monochrome) */
         body.dark-mode {
-            --bg-color: #121212;
-            --container-bg: #1e1e1e;
-            --text-main: #ffffff;
-            --text-sub: #cccccc;
+            --efb-green: #ffffff;
+            --efb-red: #ffffff;
+            --bg-white: #121212;
+            --soft-gray: #1e1e1e;
+            --text-dark: #ffffff;
+            --card-bg: #1e1e1e;
+            --header-bg: #1e1e1e;
             --border-color: #333333;
-            --card-hover: #2a2a2a;
-            --accent-black: #ffffff;
+            --text-condition: #ffffff;
+            --footer-text: #cccccc;
             --btn-bg: #ffffff;
             --btn-text: #000000;
-            --alert-bg: #222222;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-white);
+            color: var(--text-dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 40px 20px;
@@ -55,7 +59,7 @@
             z-index: 9999;
             background: var(--btn-bg);
             color: var(--btn-text);
-            border: 1px solid var(--accent-black);
+            border: 1px solid var(--text-dark);
             padding: 10px 18px;
             border-radius: 30px;
             cursor: pointer;
@@ -75,12 +79,12 @@
         .info-card {
             max-width: 700px;
             width: 100%;
-            background: var(--container-bg);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             overflow: hidden;
-            border-top: 6px solid var(--accent-black);
+            border-top: 6px solid var(--efb-red);
             transition: all 0.3s ease;
         }
 
@@ -88,12 +92,13 @@
         .card-header {
             text-align: center;
             padding: 30px 20px;
-            background: var(--alert-bg);
+            background: var(--header-bg);
             border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         .card-header h1 {
-            color: var(--text-main);
+            color: var(--efb-red);
             margin: 0;
             font-size: 26px;
             display: flex;
@@ -115,33 +120,35 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--alert-bg);
+            background: var(--soft-gray);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 20px;
-            border-right: 5px solid var(--accent-black);
+            border-right: 5px solid var(--efb-green);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
 
         .condition-text {
             font-size: 18px;
             font-weight: 500;
-            color: var(--text-sub);
+            color: var(--text-condition);
         }
 
         .or-divider {
             text-align: center;
             margin: -10px 0 10px;
             font-weight: bold;
-            color: var(--text-sub);
+            color: var(--footer-text);
             font-size: 14px;
         }
 
         /* النتيجة النهائية */
         .action-box {
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            border: 1px solid var(--accent-black);
+            background: var(--efb-green);
+            color: white;
             text-align: center;
             padding: 20px;
             border-radius: 12px;
@@ -152,11 +159,16 @@
             transition: all 0.3s ease;
         }
 
+        body.dark-mode .action-box {
+            color: #000000;
+            border: 1px solid var(--border-color);
+        }
+
         .footer-note {
             text-align: center;
             padding: 15px;
             font-size: 14px;
-            color: var(--text-sub);
+            color: var(--footer-text);
             border-top: 1px solid var(--border-color);
         }
 
@@ -164,14 +176,12 @@
 </head>
 <body id="pageBody">
 
-<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
 <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
     <span>🌙</span> <span id="btnText">Dark Mode</span>
 </button>
 
 <center>
 <div class="info-card">
-    <!-- العنوان -->
     <div class="card-header">
         <h1>
             <span class="icon-large">😊</span>
@@ -180,27 +190,20 @@
     </div>
 
     <div class="card-body">
-        <!-- الشرط الأول -->
         <div class="condition-box">
             <span class="icon-large">⏳</span>
             <div class="condition-text">الحالات التي لم تستلم أي مساعدات منذ أكثر من سنة.</div>
         </div>
-        <!-- الشرط الثاني -->
+
         <div class="condition-box">
             <span class="icon-large">⏳</span>
             <div class="condition-text">الحالات الموسيميه ( أ ) فى حاله عدم الاستلام خلال فتره اقل من سنه يتم تسجيل شكوى انقطاع كرتونه </div>
         </div>
 
-        <!-- النتيجة -->
         <div class="action-box">
             ✅ الإجراء: سيتم تقديم طلب مساعدة جديد 
         </div>
     </div>
-<!--
-    <div class="footer-note">
-        نظام تحديث قاعدة بيانات بنك الطعام المصري 2024
-    </div>
--->
 </div>
 </center>
 
