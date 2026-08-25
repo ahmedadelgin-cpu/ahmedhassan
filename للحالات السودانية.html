@@ -1,45 +1,55 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="stylesheet" href="styles/mystyle.css">
+<link rel="stylesheet" href="styles/mystyle.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
-   
-
+    <title>توجيه الحالات السودانية - بنك الطعام</title>
     <style>
-        /* إعدادات ألوان الوضع المضيء (أبيض وأسود) */
+        /* المتغيرات الأصلية للوضع المضيء */
         :root {
-            --bg-color: #f4f7f6;
-            --container-bg: #ffffff;
-            --text-main: #000000;
-            --text-sub: #333333;
-            --border-color: #e0e0e0;
-            --card-hover: #f0f0f0;
-            --accent-black: #000000;
+            --efb-green: #00a651;
+            --warning-red: #d63031;
+            --bg-white: #ffffff;
+            --light-gray: #f9f9f9;
+            --text-dark: #2d3436;
+            --card-bg: #f9f9f9;
+            --card-hover: #ffffff;
+            --alert-bg: #fff5f5;
+            --alert-text: #c0392b;
+            --address-text: #555555;
+            --status-text: #777777;
+            --border-color: #dddddd;
+            --c2-color: #0984e3;
+            --c3-color: #6c5ce7;
             --btn-bg: #000000;
             --btn-text: #ffffff;
-            --alert-bg: #f9f9f9;
         }
 
-        /* إعدادات ألوان الوضع الداكن (أسود وأبيض) */
+        /* المتغيرات للوضع الداكن (نظام أبيض وأسود Monochrome) */
         body.dark-mode {
-            --bg-color: #121212;
-            --container-bg: #1e1e1e;
-            --text-main: #ffffff;
-            --text-sub: #cccccc;
-            --border-color: #333333;
+            --efb-green: #ffffff;
+            --warning-red: #ffffff;
+            --bg-white: #121212;
+            --light-gray: #1e1e1e;
+            --text-dark: #ffffff;
+            --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
-            --accent-black: #ffffff;
+            --alert-bg: #1e1e1e;
+            --alert-text: #ffffff;
+            --address-text: #cccccc;
+            --status-text: #aaaaaa;
+            --border-color: #333333;
+            --c2-color: #ffffff;
+            --c3-color: #ffffff;
             --btn-bg: #ffffff;
             --btn-text: #000000;
-            --alert-bg: #222222;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-white);
+            color: var(--text-dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
@@ -55,7 +65,7 @@
             z-index: 9999;
             background: var(--btn-bg);
             color: var(--btn-text);
-            border: 1px solid var(--accent-black);
+            border: 1px solid var(--text-dark);
             padding: 10px 18px;
             border-radius: 30px;
             cursor: pointer;
@@ -77,26 +87,26 @@
             margin: 0 auto;
         }
 
-        /* قسم التنبيهات */
+        /* قسم التنبيهات الحمراء */
         .alert-section {
             background-color: var(--alert-bg);
-            border: 2px solid var(--accent-black);
+            border: 2px solid var(--warning-red);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 40px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
 
         .alert-section h2 {
-            color: var(--text-main);
+            color: var(--warning-red);
             margin: 0 0 10px 0;
             font-size: 22px;
         }
 
         .alert-section p {
-            color: var(--text-sub);
+            color: var(--alert-text);
             font-weight: bold;
             margin: 5px 0;
             font-size: 16px;
@@ -105,37 +115,42 @@
         /* عنوان القسم */
         .section-title {
             text-align: center;
-            color: var(--text-main);
-            border-bottom: 2px solid var(--accent-black);
+            color: var(--efb-green);
+            border-bottom: 2px solid var(--efb-green);
             display: table;
             margin: 0 auto 30px;
             padding-bottom: 10px;
             font-size: 24px;
+            transition: all 0.3s ease;
         }
 
-        /* تصميم بطاقات الجمعيات موحد بالكامل بالأبيض والأسود */
+        /* تصميم بطاقات الجمعيات */
         .association-card {
-            background: var(--container-bg);
-            border-right: 8px solid var(--accent-black);
+            background: var(--card-bg);
+            border-right: 8px solid var(--efb-green);
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
         }
 
         .association-card:hover {
             transform: scale(1.02);
             background: var(--card-hover);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .assoc-name {
             font-size: 20px;
             font-weight: bold;
-            color: var(--text-main);
+            color: var(--efb-green);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -143,7 +158,7 @@
 
         .assoc-address {
             font-size: 16px;
-            color: var(--text-sub);
+            color: var(--address-text);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -151,9 +166,8 @@
 
         .province-badge {
             display: inline-block;
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            border: 1px solid var(--accent-black);
+            background: var(--efb-green);
+            color: white;
             padding: 2px 12px;
             border-radius: 20px;
             font-size: 14px;
@@ -161,9 +175,13 @@
             width: fit-content;
         }
 
+        body.dark-mode .province-badge {
+            color: #000000;
+        }
+
         .status-text {
             font-size: 14px;
-            color: var(--text-sub);
+            color: var(--status-text);
             font-style: italic;
             border-top: 1px solid var(--border-color);
             padding-top: 10px;
@@ -172,13 +190,34 @@
 
         .icon { font-size: 20px; }
 
+        /* تعديلات الفئات المخصصة بالوضع الداكن */
+        .card-2 {
+            border-right-color: var(--c2-color) !important;
+        }
+        .card-2 .assoc-name {
+            color: var(--c2-color) !important;
+        }
+        .card-2 .province-badge {
+            background: var(--c2-color) !important;
+        }
+
+        .card-3 {
+            border-right-color: var(--c3-color) !important;
+        }
+        .card-3 .assoc-name {
+            color: var(--c3-color) !important;
+        }
+        .card-3 .province-badge {
+            background: var(--c3-color) !important;
+        }
+
     </style>
 </head>
 <body id="pageBody">
 
-<!-- الزر الجانبي للتحويل بين الأبيض والأسود -->
+<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
 <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-    <span>🌙</span> <span id="btnText">Dark mode 🌙</span>
+    <span>🌙</span> <span id="btnText">Dark Mode</span>
 </button>
 
 <div class="container">
@@ -206,7 +245,7 @@
     </div>
 
     <!-- الجمعية الثانية -->
-    <div class="association-card">
+    <div class="association-card card-2">
         <div class="assoc-name">
             <span class="icon">👩</span> جمعية المرأة السودانية
         </div>
@@ -218,7 +257,7 @@
     </div>
 
     <!-- الجمعية الثالثة -->
-    <div class="association-card">
+    <div class="association-card card-3">
         <div class="assoc-name">
             <span class="icon">🏢</span> مؤسسة الكمال الخيرية
         </div>
@@ -241,11 +280,11 @@
         
         if (body.classList.contains('dark-mode')) {
             btn.querySelector('span:first-child').innerText = "☀️";
-            btnText.innerText = "Night Mode ☀️";
+            btnText.innerText = "Night Mode";
             localStorage.setItem('myTheme', 'dark');
         } else {
             btn.querySelector('span:first-child').innerText = "🌙";
-            btnText.innerText = "Dark mode 🌙";
+            btnText.innerText = "Dark Mode";
             localStorage.setItem('myTheme', 'light');
         }
     }
@@ -256,7 +295,7 @@
         if (savedTheme === 'dark') {
             document.getElementById('pageBody').classList.add('dark-mode');
             document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-            document.getElementById('btnText').innerText = "Night Mode ☀️";
+            document.getElementById('btnText').innerText = "Night Mode";
         }
     }
 </script>
