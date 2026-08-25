@@ -2,28 +2,83 @@
 <html lang="ar" dir="rtl">
 <head>
 
-<link rel= "stylesheet" href="styles/mystyle.css"
+<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعليمات نقل المساعدة | بنك الطعام</title>
-    <!-- استدعاء أيقونات FontAwesome للمظهر التقني -->
+    
+<link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>help Needy customer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            /* الألوان الموحدة للطرفين */
             --neon-green: #00ff41;
-            --dark-bg: #0a0a0a;
-            --card-bg: #161616;
             --danger-red: #ff4b4b;
             --accent-blue: #00d2ff;
+            
+            /* ألوان الوضع الداكن (الافتراضي في تصميمك الأصلي) */
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+            --case-bg: #202020;
+            --case-hover: #252525;
+            --header-bg: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
+            --text-main: #ffffff;
             --text-gray: #b0b0b0;
+            --border-color: #333333;
+            --status-bg: #000000;
+            --btn-bg: #222222;
+            --btn-text: #ffffff;
+        }
+
+        /* ألوان Light Mode عند التفعيل */
+        body.light-mode {
+            --dark-bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --case-bg: #f8f9fa;
+            --case-hover: #eef2f5;
+            --header-bg: linear-gradient(to bottom, #ffffff, #f4f6f8);
+            --text-main: #222222;
+            --text-gray: #555555;
+            --border-color: #e0e0e0;
+            --status-bg: #1e1e1e;
+            --btn-bg: #ffffff;
+            --btn-text: #222222;
+            --accent-blue: #0066cc;
+            --neon-green: #00b32d;
         }
 
         body {
             background-color: var(--dark-bg);
-            color: white;
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* زر التبديل الجانبي المثبت */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
         }
 
         .container {
@@ -37,8 +92,9 @@
             border-bottom: 2px solid var(--neon-green);
             padding-bottom: 20px;
             margin-bottom: 30px;
-            background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
+            background: var(--header-bg);
             border-radius: 10px 10px 0 0;
+            transition: background 0.3s ease;
         }
 
         .header h1 {
@@ -52,10 +108,11 @@
         /* الصندوق الرئيسي */
         .main-card {
             background: var(--card-bg);
-            border: 1px solid #333;
+            border: 1px solid var(--border-color);
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .instruction-text {
@@ -75,7 +132,7 @@
         }
 
         .case-item {
-            background: #202020;
+            background: var(--case-bg);
             padding: 20px;
             border-radius: 10px;
             display: flex;
@@ -86,7 +143,7 @@
 
         .case-item:hover {
             border-color: var(--neon-green);
-            background: #252525;
+            background: var(--case-hover);
             transform: scale(1.01);
         }
 
@@ -107,7 +164,7 @@
         .case-content b {
             display: block;
             font-size: 17px;
-            color: #fff;
+            color: var(--text-main);
             margin-bottom: 5px;
         }
 
@@ -119,23 +176,27 @@
         /* التذييل التقني */
         .status-bar {
             margin-top: 30px;
-            background: #000;
+            background: var(--status-bg);
             padding: 10px;
             border-radius: 5px;
             font-family: monospace;
             color: var(--neon-green);
             font-size: 12px;
             text-align: center;
-            border: 1px solid #222;
+            border: 1px solid var(--border-color);
+            transition: background 0.3s ease;
         }
 
         .highlight-red { color: var(--danger-red); font-weight: bold; }
     </style>
 </head>
-<body>
+<body id="pageBody">
+
+<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
+    <span id="themeIcon">☀️</span> <span id="themeText">Night Mode</span>
+</button>
 
 <div class="container">
-    <!-- الهيدر -->
     <header class="header">
         <h1><i class="fa-solid fa-truck-ramp-box"></i> بخصوص طلب نقل مساعدة</h1>
     </header>
@@ -147,7 +208,6 @@
 
         <div class="cases-grid">
             
-            <!-- الحالة الأولى -->
             <div class="case-item">
                 <div class="case-icon"><i class="fa-solid fa-handshake-slash"></i></div>
                 <div class="case-content">
@@ -156,7 +216,6 @@
                 </div>
             </div>
 
-            <!-- الحالة الثانية -->
             <div class="case-item">
                 <div class="case-icon"><i class="fa-solid fa-map-location-dot"></i></div>
                 <div class="case-content">
@@ -165,7 +224,6 @@
                 </div>
             </div>
 
-            <!-- الحالة الثالثة -->
             <div class="case-item">
                 <div class="case-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
                 <div class="case-content">
@@ -177,11 +235,37 @@
         </div>
     </div>
 
-    <!-- شريط النظام السفلي -->
-    <div class="status-bar">
-        > SYSTEM_MODULE: TRANSFER_REQUEST_V1.2 | STATUS: READY_FOR_INPUT
-    </div>
-</div>
+    
+
+<script>
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        body.classList.toggle('light-mode');
+
+        if (body.classList.contains('light-mode')) {
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark mode';
+            localStorage.setItem('theme', 'light');
+        } else {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Night Mode';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // استعادة تفضيلات الوضع عند تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.getElementById('pageBody').classList.add('light-mode');
+            document.getElementById('themeIcon').textContent = '🌙';
+            document.getElementById('themeText').textContent = 'Dark mode';
+        }
+    });
+</script>
 
 </body>
 </html>
