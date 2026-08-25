@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel= "stylesheet" href="styles/mystyle.css"
+<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
-    <title>نظام توزيع السلع | بنك الطعام</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>help Needy customer</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            /* الألوان الأصلية في الوضع الداكن (الأساسي) */
             --neon-green: #00ff41;
             --dark-bg: #0a0a0a;
             --card-bg: #161616;
@@ -14,14 +19,68 @@
             --text-gray: #b0b0b0;
             --accent-blue: #00d2ff;
             --orange: #ff9f43;
+
+            /* متغيرات التحكم بالوضع */
+            --main-bg: var(--dark-bg);
+            --main-card-bg: var(--card-bg);
+            --main-header-bg: var(--header-bg);
+            --text-main: #ffffff;
+            --table-border: #333333;
+            --row-border: #222222;
+            --summary-bg: #252525;
+            --toggle-bg: #161616;
+            --hover-bg: rgba(0, 255, 65, 0.05);
+        }
+
+        /* متغيرات الوضع الفاتح Light Mode */
+        [data-theme="light"] {
+            --neon-green: #00a651;
+            --accent-blue: #0984e3;
+            --orange: #d63031;
+            --main-bg: #f8f9fa;
+            --main-card-bg: #ffffff;
+            --main-header-bg: #f1f2f6;
+            --text-main: #2d3436;
+            --text-gray: #636e72;
+            --table-border: #e0e0e0;
+            --row-border: #f0f0f0;
+            --summary-bg: #eef2f5;
+            --toggle-bg: #ffffff;
+            --hover-bg: rgba(0, 166, 81, 0.08);
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: white;
+            background-color: var(--main-bg);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, sans-serif;
             margin: 0;
             padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* تثبيت زر التبديل بجانب الصفحة */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: var(--toggle-bg);
+            color: var(--text-main);
+            border: 2px solid var(--neon-green);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
         }
 
         .container {
@@ -32,11 +91,12 @@
         .main-header {
             text-align: center;
             padding: 30px;
-            background: var(--card-bg);
+            background: var(--main-card-bg);
             border-radius: 15px;
             border-bottom: 4px solid var(--neon-green);
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1);
+            transition: background 0.3s;
         }
 
         .main-header h1 { color: var(--neon-green); margin: 0; font-size: 24px; }
@@ -44,10 +104,11 @@
 
         /* تنسيق الجدول */
         .table-container {
-            background: var(--card-bg);
+            background: var(--main-card-bg);
             border-radius: 15px;
             overflow-x: auto;
-            border: 1px solid #333;
+            border: 1px solid var(--table-border);
+            transition: background 0.3s;
         }
 
         table {
@@ -57,8 +118,8 @@
         }
 
         thead tr {
-            background: var(--header-bg);
-            border-bottom: 2px solid #333;
+            background: var(--main-header-bg);
+            border-bottom: 2px solid var(--table-border);
         }
 
         th {
@@ -70,23 +131,24 @@
 
         td {
             padding: 12px 10px;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid var(--row-border);
             font-size: 14px;
+            color: var(--text-main);
         }
 
         tbody tr:hover {
-            background: rgba(0, 255, 65, 0.05);
+            background: var(--hover-bg);
         }
 
         .item-name {
             text-align: right;
             font-weight: bold;
-            color: white;
+            color: var(--text-main);
             padding-right: 20px;
         }
 
         .point-badge {
-            background: rgba(0, 255, 65, 0.1);
+            background: rgba(0, 255, 65, 0.15);
             color: var(--neon-green);
             padding: 3px 8px;
             border-radius: 5px;
@@ -95,7 +157,7 @@
 
         /* تنسيق الخلاصة (الشرائح) */
         .summary-row {
-            background: #252525;
+            background: var(--summary-bg);
             font-weight: bold;
         }
 
@@ -115,9 +177,24 @@
             color: var(--text-gray);
             font-size: 12px;
         }
+
+        @media (max-width: 600px) {
+            .theme-toggle-btn {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
+
+<!-- زر التبديل عائم بجانب الصفحة -->
+<button id="themeToggle" class="theme-toggle-btn">
+    <span id="themeIcon">☀️</span>
+    <span id="themeText">Light mode</span>
+</button>
 
 <div class="container">
     <div class="main-header">
@@ -183,9 +260,29 @@
     </div>
 
     <div class="status-bar">
-        DATA SOURCE: EFB_PORTAL_V4 | SYNC_STATUS: STABLE | <i class="fa-solid fa-shield-halved"></i> SECURED
+        
     </div>
 </div>
+
+<script>
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        
+        if (currentTheme === 'light') {
+            document.documentElement.removeAttribute('data-theme');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light mode';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark mode';
+        }
+    });
+</script>
 
 </body>
 </html>
