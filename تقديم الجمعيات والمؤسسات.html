@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="stylesheet" href="styles/mystyle.css">
+<link rel="stylesheet" href="styles/mystyle.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer - تقديم الجمعيات والمؤسسات - بنك الطعام</title>
+    <title>help Needy customer</title>
     <style>
-        /* إعدادات المتغيرات الافتراضية (الوضع المضيء - أبيض وأسود) */
+        /* المتغيرات الأصلية للوضع المضيء (الألوان الأصلية) */
         :root {
-            --bg-color: #f4f7f6;
-            --container-bg: #ffffff;
-            --text-main: #000000;
-            --text-sub: #333333;
-            --border-color: #e0e0e0;
-            --card-hover: #f9f9f9;
-            --accent-black: #000000;
-            --accent-gray: #555555;
+            --efb-green: #00a651;
+            --efb-red: #d63031;
+            --bg-white: #ffffff;
+            --soft-gray: #f4f7f6;
+            --text-dark: #2d3436;
+            --card-bg: #ffffff;
+            --border-color: #eee;
+            --doc-hover: #f9f9f9;
+            --footer-text: #777;
+            --wa-bg: #25D366;
+            --wa-text: #ffffff;
             --btn-bg: #000000;
             --btn-text: #ffffff;
         }
 
-        /* إعدادات المتغيرات عند تفعيل الوضع الداكن (أسود وأبيض) */
+        /* المتغيرات للوضع الداكن (نظام أبيض وأسود Monochrome) */
         body.dark-mode {
-            --bg-color: #121212;
-            --container-bg: #1e1e1e;
-            --text-main: #ffffff;
-            --text-sub: #e0e0e0;
+            --efb-green: #ffffff;
+            --efb-red: #ffffff;
+            --bg-white: #121212;
+            --soft-gray: #121212;
+            --text-dark: #ffffff;
+            --card-bg: #1e1e1e;
             --border-color: #333333;
-            --card-hover: #252525;
-            --accent-black: #ffffff;
-            --accent-gray: #aaaaaa;
+            --doc-hover: #2a2a2a;
+            --footer-text: #cccccc;
+            --wa-bg: #222222;
+            --wa-text: #ffffff;
             --btn-bg: #ffffff;
             --btn-text: #000000;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--soft-gray);
+            color: var(--text-dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
@@ -53,7 +60,7 @@
             z-index: 9999;
             background: var(--btn-bg);
             color: var(--btn-text);
-            border: 1px solid var(--accent-black);
+            border: 1px solid var(--text-dark);
             padding: 10px 18px;
             border-radius: 30px;
             cursor: pointer;
@@ -78,24 +85,24 @@
 
         /* رأس الصفحة */
         header {
-            background: var(--container-bg);
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
-            border-top: 5px solid var(--accent-black);
+            border-top: 5px solid var(--efb-green);
             transition: all 0.3s ease;
         }
 
         header h1 {
-            color: var(--text-main);
+            color: var(--efb-red);
             margin: 0;
             font-size: 28px;
         }
 
         header p {
-            color: var(--text-sub);
+            color: var(--text-dark);
             font-size: 18px;
             font-weight: bold;
             margin-top: 10px;
@@ -104,8 +111,8 @@
         /* زر التسجيل */
         .reg-link {
             display: inline-block;
-            background: var(--btn-bg);
-            color: var(--btn-text);
+            background: var(--efb-red);
+            color: white;
             text-decoration: none;
             padding: 12px 30px;
             border-radius: 50px;
@@ -113,7 +120,12 @@
             font-size: 18px;
             margin-top: 15px;
             transition: 0.3s;
-            border: 1px solid var(--accent-black);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode .reg-link {
+            color: #000000;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
         }
 
         .reg-link:hover {
@@ -123,16 +135,17 @@
 
         /* قائمة الأوراق المطلوبة */
         .docs-card {
-            background: var(--container-bg);
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
 
         .docs-card h2 {
-            color: var(--text-main);
-            border-bottom: 2px solid var(--accent-black);
+            color: var(--efb-green);
+            border-bottom: 2px solid var(--efb-green);
             padding-bottom: 10px;
             margin-bottom: 25px;
             font-size: 22px;
@@ -152,12 +165,12 @@
         }
 
         .doc-item:hover {
-            background-color: var(--card-hover);
+            background-color: var(--doc-hover);
         }
 
         .doc-number {
-            background: var(--btn-bg);
-            color: var(--btn-text);
+            background: var(--efb-green);
+            color: white;
             min-width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -166,12 +179,15 @@
             justify-content: center;
             font-weight: bold;
             font-size: 14px;
-            border: 1px solid var(--accent-black);
+        }
+
+        body.dark-mode .doc-number {
+            color: #000000;
         }
 
         .doc-text {
             font-size: 16px;
-            color: var(--text-sub);
+            color: var(--text-dark);
         }
 
         /* تذييل الصفحة */
@@ -179,27 +195,31 @@
             text-align: center;
             margin-top: 30px;
             font-size: 15px;
-            color: var(--accent-gray);
+            color: var(--footer-text);
         }
 
         .whatsapp-note {
-            background: var(--btn-bg);
-            color: var(--btn-text);
+            background: var(--wa-bg);
+            color: var(--wa-text);
             padding: 10px 20px;
             border-radius: 8px;
             display: inline-block;
             margin-top: 10px;
             font-weight: bold;
-            border: 1px solid var(--accent-black);
+            border: 1px solid var(--border-color);
+        }
+
+        body.dark-mode .whatsapp-note {
+            color: #ffffff;
         }
 
     </style>
 </head>
 <body id="pageBody">
 
-<!-- الزر الجانبي للتحويل بين الأبيض والأسود -->
+<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
 <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-    <span>🌙</span> <span id="btnText">Dark mode 🌙</span>
+    <span>🌙</span> <span id="btnText">Dark Mode</span>
 </button>
 
 <div class="container">
@@ -208,7 +228,7 @@
     <header>
         <h1>تقديم الجمعيات والمؤسسات</h1>
         <p>الأوراق المطلوبة للاشتراك في برامج بنك الطعام</p>
-        <a href="https://portal.efb.eg/"target="_blank" class="reg-link">رابط التسجيل: https://portal.efb.eg/</a>
+        <a href="https://portal.efb.eg/" target="_blank" class="reg-link">رابط التسجيل: https://portal.efb.eg/</a>
     </header>
 
     <!-- قائمة الأوراق -->
@@ -269,7 +289,7 @@
 
     <!-- معلومات إضافية -->
     <div class="footer-info">
-        
+        <p>تم توضيح الأوراق المطلوبة وإرسال الرابط بنجاح.</p>
         <div class="whatsapp-note">فى حالة سوال العميل عن امكانية ارسال المستندات المطلوبة عن طريق الواتساب يتم توضيح رقم الواتساب 01152888777</div>
     </div>
 
@@ -285,22 +305,22 @@
         
         if (body.classList.contains('dark-mode')) {
             btn.querySelector('span:first-child').innerText = "☀️";
-            btnText.innerText = "Night Mode ☀️";
+            btnText.innerText = "Night Mode";
             localStorage.setItem('myTheme', 'dark');
         } else {
             btn.querySelector('span:first-child').innerText = "🌙";
-            btnText.innerText = "Dark mode 🌙";
+            btnText.innerText = "Dark Mode";
             localStorage.setItem('myTheme', 'light');
         }
     }
 
-    // حفظ الوضع المختار عند تحميل الصفحة
+    // حفظ تفضيل الوضع عند إعادة تحميل الصفحة
     window.onload = () => {
         const savedTheme = localStorage.getItem('myTheme');
         if (savedTheme === 'dark') {
             document.getElementById('pageBody').classList.add('dark-mode');
             document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-            document.getElementById('btnText').innerText = "Night Mode ☀️";
+            document.getElementById('btnText').innerText = "Night Mode";
         }
     }
 </script>
