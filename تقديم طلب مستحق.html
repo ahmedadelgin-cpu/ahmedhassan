@@ -1,26 +1,77 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel= "stylesheet" href="styles/mystyle.css"
+    <link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>help Needy customer</title>
     <title>نموذج تقديم طلب محتاج - بنك الطعام</title>
     <style>
+        /* إعدادات المتغيرات الافتراضية (الوضع المضيء) */
         :root {
             --efb-green: #00a651;
             --efb-red: #d63031;
             --soft-blue: #e1f5fe;
             --bg-white: #ffffff;
             --text-dark: #2d3436;
+            --body-bg: #f4f7f6;
+            --script-bg: #fff9f9;
+            --item-bg: #f9f9f9;
+            --item-border: #eee;
+            --footer-title: #0277bd;
+            --footer-border: #0288d1;
+        }
+
+        /* إعدادات المتغيرات عند تفعيل الوضع الداكن */
+        body.dark-mode {
+            --efb-green: #00e676;
+            --efb-red: #ff5252;
+            --soft-blue: #1c2b36;
+            --bg-white: #1e1e1e;
+            --text-dark: #e0e0e0;
+            --body-bg: #121212;
+            --script-bg: #2a1a1a;
+            --item-bg: #252525;
+            --item-border: #333333;
+            --footer-title: #4fc3f7;
+            --footer-border: #0288d1;
         }
 
         body {
-            background-color: #f4f7f6;
+            background-color: var(--body-bg);
             color: var(--text-dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             line-height: 1.7;
+            transition: all 0.3s ease;
+        }
+
+        /* زر التبديل المساعد المثبت في جانب الصفحة */
+        .side-theme-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: var(--efb-green);
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .side-theme-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
         }
 
         .container {
@@ -30,11 +81,12 @@
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             overflow: hidden;
+            position: relative;
         }
 
         /* رأس الصفحة */
         header {
-            background: var(--efb-green);
+            background: #00a651;
             color: white;
             padding: 25px;
             text-align: center;
@@ -44,7 +96,7 @@
 
         /* صندوق نص الرد (Script) */
         .script-box {
-            background: #fff9f9;
+            background: var(--script-bg);
             border: 2px dashed var(--efb-red);
             margin: 20px;
             padding: 20px;
@@ -65,7 +117,7 @@
         }
 
         .script-box p {
-            color: #444;
+            color: var(--text-dark);
             margin: 10px 0;
             font-weight: 500;
         }
@@ -102,13 +154,14 @@
         }
 
         .data-item {
-            background: #f9f9f9;
+            background: var(--item-bg);
             padding: 12px 15px;
             border-radius: 8px;
-            border: 1px solid #eee;
+            border: 1px solid var(--item-border);
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--text-dark);
         }
 
         .data-item span { font-weight: bold; color: var(--efb-green); }
@@ -119,10 +172,12 @@
             padding: 20px;
             margin: 20px;
             border-radius: 10px;
-            border-right: 5px solid #0288d1;
+            border-right: 5px solid var(--footer-border);
         }
 
-        .note-footer h3 { margin: 0 0 10px 0; color: #0277bd; font-size: 18px; }
+        .note-footer h3 { margin: 0 0 10px 0; color: var(--footer-title); font-size: 18px; }
+
+        .note-footer p { color: var(--text-dark); }
 
         .urgent-tag {
             color: var(--efb-red);
@@ -132,7 +187,12 @@
 
     </style>
 </head>
-<body>
+<body id="pageBody">
+
+<!-- الزر الجانبي المثبت في الشاشة -->
+<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
+    <span>🌙</span> <span id="btnText">Dark Mode</span>
+</button>
 
 <div class="container">
     <header>
@@ -170,41 +230,55 @@
         <p>• يتم متابعة طلب المساعدة <strong>مرة واحدة فقط خلال الشهر</strong>.</p>
         <p>• <span class="urgent-tag">في حالة استعجال الطلب:</span> يتم توضيح أن الحالة لها طلب ولم يتم التواصل معها حتى الآن،.</p>
     </div>
- <!-- قسم السياسات والمتابعة -->
+
+    <!-- قسم السياسات والمتابعة -->
     <div class="note-footer">
         <h3>🔄 بخصوص تقديم  الطلب:</h3>
-        <p>     تقديم طلب مستحق دى خاص بة المصريون</p>
-        <p>    تقديم طلبات اهالي غزة خاص با الفلسطينية</p>
-        <p>      </p>
-       <p>      </p>
-        
+        <p>  تقديم طلب مستحق دى خاص بة المصريون</p>
+        <p>  تقديم طلبات اهالي غزة خاص با الفلسطينية</p>
+        <p>   </p>
+        <p>   </p>
     </div>
- <div class="note-footer">
+
+    <div class="note-footer">
         <h3>🔄 بخصوص توجيه محتاج:</h3>
-        <p>   لو  متسجل على السيستم متابعة طلب فى نفس الشهر يتم عمل توجية محتاج بعد المتابعة  </p>
-        <p>   يتم كتابة فى توجية محتاج الحالة لها طلب لم يتم التواصل حتى الان </p>
-
-        <p>      </p>
-       <p>      </p>
-        
+        <p> لو  متسجل على السيستم متابعة طلب فى نفس الشهر يتم عمل توجية محتاج بعد المتابعة  </p>
+        <p> يتم كتابة فى توجية محتاج الحالة لها طلب لم يتم التواصل حتى الان </p>
+        <p>   </p>
+        <p>   </p>
     </div>
-
 
 </div>
 
+<script>
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const btnText = document.getElementById('btnText');
+        const btn = document.getElementById('themeBtn');
+        
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            btn.querySelector('span:first-child').innerText = "☀️";
+            btnText.innerText = "Light Mode";
+            localStorage.setItem('myTheme', 'dark');
+        } else {
+            btn.querySelector('span:first-child').innerText = "🌙";
+            btnText.innerText = "Dark Mode";
+            localStorage.setItem('myTheme', 'light');
+        }
+    }
+
+    // حفظ الوضع المختار عند إعادة التحميل
+    window.onload = () => {
+        const savedTheme = localStorage.getItem('myTheme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
+            document.getElementById('btnText').innerText = "Light Mode";
+        }
+    }
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
