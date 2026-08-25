@@ -1,49 +1,99 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel= "stylesheet" href="styles/mystyle.css"
+    <link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحديث الحالات الموسمية - بنك الطعام</title>
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>help Needy customer</title>
+
     <style>
+        /* المتغيرات الافتراضية (الوضع المضيء - أبيض وأسود) */
         :root {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-white: #ffffff;
-            --soft-gray: #f8f9fa;
-            --text-dark: #2d3436;
+            --bg-color: #f4f7f6;
+            --container-bg: #ffffff;
+            --text-main: #000000;
+            --text-sub: #333333;
+            --border-color: #e0e0e0;
+            --card-hover: #f0f0f0;
+            --accent-black: #000000;
+            --btn-bg: #000000;
+            --btn-text: #ffffff;
+            --alert-bg: #f9f9f9;
+        }
+
+        /* المتغيرات عند تفعيل الوضع الداكن (أسود وأبيض) */
+        body.dark-mode {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-main: #ffffff;
+            --text-sub: #cccccc;
+            --border-color: #333333;
+            --card-hover: #2a2a2a;
+            --accent-black: #ffffff;
+            --btn-bg: #ffffff;
+            --btn-text: #000000;
+            --alert-bg: #222222;
         }
 
         body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 40px 20px;
             display: flex;
             justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        /* زر التبديل الجانبي المثبت */
+        .side-theme-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--accent-black);
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .side-theme-btn:hover {
+            transform: scale(1.05);
         }
 
         .info-card {
             max-width: 700px;
             width: 100%;
-            background: var(--bg-white);
-            border: 1px solid #eee;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             overflow: hidden;
-            border-top: 6px solid var(--efb-red);
+            border-top: 6px solid var(--accent-black);
+            transition: all 0.3s ease;
         }
 
         /* رأس البطاقة */
         .card-header {
             text-align: center;
             padding: 30px 20px;
-            background: #fff5f5;
+            background: var(--alert-bg);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .card-header h1 {
-            color: var(--efb-red);
+            color: var(--text-main);
             margin: 0;
             font-size: 26px;
             display: flex;
@@ -65,51 +115,60 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--soft-gray);
+            background: var(--alert-bg);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 20px;
-            border-right: 5px solid var(--efb-green);
+            border-right: 5px solid var(--accent-black);
+            transition: all 0.3s ease;
         }
 
         .condition-text {
             font-size: 18px;
             font-weight: 500;
-            color: #444;
+            color: var(--text-sub);
         }
 
         .or-divider {
             text-align: center;
             margin: -10px 0 10px;
             font-weight: bold;
-            color: #999;
+            color: var(--text-sub);
             font-size: 14px;
         }
 
         /* النتيجة النهائية */
         .action-box {
-            background: var(--efb-green);
-            color: white;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--accent-black);
             text-align: center;
             padding: 20px;
             border-radius: 12px;
             margin-top: 30px;
             font-size: 20px;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 166, 81, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         .footer-note {
             text-align: center;
             padding: 15px;
             font-size: 14px;
-            color: #999;
-            border-top: 1px solid #eee;
+            color: var(--text-sub);
+            border-top: 1px solid var(--border-color);
         }
 
     </style>
 </head>
-<body>
+<body id="pageBody">
+
+<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
+<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
+    <span>🌙</span> <span id="btnText">Dark Mode</span>
+</button>
+
 <center>
 <div class="info-card">
     <!-- العنوان -->
@@ -120,21 +179,17 @@
         </h1>
     </div>
 
-   
-        
-        
-
-        <!-- الشرط الثاني -->
+    <div class="card-body">
+        <!-- الشرط الأول -->
         <div class="condition-box">
             <span class="icon-large">⏳</span>
             <div class="condition-text">الحالات التي لم تستلم أي مساعدات منذ أكثر من سنة.</div>
         </div>
-<!-- الشرط الثاني -->
+        <!-- الشرط الثاني -->
         <div class="condition-box">
             <span class="icon-large">⏳</span>
-            <div class="condition-text">الحالات الموسيميه ( أ ) فى حاله عدم الاستلام خلال فتره اقل من سنه يتم تسجيل شكوى انقطاع كرتونه  </div>
+            <div class="condition-text">الحالات الموسيميه ( أ ) فى حاله عدم الاستلام خلال فتره اقل من سنه يتم تسجيل شكوى انقطاع كرتونه </div>
         </div>
-
 
         <!-- النتيجة -->
         <div class="action-box">
@@ -149,17 +204,35 @@
 </div>
 </center>
 
+<script>
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const btnText = document.getElementById('btnText');
+        const btn = document.getElementById('themeBtn');
+        
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            btn.querySelector('span:first-child').innerText = "☀️";
+            btnText.innerText = "Night Mode";
+            localStorage.setItem('myTheme', 'dark');
+        } else {
+            btn.querySelector('span:first-child').innerText = "🌙";
+            btnText.innerText = "Dark Mode";
+            localStorage.setItem('myTheme', 'light');
+        }
+    }
+
+    // حفظ تفضيل الوضع عند إعادة تحميل الصفحة
+    window.onload = () => {
+        const savedTheme = localStorage.getItem('myTheme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
+            document.getElementById('btnText').innerText = "Night Mode";
+        }
+    }
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
