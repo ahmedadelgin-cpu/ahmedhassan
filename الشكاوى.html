@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel="stylesheet" href="styles/mystyle.css">
+<link rel= "stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
     <title>help Needy customer</title>
     <style>
-        /* المتغيرات الأصلية للوضع المضيء (الألوان كما هي تماماً) */
         :root {
             --primary-red: #d63031;
             --primary-green: #00a651;
@@ -15,75 +14,70 @@
             --warning-orange: #f39c12;
             --bg-white: #ffffff;
             --light-gray: #f8f9fa;
-            --card-bg: #ffffff;
+            
+            /* ألوان الوضع المضيء (الأساسي) */
+            --bg-body: #ffffff;
             --text-color: #333333;
-            --border-color: #eee;
             --essentials-bg: #fff5f5;
             --essentials-border: #ffcece;
-            --badge-bg: #eee;
-            --bg-honor-clr: #6c5ce7;
-            --bg-package-clr: #00a651;
-            --bg-quality-clr: #d63031;
-            --bg-otp-clr: #0984e3;
-            --header-text: #ffffff;
-            --btn-bg: #000000;
+            --grid-item-bg: #ffffff;
+            --grid-item-border: #eeeeee;
+            --card-bg: #ffffff;
+            --card-border: #eeeeee;
+            --list-border: #f1f1f1;
+            --time-badge-bg: #eeeeee;
+            --btn-bg: #2d3436;
             --btn-text: #ffffff;
         }
 
-        /* المتغيرات عند تفعيل الوضع الداكن (نظام أبيض وأسود Monochrome) */
+        /* ألوان Dark Mode عند تفعيله */
         body.dark-mode {
-            --bg-white: #121212;
+            --bg-body: #121212;
+            --text-color: #e0e0e0;
+            --essentials-bg: #2b1d1d;
+            --essentials-border: #522727;
+            --grid-item-bg: #1e1e1e;
+            --grid-item-border: #333333;
             --card-bg: #1e1e1e;
-            --text-color: #ffffff;
-            --border-color: #333333;
-            --primary-red: #ffffff;
-            --primary-green: #ffffff;
-            --dark-blue: #ffffff;
-            --warning-orange: #ffffff;
-            --essentials-bg: #222222;
-            --essentials-border: #333333;
-            --badge-bg: #222222;
-            --bg-honor-clr: #000000;
-            --bg-package-clr: #000000;
-            --bg-quality-clr: #000000;
-            --bg-otp-clr: #000000;
-            --header-text: #ffffff;
-            --btn-bg: #ffffff;
-            --btn-text: #000000;
+            --card-border: #333333;
+            --list-border: #2a2a2a;
+            --time-badge-bg: #333333;
+            --btn-bg: #f5f6fa;
+            --btn-text: #2d3436;
         }
 
         body {
-            background-color: var(--bg-white);
+            background-color: var(--bg-body);
             color: var(--text-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* زر التبديل الجانبي المثبت */
-        .side-theme-btn {
+        /* زر Dark Mode / Night Mode المثبت */
+        .theme-toggle-btn {
             position: fixed;
             top: 20px;
             left: 20px;
-            z-index: 9999;
-            background: var(--btn-bg);
+            z-index: 1000;
+            background-color: var(--btn-bg);
             color: var(--btn-text);
-            border: 1px solid var(--text-color);
+            border: none;
             padding: 10px 18px;
-            border-radius: 30px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
             font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
         }
 
-        .side-theme-btn:hover {
+        .theme-toggle-btn:hover {
             transform: scale(1.05);
         }
 
@@ -112,6 +106,7 @@
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .essentials h2 {
@@ -127,14 +122,15 @@
         }
 
         .grid-item {
-            background: var(--card-bg);
-            color: var(--text-color);
+            background: var(--grid-item-bg);
             padding: 10px;
             text-align: center;
             border-radius: 8px;
             font-weight: bold;
             font-size: 14px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--grid-item-border);
+            color: var(--text-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         /* 2. حالة الجمعيات */
@@ -148,11 +144,8 @@
         }
 
         body.dark-mode .alert-box {
-            background: #222222;
-            border-right: 5px solid #ffffff;
-            border-top: 1px solid #333;
-            border-left: 1px solid #333;
-            border-bottom: 1px solid #333;
+            background: #2d2618;
+            color: #f1c40f;
         }
 
         /* 3. أنواع الشكاوى - بطاقات */
@@ -164,15 +157,16 @@
 
         .card {
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--card-border);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .card-header {
             padding: 15px;
-            color: var(--header-text);
+            color: white;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -181,18 +175,13 @@
 
         .card-body {
             padding: 20px;
-            color: var(--text-color);
         }
 
-        /* ألوان الأقسام في الوضع المضيء وتتحول للأسود في الداكن */
-        .bg-honor { background: var(--bg-honor-clr); } 
-        .bg-package { background: var(--bg-package-clr); } 
-        .bg-quality { background: var(--bg-quality-clr); } 
-        .bg-otp { background: var(--bg-otp-clr); } 
-
-        body.dark-mode .card-header {
-            border-bottom: 1px solid #333333;
-        }
+        /* ألوان الأقسام */
+        .bg-honor { background: #6c5ce7; } /* ميثاق الشرف */
+        .bg-package { background: var(--primary-green); } /* انقطاع الكرتونة */
+        .bg-quality { background: var(--primary-red); } /* الجودة والنقص */
+        .bg-otp { background: var(--dark-blue); } /* القسائم الإلكترونية */
 
         .list-unstyled {
             list-style: none;
@@ -202,20 +191,22 @@
 
         .list-unstyled li {
             padding: 8px 0;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--list-border);
             font-size: 14px;
+            transition: border-color 0.3s ease;
         }
 
         .list-unstyled li:last-child { border: none; }
 
         .time-badge {
             display: inline-block;
-            background: var(--badge-bg);
-            color: var(--text-color);
+            background: var(--time-badge-bg);
             padding: 2px 8px;
             border-radius: 4px;
             font-weight: bold;
             margin-bottom: 10px;
+            color: var(--text-color);
+            transition: background 0.3s ease;
         }
 
         .danger-note {
@@ -226,19 +217,12 @@
             display: block;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #999;
-            font-size: 12px;
-        }
     </style>
 </head>
-<body id="pageBody">
+<body id="bodyElement">
 
-<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
-<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-    <span>🌙</span> <span id="btnText">Dark Mode</span>
+<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
+    <span id="themeIcon">🌙</span> <span id="themeText">Dark mode</span>
 </button>
 
 <div class="container">
@@ -257,6 +241,8 @@
         </div>
     </div>
 
+    
+
     <!-- 2. شبكة أنواع الشكاوى -->
     <div class="complaint-grid">
         
@@ -268,8 +254,8 @@
                     <li>طلب مبالغ مالية مقابل المساعدة.</li>
                     <li>سوء سلوك الجمعية مع الحالات.</li>
                     <li>إجبار الحالة على أعمال نظافة أو تنزيل كراتين.</li>
-                    <br>
-                    <li>الحالة   &nbsp;&nbsp;&nbsp;  من جمعية &nbsp;&nbsp;&nbsp;   تشكو من   &nbsp;&nbsp;&nbsp;    العميلة مصنفة مشروع   &nbsp;&nbsp;&nbsp;  الحالة تستلم (موسمى)او(شهرى)</li>
+                     <br>
+                      <li>الحالة    &nbsp;&nbsp;&nbsp;  من جمعية &nbsp;&nbsp;&nbsp;   تشكو من   &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع   &nbsp;&nbsp;&nbsp;  الحالة تستلم (موسمى)او(شهرى)</li>
                 </ul>
             </div>
         </div>
@@ -281,8 +267,8 @@
                 <div class="time-badge">من 1 شهر إلى 11 شهر:</div>
                 <p style="font-size: 13px; margin: 0;">يتم تسجيل شكوى (توضيح النوع: شهري أو موسمي).</p>
                 <span class="danger-note">🚨 12 شهر أو أكثر: لا تسجل شكوى (تقديم طلب جديد).</span>
-                <br>
-                <span class="danger-note">الحالة  &nbsp;&nbsp;&nbsp;   من جمعية  &nbsp;&nbsp;&nbsp;   تشكو من انقطاع الكرتونة من شهر  &nbsp;&nbsp;&nbsp;   الى شهر   &nbsp;&nbsp;&nbsp;    العميلة مصنفة مشروع   &nbsp;&nbsp;&nbsp;    الحالة تستلم (موسمى)او(شهرى)</span>
+                 <br>
+                <span class="danger-note">الحالة  &nbsp;&nbsp;&nbsp;   من جمعية  &nbsp;&nbsp;&nbsp;   تشكو من انقطاع الكرتونة من شهر  &nbsp;&nbsp;&nbsp;   الى شهر   &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع   &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى)</span>
             </div>
         </div>
 
@@ -293,11 +279,11 @@
                 <ul class="list-unstyled">
                     <li><strong>سوء الجودة:</strong> الجودة </li>
                     <li><strong>سوء الجودة:</strong> وصف حالة المنتج التالف.</li>
-                    <li><strong>سوء الجودة:</strong>الحالة&nbsp;&nbsp;&nbsp;   من جمعية &nbsp;&nbsp;&nbsp;   تشكو من سوء جودة المنتجات  &nbsp;&nbsp;&nbsp;&nbsp;    العميلة مصنفة مشروع  &nbsp;&nbsp;&nbsp;    الحالة تستلم (موسمى)او(شهرى) </li>
-                    <br>
+                    <li><strong>سوء الجودة:</strong>الحالة&nbsp;&nbsp;&nbsp;   من جمعية &nbsp;&nbsp;&nbsp;   تشكو من سوء جودة المنتجات  &nbsp;&nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع  &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى) </li>
+                     <br>
                     <li><strong>:</strong> </li>
                     <li><strong>نقص المكونات:</strong> يتم التقديم في حالة نقص المكونات الأساسية المتفق عليها بعد مراجعه الاصناف بالكامل مع العميله و معرفه الاصناف التى لم يتم استلامها و كتاتها فى الشكوى بالتفصيل .</li>
-                    <li><strong>نقص المكونات:</strong> الحالة    &nbsp;&nbsp;&nbsp; تشتكى من نقص المكونات والحالة استلمت  &nbsp;&nbsp;&nbsp;    العميلة مصنفة مشروع  &nbsp;&nbsp;&nbsp;    الحالة تستلم (موسمى)او(شهرى)</li>
+                    <li><strong>نقص المكونات:</strong> الحالة    &nbsp;&nbsp;&nbsp; تشتكى من نقص المكونات والحالة استلمت  &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع  &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى)</li>
                 </ul>
             </div>
         </div>
@@ -313,27 +299,28 @@
                 </ul>
                 <span class="danger-note">❌ لا يتم تسجيل شكوى للمنح المؤقتة (مثل المنحة الفلسطينية).</span>
                 <br>
-                <ul class="list-unstyled">
-                    <li>            الحالة    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; تشكو عدم ارسال الكود او القسايم الشرائية من شهر.    &nbsp;&nbsp;&nbsp; الى شهر</li>
-                </ul>
+                 <li>            الحالة    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; تشكو عدم ارسال الكود او القسايم الشرائية من شهر.    &nbsp;&nbsp;&nbsp; الى شهر
+
+     </li>
             </div>
         </div>
-
-        <!-- استفسارات الشكاوى وشكاوى السودانية -->
+<!-- OTP القسائم الإلكترونية -->
         <div class="card">
-            <div class="card-header bg-otp">❓ استفسارات الشكاوى</div>
+            <div class="card-header bg-otp">   استفسارات الشكاوى </div>
             <div class="card-body">
                 <ul class="list-unstyled">
-                    <li>                تم توضيح رد الشكوى     </li>
+                    <li>                  تم توضيح رد الشكوى     </li>
                     <li>           العميل له شكوى لم يتم الرد حتى الان      </li>
-                    <li>      العميلة لها شكوى لم يتم الرد حتى الان            </li>
+                    <li>      العميلة لها شكوى لم يتم الرد حتى الان           </li>
                     <li>            العميل له شكوى تم متابعة الشكوى     </li>
-                    <li>          العميلة لها شكوى تم متابعة الشكوى        </li>
+                    <li>         العميلة لها شكوى تم متابعة الشكوى        </li>
+                    
                 </ul>
-            </div>
+                
+          </div>
 
-            <div class="card-header bg-otp">🇸🇩 شكاوى السودانية</div>
             <div class="card-body">
+                <div class="card-header bg-otp">   شكاوى السودانية </div>
                 <ul class="list-unstyled">
                     <li>    لو العميلة وضحت تم إيقاف تلقي الطلبات حالياً في جمعيات (الكمال الخيرية، المرأة السودانية، إسناد لدعم المتضررين).        </li>
                     <li>     يتم  تقديم شكوى  تجاوزات جمعية       </li>
@@ -341,44 +328,46 @@
                     <li>             </li>
                     <li>                </li>  
                 </ul>
-            </div>
+                
+              
+          </div>
         </div>
 
     </div>
 
-    <footer>
-        نظام إدارة الجودة والشكاوى - بنك الطعام المصري © 2024
+    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 12px;">
+       
     </footer>
 </div>
 
 <script>
     function toggleTheme() {
-        const body = document.getElementById('pageBody');
-        const btnText = document.getElementById('btnText');
-        const btn = document.getElementById('themeBtn');
-        
+        const body = document.getElementById('bodyElement');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
         body.classList.toggle('dark-mode');
-        
+
         if (body.classList.contains('dark-mode')) {
-            btn.querySelector('span:first-child').innerText = "☀️";
-            btnText.innerText = "Night Mode";
-            localStorage.setItem('myTheme', 'dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Night Mode';
+            localStorage.setItem('theme', 'dark');
         } else {
-            btn.querySelector('span:first-child').innerText = "🌙";
-            btnText.innerText = "Dark Mode";
-            localStorage.setItem('myTheme', 'light');
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark mode';
+            localStorage.setItem('theme', 'light');
         }
     }
 
-    // حفظ تفضيل الوضع عند إعادة تحميل الصفحة
-    window.onload = () => {
-        const savedTheme = localStorage.getItem('myTheme');
+    // حفظ خيار المستخدم عند إعادة تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {
-            document.getElementById('pageBody').classList.add('dark-mode');
-            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-            document.getElementById('btnText').innerText = "Night Mode";
+            document.getElementById('bodyElement').classList.add('dark-mode');
+            document.getElementById('themeIcon').textContent = '☀️';
+            document.getElementById('themeText').textContent = 'Night Mode';
         }
-    }
+    });
 </script>
 
 </body>
