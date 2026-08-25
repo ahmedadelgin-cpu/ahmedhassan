@@ -1,49 +1,60 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
 <link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
     <title>help Needy customer</title>
     <style>
-        /* المتغيرات الافتراضية (الوضع المضيء - أبيض وأسود) */
         :root {
-            --bg-color: #f4f7f6;
-            --container-bg: #ffffff;
-            --text-main: #000000;
-            --text-sub: #333333;
-            --border-color: #e0e0e0;
-            --card-hover: #f0f0f0;
-            --accent-black: #000000;
-            --btn-bg: #000000;
+            --efb-green: #00a651;
+            --efb-red: #d63031;
+            --bg-white: #ffffff;
+            --soft-gray: #f8f9fa;
+            --text-dark: #2d3436;
+            --border: #e0e0e0;
+            --rules-bg: #fffafa;
+            --rules-border: #ffeded;
+            --rules-item-border: #f9ecec;
+            --action-card-bg: #ffffff;
+            --action-card-border: #dddddd;
+            --exception-bg: #e1f5fe;
+            --exception-header: #01579b;
+            --logic-box-bg: #ffffff;
+            --btn-bg: #2d3436;
             --btn-text: #ffffff;
-            --alert-bg: #f9f9f9;
+            --btn-border: #2d3436;
         }
 
-        /* المتغيرات عند تفعيل الوضع الداكن (أسود وأبيض) */
         body.dark-mode {
-            --bg-color: #121212;
-            --container-bg: #1e1e1e;
-            --text-main: #ffffff;
-            --text-sub: #cccccc;
-            --border-color: #333333;
-            --card-hover: #2a2a2a;
-            --accent-black: #ffffff;
+            --efb-green: #00a651;
+            --efb-red: #d63031;
+            --bg-white: #121212;
+            --soft-gray: #1e1e1e;
+            --text-dark: #f5f6fa;
+            --border: #333333;
+            --rules-bg: #2d1515;
+            --rules-border: #4a1d1d;
+            --rules-item-border: #3d1a1a;
+            --action-card-bg: #262626;
+            --action-card-border: #3d3d3d;
+            --exception-bg: #0d2a3a;
+            --exception-header: #4fc3f7;
+            --logic-box-bg: #1e1e1e;
             --btn-bg: #ffffff;
-            --btn-text: #000000;
-            --alert-bg: #222222;
+            --btn-text: #121212;
+            --btn-border: #ffffff;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-white);
+            color: var(--text-dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* زر التبديل الجانبي المثبت */
@@ -54,13 +65,13 @@
             z-index: 9999;
             background: var(--btn-bg);
             color: var(--btn-text);
-            border: 1px solid var(--accent-black);
+            border: 1px solid var(--btn-border);
             padding: 10px 18px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: bold;
             font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -78,37 +89,35 @@
 
         header {
             text-align: center;
-            border-bottom: 4px solid var(--accent-black);
+            border-bottom: 4px solid var(--efb-red);
             padding-bottom: 15px;
             margin-bottom: 30px;
         }
 
         header h1 {
-            color: var(--text-main);
+            color: var(--efb-red);
             margin: 0;
             font-size: 28px;
         }
 
         /* قسم قواعد التسليم */
         .rules-section {
-            background: var(--alert-bg);
-            border: 1px solid var(--border-color);
+            background: var(--rules-bg);
+            border: 1px solid var(--rules-border);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .rules-header {
-            color: var(--text-main);
+            color: var(--efb-red);
             font-weight: bold;
             font-size: 20px;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
         }
 
         .rule-item {
@@ -116,8 +125,7 @@
             align-items: center;
             gap: 10px;
             padding: 8px 0;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-sub);
+            border-bottom: 1px solid var(--rules-item-border);
         }
 
         .rule-item:last-child { border: none; }
@@ -130,9 +138,8 @@
         }
 
         .section-title {
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            border: 1px solid var(--accent-black);
+            background: var(--efb-green);
+            color: white;
             padding: 10px 20px;
             border-radius: 8px 8px 0 0;
             font-size: 18px;
@@ -143,96 +150,75 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
-            background: var(--alert-bg);
+            background: var(--soft-gray);
             padding: 20px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border);
             border-radius: 0 0 8px 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .action-card {
-            background: var(--container-bg);
-            color: var(--text-main);
+            background: var(--action-card-bg);
             padding: 12px;
             border-radius: 6px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--action-card-border);
             text-align: center;
             font-size: 14px;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text-dark);
         }
 
         .action-card:hover {
-            border-color: var(--accent-black);
-            background: var(--card-hover);
+            border-color: var(--efb-green);
+            color: var(--efb-green);
             transform: translateY(-2px);
         }
 
         /* قسم استثناء رقم الهاتف */
         .phone-exception {
-            background: var(--alert-bg);
-            border-right: 6px solid var(--accent-black);
-            border-top: 1px solid var(--border-color);
-            border-left: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
+            background: var(--exception-bg);
+            border-right: 6px solid #0288d1;
             padding: 20px;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         .exception-header {
-            color: var(--text-main);
+            color: var(--exception-header);
             font-weight: bold;
             font-size: 18px;
             margin-bottom: 15px;
         }
 
         .logic-box {
-            background: var(--container-bg);
+            background: var(--logic-box-bg);
             padding: 15px;
             border-radius: 8px;
             margin-top: 10px;
-            border: 1px solid var(--border-color);
-            color: var(--text-sub);
-        }
-
-        .logic-box strong {
-            color: var(--text-main);
+            transition: background-color 0.3s ease;
         }
 
         .status-badge {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 2px 10px;
             border-radius: 4px;
             font-size: 12px;
             font-weight: bold;
             margin-top: 5px;
-            border: 1px solid var(--accent-black);
         }
 
-        .badge-no { 
-            background: var(--btn-bg); 
-            color: var(--btn-text); 
-        }
-        .badge-yes { 
-            background: var(--container-bg); 
-            color: var(--text-main); 
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-sub);
-            font-size: 13px;
-        }
+        .badge-no { background: #ffebee; color: #c62828; }
+        .badge-yes { background: #e8f5e9; color: #2e7d32; }
 
     </style>
 </head>
 <body id="pageBody">
 
-<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
+<!-- زر التبديل الجانبي -->
 <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
     <span>🌙</span> <span id="btnText">Dark Mode</span>
 </button>
@@ -284,8 +270,8 @@
         </div>
     </div>
 
-    <footer>
-        مركز دعم اتصالات بنك الطعام المصري © 2024
+    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
+        
     </footer>
 </div>
 
@@ -308,7 +294,7 @@
         }
     }
 
-    // حفظ تفضيل الوضع عند إعادة تحميل الصفحة
+    // استعادة تفضيل الوضع عند تحميل الصفحة
     window.onload = () => {
         const savedTheme = localStorage.getItem('myTheme');
         if (savedTheme === 'dark') {
