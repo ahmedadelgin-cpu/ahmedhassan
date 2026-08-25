@@ -2,27 +2,73 @@
 <html lang="ar" dir="rtl">
 <head>
 
-<link rel= "stylesheet" href="styles/mystyle.css"
+<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل تسليم الأكواد - بنك الطعام</title>
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>help Needy customer</title>
     <style>
+        /* المتغيرات الافتراضية (الوضع المضيء - أبيض وأسود) */
         :root {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-white: #ffffff;
-            --soft-gray: #f8f9fa;
-            --text-dark: #2d3436;
-            --border: #e0e0e0;
+            --bg-color: #f4f7f6;
+            --container-bg: #ffffff;
+            --text-main: #000000;
+            --text-sub: #333333;
+            --border-color: #e0e0e0;
+            --card-hover: #f0f0f0;
+            --accent-black: #000000;
+            --btn-bg: #000000;
+            --btn-text: #ffffff;
+            --alert-bg: #f9f9f9;
+        }
+
+        /* المتغيرات عند تفعيل الوضع الداكن (أسود وأبيض) */
+        body.dark-mode {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-main: #ffffff;
+            --text-sub: #cccccc;
+            --border-color: #333333;
+            --card-hover: #2a2a2a;
+            --accent-black: #ffffff;
+            --btn-bg: #ffffff;
+            --btn-text: #000000;
+            --alert-bg: #222222;
         }
 
         body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* زر التبديل الجانبي المثبت */
+        .side-theme-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--accent-black);
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .side-theme-btn:hover {
+            transform: scale(1.05);
         }
 
         .container {
@@ -32,34 +78,37 @@
 
         header {
             text-align: center;
-            border-bottom: 4px solid var(--efb-red);
+            border-bottom: 4px solid var(--accent-black);
             padding-bottom: 15px;
             margin-bottom: 30px;
         }
 
         header h1 {
-            color: var(--efb-red);
+            color: var(--text-main);
             margin: 0;
             font-size: 28px;
         }
 
         /* قسم قواعد التسليم */
         .rules-section {
-            background: #fffafa;
-            border: 1px solid #ffeded;
+            background: var(--alert-bg);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
+            transition: all 0.3s ease;
         }
 
         .rules-header {
-            color: var(--efb-red);
+            color: var(--text-main);
             font-weight: bold;
             font-size: 20px;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
         }
 
         .rule-item {
@@ -67,7 +116,8 @@
             align-items: center;
             gap: 10px;
             padding: 8px 0;
-            border-bottom: 1px solid #f9ecec;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-sub);
         }
 
         .rule-item:last-child { border: none; }
@@ -80,8 +130,9 @@
         }
 
         .section-title {
-            background: var(--efb-green);
-            color: white;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--accent-black);
             padding: 10px 20px;
             border-radius: 8px 8px 0 0;
             font-size: 18px;
@@ -92,69 +143,99 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
-            background: var(--soft-gray);
+            background: var(--alert-bg);
             padding: 20px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: 0 0 8px 8px;
         }
 
         .action-card {
-            background: white;
+            background: var(--container-bg);
+            color: var(--text-main);
             padding: 12px;
             border-radius: 6px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             text-align: center;
             font-size: 14px;
             font-weight: 500;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .action-card:hover {
-            border-color: var(--efb-green);
-            color: var(--efb-green);
+            border-color: var(--accent-black);
+            background: var(--card-hover);
             transform: translateY(-2px);
         }
 
         /* قسم استثناء رقم الهاتف */
         .phone-exception {
-            background: #e1f5fe;
-            border-right: 6px solid #0288d1;
+            background: var(--alert-bg);
+            border-right: 6px solid var(--accent-black);
+            border-top: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
             padding: 20px;
             border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
         .exception-header {
-            color: #01579b;
+            color: var(--text-main);
             font-weight: bold;
             font-size: 18px;
             margin-bottom: 15px;
         }
 
         .logic-box {
-            background: white;
+            background: var(--container-bg);
             padding: 15px;
             border-radius: 8px;
             margin-top: 10px;
+            border: 1px solid var(--border-color);
+            color: var(--text-sub);
+        }
+
+        .logic-box strong {
+            color: var(--text-main);
         }
 
         .status-badge {
             display: inline-block;
-            padding: 2px 10px;
+            padding: 4px 12px;
             border-radius: 4px;
             font-size: 12px;
             font-weight: bold;
             margin-top: 5px;
+            border: 1px solid var(--accent-black);
         }
 
-        .badge-no { background: #ffebee; color: #c62828; }
-        .badge-yes { background: #e8f5e9; color: #2e7d32; }
+        .badge-no { 
+            background: var(--btn-bg); 
+            color: var(--btn-text); 
+        }
+        .badge-yes { 
+            background: var(--container-bg); 
+            color: var(--text-main); 
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-sub);
+            font-size: 13px;
+        }
 
     </style>
 </head>
-<body>
+<body id="pageBody">
+
+<!-- الزر الجانبي للتحويل بين الوضع المضيء والداكن -->
+<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
+    <span>🌙</span> <span id="btnText">Dark Mode</span>
+</button>
 
 <div class="container">
     <header>
@@ -203,20 +284,40 @@
         </div>
     </div>
 
-    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
+    <footer>
         مركز دعم اتصالات بنك الطعام المصري © 2024
     </footer>
 </div>
 
+<script>
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const btnText = document.getElementById('btnText');
+        const btn = document.getElementById('themeBtn');
+        
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            btn.querySelector('span:first-child').innerText = "☀️";
+            btnText.innerText = "Night Mode";
+            localStorage.setItem('myTheme', 'dark');
+        } else {
+            btn.querySelector('span:first-child').innerText = "🌙";
+            btnText.innerText = "Dark Mode";
+            localStorage.setItem('myTheme', 'light');
+        }
+    }
+
+    // حفظ تفضيل الوضع عند إعادة تحميل الصفحة
+    window.onload = () => {
+        const savedTheme = localStorage.getItem('myTheme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
+            document.getElementById('btnText').innerText = "Night Mode";
+        }
+    }
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
