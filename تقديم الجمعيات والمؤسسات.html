@@ -20,6 +20,7 @@
             --footer-color: #777;
             --btn-bg: #2d3436;
             --btn-text: #ffffff;
+            --path-bg: #f0f2f1;
         }
 
         body.dark-mode {
@@ -34,6 +35,7 @@
             --footer-color: #aaaaaa;
             --btn-bg: #ffffff;
             --btn-text: #121212;
+            --path-bg: #2d3436;
         }
 
         body {
@@ -77,7 +79,6 @@
             padding: 20px;
         }
 
-        /* رأس الصفحة */
         header {
             background: var(--card-bg);
             padding: 30px;
@@ -89,20 +90,9 @@
             transition: background-color 0.3s ease;
         }
 
-        header h1 {
-            color: var(--efb-red);
-            margin: 0;
-            font-size: 28px;
-        }
+        header h1 { color: var(--efb-red); margin: 0; font-size: 28px; }
+        header p { color: var(--text-dark); font-size: 18px; font-weight: bold; margin-top: 10px; }
 
-        header p {
-            color: var(--text-dark);
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        /* زر التسجيل */
         .reg-link {
             display: inline-block;
             background: var(--efb-red);
@@ -117,19 +107,15 @@
             box-shadow: 0 4px 10px rgba(214, 48, 49, 0.3);
         }
 
-        .reg-link:hover {
-            transform: translateY(-3px);
-            background: #b32d2d;
-            box-shadow: 0 6px 15px rgba(214, 48, 49, 0.4);
-        }
+        .reg-link:hover { transform: translateY(-3px); background: #b32d2d; }
 
-        /* قائمة الأوراق المطلوبة */
         .docs-card {
             background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: background-color 0.3s ease;
+            margin-bottom: 30px;
         }
 
         .docs-card h2 {
@@ -146,17 +132,9 @@
             gap: 15px;
             padding: 15px;
             border-bottom: 1px solid var(--border-color);
-            transition: 0.2s;
         }
 
-        .doc-item:last-child {
-            border-bottom: none;
-        }
-
-        .doc-item:hover {
-            background-color: var(--hover-bg);
-        }
-
+        .doc-item:last-child { border-bottom: none; }
         .doc-number {
             background: var(--efb-green);
             color: white;
@@ -167,15 +145,71 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 14px;
         }
 
-        .doc-text {
+        /* --- تنسيق System Action الجديد --- */
+        .system-action-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-right: 6px solid var(--efb-green);
+            margin-bottom: 30px;
+        }
+
+        .system-action-card h3 {
+            margin: 0 0 20px 0;
+            color: var(--efb-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+
+        .action-info-box {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 16px;
-            color: var(--text-doc);
         }
 
-        /* تذييل الصفحة */
+        .info-row strong { color: var(--efb-green); min-width: 100px; }
+
+        .breadcrumb-path {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background: var(--path-bg);
+            padding: 15px;
+            border-radius: 10px;
+            gap: 10px;
+            font-family: 'Segoe UI', Tahoma;
+            direction: ltr; /* لجعل مسار السيستم يظهر بشكل صحيح */
+        }
+
+        .step-item {
+            background: var(--card-bg);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-item.highlight {
+            background: var(--efb-green);
+            color: white;
+        }
+
+        .separator { color: var(--efb-green); font-weight: bold; }
+
+        /* --- التذييل --- */
         .footer-info {
             text-align: center;
             margin-top: 30px;
@@ -214,62 +248,53 @@
     <!-- قائمة الأوراق -->
     <div class="docs-card">
         <h2>قائمة المستندات المطلوبة (10 مستندات)</h2>
+        <div class="doc-item"><div class="doc-number">1</div><div class="doc-text">قرار إشهار الجمعية / المؤسسة.</div></div>
+        <div class="doc-item"><div class="doc-number">2</div><div class="doc-text">لائحة النظام الأساسي كاملة معتمدة بخاتم شعار الجمهورية.</div></div>
+        <div class="doc-item"><div class="doc-number">3</div><div class="doc-text">كشف بيانات أعضاء مجلس (الإدارة/الأمناء) الحالي موضح به (الاسم / الصفة بالجهة / الوظيفة خارج الجهة / التليفون) معتمد من الجهة الإدارية.</div></div>
+        <div class="doc-item"><div class="doc-number">4</div><div class="doc-text">مستند شغل المقر (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق من الشهر العقاري.</div></div>
+        <div class="doc-item"><div class="doc-number">5</div><div class="doc-text">آخر حساب ختامي لعام كامل معتمد من محاسب قانوني أو من التضامن الاجتماعي.</div></div>
+        <div class="doc-item"><div class="doc-number">6</div><div class="doc-text">إفادة من التضامن الاجتماعي بأن الجمعية / المؤسسة فاعلة وليست من الجهات المحظور التعامل معها.</div></div>
+        <div class="doc-item"><div class="doc-number">7</div><div class="doc-text">آخر محضر مجلس إدارة/أمناء مختوم بخختم الجهة وخاتم الشعار.</div></div>
+        <div class="doc-item"><div class="doc-number">8</div><div class="doc-text">كشف بأعضاء الجمعية العمومية موقع ومختوم بختم الجهة وخاتم الشعار (للجمعيات فقط).</div></div>
+        <div class="doc-item"><div class="doc-number">9</div><div class="doc-text">قرار مد النشاط موثق من التضامن الاجتماعي في حالة الفروع.</div></div>
+        <div class="doc-item"><div class="doc-number">10</div><div class="doc-text">قرار توفيق الأوضاع.</div></div>
+    </div>
+
+    <!-- قسم System Action الجديد -->
+    <div class="system-action-card">
+        <h3>🔄 إجراءات النظام | Action System </h3>
         
-        <div class="doc-item">
-            <div class="doc-number">1</div>
-            <div class="doc-text">قرار إشهار الجمعية / المؤسسة.</div>
+        <div class="action-info-box">
+            <div class="info-row">
+                <strong>نوع التسجيل:</strong>
+                <span>يتم تسجيل الجمعيات على السيستم  <b style="color:var(--efb-red)">Contact</b></span>
+            </div>
+            <div class="info-row">
+                <strong>نوع المكالمة:</strong>
+                <span>الـ <b style="color:var(--efb-red)">CALL Logs</b> تكون <b style="color:var(--efb-red)">Inquiry / استفسار</b></span>
+            </div>
         </div>
 
-        <div class="doc-item">
-            <div class="doc-number">2</div>
-            <div class="doc-text">لائحة النظام الأساسي كاملة معتمدة بخاتم شعار الجمهورية.</div>
+        <p style="margin-bottom: 10px; font-weight: bold;">مسار تسجيل الجمعية الخيرية:</p>
+        <div class="breadcrumb-path">
+            <span class="step-item">CaLL Actions</span>  
+ <span class="separator">◀</span>
+              <span class="step-item">Inquiry CALLs</span>  
+<span class="separator">◀</span>
+               
+            <span class="step-item highlight">add Inquiry</span>
+<span class="separator">◀</span>
+              <span class="step-item">جمعية خيرية</span>
+           
+            
+            
+            
+           
         </div>
-
-        <div class="doc-item">
-            <div class="doc-number">3</div>
-            <div class="doc-text">كشف بيانات أعضاء مجلس (الإدارة/الأمناء) الحالي موضح به (الاسم / الصفة بالجهة / الوظيفة خارج الجهة / التليفون) معتمد من الجهة الإدارية.</div>
-        </div>
-
-        <div class="doc-item">
-            <div class="doc-number">4</div>
-            <div class="doc-text">مستند شغل المقر (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق من الشهر العقاري.</div>
-        </div>
-
-        <div class="doc-item">
-            <div class="doc-number">5</div>
-            <div class="doc-text">آخر حساب ختامي لعام كامل معتمد من محاسب قانوني أو من التضامن الاجتماعي.</div>
-        </div>
-
-        <div class="doc-item">
-            <div class="doc-number">6</div>
-            <div class="doc-text">إفادة من التضامن الاجتماعي بأن الجمعية / المؤسسة فاعلة وليست من الجهات المحظور التعامل معها.</div>
-        </div>
-
-        <div class="doc-item">
-            <div class="doc-number">7</div>
-            <div class="doc-text">آخر محضر مجلس إدارة/أمناء مختوم بخختم الجهة وخاتم الشعار.</div>
-        </div>
-
-        <div class="doc-item">
-            <div class="doc-number">8</div>
-            <div class="doc-text">كشف بأعضاء الجمعية العمومية موقع ومختوم بختم الجهة وخاتم الشعار (للجمعيات فقط).</div>
-        </div>
-
-        <div class="doc-item">
-            <div class="doc-number">9</div>
-            <div class="doc-text">قرار مد النشاط موثق من التضامن الاجتماعي في حالة الفروع.</div>
-        </div>
-
-        <div class="doc-item">
-            <div class="doc-number">10</div>
-            <div class="doc-text">قرار توفيق الأوضاع.</div>
-        </div>
-
     </div>
 
     <!-- معلومات إضافية -->
     <div class="footer-info">
-        <p>تم توضيح الأوراق المطلوبة وإرسال الرابط بنجاح.</p>
         <div class="whatsapp-note">فى حالة سوال العميل عن امكانية ارسال المستندات المطلوبة عن طريق الواتساب يتم توضيح رقم الواتساب 01152888777</div>
     </div>
 
@@ -294,7 +319,6 @@
         }
     }
 
-    // استعادة تفضيل الوضع عند تحميل الصفحة
     window.onload = () => {
         const savedTheme = localStorage.getItem('myTheme');
         if (savedTheme === 'dark') {
