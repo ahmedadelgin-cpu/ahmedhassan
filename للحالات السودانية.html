@@ -22,6 +22,7 @@
             --btn-bg: #2d3436;
             --btn-text: #ffffff;
             --btn-border: #2d3436;
+            --system-blue: #2d3436; /* لون مخصص لقسم إجراءات النظام */
         }
 
         body.dark-mode {
@@ -39,6 +40,7 @@
             --btn-bg: #ffffff;
             --btn-text: #121212;
             --btn-border: #ffffff;
+            --system-blue: #f5f6fa;
         }
 
         body {
@@ -112,7 +114,7 @@
             color: var(--efb-green);
             border-bottom: 2px solid var(--efb-green);
             display: table;
-            margin: 0 auto 30px;
+            margin: 40px auto 30px;
             padding-bottom: 10px;
             font-size: 24px;
         }
@@ -233,6 +235,24 @@
         <div class="status-text">توجيه الحالات السودانية لمؤسسة الكمال الخيرية بالجيزة</div>
     </div>
 
+    <!-- قسم إجراءات النظام (تمت إضافته من الصورة) -->
+    <h2 class="section-title" style="color: var(--system-blue); border-bottom-color: var(--system-blue);">Action System </h2>
+    
+    <div class="association-card" style="border-right-color: var(--system-blue);">
+        <div class="assoc-name" style="color: var(--system-blue);">
+            <span class="icon">🔄</span> Action System 
+        </div>
+        <div class="assoc-address" style="font-weight: bold; font-size: 18px; color: var(--text-dark);">
+            استفسار الحالات السودانية
+        </div>
+        <div class="status-text" style="font-style: normal; color: var(--text-dark); font-size: 16px; border-top: none;">
+            استفسار / Inquiry بتكون <strong>Call Logs</strong>
+        </div>
+<div class="status-text" style="font-style: normal; color: var(--text-dark); font-size: 16px; border-top: none;">
+        توجية محتاج   ---- CaLL Actions --- Inquiry CALLs --- add Inquiry  <strong></strong>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -254,7 +274,6 @@
         }
     }
 
-    // استعادة تفضيل الوضع عند تحميل الصفحة
     window.onload = () => {
         const savedTheme = localStorage.getItem('myTheme');
         if (savedTheme === 'dark') {
