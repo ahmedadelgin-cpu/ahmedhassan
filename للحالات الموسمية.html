@@ -20,6 +20,7 @@
             --btn-bg: #2d3436;
             --btn-text: #ffffff;
             --btn-border: #2d3436;
+            --path-bg: #f1f2f6;
         }
 
         body.dark-mode {
@@ -35,6 +36,7 @@
             --btn-bg: #ffffff;
             --btn-text: #121212;
             --btn-border: #ffffff;
+            --path-bg: #2f3542;
         }
 
         body {
@@ -48,7 +50,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* زر التبديل الجانبي المثبت */
         .side-theme-btn {
             position: fixed;
             top: 20px;
@@ -69,9 +70,7 @@
             gap: 8px;
         }
 
-        .side-theme-btn:hover {
-            transform: scale(1.05);
-        }
+        .side-theme-btn:hover { transform: scale(1.05); }
 
         .info-card {
             max-width: 700px;
@@ -85,7 +84,6 @@
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        /* رأس البطاقة */
         .card-header {
             text-align: center;
             padding: 30px 20px;
@@ -103,14 +101,9 @@
             gap: 15px;
         }
 
-        .icon-large {
-            font-size: 35px;
-        }
+        .icon-large { font-size: 35px; }
 
-        /* محتوى الشروط */
-        .card-body {
-            padding: 30px;
-        }
+        .card-body { padding: 30px; }
 
         .condition-box {
             display: flex;
@@ -124,53 +117,83 @@
             transition: background-color 0.3s ease;
         }
 
-        .condition-text {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--condition-text);
-        }
+        .condition-text { font-size: 18px; font-weight: 500; color: var(--condition-text); }
 
-        .or-divider {
-            text-align: center;
-            margin: -10px 0 10px;
-            font-weight: bold;
-            color: #999;
-            font-size: 14px;
-        }
-
-        /* النتيجة النهائية */
         .action-box {
             background: var(--efb-green);
             color: white;
             text-align: center;
             padding: 20px;
             border-radius: 12px;
-            margin-top: 30px;
+            margin-top: 20px;
             font-size: 20px;
             font-weight: bold;
             box-shadow: 0 4px 15px rgba(0, 166, 81, 0.2);
         }
 
-        .footer-note {
-            text-align: center;
+        /* --- تنسيق قسم System Action الجديد --- */
+        .system-action-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed var(--card-border);
+        }
+
+        .system-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .system-row { margin-bottom: 10px; font-size: 16px; }
+        .highlight-text { color: var(--efb-red); font-weight: bold; }
+
+        .path-container {
+            background: var(--path-bg);
             padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
             font-size: 14px;
-            color: #999;
-            border-top: 1px solid #eee;
+            direction: ltr; /* لجعل المسار البرمجي من اليسار لليمين */
+        }
+
+        .path-node {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .path-arrow { color: var(--efb-green); font-weight: bold; }
+
+        .path-final {
+            direction: rtl;
+            background: var(--efb-red);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: bold;
         }
 
     </style>
 </head>
 <body id="pageBody">
 
-<!-- زر التبديل الجانبي -->
 <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
     <span>🌙</span> <span id="btnText">Dark Mode</span>
 </button>
 
 <center>
 <div class="info-card">
-    <!-- العنوان -->
     <div class="card-header">
         <h1>
             <span class="icon-large">😊</span>
@@ -179,27 +202,62 @@
     </div>
 
     <div class="card-body">
-        <!-- الشرط الثاني -->
         <div class="condition-box">
             <span class="icon-large">⏳</span>
             <div class="condition-text">الحالات التي لم تستلم أي مساعدات منذ أكثر من سنة.</div>
         </div>
-        <!-- الشرط الثاني -->
+
         <div class="condition-box">
-            <span class="icon-large">⏳</span>
-            <div class="condition-text">الحالات الموسيميه ( أ ) فى حاله عدم الاستلام خلال فتره اقل من سنه يتم تسجيل شكوى انقطاع كرتونه </div>
+            <span class="icon-large">📦</span>
+            <div class="condition-text">الحالات الموسمية ( أ ) في حالة عدم الاستلام خلال فترة أقل من سنة يتم تسجيل شكوى انقطاع كرتونة.</div>
         </div>
 
-        <!-- النتيجة -->
         <div class="action-box">
             ✅ الإجراء: سيتم تقديم طلب مساعدة جديد 
         </div>
+
+        <!-- إضافة قسم System Action -->
+        <div class="system-action-section">
+            <div class="system-title">
+                <span style="font-size: 22px;">🔄</span> Action  System 
+            </div>
+            
+            <div class="system-row">
+                <span>يتم التسجيل  : </span>
+                <span class="highlight-text">Beneficiary</span>
+            </div>
+            
+            <div class="system-row">
+                <span>الـ <b>CALL Logs</b> تكون : </span>
+                <span class="highlight-text">Inquiry / استفسار</span>
+            </div>
+
+            <div class="path-container">
+                <span class="path-node">CaLL Actions</span>
+                <span class="path-arrow">➔</span>
+                <span class="path-node">Inquiry CALLs</span>
+                <span class="path-arrow">➔</span>
+                <span class="path-node">add Inquiry</span>
+                <span class="path-final">توجيه محتاج</span>
+            </div>
+         <div class="path-container">
+                <span class="path-node">CaLL Actions</span>
+                <span class="path-arrow">➔</span>
+                <span class="path-node">Inquiry CALLs</span>
+                <span class="path-arrow">➔</span>
+                <span class="path-node">add Inquiry</span>
+                <span class="path-final">نقل مساعدة</span>
+            </div>
+<div class="path-container">
+                <span class="path-node">CaLL Actions</span>
+                <span class="path-arrow">➔</span>
+                <span class="path-node">Inquiry CALLs</span>
+                <span class="path-arrow">➔</span>
+                <span class="path-node">add Inquiry</span>
+                <span class="path-final">تقديم طلب مستحق </span>
+            </div>
+        </div>
     </div>
-<!--
-    <div class="footer-note">
-        نظام تحديث قاعدة بيانات بنك الطعام المصري 2024
-    </div>
--->
 </div>
 </center>
 
@@ -208,9 +266,7 @@
         const body = document.getElementById('pageBody');
         const btnText = document.getElementById('btnText');
         const btn = document.getElementById('themeBtn');
-        
         body.classList.toggle('dark-mode');
-        
         if (body.classList.contains('dark-mode')) {
             btn.querySelector('span:first-child').innerText = "☀️";
             btnText.innerText = "Night Mode";
@@ -222,7 +278,6 @@
         }
     }
 
-    // استعادة تفضيل الوضع عند تحميل الصفحة
     window.onload = () => {
         const savedTheme = localStorage.getItem('myTheme');
         if (savedTheme === 'dark') {
