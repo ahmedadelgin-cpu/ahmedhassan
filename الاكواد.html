@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel="stylesheet" href="styles/mystyle.css">
+    <link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <title>help Needy customer - تسليم الأكواد</title>
     <style>
         :root {
             --efb-green: #00a651;
@@ -25,6 +25,8 @@
             --btn-bg: #2d3436;
             --btn-text: #ffffff;
             --btn-border: #2d3436;
+            --info-box-bg: #e8f5e9; /* لون خلفية جديد للمعلومات */
+            --info-box-border: #c8e6c9; /* لون حدود جديد للمعلومات */
         }
 
         body.dark-mode {
@@ -45,6 +47,8 @@
             --btn-bg: #ffffff;
             --btn-text: #121212;
             --btn-border: #ffffff;
+            --info-box-bg: #1b2b1b; /* خلفية داكنة لصندوق المعلومات */
+            --info-box-border: #2d472d; /* حدود داكنة لصندوق المعلومات */
         }
 
         body {
@@ -185,6 +189,7 @@
             padding: 20px;
             border-radius: 8px;
             transition: background-color 0.3s ease;
+            margin-bottom: 30px;
         }
 
         .exception-header {
@@ -214,96 +219,139 @@
         .badge-no { background: #ffebee; color: #c62828; }
         .badge-yes { background: #e8f5e9; color: #2e7d32; }
 
+        /* صندوق توثيق النظام الجديد */
+        .system-info-box {
+            background-color: var(--info-box-bg);
+            border: 1px solid var(--info-box-border);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+        .system-info-box strong {
+            color: var(--efb-green);
+        }
+        .tag {
+            background-color: rgba(0,166,81, 0.1);
+            color: var(--efb-green);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            margin: 0 2px;
+        }
+
     </style>
 </head>
 <body id="pageBody">
 
-<!-- زر التبديل الجانبي -->
-<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-    <span>🌙</span> <span id="btnText">Dark Mode</span>
-</button>
+    <!-- زر التبديل الجانبي -->
+    <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
+        <span>🌙</span> <span id="btnText">Dark Mode</span>
+    </button>
 
-<div class="container">
-    <header>
-        <h1>نظام تسليم الأكواد | Code Delivery System</h1>
-    </header>
+    <div class="container">
+        <header>
+            <h1>نظام تسليم الأكواد | Code Delivery System</h1>
+        </header>
 
-    <!-- 1. قواعد التسليم -->
-    <div class="rules-section">
-        <div class="rules-header">⚠️ قواعد هامة جداً قبل التسليم</div>
-        <div class="rule-item"><span class="icon">📱</span> الاتصال من نفس الرقم المسجل.</div>
-        <div class="rule-item"><span class="icon">👤</span> التأكد من الاسم الرباعي الصحيح للحالة.</div>
-        <div class="rule-item"><span class="icon">👪</span> التسليم للحالة أو أقارب درجة أولى (زوج/زوجة/أبناء).</div>
-        <div class="rule-item"><span class="icon">🆔</span> في حالة العزاب: يمكن للأخ/الأخت الاستلام ببطاقة الرقم القومي.</div>
-        <div class="rule-item"><span class="icon">👶</span> الحفيد: يستلم إذا كان يتصل من رقم الحالة + ذكر الاسم الرباعي والرقم القومي.</div>
-    </div>
-
-    <!-- 2. خيارات الأكشن -->
-    <div class="action-section">
-        <div class="section-title">قائمة "الأكشن" عند التسليم</div>
-        <div class="action-grid">
-            <div class="action-card">تم تسليم الكود</div>
-            <div class="action-card">اختلاف في رقم الهاتف</div>
-            <div class="action-card">لم يتم التوضيح (وفاة الحالة)</div>
-            <div class="action-card">الكود الشهري غير متاح حالياً</div>
-            <div class="action-card">الكود الموسمي غير متاح حالياً</div>
-            <div class="action-card">عدم وجود صاحب الكرتونة</div>
-            <div class="action-card">اختلاف في رقم واحد من الهاتف</div>
-            <div class="action-card">هتعاود الاتصال لاستكمال البيانات</div>
-        </div>
-    </div>
-
-    <!-- 3. استثناء رقم الهاتف -->
-    <div class="phone-exception">
-        <div class="exception-header">🔍 حالة خاصة: اختلاف "رقم واحد فقط" في الهاتف</div>
-        
-        <div class="logic-box">
-            <strong>1. مراجعة الأكشن السابق:</strong>
-            <p>إذا وجد أكشن سابق بتنبيه العميل للتوجه للجمعية لتعديل الرقم:</p>
-            <span class="status-badge badge-no">❌ لا يتم تسليم الكود</span>
+        <!-- 1. قواعد التسليم -->
+        <div class="rules-section">
+            <div class="rules-header">⚠️ قواعد هامة جداً قبل التسليم</div>
+            <div class="rule-item"><span class="icon">📱</span> الاتصال من نفس الرقم المسجل.</div>
+            <div class="rule-item"><span class="icon">👤</span> التأكد من الاسم الرباعي الصحيح للحالة.</div>
+            <div class="rule-item"><span class="icon">👪</span> التسليم للحالة أو أقارب درجة أولى (زوج/زوجة/أبناء).</div>
+            <div class="rule-item"><span class="icon">🆔</span> في حالة العزاب: يمكن للأخ/الأخت الاستلام ببطاقة الرقم القومي.</div>
+            <div class="rule-item"><span class="icon">👶</span> الحفيد: يستلم إذا كان يتصل من رقم الحالة + ذكر الاسم الرباعي والرقم القومي.</div>
         </div>
 
-        <div class="logic-box">
-            <strong>2. في حالة عدم وجود أكشن سابق:</strong>
-            <p>يتم توضيح وتسليم الكود "كاستثناء لأول مرة فقط" مع التنبيه بضرورة التوجه للجمعية لتعديل الرقم.</p>
-            <span class="status-badge badge-yes">✅ يتم التسليم (مرة واحدة)</span>
+        <!-- 2. خيارات الأكشن -->
+        <div class="action-section">
+            <div class="section-title">قائمة "الأكشن" عند التسليم</div>
+            <div class="action-grid">
+                <div class="action-card">تم تسليم الكود</div>
+                <div class="action-card">اختلاف في رقم الهاتف</div>
+                <div class="action-card">لم يتم التوضيح (وفاة الحالة)</div>
+                <div class="action-card">الكود الشهري غير متاح حالياً</div>
+                <div class="action-card">الكود الموسمي غير متاح حالياً</div>
+                <div class="action-card">عدم وجود صاحب الكرتونة</div>
+                <div class="action-card">اختلاف في رقم واحد من الهاتف</div>
+                <div class="action-card">هتعاود الاتصال لاستكمال البيانات</div>
+            </div>
         </div>
+
+        <!-- 3. استثناء رقم الهاتف -->
+        <div class="phone-exception">
+            <div class="exception-header">🔍 حالة خاصة: اختلاف "رقم واحد فقط" في الهاتف</div>
+            
+            <div class="logic-box">
+                <strong>1. مراجعة الأكشن السابق:</strong>
+                <p>إذا وجد أكشن سابق بتنبيه العميل للتوجه للجمعية لتعديل الرقم:</p>
+                <span class="status-badge badge-no">❌ لا يتم تسليم الكود</span>
+            </div>
+
+            <div class="logic-box">
+                <strong>2. في حالة عدم وجود أكشن سابق:</strong>
+                <p>يتم توضيح وتسليم الكود "كاستثناء لأول مرة فقط" مع التنبيه بضرورة التوجه للجمعية لتعديل الرقم.</p>
+                <span class="status-badge badge-yes">✅ يتم التسليم (مرة واحدة)</span>
+            </div>
+        </div>
+
+        <!-- 
+          =============================================================================
+          🔄 توثيق النظام (System Documentation) - تم إضافته في نهاية الصفحة
+          =============================================================================
+          هذا القسم يوضح الإجراءات البرمجية ومنطق النظام لهذه الصفحة:
+          
+          1. System Action (إجراء النظام): يتم تسجيل مستفيد.
+          2. Call Logs (سجلات المكالمات): يتم تصنيف المكالمة كـ Inquiry/استفسار.
+          3. Call Actions (إجراءات المكالمة): تندرج تحت Inquiry CALLs، والإجراء هو addInquiry - توجيه محتاج.
+          =============================================================================
+        -->
+        <div class="system-info-box">
+            <strong>🛠️ توثيق النظام البرمجي:</strong><br>
+            <strong>System Action:</strong> تسجيل <span class="tag">Beneficiary</span><br>
+            <strong>Call Logs:</strong> نوع المكالمة <span class="tag">Inquiry / استفسار</span><br>
+            <strong>Call Actions:</strong> تصنيف <span class="tag">Beneficiary Call</span> >> إجراء <span class="tag">addBeneficiary Call </span>
+        </div>
+        <!-- نهاية توثيق النظام -->
+
+        <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
+            نظام إدارة الأكواد - بنك الطعام المصري
+        </footer>
     </div>
 
-    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
-        
-    </footer>
-</div>
-
-<script>
-    function toggleTheme() {
-        const body = document.getElementById('pageBody');
-        const btnText = document.getElementById('btnText');
-        const btn = document.getElementById('themeBtn');
-        
-        body.classList.toggle('dark-mode');
-        
-        if (body.classList.contains('dark-mode')) {
-            btn.querySelector('span:first-child').innerText = "☀️";
-            btnText.innerText = "Night Mode";
-            localStorage.setItem('myTheme', 'dark');
-        } else {
-            btn.querySelector('span:first-child').innerText = "🌙";
-            btnText.innerText = "Dark Mode";
-            localStorage.setItem('myTheme', 'light');
+    <script>
+        function toggleTheme() {
+            const body = document.getElementById('pageBody');
+            const btnText = document.getElementById('btnText');
+            const btn = document.getElementById('themeBtn');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                btn.querySelector('span:first-child').innerText = "☀️";
+                btnText.innerText = "Night Mode";
+                localStorage.setItem('myTheme', 'dark');
+            } else {
+                btn.querySelector('span:first-child').innerText = "🌙";
+                btnText.innerText = "Dark Mode";
+                localStorage.setItem('myTheme', 'light');
+            }
         }
-    }
 
-    // استعادة تفضيل الوضع عند تحميل الصفحة
-    window.onload = () => {
-        const savedTheme = localStorage.getItem('myTheme');
-        if (savedTheme === 'dark') {
-            document.getElementById('pageBody').classList.add('dark-mode');
-            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-            document.getElementById('btnText').innerText = "Night Mode";
+        // استعادة تفضيل الوضع عند تحميل الصفحة
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('myTheme');
+            if (savedTheme === 'dark') {
+                document.getElementById('pageBody').classList.add('dark-mode');
+                document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
+                document.getElementById('btnText').innerText = "Night Mode";
+            }
         }
-    }
-</script>
+    </script>
 
 </body>
 </html>
