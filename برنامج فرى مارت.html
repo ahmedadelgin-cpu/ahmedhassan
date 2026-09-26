@@ -1,146 +1,268 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-<link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>برنامج فري مارت | دليل الحصص والنقاط</title>
 
+    <!-- أيقونات FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            /* الألوان الأصلية في الوضع الداكن (الأساسي) */
-            --neon-green: #00ff41;
-            --dark-bg: #0a0a0a;
-            --card-bg: #161616;
-            --header-bg: #1f1f1f;
-            --text-gray: #b0b0b0;
-            --accent-blue: #00d2ff;
-            --orange: #ff9f43;
-
-            /* متغيرات التحكم بالوضع */
-            --main-bg: var(--dark-bg);
-            --main-card-bg: var(--card-bg);
-            --main-header-bg: var(--header-bg);
-            --text-main: #ffffff;
-            --table-border: #333333;
-            --row-border: #222222;
-            --summary-bg: #252525;
-            --toggle-bg: #161616;
-            --hover-bg: rgba(0, 255, 65, 0.05);
+            /* درجات الألوان للوضع الفاتح */
+            --primary: #00873e;
+            --primary-light: #e8f5e9;
+            --accent-blue: #0984e3;
+            --accent-blue-light: #e1f5fe;
+            --accent-orange: #e67e22;
+            --accent-orange-light: #fef5e7;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --table-border: #edf2f7;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --highlight-col: rgba(0, 135, 62, 0.12);
+            --highlight-border: #00873e;
         }
 
-        /* متغيرات الوضع الفاتح Light Mode */
-        [data-theme="light"] {
-            --neon-green: #00a651;
-            --accent-blue: #0984e3;
-            --orange: #d63031;
-            --main-bg: #f8f9fa;
-            --main-card-bg: #ffffff;
-            --main-header-bg: #f1f2f6;
-            --text-main: #2d3436;
-            --text-gray: #636e72;
-            --table-border: #e0e0e0;
-            --row-border: #f0f0f0;
-            --summary-bg: #eef2f5;
-            --toggle-bg: #ffffff;
-            --hover-bg: rgba(0, 166, 81, 0.08);
+        body.dark-mode {
+            /* درجات الألوان للوضع الليلي */
+            --primary: #00e676;
+            --primary-light: rgba(0, 230, 118, 0.12);
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --accent-orange: #ffb74d;
+            --accent-orange-light: rgba(255, 183, 77, 0.12);
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --table-border: #21262d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --highlight-col: rgba(0, 230, 118, 0.18);
+            --highlight-border: #00e676;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--main-bg);
+            background-color: var(--bg-body);
             color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
+            padding: 0;
+            line-height: 1.6;
         }
 
-        /* تثبيت زر التبديل بجانب الصفحة */
-        .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
             z-index: 1000;
-            background-color: var(--toggle-bg);
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
             color: var(--text-main);
-            border: 2px solid var(--neon-green);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
         }
 
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
+        .btn-nav:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1250px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
         }
 
-        .main-header {
+        /* رأس الصفحة */
+        .page-header {
             text-align: center;
-            padding: 30px;
-            background: var(--main-card-bg);
-            border-radius: 15px;
-            border-bottom: 4px solid var(--neon-green);
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1);
-            transition: background 0.3s;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            border-bottom: 4px solid var(--primary);
+            box-shadow: var(--card-shadow);
         }
 
-        .main-header h1 { color: var(--neon-green); margin: 0; font-size: 24px; }
-        .main-header p { color: var(--text-gray); font-size: 14px; margin-top: 10px; }
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
 
-        /* تنسيق الجدول */
-        .table-container {
-            background: var(--main-card-bg);
-            border-radius: 15px;
+        .page-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* بطاقات الشرائح السريعة (Interactive Family Selector) */
+        .family-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .family-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+            transition: all 0.25s;
+        }
+
+        .family-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .family-card.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 135, 62, 0.15);
+        }
+
+        .family-card-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .family-card-points {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .family-card-money {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-top: 3px;
+        }
+
+        /* شريط البحث */
+        .search-box {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 50px 14px 20px;
+            font-size: 14.5px;
+            font-family: inherit;
+            color: var(--text-main);
+            outline: none;
+            box-shadow: var(--card-shadow);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        /* حاوية الجدول */
+        .table-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .table-responsive {
             overflow-x: auto;
-            border: 1px solid var(--table-border);
-            transition: background 0.3s;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: center;
-        }
-
-        thead tr {
-            background: var(--main-header-bg);
-            border-bottom: 2px solid var(--table-border);
-        }
-
-        th {
-            padding: 15px;
-            color: var(--accent-blue);
             font-size: 14px;
+        }
+
+        thead th {
+            background: var(--bg-header);
+            color: var(--accent-blue);
+            font-weight: bold;
+            padding: 16px 12px;
+            border-bottom: 2px solid var(--border-color);
             white-space: nowrap;
         }
 
-        td {
+        tbody td {
             padding: 12px 10px;
-            border-bottom: 1px solid var(--row-border);
-            font-size: 14px;
+            border-bottom: 1px solid var(--table-border);
             color: var(--text-main);
         }
 
         tbody tr:hover {
-            background: var(--hover-bg);
+            background: var(--primary-light);
         }
 
-        .item-name {
+        .col-item-name {
             text-align: right;
             font-weight: bold;
             color: var(--text-main);
@@ -148,138 +270,334 @@
         }
 
         .point-badge {
-            background: rgba(0, 255, 65, 0.15);
-            color: var(--neon-green);
-            padding: 3px 8px;
-            border-radius: 5px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
             font-weight: bold;
+            font-size: 13px;
         }
 
-        /* تنسيق الخلاصة (الشرائح) */
-        .summary-row {
-            background: var(--summary-bg);
-            font-weight: bold;
-        }
-
-        .points-summary td { color: var(--neon-green); font-size: 16px; padding: 20px 10px; }
-        .money-summary td { color: var(--orange); font-size: 16px; padding: 20px 10px; }
-
-        .label-cell {
-            text-align: left !important;
-            padding-left: 20px !important;
-            color: var(--text-gray);
-        }
-
-        .status-bar {
-            margin-top: 20px;
-            text-align: center;
-            font-family: monospace;
-            color: var(--text-gray);
+        .unit-badge {
+            background: var(--border-color);
+            color: var(--text-muted);
+            padding: 2px 8px;
+            border-radius: 6px;
             font-size: 12px;
         }
 
-        @media (max-width: 600px) {
-            .theme-toggle-btn {
-                top: 10px;
-                left: 10px;
-                padding: 6px 12px;
-                font-size: 12px;
-            }
+        /* تمييز العمود المختار */
+        td.highlighted, th.highlighted {
+            background-color: var(--highlight-col) !important;
+            font-weight: bold;
+            color: var(--primary) !important;
         }
+
+        /* صفوف الخلاصة */
+        .summary-row {
+            font-weight: bold;
+        }
+
+        .summary-points {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .summary-points td {
+            color: var(--primary);
+            padding: 16px 10px;
+            font-weight: 800;
+        }
+
+        .summary-money {
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            font-size: 16px;
+        }
+
+        .summary-money td {
+            color: var(--accent-orange);
+            padding: 16px 10px;
+            font-weight: 800;
+        }
+
+        .summary-label {
+            text-align: right !important;
+            padding-right: 20px !important;
+            color: var(--text-main);
+            font-size: 15px;
+        }
+
+        /* صندوق إجراءات السيستم */
+        .system-action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary);
+            border-radius: 16px;
+            padding: 22px;
+            margin-top: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .system-header {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13.5px;
+        }
+
+        .tag-pill {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 8px;
+        }
+
+        .tag-pill b { color: var(--text-muted); }
+        .tag-pill span { color: var(--primary); font-family: monospace; font-weight: bold; }
     </style>
 </head>
-<body>
+<body id="pageBody">
 
-<!-- زر التبديل عائم بجانب الصفحة -->
-<button id="themeToggle" class="theme-toggle-btn">
-    <span id="themeIcon">☀️</span>
-    <span id="themeText">Light mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
+
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
 
 <div class="container">
-    <div class="main-header">
-        <h1><i class="fa-solid fa-clipboard-list"></i> الحد الأقصى للنقاط والمنتجات حسب عدد الأفراد</h1>
-        <p>برجاء العلم أن لكل عدد أفراد حد أقصى من النقاط والمنتجات كما هو موضح في الجدول أدناه</p>
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-basket-shopping"></i> برنامج فري مارت | جدول الحصص والنقاط</h1>
+        <p>الحد الأقصى للنقاط والمنتجات والدعم المالي المقابل بحسب عدد أفراد الأسرة (اضغط على أي شريحة لتظليل عمودها بالجدول)</p>
+    </header>
+
+    <!-- بطاقات الشرائح السريعة -->
+    <div class="family-selector-grid">
+        <div class="family-card" onclick="highlightColumn(5, this)">
+            <div class="family-card-title"><i class="fa-solid fa-user"></i> فرد واحد</div>
+            <div class="family-card-points">30 نقطة</div>
+            <div class="family-card-money">مقابل 200 ج</div>
+        </div>
+
+        <div class="family-card" onclick="highlightColumn(6, this)">
+            <div class="family-card-title"><i class="fa-solid fa-user-group"></i> فردين</div>
+            <div class="family-card-points">54 نقطة</div>
+            <div class="family-card-money">مقابل 400 ج</div>
+        </div>
+
+        <div class="family-card" onclick="highlightColumn(7, this)">
+            <div class="family-card-title"><i class="fa-solid fa-users"></i> 3 أفراد</div>
+            <div class="family-card-points">78 نقطة</div>
+            <div class="family-card-money">مقابل 600 ج</div>
+        </div>
+
+        <div class="family-card" onclick="highlightColumn(8, this)">
+            <div class="family-card-title"><i class="fa-solid fa-people-roof"></i> 4 أفراد</div>
+            <div class="family-card-points">99 نقطة</div>
+            <div class="family-card-money">مقابل 800 ج</div>
+        </div>
+
+        <div class="family-card" onclick="highlightColumn(9, this)">
+            <div class="family-card-title"><i class="fa-solid fa-people-group"></i> 5 أفراد</div>
+            <div class="family-card-points">123 نقطة</div>
+            <div class="family-card-money">مقابل 1000 ج</div>
+        </div>
+
+        <div class="family-card" onclick="highlightColumn(10, this)">
+            <div class="family-card-title"><i class="fa-solid fa-house-chimney-user"></i> 6 أفراد</div>
+            <div class="family-card-points">147 نقطة</div>
+            <div class="family-card-money">مقابل 1200 ج</div>
+        </div>
     </div>
 
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>الصنف</th>
-                    <th>الوحدة</th>
-                    <th>الكمية</th>
-                    <th>النقاط</th>
-                    <th>للفرد الواحد</th>
-                    <th>للفردين</th>
-                    <th>لـ 3 أفراد</th>
-                    <th>لـ 4 أفراد</th>
-                    <th>لـ 5 أفراد</th>
-                    <th>لـ 6 أفراد</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- الأصناف -->
-                <tr><td class="item-name">أرز</td><td>كيس</td><td>800 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
-                <tr><td class="item-name">مكرونة</td><td>كيس</td><td>350 جم</td><td><span class="point-badge">2</span></td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>5</td></tr>
-                <tr><td class="item-name">لوبيا</td><td>كيس</td><td>400 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr>
-                <tr><td class="item-name">سكر</td><td>كيس</td><td>400 جم</td><td><span class="point-badge">3</span></td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
-                <tr><td class="item-name">زيت 600 مل</td><td>زجاجة</td><td>1</td><td><span class="point-badge">8</span></td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
-                <tr><td class="item-name">دقيق</td><td>كجم</td><td>1</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
-                <tr><td class="item-name">عدس أصفر</td><td>كيس</td><td>400 جم</td><td><span class="point-badge">4</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
-                <tr><td class="item-name">عسل أسود 350 جم</td><td>علبة</td><td>1</td><td><span class="point-badge">4</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
-                <tr><td class="item-name">كندبيف 340 جم</td><td>علبة</td><td>1</td><td><span class="point-badge">9</span></td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>4</td></tr>
-                <tr><td class="item-name">جبنة فيتا 250 جم</td><td>علبة</td><td>1</td><td><span class="point-badge">3</span></td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>4</td></tr>
-                <tr><td class="item-name">فاصوليا</td><td>كيس</td><td>400 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr>
-                <tr><td class="item-name">لسان العصفور</td><td>كيس</td><td>350 جم</td><td><span class="point-badge">2</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
-                <tr><td class="item-name">صلصة 400 جم</td><td>برطمان</td><td>1</td><td><span class="point-badge">7</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
-
-                <!-- خلاصة النقاط -->
-                <tr class="summary-row points-summary">
-                    <td colspan="4" class="label-cell">عدد النقاط لكل شريحة</td>
-                    <td>30</td>
-                    <td>54</td>
-                    <td>78</td>
-                    <td>99</td>
-                    <td>123</td>
-                    <td>147</td>
-                </tr>
-
-                <!-- خلاصة الدعم المادي -->
-                <tr class="summary-row money-summary">
-                    <td colspan="4" class="label-cell">الدعم مقابل (بالجنيه)</td>
-                    <td>200 جنية</td>
-                    <td>400 جنية</td>
-                    <td>600 جنية</td>
-                    <td>800 جنية</td>
-                    <td>1000 جنية</td>
-                    <td>1200 جنية</td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- شريط البحث في السلع -->
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="itemSearch" class="search-input" placeholder="🔍 ابحث عن أي سلعة غذائية (أرز، سكر، زيت، عدس، جبنة...)" onkeyup="filterTable()">
     </div>
 
-    <div class="status-bar">
-        
+    <!-- بطاقة جدول الأصناف والحصص -->
+    <div class="table-card">
+        <div class="table-responsive">
+            <table id="freeMartTable">
+                <thead>
+                    <tr>
+                        <th style="text-align: right; padding-right: 20px;">الصنف الغذائي</th>
+                        <th>الوحدة</th>
+                        <th>الوزن / الحجم</th>
+                        <th>النقاط</th>
+                        <th class="col-head" data-col="5">فرد واحد</th>
+                        <th class="col-head" data-col="6">فردين</th>
+                        <th class="col-head" data-col="7">3 أفراد</th>
+                        <th class="col-head" data-col="8">4 أفراد</th>
+                        <th class="col-head" data-col="9">5 أفراد</th>
+                        <th class="col-head" data-col="10">6 أفراد</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="col-item-name">أرز</td><td><span class="unit-badge">كيس</span></td><td>800 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+                    <tr><td class="col-item-name">مكرونة</td><td><span class="unit-badge">كيس</span></td><td>350 جم</td><td><span class="point-badge">2</span></td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td><td>5</td></tr>
+                    <tr><td class="col-item-name">لوبيا</td><td><span class="unit-badge">كيس</span></td><td>400 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr>
+                    <tr><td class="col-item-name">سكر</td><td><span class="unit-badge">كيس</span></td><td>400 جم</td><td><span class="point-badge">3</span></td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
+                    <tr><td class="col-item-name">زيت طعام</td><td><span class="unit-badge">زجاجة</span></td><td>600 مل</td><td><span class="point-badge">8</span></td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
+                    <tr><td class="col-item-name">دقيق</td><td><span class="unit-badge">كجم</span></td><td>1 كجم</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+                    <tr><td class="col-item-name">عدس أصفر</td><td><span class="unit-badge">كيس</span></td><td>400 جم</td><td><span class="point-badge">4</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+                    <tr><td class="col-item-name">عسل أسود</td><td><span class="unit-badge">علبة</span></td><td>350 جم</td><td><span class="point-badge">4</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+                    <tr><td class="col-item-name">كندبيف</td><td><span class="unit-badge">علبة</span></td><td>340 جم</td><td><span class="point-badge">9</span></td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>4</td></tr>
+                    <tr><td class="col-item-name">جبنة فيتا</td><td><span class="unit-badge">علبة</span></td><td>250 جم</td><td><span class="point-badge">3</span></td><td>1</td><td>2</td><td>3</td><td>3</td><td>3</td><td>4</td></tr>
+                    <tr><td class="col-item-name">فاصوليا</td><td><span class="unit-badge">كيس</span></td><td>400 جم</td><td><span class="point-badge">5</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td></tr>
+                    <tr><td class="col-item-name">لسان عصفور</td><td><span class="unit-badge">كيس</span></td><td>350 جم</td><td><span class="point-badge">2</span></td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td></tr>
+                    <tr><td class="col-item-name">صلصة طماطم</td><td><span class="unit-badge">برطمان</span></td><td>400 جم</td><td><span class="point-badge">7</span></td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+
+                    <!-- صف خلاصة النقاط -->
+                    <tr class="summary-row summary-points">
+                        <td colspan="4" class="summary-label"><i class="fa-solid fa-coins"></i> إجمالي عدد النقاط المستحقة:</td>
+                        <td>30</td>
+                        <td>54</td>
+                        <td>78</td>
+                        <td>99</td>
+                        <td>123</td>
+                        <td>147</td>
+                    </tr>
+
+                    <!-- صف خلاصة الدعم بالجنيه -->
+                    <tr class="summary-row summary-money">
+                        <td colspan="4" class="summary-label"><i class="fa-solid fa-hand-holding-dollar"></i> القيمة المالية للدعم المقابل:</td>
+                        <td>200 ج</td>
+                        <td>400 ج</td>
+                        <td>600 ج</td>
+                        <td>800 ج</td>
+                        <td>1000 ج</td>
+                        <td>1200 ج</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <!-- صندوق إجراءات السيستم -->
+    <div class="system-action-box">
+        <div class="system-header">
+            <i class="fa-solid fa-gears"></i> إجراءات تسجيل مكالمات فري مارت (Action System):
+        </div>
+        <div class="tags-row">
+            <div class="tag-pill">
+                <b>Call Logs:</b> <span>Inquiry / استفسار</span>
+            </div>
+            <div class="tag-pill">
+                <b>Call Actions:</b> <span>Inquiry CALLs ➔ addInquiry</span>
+            </div>
+            <div class="tag-pill">
+                <b>الموضوع:</b> <span>استفسار نقاط فري مارت</span>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeText = document.getElementById('themeText');
+    // وظيفة تظليل وتمييز عمود الشريحة المختارة
+    let currentHighlightedCol = null;
 
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        
-        if (currentTheme === 'light') {
-            document.documentElement.removeAttribute('data-theme');
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Light mode';
+    function highlightColumn(colIndex, cardElement) {
+        const table = document.getElementById('freeMartTable');
+        const rows = table.rows;
+
+        // إزالة التظليل السابق
+        if (currentHighlightedCol === colIndex) {
+            clearHighlight();
+            return;
+        }
+
+        clearHighlight();
+        currentHighlightedCol = colIndex;
+        cardElement.classList.add('active');
+
+        for (let i = 0; i < rows.length; i++) {
+            const cell = rows[i].cells[colIndex - 1];
+            if (cell) {
+                cell.classList.add('highlighted');
+            }
+        }
+    }
+
+    function clearHighlight() {
+        document.querySelectorAll('.family-card').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.highlighted').forEach(el => el.classList.remove('highlighted'));
+        currentHighlightedCol = null;
+    }
+
+    // تصفية السلع بالبحث الحي
+    function filterTable() {
+        const query = document.getElementById('itemSearch').value.toLowerCase().trim();
+        const table = document.getElementById('freeMartTable');
+        const tbodyRows = table.querySelector('tbody').rows;
+
+        for (let i = 0; i < tbodyRows.length; i++) {
+            const row = tbodyRows[i];
+            if (row.classList.contains('summary-row')) continue; // لا تخفِ صفوف الخلاصة
+
+            const itemName = row.querySelector('.col-item-name').textContent.toLowerCase();
+            if (itemName.includes(query)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    }
+
+    // إدارة الوضع الليلي/النهاري
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
+            localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
         } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'Dark mode';
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
     });
 </script>
