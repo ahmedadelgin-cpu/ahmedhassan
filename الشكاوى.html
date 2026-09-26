@@ -1,394 +1,702 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel= "stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <title>دليل تقديم الشكاوى الموحد | بنك الطعام المصري</title>
+
+    <!-- أيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
+            /* ألوان الوضع النهاري (Light Mode) */
+            --primary-green: #00873e;
+            --primary-green-light: #e8f5e9;
             --primary-red: #d63031;
-            --primary-green: #00a651;
-            --dark-blue: #0984e3;
+            --primary-red-light: #ffebee;
+            --accent-blue: #0984e3;
+            --accent-blue-light: #e1f5fe;
+            --accent-purple: #6c5ce7;
+            --accent-purple-light: #f3f0ff;
             --warning-orange: #f39c12;
-            --bg-white: #ffffff;
-            --light-gray: #f8f9fa;
+            --warning-orange-light: #fff8e1;
             
-            /* ألوان الوضع المضيء (الأساسي) */
-            --bg-body: #ffffff;
-            --text-color: #333333;
-            --essentials-bg: #fff5f5;
-            --essentials-border: #ffcece;
-            --grid-item-bg: #ffffff;
-            --grid-item-border: #eeeeee;
-            --card-bg: #ffffff;
-            --card-border: #eeeeee;
-            --list-border: #f1f1f1;
-            --time-badge-bg: #eeeeee;
-            --btn-bg: #2d3436;
-            --btn-text: #ffffff;
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
         }
 
-        /* ألوان Dark Mode عند تفعيله */
         body.dark-mode {
-            --bg-body: #121212;
-            --text-color: #e0e0e0;
-            --essentials-bg: #2b1d1d;
-            --essentials-border: #522727;
-            --grid-item-bg: #1e1e1e;
-            --grid-item-border: #333333;
-            --card-bg: #1e1e1e;
-            --card-border: #333333;
-            --list-border: #2a2a2a;
-            --time-badge-bg: #333333;
-            --btn-bg: #f5f6fa;
-            --btn-text: #2d3436;
+            /* ألوان الوضع الليلي (Dark Mode) */
+            --primary-green: #00e676;
+            --primary-green-light: rgba(0, 230, 118, 0.12);
+            --primary-red: #ff5252;
+            --primary-red-light: rgba(255, 82, 82, 0.15);
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --accent-purple: #a29bfe;
+            --accent-purple-light: rgba(108, 92, 231, 0.15);
+            --warning-orange: #ffb74d;
+            --warning-orange-light: rgba(255, 183, 77, 0.15);
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
             background-color: var(--bg-body);
-            color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* زر Dark Mode / Night Mode المثبت */
-        .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
             z-index: 1000;
-            background-color: var(--btn-bg);
-            color: var(--btn-text);
-            border: none;
-            padding: 10px 18px;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
             border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
         }
 
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
+        .btn-nav:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--primary-red-light);
+            color: var(--primary-red);
+            border-color: var(--primary-red);
         }
 
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
+            max-width: 1150px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
         }
 
-        header {
+        /* رأس الصفحة */
+        .page-header {
             text-align: center;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
             border-bottom: 4px solid var(--primary-red);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
         }
 
-        header h1 {
+        .page-header h1 {
+            margin: 0 0 8px;
             color: var(--primary-red);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .page-header p {
             margin: 0;
-            font-size: 28px;
+            color: var(--text-muted);
+            font-size: 14px;
         }
 
-        /* 1. المتطلبات الأساسية */
-        .essentials {
-            background: var(--essentials-bg);
-            border: 1px solid var(--essentials-border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            transition: background 0.3s ease, border-color 0.3s ease;
+        /* شريط المتطلبات الـ 4 الأساسية */
+        .essentials-banner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary-red);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
         }
 
-        .essentials h2 {
+        .essentials-title {
             color: var(--primary-red);
-            font-size: 18px;
-            margin-top: 0;
-        }
-
-        .grid-5 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-        }
-
-        .grid-item {
-            background: var(--grid-item-bg);
-            padding: 10px;
-            text-align: center;
-            border-radius: 8px;
+            font-size: 16px;
             font-weight: bold;
-            font-size: 14px;
-            border: 1px solid var(--grid-item-border);
-            color: var(--text-color);
-            transition: background 0.3s ease, border-color 0.3s ease;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* 2. حالة الجمعيات */
-        .alert-box {
-            background: #fdf6e3;
-            border-right: 5px solid var(--warning-orange);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        body.dark-mode .alert-box {
-            background: #2d2618;
-            color: #f1c40f;
-        }
-
-        /* 3. أنواع الشكاوى - بطاقات */
-        .complaint-grid {
+        .essentials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
-
-        .card-header {
-            padding: 15px;
-            color: white;
-            font-weight: bold;
+        .essential-chip {
+            background: var(--primary-red-light);
+            border: 1px solid var(--primary-red);
+            padding: 10px 14px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--primary-red);
         }
+
+        /* صندوق البحث السريع */
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 50px 14px 20px;
+            font-size: 14.5px;
+            font-family: inherit;
+            color: var(--text-main);
+            outline: none;
+            box-shadow: var(--card-shadow);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-red);
+        }
+
+        /* شبكة بطاقات الشكاوى */
+        .complaints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 22px;
+        }
+
+        .complaint-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s;
+        }
+
+        .complaint-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bg-honor { background: var(--accent-purple); }
+        .bg-package { background: var(--primary-green); }
+        .bg-quality { background: var(--primary-red); }
+        .bg-otp { background: var(--accent-blue); }
+        .bg-bless { background: #2d3436; }
+        .bg-inquiry { background: var(--warning-orange); }
 
         .card-body {
             padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
-        /* ألوان الأقسام */
-        .bg-honor { background: #6c5ce7; } /* ميثاق الشرف */
-        .bg-package { background: var(--primary-green); } /* انقطاع الكرتونة */
-        .bg-quality { background: var(--primary-red); } /* الجودة والنقص */
-        .bg-otp { background: var(--dark-blue); } /* القسائم الإلكترونية */
-
-        .list-unstyled {
-            list-style: none;
+        .rules-list {
+            margin: 0;
             padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .rules-list li {
+            font-size: 13.5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.5;
+        }
+
+        .rules-list li::before {
+            content: "•";
+            color: var(--primary-red);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* صندوق صيغة الشكوى والنسخ */
+        .template-box {
+            background: var(--item-bg);
+            border: 1px dashed var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            position: relative;
+            margin-top: auto;
+        }
+
+        .template-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--text-muted);
+        }
+
+        .template-text {
+            font-size: 13px;
+            font-family: inherit;
+            color: var(--text-main);
+            line-height: 1.6;
             margin: 0;
         }
 
-        .list-unstyled li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--list-border);
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .list-unstyled li:last-child { border: none; }
-
-        .time-badge {
-            display: inline-block;
-            background: var(--time-badge-bg);
-            padding: 2px 8px;
-            border-radius: 4px;
+        .btn-copy-template {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 11.5px;
             font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--text-color);
-            transition: background 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
         }
 
-        .danger-note {
+        .btn-copy-template:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            background: var(--primary-green-light);
+        }
+
+        .danger-badge {
+            background: var(--primary-red-light);
             color: var(--primary-red);
+            border: 1px solid var(--primary-red);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12.5px;
             font-weight: bold;
-            font-size: 12px;
-            margin-top: 10px;
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
+        /* صندوق توثيق النظام البرمجي */
+        .system-action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary-green);
+            border-radius: 16px;
+            padding: 22px;
+            margin-top: 35px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .system-header {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .tag-pill {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 8px;
+        }
+
+        .tag-pill b { color: var(--text-muted); }
+        .tag-pill span { color: var(--primary-green); font-family: monospace; font-weight: bold; }
+
+        /* توست النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary-green);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .complaints-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
-<body id="bodyElement">
+<body id="pageBody">
 
-<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn">
-    <span id="themeIcon">🌙</span> <span id="themeText">Dark mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
+
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
 
 <div class="container">
-    <header>
-        <h1>دليل تقديم الشكاوى الموحد | Complaints Guide</h1>
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-file-shield"></i> دليل تقديم الشكاوى الموحد | Complaints Guide</h1>
+        <p>الضوابط الرسمية وصيغ كتابة الشكاوى المعتمدة على السيستم لضمان قبولها وسرعة معالجتها</p>
     </header>
 
-    <!-- 1. الأساسيات والجمعيات -->
-    <div class="essentials">
-        <h2>📌 4 بيانات أساسية لتقديم أي شكوى:</h2>
-        <div class="grid-5">
-            <div class="grid-item">اسم المشروع</div>
-            <div class="grid-item">اسم الحالة</div>
-            <div class="grid-item"> تفاصيل الشكوى</div>
-            <div class="grid-item">مدة الانقطاع</div>
+    <!-- شريط البيانات الأساسية الأربعة -->
+    <div class="essentials-banner">
+        <div class="essentials-title">
+            <i class="fa-solid fa-circle-exclamation"></i> 4 بيانات أساسية وإلزامية لرفع أي شكوى على السيستم:
+        </div>
+        <div class="essentials-grid">
+            <div class="essential-chip"><i class="fa-solid fa-folder-tree"></i> 1. اسم المشروع</div>
+            <div class="essential-chip"><i class="fa-solid fa-user"></i> 2. اسم الحالة الرباعي</div>
+            <div class="essential-chip"><i class="fa-solid fa-calendar-xmark"></i> 3. مدة الانقطاع</div>
+            <div class="essential-chip"><i class="fa-solid fa-file-lines"></i> 4. تفاصيل الشكوى الوافية</div>
         </div>
     </div>
 
-    
+    <!-- شريط البحث السريع -->
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث في أنواع الشكاوى وصيغها (ميثاق شرف، انقطاع، جودة، نقص، OTP، Bless، سودانية)..." onkeyup="filterComplaints()">
+    </div>
 
-    <!-- 2. شبكة أنواع الشكاوى -->
-    <div class="complaint-grid">
-        
-        <!-- ميثاق الشرف -->
-        <div class="card">
-            <div class="card-header bg-honor">⚖️ شكاوى ميثاق الشرف</div>
+    <!-- شبكة بطاقات الشكاوى -->
+    <div class="complaints-grid" id="complaintsGrid">
+
+        <!-- 1. شكاوى ميثاق الشرف -->
+        <div class="complaint-card">
+            <div class="card-header bg-honor">
+                <span><i class="fa-solid fa-scale-balanced"></i> 1. شكاوى ميثاق الشرف</span>
+                <small>سلوك الجمعية</small>
+            </div>
             <div class="card-body">
-                <ul class="list-unstyled">
-                    <li>طلب مبالغ مالية مقابل المساعدة.</li>
-                    <li>سوء سلوك الجمعية مع الحالات.</li>
-                    <li>إجبار الحالة على أعمال نظافة أو تنزيل كراتين.</li>
-                     <br>
-                      <li>الحالة    &nbsp;&nbsp;&nbsp;  من جمعية &nbsp;&nbsp;&nbsp;   تشكو من   &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع   &nbsp;&nbsp;&nbsp;  الحالة تستلم (موسمى)او(شهرى)</li>
+                <ul class="rules-list">
+                    <li>طلب الجمعية مبالغ مالية مقابل تسليم المساعدة أو الكرتونة.</li>
+                    <li>سوء سلوك مسؤولي الجمعية في التعامل مع الحالات المستحقة.</li>
+                    <li>إجبار الحالة على أعمال نظافة أو تنزيل وتحميل كراتين مقابل الصرف.</li>
                 </ul>
+                <div class="template-box">
+                    <div class="template-header">
+                        <span>📋 صيغة كتابة الشكوى:</span>
+                        <button class="btn-copy-template" onclick="copyTemplate(this)">
+                            <i class="fa-regular fa-copy"></i> نسخ الصيغة
+                        </button>
+                    </div>
+                    <p class="template-text">الحالة [اسم الحالة] من جمعية [اسم الجمعية] تشكو من [ذكر الواقعة بالتفصيل].. العميلة مصنفة مشروع [اسم المشروع].. الحالة تستلم [شهري / موسمي].</p>
+                </div>
             </div>
         </div>
 
-        <!-- انقطاع الخدمة-->
-        <div class="card">
-            <div class="card-header bg-package">📦 شكاوى انقطاع الخدمة</div>
+        <!-- 2. شكاوى انقطاع الخدمة -->
+        <div class="complaint-card">
+            <div class="card-header bg-package">
+                <span><i class="fa-solid fa-box-archive"></i> 2. شكاوى انقطاع الخدمة والكرتونة</span>
+                <small>مدة الانقطاع</small>
+            </div>
             <div class="card-body">
-                <div class="time-badge">من 1 شهر إلى 11 شهر:</div>
-                <p style="font-size: 13px; margin: 0;">يتم تسجيل شكوى (توضيح النوع: شهري أو موسمي).</p>
-                <span class="danger-note">🚨 12 شهر أو أكثر: لا تسجل شكوى (تقديم طلب جديد).</span>
-                 <br>
-                <span class="danger-note">الحالة  &nbsp;&nbsp;&nbsp;   من جمعية  &nbsp;&nbsp;&nbsp;   تشكو من انقطاع الكرتونة من شهر  &nbsp;&nbsp;&nbsp;   الى شهر   &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع   &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى)</span>
+                <div style="font-weight: bold; font-size: 13.5px; color: var(--primary-green);">
+                    <i class="fa-solid fa-clock"></i> من شهر حتى 11 شهر: يتم تسجيل شكوى رسمية.
+                </div>
+                <div class="danger-badge">
+                    <i class="fa-solid fa-triangle-exclamation"></i> تنبيه: 12 شهر أو أكثر لا تسجل شكوى (يتم تقديم طلب جديد).
+                </div>
+                <div class="template-box">
+                    <div class="template-header">
+                        <span>📋 صيغة كتابة الشكوى:</span>
+                        <button class="btn-copy-template" onclick="copyTemplate(this)">
+                            <i class="fa-regular fa-copy"></i> نسخ الصيغة
+                        </button>
+                    </div>
+                    <p class="template-text">الحالة [اسم الحالة] من جمعية [اسم الجمعية] تشكو من انقطاع الكرتونة من شهر [..] إلى شهر [..].. العميلة مصنفة مشروع [اسم المشروع].. الحالة تستلم [شهري / موسمي].</p>
+                </div>
             </div>
         </div>
 
-
-
-        <!-- جودة المنتجات ونقص المكونات -->
-        <div class="card">
-            <div class="card-header bg-quality">🍎 الجودة ونقص المكونات</div>
+        <!-- 3. الجودة ونقص المكونات -->
+        <div class="complaint-card">
+            <div class="card-header bg-quality">
+                <span><i class="fa-solid fa-apple-whole"></i> 3. جودة المنتجات ونقص المكونات</span>
+                <small>الأصناف التالفة / الناقصة</small>
+            </div>
             <div class="card-body">
-                <ul class="list-unstyled">
-                    <li><strong>سوء الجودة:</strong> الجودة </li>
-                    <li><strong>سوء الجودة:</strong> وصف حالة المنتج التالف.</li>
-                    <li><strong>سوء الجودة:</strong>الحالة&nbsp;&nbsp;&nbsp;   من جمعية &nbsp;&nbsp;&nbsp;   تشكو من سوء جودة المنتجات  &nbsp;&nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع  &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى) </li>
-                     <br>
-                    <li><strong>:</strong> </li>
-                    <li><strong>نقص المكونات:</strong> يتم التقديم في حالة نقص المكونات الأساسية المتفق عليها بعد مراجعه الاصناف بالكامل مع العميله و معرفه الاصناف التى لم يتم استلامها و كتاتها فى الشكوى بالتفصيل .</li>
-                    <li><strong>نقص المكونات:</strong> الحالة    &nbsp;&nbsp;&nbsp; تشتكى من نقص المكونات والحالة استلمت  &nbsp;&nbsp;&nbsp;   العميلة مصنفة مشروع  &nbsp;&nbsp;&nbsp;   الحالة تستلم (موسمى)او(شهرى)</li>
+                <ul class="rules-list">
+                    <li><b>سوء الجودة:</b> وصف حالة الصنف التالف بدقة (سوس، انتهاء صلاحية، كسر).</li>
+                    <li><b>نقص المكونات:</b> مراجعة الأصناف بالكامل مع الحالة ومعرفة الصنف الناقص بالتفصيل.</li>
                 </ul>
+                <div class="template-box">
+                    <div class="template-header">
+                        <span>📋 صيغة شكوى نقص المكونات:</span>
+                        <button class="btn-copy-template" onclick="copyTemplate(this)">
+                            <i class="fa-regular fa-copy"></i> نسخ الصيغة
+                        </button>
+                    </div>
+                    <p class="template-text">الحالة [اسم الحالة] من جمعية [اسم الجمعية] تشتكي من نقص المكونات.. المستلم هو [..] والناقص هو [ذكر الأصناف الناقصة].. مشروع [..].. الحالة تستلم [شهري / موسمي].</p>
+                </div>
             </div>
         </div>
 
-        <!-- شكاوى الخاص عدم استقبال رسالة كود  -->
-        <div class="card">
-            <div class="card-header bg-otp">شكاوى الخاص عدم استقبال رسالة كود </div>
+        <!-- 4. عدم استقبال رسالة كود OTP -->
+        <div class="complaint-card">
+            <div class="card-header bg-otp">
+                <span><i class="fa-solid fa-comment-sms"></i> 4. عدم استقبال رسالة الكود / القسائم</span>
+                <small>رسائل OTP</small>
+            </div>
             <div class="card-body">
-                <ul class="list-unstyled">
-                    <li>عدم استلام الكود لمدة شهر أو أكثر.</li>
-                    <li>يتم التقديم على نفس الرقم المسجل بالحالة.</li>
-                    <li><strong>تأكد:</strong> الحالة تستلم (شهري دائم) وليس (منحة مؤقتة).</li>
+                <ul class="rules-list">
+                    <li>عدم استلام الكود لمدة شهر أو أكثر على نفس الرقم المسجل بالحالة.</li>
+                    <li><b>شرط التأكد:</b> الحالة تستلم (شهري دائم) وليس منحة مؤقتة.</li>
+                    <li><span style="color:var(--primary-red); font-weight:bold;">❌ لا يتم تسجيل شكوى للمنح المؤقتة كالفلسطينية.</span></li>
                 </ul>
-                <span class="danger-note">❌ لا يتم تسجيل شكوى للمنح المؤقتة (مثل المنحة الفلسطينية).</span>
-                <br>
-                 <li>            الحالة    &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; تشكو عدم ارسال الكود او القسايم الشرائية من شهر.    &nbsp;&nbsp;&nbsp; الى شهر
-
-     </li>
+                <div class="template-box">
+                    <div class="template-header">
+                        <span>📋 صيغة كتابة الشكوى:</span>
+                        <button class="btn-copy-template" onclick="copyTemplate(this)">
+                            <i class="fa-regular fa-copy"></i> نسخ الصيغة
+                        </button>
+                    </div>
+                    <p class="template-text">الحالة [اسم الحالة] تشكو عدم إرسال كود القسائم الشرائية على الرقم المسجل من شهر [..] إلى شهر [..].. الحالة تتبع مشروع [اسم المشروع] بنظام شهري دائم.</p>
+                </div>
             </div>
         </div>
-<!-- OTP القسائم الإلكترونية -->
-        <div class="card">
-            <div class="card-header bg-otp">   استفسارات الشكاوى </div>
-            <div class="card-body">
-                <ul class="list-unstyled">
-                    <li>                  تم توضيح رد الشكوى     </li>
-                    <li>           العميل له شكوى لم يتم الرد حتى الان      </li>
-                    <li>      العميلة لها شكوى لم يتم الرد حتى الان           </li>
-                    <li>            العميل له شكوى تم متابعة الشكوى     </li>
-                    <li>         العميلة لها شكوى تم متابعة الشكوى        </li>
-                    
-                </ul>
-                
-          </div>
 
+        <!-- 5. تأخير جمعية في التسليمات (Bless) -->
+        <div class="complaint-card">
+            <div class="card-header bg-bless">
+                <span><i class="fa-solid fa-truck-clock"></i> 5. شكاوى تأخير جمعية (مشروع Bless)</span>
+                <small>المشرفين والحالات الفلسطينية</small>
+            </div>
             <div class="card-body">
-                <div class="card-header bg-otp">   شكاوى السودانية </div>
-                <ul class="list-unstyled">
-                    <li>    لو العميلة وضحت تم إيقاف تلقي الطلبات حالياً في جمعيات (الكمال الخيرية، المرأة السودانية، إسناد لدعم المتضررين).        </li>
-                    <li>     يتم  تقديم شكوى  تجاوزات جمعية       </li>
-                    <li>                </li>
-                    <li>             </li>
-                    <li>                </li>  
+                <ul class="rules-list">
+                    <li>في حال تواصل الحالة وتوضيح محاولة الاتصال بالمشرف دون رد، أو عدم وجودها بالجروب.</li>
+                    <li>تسجيل الشكوى كـ (تأخير جمعية في التسليمات).</li>
+                    <li><b style="color:var(--warning-orange);">شرط أساسي إلزامي:</b> كتابة اسم المشروع <b>Bless</b>.</li>
                 </ul>
-                
-              
-          </div>
+                <div class="template-box">
+                    <div class="template-header">
+                        <span>📋 صيغة كتابة الشكوى:</span>
+                        <button class="btn-copy-template" onclick="copyTemplate(this)">
+                            <i class="fa-regular fa-copy"></i> نسخ الصيغة
+                        </button>
+                    </div>
+                    <p class="template-text">الحالة [اسم الحالة] تشكو من تأخير الجمعية في التسليمات وعدم الرد من قبل المشرف.. اسم المشروع Bless.</p>
+                </div>
+            </div>
         </div>
- <!-- تأخير جمعية فى التسليمات-->
-        <div class="card">
-            <div class="card-header bg-package">📦 شكاوى تأخير جمعية فى التسليمات</div>
+
+        <!-- 6. متابعة الشكاوى والشكاوى السودانية -->
+        <div class="complaint-card">
+            <div class="card-header bg-inquiry">
+                <span><i class="fa-solid fa-list-check"></i> 6. استفسارات الشكاوى والحالات السودانية</span>
+                <small>متابعة الردود والتجاوزات</small>
+            </div>
             <div class="card-body">
-                <div class="time-badge">  عند التواصل والحالة توضيح انها تتواصل مع مشرف بنك الطعام و هو  لم يتم الرد من خلال  المشرف     </div>
-                <div class="time-badge">  يتم تقديم شكوى تأخير جمعية فى التسليمات    </div>
-                <div class="time-badge">  شرط اساسى كتابة اسم المشروع Bless    </div>
-                <p style="font-size: 13px; margin: 0;">     </p>
-                <span class="danger-note">    </span>
-                 <br>
-                <span class="danger-note"> الحالة  &nbsp;&nbsp;&nbsp;   تشكو  &nbsp;&nbsp;&nbsp;&nbsp; اسم المشروع Bless    </span>
+                <ul class="rules-list">
+                    <li><b>متابعة الشكاوى:</b> (تم توضيح رد الشكوى / العميل له شكوى لم يتم الرد حتى الآن / تم عمل استعجال للشكوى).</li>
+                    <li><b>الحالات السودانية:</b> عند رفض الجمعيات المعتمدة (الكمال، المرأة السودانية، إسناد) تلقي الطلب 👈 يتم فوراً تقديم <b>شكوى تجاوزات جمعية</b>.</li>
+                </ul>
+                <div class="template-box">
+                    <div class="template-header">
+                        <span>📋 صيغة شكوى تجاوزات جمعية:</span>
+                        <button class="btn-copy-template" onclick="copyTemplate(this)">
+                            <i class="fa-regular fa-copy"></i> نسخ الصيغة
+                        </button>
+                    </div>
+                    <p class="template-text">الحالة [اسم الحالة] (حالة سودانية) تشكو من رفض جمعية [اسم الجمعية] تلقي واستلام أوراق الطلب.. تم توجيه الحالة ورفضت الجمعية الاستلام.</p>
+                </div>
             </div>
         </div>
 
     </div>
 
-        <div class="system-info-box">
-            <strong>🛠️ توثيق النظام البرمجي:</strong><br>
-            <strong>System Action:</strong> تسجيل <span class="tag">Beneficiary</span><br>
-            <strong>Call Logs:</strong> نوع المكالمة <span class="tag">Complaint / استفسار</span><br>
-            <strong>Call Actions:</strong> تصنيف <span class="tag">Complaint Call</span> >> إجراء <span class="tag">addComplaint  </span>
+    <!-- صندوق إجراءات السيستم -->
+    <div class="system-action-box">
+        <div class="system-header">
+            <i class="fa-solid fa-gears"></i> إجراءات تسجيل الشكوى بالنظام (Action System):
         </div>
-        <!-- نهاية توثيق النظام -->
+        <div class="tags-row">
+            <div class="tag-pill">
+                <b>System Action:</b> <span>تسجيل Beneficiary</span>
+            </div>
+            <div class="tag-pill">
+                <b>Call Logs:</b> <span>Complaint / شكوى</span>
+            </div>
+            <div class="tag-pill">
+                <b>Call Actions:</b> <span>Complaint Call ➔ addComplaint</span>
+            </div>
+        </div>
+    </div>
 
-    <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 12px;">
-       
-    </footer>
+</div>
+
+<!-- توست النسخ -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--primary-green);"></i>
+    <span id="toastMsg">تم نسخ صيغة الشكوى بنجاح!</span>
 </div>
 
 <script>
+    // وظيفة نسخ نص القالب
+    function copyTemplate(button) {
+        const templateText = button.closest('.template-box').querySelector('.template-text').innerText.trim();
+        navigator.clipboard.writeText(templateText).then(() => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = `تم نسخ قالب الشكوى بنجاح`;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        });
+    }
+
+    // تصفية الشكاوى بالبحث الحي
+    function filterComplaints() {
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.complaint-card');
+
+        cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            if (text.includes(query)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // إدارة الوضع الليلي/النهاري
     function toggleTheme() {
-        const body = document.getElementById('bodyElement');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
 
         body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
 
-        if (body.classList.contains('dark-mode')) {
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Night Mode';
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
+            localStorage.setItem('myTheme', 'dark');
             localStorage.setItem('theme', 'dark');
         } else {
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'Dark mode';
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            localStorage.setItem('myTheme', 'light');
             localStorage.setItem('theme', 'light');
         }
     }
 
-    // حفظ خيار المستخدم عند إعادة تحميل الصفحة
     window.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
         if (savedTheme === 'dark') {
-            document.getElementById('bodyElement').classList.add('dark-mode');
-            document.getElementById('themeIcon').textContent = '☀️';
-            document.getElementById('themeText').textContent = 'Night Mode';
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
     });
 </script>
