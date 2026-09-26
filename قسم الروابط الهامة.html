@@ -1,283 +1,612 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
-<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <title>قسم الروابط الهامة وبيانات الدخول | بنك الطعام المصري</title>
 
-    <!-- استدعاء أيقونات FontAwesome -->
+    <!-- أيقونات FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-gray: #f8f9fa;
-            --text-dark: #2d3436;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
-            --card-bg: #ffffff;
-            --border-hover: var(--efb-green);
-            --pass-bg: #fdf2f2;
-            --tr-hover: #f1f1f1;
-            --table-border: #eee;
+            /* درجات الألوان للوضع الفاتح */
+            --primary: #00873e;
+            --primary-light: #e8f5e9;
+            --primary-red: #d63031;
+            --primary-red-light: #ffebee;
+            --accent-blue: #0984e3;
+            --accent-blue-light: #e1f5fe;
+            --accent-purple: #6c5ce7;
+            --accent-purple-light: #f3f0ff;
+            --warning-orange: #f39c12;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
         }
 
-        /* متغيرات الوضع الداكن Dark Mode */
-        [data-theme="dark"] {
-            --bg-gray: #121212;
-            --text-dark: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --shadow: 0 4px 15px rgba(0,0,0,0.5);
-            --pass-bg: #2d1a1a;
-            --tr-hover: #2a2a2a;
-            --table-border: #333333;
+        body.dark-mode {
+            /* درجات الألوان للوضع الليلي */
+            --primary: #00e676;
+            --primary-light: rgba(0, 230, 118, 0.12);
+            --primary-red: #ff5252;
+            --primary-red-light: rgba(255, 82, 82, 0.15);
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --accent-purple: #a29bfe;
+            --accent-purple-light: rgba(108, 92, 231, 0.15);
+            --warning-orange: #ffb74d;
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--bg-gray);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 40px 20px;
-            color: var(--text-dark);
-            transition: background-color 0.3s, color 0.3s;
+            padding: 0;
+            line-height: 1.6;
         }
 
-        /* تثبيت الزرار بجانب الصفحة (عائم في الزاوية) */
-        .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
             z-index: 1000;
-            background-color: var(--card-bg);
-            color: var(--text-dark);
-            border: 2px solid var(--efb-green);
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             cursor: pointer;
-            font-size: 14px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .btn-nav:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* رأس الصفحة */
+        .page-header {
+            text-align: center;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            border-bottom: 4px solid var(--primary);
+            box-shadow: var(--card-shadow);
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14.5px;
+        }
+
+        /* بطاقة بيانات تسجيل الدخول للبورتال */
+        .credentials-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary-red);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 35px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .credentials-title {
+            color: var(--primary-red);
+            font-size: 17px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .credential-box {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .credential-info b {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .credential-info span {
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .credential-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-cred {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .btn-cred:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: scale(1.08);
+        }
+
+        /* شبكة الروابط السريعة للأنظمة */
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .system-link-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 18px;
+            transition: all 0.25s;
+        }
+
+        .system-link-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .system-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .icon-green { background: var(--primary-light); color: var(--primary); }
+        .icon-blue { background: var(--accent-blue-light); color: var(--accent-blue); }
+        .icon-purple { background: var(--accent-purple-light); color: var(--accent-purple); }
+        .icon-orange { background: var(--warning-orange-light); color: var(--warning-orange); }
+
+        .system-details h3 {
+            margin: 0 0 6px;
+            font-size: 17px;
+            color: var(--text-main);
+        }
+
+        .system-details p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .network-tag {
+            display: inline-block;
+            background: var(--primary-red-light);
+            color: var(--primary-red);
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-top: 6px;
+        }
+
+        .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 14px;
+        }
+
+        .btn-action-primary {
+            flex-grow: 1;
+            background: var(--primary);
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 9px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-action-primary:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        .btn-action-copy {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 9px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-action-copy:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* توست النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary);
         }
 
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .dashboard {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .header h1 {
-            color: var(--efb-red);
-            font-size: 36px;
-            margin: 0;
-            position: relative;
-            display: inline-block;
-        }
-
-        .header h1::after {
-            content: '';
-            width: 50%;
-            height: 4px;
-            background: var(--efb-green);
-            display: block;
-            margin: 10px auto;
-            border-radius: 2px;
-        }
-
-        /* تنسيق قسم الروابط */
-        .section-title {
-            color: var(--efb-green);
-            font-size: 22px;
-            margin-bottom: 20px;
-            border-right: 5px solid var(--efb-green);
-            padding-right: 15px;
-            font-weight: bold;
-        }
-
-        .links-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-            margin-bottom: 50px;
-        }
-
-        .link-card {
-            background: var(--card-bg);
-            padding: 15px 20px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-dark);
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
-
-        .link-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-3px);
-        }
-
-        .link-card i {
-            font-size: 20px;
-            color: var(--efb-green);
-            margin-left: 15px;
-        }
-
-        .link-card span {
-            font-size: 14px;
-            font-weight: 500;
-            word-break: break-all;
-        }
-
-        /* تنسيق قسم الحسابات */
-        .accounts-table {
-            width: 100%;
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border-collapse: collapse;
-            transition: background 0.3s;
-        }
-
-        .accounts-table th {
-            background-color: var(--efb-green);
-            color: white;
-            padding: 15px;
-            text-align: right;
-        }
-
-        .accounts-table td {
-            padding: 15px;
-            border-bottom: 1px solid var(--table-border);
-            color: var(--text-dark);
-        }
-
-        .accounts-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .accounts-table tr:hover {
-            background-color: var(--tr-hover);
-        }
-
-        .copy-btn {
-            background: none;
-            border: none;
-            color: var(--efb-red);
-            cursor: pointer;
-            margin-right: 10px;
-            font-size: 14px;
-        }
-
-        .password {
-            font-family: monospace;
-            background: var(--pass-bg);
-            padding: 2px 8px;
-            border-radius: 4px;
-            color: var(--efb-red);
-            font-weight: bold;
-        }
-
-        @media (max-width: 600px) {
-            .links-container { grid-template-columns: 1fr; }
-            .accounts-table { font-size: 13px; }
-            .theme-toggle-btn {
-                top: 10px;
-                left: 10px;
-                padding: 6px 12px;
-                font-size: 12px;
-            }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
-<body>
+<body id="pageBody">
 
-<!-- زر التبديل بجانب الصفحة -->
-<button id="themeToggle" class="theme-toggle-btn">
-    <span id="themeIcon">🌙</span>
-    <span id="themeText">Dark mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
 
-<div class="dashboard">
-    <header class="header">
-        <h1>قسم الروابط الهامة</h1>
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-link"></i> قسم الروابط الهامة والأنظمة</h1>
+        <p>الروابط المباشرة لمنظومات العمل وبيانات تسجيل الدخول الافتراضية للبورتال الداخلي</p>
     </header>
 
-    <!-- قسم الروابط الهامة -->
-    <div class="section-title">الروابط السريعة</div>
-    <div class="links-container">
-        <a href="https://portal.efb.eg/EFBPortal/HotLine/BeneficiaryHotLine" class="link-card" target="_blank">
-            <i class="fa-solid fa-headset"></i>
-            <span>صفحه البورتال  (Beneficiary)</span>
-        </a>
-        <a href="https://crm.efb.eg/agent-home" class="link-card" target="_blank">
-            <i class="fa-solid fa-users-gear"></i>
-            <span>نظام CRM </span>
-        </a>
-        <a href="https://egyptianfoodbank.my.canva.site/beneficiary" class="link-card" target="_blank">
-            <i class="fa-solid fa-palette"></i>
-            <span>الصفحة الخاصة لبنك المعرفة </span>
-        </a>
-        <a href="https://192.168.60.65/?foodbank" class="link-card" target="_blank">
-            <i class="fa-solid fa-network-wired"></i>
-            <span>رابط Aheeva (Aheeva)</span>
-        </a>
-        
+    <!-- بطاقة بيانات تسجيل الدخول للبورتال -->
+    <div class="credentials-card">
+        <div class="credentials-title">
+            <i class="fa-solid fa-key"></i> بيانات تسجيل الدخول الموحدة للبورتال:
+        </div>
+
+        <div class="credentials-grid">
+            <!-- اسم المستخدم -->
+            <div class="credential-box">
+                <div class="credential-info">
+                    <b>اسم المستخدم (Username):</b>
+                    <span id="portalUser">hotline</span>
+                </div>
+                <div class="credential-actions">
+                    <button class="btn-cred" title="نسخ اسم المستخدم" onclick="copyText('hotline', 'تم نسخ اسم المستخدم')">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- كلمة المرور -->
+            <div class="credential-box">
+                <div class="credential-info">
+                    <b>كلمة المرور (Password):</b>
+                    <span id="portalPass">••••••••</span>
+                </div>
+                <div class="credential-actions">
+                    <button class="btn-cred" id="togglePassBtn" title="إظهار/إخفاء" onclick="togglePasswordVisibility()">
+                        <i class="fa-regular fa-eye" id="eyeIcon"></i>
+                    </button>
+                    <button class="btn-cred" title="نسخ كلمة المرور" onclick="copyText('Hh123321@22', 'تم نسخ كلمة المرور')">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- قسم بيانات الدخول -->
-    <div class="section-title">يتم فتح البورتال من خلال </div>
-    <table class="accounts-table">
-        <thead>
-            <tr>
-                <th>المستخدم </th>
-                <th>كلمة المرور</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>hotline</td>
-                <td><span class="password">Hh123321@22</span></td>
-            </tr>
-            
-            
-            
-        </tbody>
-    </table>
+    <!-- شبكة روابط الأنظمة -->
+    <div class="section-title">
+        <i class="fa-solid fa-globe"></i> منصات وأنظمة العمل:
+    </div>
+
+    <div class="links-grid">
+
+        <!-- 1. بورتال المستحقين -->
+        <div class="system-link-card">
+            <div class="card-top">
+                <div class="system-icon icon-green">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <div class="system-details">
+                    <h3>صفحه البورتال (Beneficiary)</h3>
+                    <p>المنظومة المركزية لإدارة واستعلام وتسجيل طلبات المستحقين والبحث الاجتماعي.</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="https://portal.efb.eg/EFBPortal/HotLine/BeneficiaryHotLine" target="_blank" class="btn-action-primary">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح البورتال
+                </a>
+                <button class="btn-action-copy" onclick="copyText('https://portal.efb.eg/EFBPortal/HotLine/BeneficiaryHotLine', 'تم نسخ رابط البورتال')">
+                    <i class="fa-regular fa-copy"></i> نسخ
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. نظام CRM -->
+        <div class="system-link-card">
+            <div class="card-top">
+                <div class="system-icon icon-blue">
+                    <i class="fa-solid fa-users-gear"></i>
+                </div>
+                <div class="system-details">
+                    <h3>نظام CRM </h3>
+                    <p>منصة تسجيل تذاكر الشكاوى والمكالمات ومتابعة إجراءات العملاء والجمعيات.</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="https://crm.efb.eg/agent-home" target="_blank" class="btn-action-primary" style="background:var(--accent-blue);">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح الـ CRM
+                </a>
+                <button class="btn-action-copy" onclick="copyText('https://crm.efb.eg/agent-home', 'تم نسخ رابط الـ CRM')">
+                    <i class="fa-regular fa-copy"></i> نسخ
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. بنك المعرفة الداخلي -->
+        <div class="system-link-card">
+            <div class="card-top">
+                <div class="system-icon icon-purple">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="system-details">
+                    <h3>الصفحة الخاصة لبنك المعرفة</h3>
+                    <p>المكتبة المعرفية والشروحات التفصيلية لبرامج وسياسات بنك الطعام.</p>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="https://egyptianfoodbank.my.canva.site/beneficiary" target="_blank" class="btn-action-primary" style="background:var(--accent-purple);">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح بنك المعرفة
+                </a>
+                <button class="btn-action-copy" onclick="copyText('https://egyptianfoodbank.my.canva.site/beneficiary', 'تم نسخ رابط بنك المعرفة')">
+                    <i class="fa-regular fa-copy"></i> نسخ
+                </button>
+            </div>
+        </div>
+
+        <!-- 4. نظام Aheeva للاتصالات -->
+        <div class="system-link-card">
+            <div class="card-top">
+                <div class="system-icon icon-orange">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <div class="system-details">
+                    <h3>رابط Aheeva (Aheeva)</h3>
+                    <p>نظام توزيع وإدارة المكالمات الهاتفية الهاتفية لخدمة عملاء الخط الساخن.</p>
+                    <span class="network-tag"><i class="fa-solid fa-shield"></i> يعمل داخل شبكة البنك فقط</span>
+                </div>
+            </div>
+            <div class="card-actions">
+                <a href="https://192.168.60.65/?foodbank" target="_blank" class="btn-action-primary" style="background:#e67e22;">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح Aheeva
+                </a>
+                <button class="btn-action-copy" onclick="copyText('https://192.168.60.65/?foodbank', 'تم نسخ رابط Aheeva')">
+                    <i class="fa-regular fa-copy"></i> نسخ
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- توست النسخ -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--primary);"></i>
+    <span id="toastMsg">تم النسخ بنجاح!</span>
 </div>
 
 <script>
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeText = document.getElementById('themeText');
+    const realPass = "Hh123321@22";
+    let isPassVisible = false;
 
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
+    // إظهار وإخفاء كلمة المرور
+    function togglePasswordVisibility() {
+        const passSpan = document.getElementById('portalPass');
+        const eyeIcon = document.getElementById('eyeIcon');
         
-        if (currentTheme === 'dark') {
-            document.documentElement.removeAttribute('data-theme');
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'Dark mode';
+        isPassVisible = !isPassVisible;
+        if (isPassVisible) {
+            passSpan.textContent = realPass;
+            eyeIcon.className = "fa-regular fa-eye-slash";
         } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Light mode';
+            passSpan.textContent = "••••••••";
+            eyeIcon.className = "fa-regular fa-eye";
+        }
+    }
+
+    // وظيفة النسخ
+    function copyText(val, msg) {
+        navigator.clipboard.writeText(val).then(() => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        });
+    }
+
+    // إدارة الوضع الليلي/النهاري
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
+            localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
     });
 </script>
