@@ -250,6 +250,7 @@
             display: flex;
             align-items: flex-start;
             gap: 16px;
+            flex: 1;
         }
 
         .assoc-icon {
@@ -267,6 +268,10 @@
         .icon-giza { background: var(--accent-purple-light); color: var(--accent-purple); }
         .icon-qalyubia { background: var(--accent-blue-light); color: var(--accent-blue); }
 
+        .assoc-details {
+            flex: 1;
+        }
+
         .assoc-details h3 {
             margin: 0 0 6px;
             font-size: 18px;
@@ -274,6 +279,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .province-pill {
@@ -289,7 +295,7 @@
         .pill-qalyubia { background: var(--accent-blue); }
 
         .assoc-address {
-            margin: 0 0 6px;
+            margin: 0 0 10px;
             font-size: 14.5px;
             font-weight: 500;
             color: var(--text-main);
@@ -298,17 +304,84 @@
             gap: 6px;
         }
 
-        .assoc-desc {
-            margin: 0;
-            font-size: 13px;
+        /* صندوق صيغة توجيه الحالة الجديد (واضح وبارز) */
+        .referral-statement-box {
+            background: var(--item-bg);
+            border: 1.5px dashed var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .referral-text-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text-main);
+            flex: 1;
+        }
+
+        .referral-text-wrapper i {
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .referral-label {
+            font-size: 12px;
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        /* ألوان مخصصة لكل محافظة لتمييز الصيغة */
+        .box-cairo { border-right: 4px solid var(--primary); }
+        .box-cairo .referral-text-wrapper i { color: var(--primary); }
+        .box-cairo .referral-label { background: var(--primary-light); color: var(--primary); }
+
+        .box-giza { border-right: 4px solid var(--accent-purple); }
+        .box-giza .referral-text-wrapper i { color: var(--accent-purple); }
+        .box-giza .referral-label { background: var(--accent-purple-light); color: var(--accent-purple); }
+
+        .box-qalyubia { border-right: 4px solid var(--accent-blue); }
+        .box-qalyubia .referral-text-wrapper i { color: var(--accent-blue); }
+        .box-qalyubia .referral-label { background: var(--accent-blue-light); color: var(--accent-blue); }
+
+        /* زر نسخ صيغة التوجيه */
+        .btn-copy-phrase {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-copy-phrase:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            background: var(--primary-red-light);
         }
 
         .btn-copy-address {
             background: var(--item-bg);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 9px 18px;
+            padding: 10px 18px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: bold;
@@ -443,6 +516,7 @@
         @media (max-width: 768px) {
             .assoc-card { flex-direction: column; align-items: flex-start; }
             .btn-copy-address { width: 100%; justify-content: center; }
+            .referral-statement-box { width: 100%; }
         }
     </style>
 </head>
@@ -479,7 +553,7 @@
         <ul class="alert-list">
             <li>تقديم ومتابعة الحالة السودانية يتم <b>حصراً من خلال الجمعيات الـ 3 الموضحة أدناه</b>.</li>
             <li>الحالة المسجلة على السيستم يتم توجيهها للجمعية الأقرب لمحل سكنها.</li>
-            <li><b style="color:var(--primary-red);">في حالة رفض الجمعية تلقي الطلب:</b> يتم فوراً تسجيل <b>"شكوى تجاوزات جمعية"</b> على السيستم.</li>
+            <li><b style="color:var(--primary-red);">في حالة رفض الجمعية تلقي الطلب:</b> يتم ً تسجيل <b>"شكوى تجاوزات جمعية"</b> على السيستم.</li>
         </ul>
     </div>
 
@@ -514,12 +588,18 @@
                         <i class="fa-solid fa-location-dot" style="color:var(--primary);"></i>
                         <span class="address-text">مدينة نصر - 59 شارع حسني أحمد خلف</span>
                     </div>
-                   <br>
-                   
-                       <p class="assoc-desc" style="font-weight: bold; color: #4a4a4a;">
-                       تم توجية الحالة الى جمعية إسناد لدعم المتضررين من الحروب والكوارث
-                       </p>
-                    
+
+                    <!-- صيغة التوجيه واضحة ومميزة -->
+                    <div class="referral-statement-box box-cairo">
+                        <div class="referral-text-wrapper">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                            <span class="referral-label">صيغة السيستم:</span>
+                            <span class="phrase-text">تم توجيه الحالة إلى جمعية إسناد لدعم المتضررين من الحروب والكوارث</span>
+                        </div>
+                        <button class="btn-copy-phrase" onclick="copyPhrase(this)" title="نسخ نص التوجيه للسيستم">
+                            <i class="fa-regular fa-copy"></i> نسخ النص
+                        </button>
+                    </div>
                 </div>
             </div>
             <button class="btn-copy-address" onclick="copyAddress(this, 'جمعية إسناد')">
@@ -542,12 +622,18 @@
                         <i class="fa-solid fa-location-dot" style="color:var(--accent-purple);"></i>
                         <span class="address-text">منطقة أرض اللواء - 5 شارع الطوخي حسن</span>
                     </div>
-                       <br>
-                   
-                     <p class="assoc-desc" style="font-weight: bold; color: #4a4a4a;">
-                       تم توجية الحالة الى جمعية مؤسسة الكمال الخيرية
-                       </p>
-                  
+
+                    <!-- صيغة التوجيه واضحة ومميزة -->
+                    <div class="referral-statement-box box-giza">
+                        <div class="referral-text-wrapper">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                            <span class="referral-label">صيغة السيستم:</span>
+                            <span class="phrase-text">تم توجيه الحالة إلى جمعية مؤسسة الكمال الخيرية</span>
+                        </div>
+                        <button class="btn-copy-phrase" onclick="copyPhrase(this)" title="نسخ نص التوجيه للسيستم">
+                            <i class="fa-regular fa-copy"></i> نسخ النص
+                        </button>
+                    </div>
                 </div>
             </div>
             <button class="btn-copy-address" onclick="copyAddress(this, 'مؤسسة الكمال')">
@@ -570,10 +656,18 @@
                         <i class="fa-solid fa-location-dot" style="color:var(--accent-blue);"></i>
                         <span class="address-text">منطقة منشية الجبل الأصفر - 16 شارع جمال عبد الناصر - الخانكة</span>
                     </div>
-                        <br>
-                     <p class="assoc-desc" style="font-weight: bold; color: #4a4a4a;">
-                       تم توجيه الحالة إلى جمعية المرأة السودانية
-                       </p>
+
+                    <!-- صيغة التوجيه واضحة ومميزة -->
+                    <div class="referral-statement-box box-qalyubia">
+                        <div class="referral-text-wrapper">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                            <span class="referral-label">صيغة السيستم:</span>
+                            <span class="phrase-text">تم توجيه الحالة إلى جمعية المرأة السودانية</span>
+                        </div>
+                        <button class="btn-copy-phrase" onclick="copyPhrase(this)" title="نسخ نص التوجيه للسيستم">
+                            <i class="fa-regular fa-copy"></i> نسخ النص
+                        </button>
+                    </div>
                 </div>
             </div>
             <button class="btn-copy-address" onclick="copyAddress(this, 'جمعية المرأة السودانية')">
@@ -630,19 +724,53 @@
 </div>
 
 <script>
-    // وظيفة نسخ عنوان الجمعية
+    let toastTimer;
+
+    function showNotification(msg) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastMsg').innerText = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2200);
+    }
+
+    // نسخ نص العنوان
     function copyAddress(btn, name) {
         const card = btn.closest('.assoc-card');
         const address = card.querySelector('.address-text').innerText.trim();
         const full = `${name}: ${address}`;
 
         navigator.clipboard.writeText(full).then(() => {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = `تم نسخ عنوان: ${name}`;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2200);
+            showNotification(`تم نسخ عنوان: ${name}`);
+        }).catch(() => {
+            // بديل للمتصفحات القديمة
+            const el = document.createElement('textarea');
+            el.value = full;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            showNotification(`تم نسخ عنوان: ${name}`);
+        });
+    }
+
+    // نسخ نص صيغة التوجيه للسيستم
+    function copyPhrase(btn) {
+        const box = btn.closest('.referral-statement-box');
+        const phrase = box.querySelector('.phrase-text').innerText.trim();
+
+        navigator.clipboard.writeText(phrase).then(() => {
+            showNotification('تم نسخ صيغة التوجيه بنجاح');
+        }).catch(() => {
+            const el = document.createElement('textarea');
+            el.value = phrase;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            showNotification('تم نسخ صيغة التوجيه بنجاح');
         });
     }
 
@@ -674,19 +802,15 @@
             icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
             text.textContent = 'الوضع النهاري';
             localStorage.setItem('efb_theme', 'dark');
-            localStorage.setItem('myTheme', 'dark');
-            localStorage.setItem('theme', 'dark');
         } else {
             icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
             text.textContent = 'الوضع الليلي';
             localStorage.setItem('efb_theme', 'light');
-            localStorage.setItem('myTheme', 'light');
-            localStorage.setItem('theme', 'light');
         }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        const savedTheme = localStorage.getItem('efb_theme');
         if (savedTheme === 'dark') {
             document.getElementById('pageBody').classList.add('dark-mode');
             document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
