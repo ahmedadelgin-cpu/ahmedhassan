@@ -1,300 +1,661 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
-<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <title>تقديم دور الرعاية | بنك الطعام المصري</title>
+
+    <!-- أيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-gray: #f4f7f6;
-            --text-dark: #2d3436;
-            --white: #ffffff;
-            --card-bg: #ffffff;
-            --text-color: #2d3436;
-            --doc-text-color: #444444;
-            --even-bg: #fafafa;
-            --border-color: #f0f0f0;
+            /* درجات الألوان للوضع الفاتح */
+            --primary: #00873e;
+            --primary-light: #e8f5e9;
+            --primary-red: #d63031;
+            --primary-red-light: #ffebee;
+            --accent-blue: #0984e3;
+            --accent-blue-light: #e1f5fe;
+            --whatsapp-green: #25D366;
+            --whatsapp-light: #e8f9ed;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
         }
 
-        /* متغيرات الوضع الداكن Dark Mode */
-        [data-theme="dark"] {
-            --bg-gray: #121212;
-            --card-bg: #1e1e1e;
-            --text-dark: #e0e0e0;
-            --text-color: #e0e0e0;
-            --doc-text-color: #ccc;
-            --even-bg: #252525;
-            --border-color: #333333;
+        body.dark-mode {
+            /* درجات الألوان للوضع الليلي */
+            --primary: #00e676;
+            --primary-light: rgba(0, 230, 118, 0.12);
+            --primary-red: #ff5252;
+            --primary-red-light: rgba(255, 82, 82, 0.15);
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --whatsapp-green: #25D366;
+            --whatsapp-light: rgba(37, 211, 102, 0.15);
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--bg-gray);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 40px 20px;
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* تثبيت الزرار بجانب الصفحة (عائم في الزاوية) */
-        .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 2px solid var(--efb-green);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* الجزء العلوي (الهيدر) */
-        .header-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border-top: 8px solid var(--efb-green);
-            margin-bottom: 30px;
-            transition: background 0.3s;
-        }
-
-        .header-card h1 {
-            color: var(--efb-red);
-            margin: 0;
-            font-size: 32px;
-            font-weight: bold;
-        }
-
-        .header-card p {
-            font-size: 18px;
-            margin: 15px 0 25px;
-            color: var(--text-color);
-        }
-
-        /* تصميم زر رابط التسجيل المطابق للصورة */
-        .btn-register {
-            background-color: var(--efb-red);
-            color: #ffffff !important;
-            text-decoration: none;
-            padding: 12px 35px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.4);
-            transition: 0.3s;
-            direction: ltr; /* لضبط اتجاه النقطتان والرابط بشكل صحيح */
-        }
-
-        .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(214, 48, 49, 0.5);
-        }
-
-        /* بطاقة المستندات */
-        .docs-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: background 0.3s;
-        }
-
-        .docs-title {
-            color: var(--efb-green);
-            font-size: 24px;
-            font-weight: bold;
-            border-bottom: 2px solid var(--efb-green);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        /* القائمة المرقمة */
-        .docs-list {
-            list-style: none;
             padding: 0;
-            margin: 0;
+            line-height: 1.6;
         }
 
-        .doc-item {
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 25px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 15px;
-            border-bottom: 1px solid var(--border-color);
-            transition: background 0.2s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
-        .doc-item:nth-child(even) {
-            background-color: var(--even-bg);
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
         }
 
-        .doc-item:last-child {
-            border-bottom: none;
+        .btn-nav:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
-        .doc-text {
-            font-size: 16px;
-            color: var(--doc-text-color);
-            flex: 1;
-            padding-left: 20px;
+        .btn-theme {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
         }
 
-        .doc-number {
-            background-color: var(--efb-green);
-            color: #ffffff;
-            width: 35px;
-            height: 35px;
+        .container {
+            max-width: 950px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* رأس الصفحة */
+        .page-header {
+            text-align: center;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 35px 25px;
+            margin-bottom: 25px;
+            border-bottom: 4px solid var(--primary);
+            box-shadow: var(--card-shadow);
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .page-header p {
+            margin: 0 0 20px;
+            color: var(--text-muted);
+            font-size: 14.5px;
+        }
+
+        .portal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-red);
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3);
+            transition: all 0.25s;
+        }
+
+        .portal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(214, 48, 49, 0.4);
+            background: #b32526;
+        }
+
+        /* بطاقة الواتساب */
+        .whatsapp-card {
+            background: var(--whatsapp-light);
+            border: 2px solid var(--whatsapp-green);
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .whatsapp-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .whatsapp-icon {
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
+            background: var(--whatsapp-green);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .whatsapp-text b {
+            display: block;
+            font-size: 15px;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .whatsapp-text span {
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        .whatsapp-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-wa-copy {
+            background: var(--bg-card);
+            border: 1px solid var(--whatsapp-green);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-wa-copy:hover {
+            background: var(--whatsapp-green);
+            color: #fff;
+        }
+
+        /* حاوية قائمة المستندات */
+        .docs-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .docs-panel-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1.5px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .docs-panel-title {
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .btn-copy-all {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-copy-all:hover {
+            background: var(--primary);
+            color: #ffffff;
+            transform: scale(1.03);
+        }
+
+        .docs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .doc-item-card {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.2s;
+        }
+
+        .doc-item-card:hover {
+            border-color: var(--primary);
+            background: var(--bg-card);
+            transform: translateX(-3px);
+        }
+
+        .doc-num {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 15px;
             flex-shrink: 0;
+            margin-top: 2px;
         }
 
-        /* تعديلات للموبايل */
-        @media (max-width: 600px) {
-            .docs-card { padding: 20px; }
-            .header-card h1 { font-size: 24px; }
-            .doc-text { font-size: 14px; }
-            .btn-register { font-size: 14px; padding: 10px 20px; }
-            .theme-toggle-btn {
-                top: 10px;
-                left: 10px;
-                padding: 6px 12px;
-                font-size: 12px;
-            }
+        .doc-content {
+            flex-grow: 1;
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: var(--text-main);
         }
 
-        .whatsapp-note {
-            background: #25D366;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-top: 20px;
+        .doc-content b {
+            color: var(--primary);
+        }
+
+        /* صندوق إجراءات السيستم */
+        .system-action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .system-header {
+            font-size: 17px;
             font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .system-facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .fact-card {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fact-card i {
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        .fact-info b {
+            display: block;
+            font-size: 12.5px;
+            color: var(--text-muted);
+        }
+
+        .fact-info span {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .path-breadcrumb {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            font-size: 13.5px;
+            direction: ltr; /* اتجاه المسار */
+        }
+
+        .path-node {
+            background: var(--bg-card);
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        .path-node.highlight {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .path-arrow {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* توست النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .whatsapp-card { flex-direction: column; align-items: flex-start; }
+            .docs-panel-header { flex-direction: column; align-items: flex-start; }
+            .btn-copy-all { width: 100%; justify-content: center; }
         }
     </style>
 </head>
-<body>
+<body id="pageBody">
 
-<!-- زر التبديل بجانب الصفحة -->
-<button id="themeToggle" class="theme-toggle-btn">
-    <span id="themeIcon">🌙</span>
-    <span id="themeText">Dark mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
+
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
 
 <div class="container">
-    <!-- الهيدر -->
-    <header class="header-card">
-        <h1>تقديم دور الرعاية</h1>
-        <p>الأوراق المطلوبة للاشتراك في برامج بنك الطعام</p>
-        <a href="https://portal.efb.eg/" target="_blank" class="btn-register">رابط التسجيل: https://portal.efb.eg/</a>
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-house-chimney-medical"></i> تقديم دور الرعاية</h1>
+        <p>قائمة المستندات والأوراق الرسمية المطلوبة لاشتراك دور الأيتام والمسنين في برامج بنك الطعام</p>
+        <a href="https://portal.efb.eg/" target="_blank" class="portal-btn">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> رابط بوابة تسجيل الدور: portal.efb.eg
+        </a>
     </header>
 
-    <!-- قائمة المستندات -->
-    <section class="docs-card">
-        <div class="docs-title">قائمة المستندات المطلوبة (5 مستندات)</div>
-        
-        <div class="docs-list">
-            <!-- مستند 1 -->
-            <div class="doc-item">
-                <div class="doc-text">صورة من ترخيص الدار / قرار الإسناد.</div>
-                <div class="doc-number">1</div>
-            </div>
-
-            <!-- مستند 2 -->
-            <div class="doc-item">
-                <div class="doc-text">صورة من قرار إشهار الجهة (الجمعية / المؤسسة) التابعة لها الدار.</div>
-                <div class="doc-number">2</div>
-            </div>
-
-            <!-- مستند 3 -->
-            <div class="doc-item">
-                <div class="doc-text">
-                    كشف بيانات السادة أعضاء مجلس الإدارة / الأمناء للجهة موضح (الاسم / الصفة بالجهة / الوظيفة خارج الجهة / التليفون المحمول) مع تحديد مسئول التواصل مع البنك سواء من المجلس أو من الهيكل الإداري للدار.
-                </div>
-                <div class="doc-number">3</div>
-            </div>
-
-            <!-- مستند 4 -->
-            <div class="doc-item">
-                <div class="doc-text">مستند شغل مقر الدار (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق.</div>
-                <div class="doc-number">4</div>
-            </div>
-
-            <!-- مستند 5 -->
-            <div class="doc-item">
-                <div class="doc-text">آخر حساب ختامي لعام كامل معتمد من محاسب قانوني للدار / الجمعية.</div>
-                <div class="doc-number">5</div>
+    <!-- بطاقة الواتساب -->
+    <div class="whatsapp-card">
+        <div class="whatsapp-info">
+            <div class="whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="whatsapp-text">
+                <b>إرسال الأوراق عبر الواتساب:</b>
+                <span>في حال رغبة مسؤولي دار الرعاية في إرسال المستندات رقمياً عبر الواتساب.</span>
             </div>
         </div>
-    </section>
-</div>
-
-<!-- معلومات إضافية -->
-<div class="footer-info">
-    <center>
-        <div class="whatsapp-note">فى حالة سوال العميل عن امكانية ارسال المستندات المطلوبة عن طريق الواتساب يتم توضيح رقم الواتساب 01152888777</div>
-    </center>
-</div>
-
-<div class="note-footer">
-        <center>
-        <h3>🔄 Action  System </h3>
-        <p>  CAll Logs بتكون Inquiry/استفسار</p>
-        <p>  جمعية خيرية    ---  CaLL Actions --- Inquiry CALLs --- add Inquiry </p>   
-        </center>       
+        <div class="whatsapp-actions">
+            <button class="btn-wa-copy" onclick="copyWhatsAppNumber()">
+                <i class="fa-regular fa-copy"></i> نسخ الرقم (01152888777)
+            </button>
+            <a href="https://api.whatsapp.com/send?phone=201152888777" target="_blank" class="btn-wa-copy" style="text-decoration:none; color:var(--whatsapp-green); border-color:var(--whatsapp-green);">
+    <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح شات
+</a>
+            </a>
+        </div>
     </div>
 
+    <!-- قائمة المستندات الـ 5 -->
+    <div class="docs-panel">
+        <div class="docs-panel-header">
+            <div class="docs-panel-title">
+                <i class="fa-solid fa-folder-open"></i> قائمة المستندات المطلوبة (5 مستندات رسمية)
+            </div>
+            <button class="btn-copy-all" onclick="copyAllCareDocuments()">
+                <i class="fa-regular fa-copy"></i> نسخ قائمة المستندات كاملة
+            </button>
+        </div>
+
+        <div class="docs-list">
+            <div class="doc-item-card">
+                <div class="doc-num">1</div>
+                <div class="doc-content">صورة من ترخيص الدار / قرار الإسناد الرسمي.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">2</div>
+                <div class="doc-content">صورة من قرار إشهار الجهة (الجمعية / المؤسسة) التابعة لها الدار.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">3</div>
+                <div class="doc-content">
+                    كشف بيانات السادة أعضاء مجلس الإدارة / الأمناء للجهة موضح به: (الاسم / الصفة بالجهة / الوظيفة خارج الجهة / التليفون المحمول) 
+                    <b>مع تحديد مسؤول التواصل مع البنك سواء من المجلس أو من الهيكل الإداري للدار</b>.
+                </div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">4</div>
+                <div class="doc-content">مستند شغل مقر الدار (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">5</div>
+                <div class="doc-content">آخر حساب ختامي لعام كامل معتمد من محاسب قانوني للدار / الجمعية.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صندوق إجراءات السيستم -->
+    <div class="system-action-box">
+        <div class="system-header">
+            <i class="fa-solid fa-gears"></i> إجراءات تسجيل دور الرعاية بالنظام (Action System):
+        </div>
+
+        <div class="system-facts-grid">
+            <div class="fact-card">
+                <i class="fa-solid fa-phone-volume"></i>
+                <div class="fact-info">
+                    <b>تصنيف Call Logs:</b>
+                    <span style="color:var(--primary);">Inquiry / استفسار</span>
+                </div>
+            </div>
+
+            <div class="fact-card">
+                <i class="fa-solid fa-sitemap"></i>
+                <div class="fact-info">
+                    <b>التصنيف بالسيستم:</b>
+                    <span style="color:var(--primary);">جمعية خيرية</span>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size: 13px; font-weight: bold; margin-bottom: 8px; color: var(--text-muted);">
+            مسار التسجيل داخل السيستم (Breadcrumb Path):
+        </p>
+        <div class="path-breadcrumb">
+            <span class="path-node">CaLL Actions</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-node">Inquiry CALLs</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-node highlight">add Inquiry</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-node highlight" style="direction: rtl;">جمعية خيرية</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- توست النسخ -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--primary);"></i>
+    <span id="toastMsg">تم النسخ بنجاح!</span>
+</div>
 
 <script>
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeText = document.getElementById('themeText');
+    // نسخ رقم الواتساب
+    function copyWhatsAppNumber() {
+        navigator.clipboard.writeText('01152888777').then(() => {
+            showToast('تم نسخ رقم الواتساب: 01152888777');
+        });
+    }
 
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        
-        if (currentTheme === 'dark') {
-            document.documentElement.removeAttribute('data-theme');
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'Dark mode';
+    // نسخ مستندات دور الرعاية كاملة
+    function copyAllCareDocuments() {
+        const docs = [
+            "قائمة الأوراق المطلوبة لتسجيل دور الرعاية في بنك الطعام المصري:",
+            "1. صورة من ترخيص الدار / قرار الإسناد.",
+            "2. صورة من قرار إشهار الجهة (الجمعية / المؤسسة) التابعة لها الدار.",
+            "3. كشف بيانات أعضاء مجلس الإدارة موضح به بياناتهم مع تحديد مسؤول التواصل مع البنك.",
+            "4. مستند شغل مقر الدار (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق.",
+            "5. آخر حساب ختامي لعام كامل معتمد من محاسب قانوني.",
+            "---",
+            "رابط التسجيل المباشر: https://portal.efb.eg/",
+            "رقم الواتساب لإرسال الأوراق: 01152888777"
+        ].join('\n');
+
+        navigator.clipboard.writeText(docs).then(() => {
+            showToast('تم نسخ قائمة المستندات كاملة بنجاح!');
+        });
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastMsg').innerText = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+
+    // إدارة الوضع الليلي/النهاري
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
+            localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
         } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Light mode';
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
     });
 </script>
