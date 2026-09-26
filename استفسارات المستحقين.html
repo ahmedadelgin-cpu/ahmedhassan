@@ -1,242 +1,665 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
-<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <title>استفسارات المستحقين | بنك الطعام المصري</title>
+
+    <!-- أيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            /* الألوان الأصلية في الوضع الداكن (الأساسي) */
-            --neon-green: #00ff41;
-            --dark-black: #0a0a0a;
-            --card-bg: #161616;
-            --accent-blue: #00d2ff;
-            --text-gray: #b0b0b0;
-            --main-bg: var(--dark-black);
-            --text-color: #ffffff;
-            --card-border: #333333;
-            --item-bg: rgba(255, 255, 255, 0.03);
-            --item-hover-bg: rgba(0, 255, 65, 0.05);
-            --toggle-btn-bg: #161616;
+            /* درجات الألوان للوضع النهاري (Light Mode) */
+            --primary: #00873e;
+            --primary-light: #e8f5e9;
+            --accent-blue: #0984e3;
+            --accent-orange: #e67e22;
+            --accent-purple: #8e44ad;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
+            --item-hover-bg: #eef7ee;
         }
 
-        /* متغيرات الوضع الفاتح Light Mode */
-        [data-theme="light"] {
-            --neon-green: #00a651;
-            --main-bg: #f8f9fa;
-            --text-color: #2d3436;
-            --card-bg: #ffffff;
-            --accent-blue: #0984e3;
-            --text-gray: #636e72;
-            --card-border: #e0e0e0;
-            --item-bg: #f1f2f6;
-            --item-hover-bg: rgba(0, 166, 81, 0.1);
-            --toggle-btn-bg: #ffffff;
+        body.dark-mode {
+            /* درجات الألوان للوضع الليلي (Dark Mode) */
+            --primary: #00e676;
+            --primary-light: rgba(0, 230, 118, 0.12);
+            --accent-blue: #40c4ff;
+            --accent-orange: #ffb74d;
+            --accent-purple: #ba68c8;
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+            --item-hover-bg: rgba(0, 230, 118, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--main-bg);
-            color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
+            padding: 0;
+            line-height: 1.6;
         }
 
-        /* تثبيت زر التبديل بجانب الصفحة */
-        .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
+        /* شريط التحكم العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
             z-index: 1000;
-            background-color: var(--toggle-btn-bg);
-            color: var(--text-color);
-            border: 2px solid var(--neon-green);
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .nav-btns {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
             padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
         }
 
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
+        .btn-nav:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
-        .header {
+        .btn-theme {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* رأس الصفحة */
+        .page-header {
             text-align: center;
-            border-bottom: 2px solid var(--neon-green);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.1);
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            border-bottom: 4px solid var(--primary);
+            box-shadow: var(--card-shadow);
         }
 
-        .header h1 { color: var(--neon-green); margin: 0; font-size: 28px; }
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-        .grid-container {
+        .page-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* شريط البحث وتصفية التبويبات */
+        .controls-panel {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--item-bg);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 48px 12px 18px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            background: var(--bg-card);
+        }
+
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-tab {
+            background: var(--item-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .filter-tab.active, .filter-tab:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* شبكة التصنيفات */
+        .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
         .category-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 15px;
-            transition: 0.3s;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
         }
 
-        .category-card:hover { border-color: var(--neon-green); transform: translateY(-5px); }
-
-        .category-title {
-            color: var(--neon-green);
-            font-weight: bold;
-            border-right: 4px solid var(--neon-green);
-            padding-right: 10px;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
-        .query-list { list-style: none; padding: 0; margin: 0; }
-
-        .query-item {
-            background: var(--item-bg);
-            margin-bottom: 8px;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 14px;
+        .category-card-header {
+            padding: 16px 20px;
             display: flex;
             align-items: center;
-            border-left: 2px solid transparent;
-            color: var(--text-color);
-            transition: background 0.2s;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--item-bg);
         }
 
-        .query-item:hover {
-            background: var(--item-hover-bg);
-            border-left-color: var(--accent-blue);
+        .category-card-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-badge {
+            font-size: 11px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .inquiries-list {
+            padding: 15px;
+            list-style: none;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        /* عناصر الاستفسار (قابلة للنسخ) */
+        .inquiry-item {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
             cursor: pointer;
+            position: relative;
         }
 
-        .query-item::before {
-            content: '>';
-            color: var(--neon-green);
-            margin-left: 10px;
+        .inquiry-item:hover {
+            background: var(--item-hover-bg);
+            border-color: var(--primary);
+            transform: translateX(-3px);
+        }
+
+        .inquiry-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .inquiry-text i {
+            color: var(--primary);
+            font-size: 11px;
+        }
+
+        .copy-hint {
+            font-size: 11px;
+            color: var(--text-muted);
+            opacity: 0;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .inquiry-item:hover .copy-hint {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        /* تمييز الحالات الخاصة بالألوان */
+        .color-blue-title i { color: var(--accent-blue); }
+        .color-orange-title i { color: var(--accent-orange); }
+        .color-purple-title i { color: var(--accent-purple); }
+
+        /* صندوق إجراءات السيستم */
+        .system-action-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary);
+            border-radius: 16px;
+            padding: 22px;
+            margin-top: 35px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .system-action-card h3 {
+            margin: 0 0 15px 0;
+            color: var(--primary);
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-tags {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            font-size: 13.5px;
+        }
+
+        .tag-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-family: monospace;
             font-weight: bold;
         }
 
-        .status-bar {
-            margin-top: 30px;
-            font-family: monospace;
-            color: var(--text-gray);
-            font-size: 12px;
-            text-align: center;
+        /* إشعار منبثق عند النسخ (Toast) */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 13.5px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary);
         }
 
-        @media (max-width: 600px) {
-            .theme-toggle-btn {
-                top: 10px;
-                left: 10px;
-                padding: 6px 12px;
-                font-size: 12px;
-            }
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .filter-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; }
+            .filter-tab { flex-shrink: 0; }
         }
     </style>
 </head>
-<body>
+<body id="pageBody">
 
-<!-- زر التبديل بجانب الصفحة -->
-<button id="themeToggle" class="theme-toggle-btn">
-    <span id="themeIcon">☀️</span>
-    <span id="themeText">Light mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
 
-<div class="header">
-    <h1>استفسارات النيدي </h1>
-    <br>
-    <br>  
+    <div class="nav-btns">
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
+
+<div class="container">
+    
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-comments"></i> استفسارات النيدي والمستحقين</h1>
+        <p>دليل الردود الجاهزة والصيغ المعتمدة أثناء استقبال مكالمات المستحقين (اضغط على أي استفسار لنسخه فوراً)</p>
+    </header>
+
+    <!-- لوحة البحث والتصفية -->
+    <div class="controls-panel">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث في صيغ الردود والاستفسارات..." onkeyup="filterInquiries()">
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterCategory('all', this)">جميع الاستفسارات</button>
+            <button class="filter-tab" onclick="filterCategory('comm', this)">التواصل والنظام</button>
+            <button class="filter-tab" onclick="filterCategory('reg', this)">التقديم والبيانات</button>
+            <button class="filter-tab" onclick="filterCategory('prog', this)">البرامج والاستحقاق</button>
+            <button class="filter-tab" onclick="filterCategory('special', this)">الحالات الخاصة والتحويل</button>
+        </div>
+    </div>
+
+    <!-- شبكة كروت الاستفسارات -->
+    <div class="categories-grid" id="categoriesGrid">
+
+        <!-- القسم 1: التواصل والنظام -->
+        <div class="category-card" data-cat="comm">
+            <div class="category-card-header color-blue-title">
+                <div class="category-card-title">
+                    <i class="fa-solid fa-headset"></i> التواصل والنظام
+                </div>
+                <span class="category-badge">5 صيغ</span>
+            </div>
+            <ul class="inquiries-list">
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>هتعاود الاتصال من الرقم المسجل</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>لا يوجد بيانات مسجلة على السيستيم</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص مكالمة من بنك الطعام</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص مكالمة تحديث بيانات</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص مكالمة من قسم الأبحاث (تم التوضيح)</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- القسم 2: التقديم والبيانات -->
+        <div class="category-card" data-cat="reg">
+            <div class="category-card-header color-orange-title">
+                <div class="category-card-title">
+                    <i class="fa-solid fa-id-card"></i> التقديم والبيانات
+                </div>
+                <span class="category-badge">5 صيغ</span>
+            </div>
+            <ul class="inquiries-list">
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص تقديم طلب (تم التوضيح)</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص تقديم طلب من (اللنك)</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص تقديم طلب من (الويب سايت)</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص تعديل رقم الهاتف تم التوضيح</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص تحديث البيانات الأساسية (تم التوضيح)</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- القسم 3: البرامج والاستحقاق -->
+        <div class="category-card" data-cat="prog">
+            <div class="category-card-header">
+                <div class="category-card-title">
+                    <i class="fa-solid fa-box-open" style="color:var(--primary);"></i> البرامج والاستحقاق
+                </div>
+                <span class="category-badge">5 صيغ</span>
+            </div>
+            <ul class="inquiries-list">
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>النقل من (موسمي) إلى (شهري)</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص عدد النقاط المتاحة</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>تم التوضيح أن الحالة "تحت الاستهداف"</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>تم توضيح أن الحالة غير مطابقة لشروط بنك الطعام</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>استفسار بخصوص نوع البرنامج (موسمي/شهري)</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- القسم 4: الحالات الخاصة والتحويل -->
+        <div class="category-card" data-cat="special">
+            <div class="category-card-header color-purple-title">
+                <div class="category-card-title">
+                    <i class="fa-solid fa-arrows-split-up-and-left"></i> الحالات الخاصة والتحويل
+                </div>
+                <span class="category-badge">4 صيغ</span>
+            </div>
+            <ul class="inquiries-list">
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span style="color:var(--accent-blue); font-weight:bold;">حالة سودانية: تم توجيه للجمعية لتقديم طلب</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>تم تقديم طلب سابق من الجمعية (متابعة)</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>تم التحويل إلى: بنك الشفاء المصري</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+                <li class="inquiry-item" onclick="copyText(this)">
+                    <div class="inquiry-text"><i class="fa-solid fa-angle-left"></i> <span>تم التحويل إلى: معنا لحياة أفضل</span></div>
+                    <span class="copy-hint"><i class="fa-regular fa-copy"></i> نسخ</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- صندوق إجراءات السيستم الموحد -->
+    <div class="system-action-card">
+        <h3><i class="fa-solid fa-rotate"></i> توثيق إجراءات السيستم (Action System):</h3>
+        <div class="action-tags">
+            <span>نوع التسجيل: <span class="tag-badge">Beneficiary</span></span>
+            <span>تصنيف الـ Call Logs: <span class="tag-badge">Inquiry / استفسار</span></span>
+            <span>المسار: <span class="tag-badge">CaLL Actions ➔ Inquiry CALLs ➔ addInquiry</span></span>
+        </div>
+    </div>
+
 </div>
 
-<div class="grid-container">
-    
-    <!-- القسم 1 -->
-    <div class="category-card">
-        <div class="category-title">التواصل والنظام</div>
-        <div class="query-list">
-            <div class="query-item">هتعاود الاتصال من الرقم المسجل</div>
-            <div class="query-item">لا يوجد بيانات مسجلة على السيستيم</div>
-            <div class="query-item">استفسار بخصوص مكالمة من بنك الطعام</div>
-            <div class="query-item">استفسار بخصوص مكالمة تحديث بيانات</div>
-            <div class="query-item">استفسار  بخصوص مكالمة    من قسم الأبحاث (تم التوضيح)</div>
-        </div>
-    </div>
-
-    <!-- القسم 2 -->
-    <div class="category-card">
-        <div class="category-title">التقديم والبيانات</div>
-        <div class="query-list">
-            <div class="query-item">استفسار بخصوص تقديم طلب (تم التوضيح)</div>
-            <div class="query-item">استفسار بخصوص تقديم طلب من (اللنك)</div>
-            <div class="query-item">استفسار بخصوص تقديم طلب من (الويب سايت)</div>
-            <div class="query-item">استفسار بخصوص تعديل رقم الهاتف تم التوضيح </div>
-            <div class="query-item"> استفسار بخصوص  تحديث البيانات الأساسية (تم التوضيح)</div>
-        </div>
-    </div>
-
-    <!-- القسم 3 -->
-    <div class="category-card">
-        <div class="category-title">البرامج والاستحقاق</div>
-        <div class="query-list">
-            <div class="query-item">النقل من (موسمي) إلى (شهري)</div>
-            <div class="query-item">استفسار بخصوص عدد النقاط المتاحة</div>
-            <div class="query-item">تم التوضيح أن الحالة "تحت الاستهداف"</div>
-            <div class="query-item"> تم توضيح انى الحالة غير مطابقة لشروط بنك الطعام </div>
-            <div class="query-item">استفسار بخصوص نوع البرنامج (موسمي/شهري)</div>
-        </div>
-    </div>
-
-    <!-- القسم 4 -->
-    <div class="category-card">
-        <div class="category-title">الحالات الخاصة والتحويل</div>
-        <div class="query-list">
-            <div class="query-item" style="color: var(--accent-blue);">حالة سودانية:  تم توجيه للجمعية لتقديم طلب</div>
-            <div class="query-item">تم تقديم طلب سابق من الجمعية (متابعة)</div>
-            <div class="query-item">تم التحويل إلى: بنك الشفاء المصري</div>
-            <div class="query-item">تم التحويل إلى: معنا لحياة أفضل</div>
-        </div>
-    </div>
-
-</div>
-
-<div class="status-bar">
-    
+<!-- إشعار النسخ المنبثق (Toast) -->
+<div id="toastNotification" class="toast-notification">
+    <i class="fa-solid fa-circle-check" style="color:var(--primary);"></i>
+    <span id="toastMsg">تم نسخ النص بنجاح!</span>
 </div>
 
 <script>
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeText = document.getElementById('themeText');
+    // وظيفة نسخ النص بنقرة واحدة
+    function copyText(element) {
+        const text = element.querySelector('.inquiry-text span').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(`تم نسخ: "${text}"`);
+        });
+    }
 
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        
-        if (currentTheme === 'light') {
-            document.documentElement.removeAttribute('data-theme');
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Light mode';
+    function showToast(msg) {
+        const toast = document.getElementById('toastNotification');
+        const toastMsg = document.getElementById('toastMsg');
+        toastMsg.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2200);
+    }
+
+    // تصفية الاستفسارات بالبحث المباشر
+    function filterInquiries() {
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        const items = document.querySelectorAll('.inquiry-item');
+        const cards = document.querySelectorAll('.category-card');
+
+        items.forEach(item => {
+            const text = item.querySelector('.inquiry-text span').textContent.toLowerCase();
+            if (text.includes(query)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        cards.forEach(card => {
+            const hasVisible = Array.from(card.querySelectorAll('.inquiry-item')).some(i => i.style.display !== 'none');
+            card.style.display = hasVisible ? 'flex' : 'none';
+        });
+    }
+
+    // تصفية حسب التبويبات
+    function filterCategory(category, tabBtn) {
+        document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.remove('active'));
+        tabBtn.classList.add('active');
+
+        const cards = document.querySelectorAll('.category-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-cat') === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // توحيد وإدارة الوضع الليلي/النهاري
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
+            localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
         } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'Dark mode';
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // استعادة تفضيل الوضع المختار
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
     });
 </script>
