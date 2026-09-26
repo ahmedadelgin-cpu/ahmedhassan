@@ -1,357 +1,641 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer - تسليم الأكواد</title>
+    <title>نظام تسليم الأكواد | بنك الطعام المصري</title>
+
+    <!-- أيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-white: #ffffff;
-            --soft-gray: #f8f9fa;
-            --text-dark: #2d3436;
-            --border: #e0e0e0;
-            --rules-bg: #fffafa;
-            --rules-border: #ffeded;
-            --rules-item-border: #f9ecec;
-            --action-card-bg: #ffffff;
-            --action-card-border: #dddddd;
-            --exception-bg: #e1f5fe;
-            --exception-header: #01579b;
-            --logic-box-bg: #ffffff;
-            --btn-bg: #2d3436;
-            --btn-text: #ffffff;
-            --btn-border: #2d3436;
-            --info-box-bg: #e8f5e9; /* لون خلفية جديد للمعلومات */
-            --info-box-border: #c8e6c9; /* لون حدود جديد للمعلومات */
+            /* ألوان الوضع الفاتح (Light Mode) */
+            --primary-green: #00873e;
+            --primary-green-light: #e8f5e9;
+            --primary-red: #d63031;
+            --primary-red-light: #ffebee;
+            --accent-blue: #0288d1;
+            --accent-blue-light: #e1f5fe;
+            --warning-orange: #f39c12;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
         }
 
         body.dark-mode {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-white: #121212;
-            --soft-gray: #1e1e1e;
-            --text-dark: #f5f6fa;
-            --border: #333333;
-            --rules-bg: #2d1515;
-            --rules-border: #4a1d1d;
-            --rules-item-border: #3d1a1a;
-            --action-card-bg: #262626;
-            --action-card-border: #3d3d3d;
-            --exception-bg: #0d2a3a;
-            --exception-header: #4fc3f7;
-            --logic-box-bg: #1e1e1e;
-            --btn-bg: #ffffff;
-            --btn-text: #121212;
-            --btn-border: #ffffff;
-            --info-box-bg: #1b2b1b; /* خلفية داكنة لصندوق المعلومات */
-            --info-box-border: #2d472d; /* حدود داكنة لصندوق المعلومات */
+            /* ألوان الوضع الليلي (Dark Mode) */
+            --primary-green: #00e676;
+            --primary-green-light: rgba(0, 230, 118, 0.12);
+            --primary-red: #ff5252;
+            --primary-red-light: rgba(255, 82, 82, 0.15);
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(2, 136, 209, 0.15);
+            --warning-orange: #ffb74d;
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* زر التبديل الجانبي المثبت */
-        .side-theme-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 9999;
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            border: 1px solid var(--btn-border);
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
         }
 
-        .side-theme-btn:hover {
-            transform: scale(1.05);
+        .btn-nav:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--primary-green-light);
+            color: var(--primary-green);
+            border-color: var(--primary-green);
         }
 
         .container {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 30px auto 80px;
+            padding: 0 20px;
         }
 
-        header {
+        /* رأس الصفحة */
+        .page-header {
             text-align: center;
-            border-bottom: 4px solid var(--efb-red);
-            padding-bottom: 15px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
             margin-bottom: 30px;
+            border-bottom: 4px solid var(--primary-green);
+            box-shadow: var(--card-shadow);
         }
 
-        header h1 {
-            color: var(--efb-red);
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary-green);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .page-header p {
             margin: 0;
-            font-size: 28px;
+            color: var(--text-muted);
+            font-size: 14px;
         }
 
-        /* قسم قواعد التسليم */
-        .rules-section {
-            background: var(--rules-bg);
-            border: 1px solid var(--rules-border);
-            border-radius: 12px;
-            padding: 20px;
+        /* 1. قسم قواعد التسليم الأساسية */
+        .rules-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary-red);
+            border-radius: 16px;
+            padding: 25px;
             margin-bottom: 30px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
 
-        .rules-header {
-            color: var(--efb-red);
-            font-weight: bold;
-            font-size: 20px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .rule-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--rules-item-border);
-        }
-
-        .rule-item:last-child { border: none; }
-
-        .icon { font-size: 20px; }
-
-        /* قسم الأكشن (الجدول) */
-        .action-section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            background: var(--efb-green);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px 8px 0 0;
+        .panel-title {
+            color: var(--primary-red);
             font-size: 18px;
             font-weight: bold;
+            margin: 0 0 18px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .rule-card {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .rule-icon {
+            font-size: 20px;
+            color: var(--primary-red);
+            flex-shrink: 0;
+        }
+
+        /* 2. قسم خيارات الأكشن */
+        .action-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .action-panel-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .action-panel-title {
+            color: var(--primary-green);
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .action-search {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-family: inherit;
+            color: var(--text-main);
+            outline: none;
+            width: 220px;
+        }
+
+        .action-search:focus {
+            border-color: var(--primary-green);
         }
 
         .action-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
-            background: var(--soft-gray);
-            padding: 20px;
-            border: 1px solid var(--border);
-            border-radius: 0 0 8px 8px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            gap: 12px;
         }
 
-        .action-card {
-            background: var(--action-card-bg);
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid var(--action-card-border);
-            text-align: center;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
+        .action-chip {
+            background: var(--item-bg);
+            border: 1.5px solid var(--border-color);
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 13.5px;
+            font-weight: bold;
+            color: var(--text-main);
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--text-dark);
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .action-card:hover {
-            border-color: var(--efb-green);
-            color: var(--efb-green);
+        .action-chip:hover {
+            border-color: var(--primary-green);
+            background: var(--primary-green-light);
+            color: var(--primary-green);
             transform: translateY(-2px);
         }
 
-        /* قسم استثناء رقم الهاتف */
-        .phone-exception {
-            background: var(--exception-bg);
-            border-right: 6px solid #0288d1;
-            padding: 20px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
+        .action-chip .copy-badge {
+            font-size: 11px;
+            opacity: 0;
+            color: var(--primary-green);
+            transition: opacity 0.2s;
+        }
+
+        .action-chip:hover .copy-badge {
+            opacity: 1;
+        }
+
+        /* 3. صندوق الاستثناء الخاص برقم الهاتف */
+        .exception-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--accent-blue);
+            border-radius: 16px;
+            padding: 25px;
             margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
         }
 
-        .exception-header {
-            color: var(--exception-header);
-            font-weight: bold;
+        .exception-title {
+            color: var(--accent-blue);
             font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        .logic-box {
-            background: var(--logic-box-bg);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 4px;
-            font-size: 12px;
             font-weight: bold;
-            margin-top: 5px;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .badge-no { background: #ffebee; color: #c62828; }
-        .badge-yes { background: #e8f5e9; color: #2e7d32; }
+        .logic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 15px;
+        }
 
-        /* صندوق توثيق النظام الجديد */
-        .system-info-box {
-            background-color: var(--info-box-bg);
-            border: 1px solid var(--info-box-border);
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-top: 40px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-dark);
+        .logic-card {
+            border-radius: 12px;
+            padding: 18px;
+            border: 1.5px solid transparent;
         }
-        .system-info-box strong {
-            color: var(--efb-green);
+
+        .logic-no {
+            background: var(--primary-red-light);
+            border-color: var(--primary-red);
         }
-        .tag {
-            background-color: rgba(0,166,81, 0.1);
-            color: var(--efb-green);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
+
+        .logic-yes {
+            background: var(--primary-green-light);
+            border-color: var(--primary-green);
+        }
+
+        .logic-header {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logic-no .logic-header { color: var(--primary-red); }
+        .logic-yes .logic-header { color: var(--primary-green); }
+
+        .logic-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: bold;
             font-size: 13px;
-            margin: 0 2px;
         }
 
+        .badge-danger { background: var(--primary-red); color: #fff; }
+        .badge-success { background: var(--primary-green); color: #fff; }
+
+        /* 4. توثيق النظام البرمجي */
+        .system-doc-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--warning-orange);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .doc-title {
+            color: var(--warning-orange);
+            font-size: 17px;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .doc-tags-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .tag-item {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tag-item b { color: var(--text-muted); }
+        .tag-item span { color: var(--primary-green); font-family: monospace; font-weight: bold; }
+
+        /* إشعار منبثق عند النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary-green);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .logic-grid { grid-template-columns: 1fr; }
+            .action-panel-header { flex-direction: column; align-items: flex-start; }
+            .action-search { width: 100%; }
+        }
     </style>
 </head>
 <body id="pageBody">
 
-    <!-- زر التبديل الجانبي -->
-    <button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-        <span>🌙</span> <span id="btnText">Dark Mode</span>
-    </button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
 
-    <div class="container">
-        <header>
-            <h1>نظام تسليم الأكواد | Code Delivery System</h1>
-        </header>
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
 
-        <!-- 1. قواعد التسليم -->
-        <div class="rules-section">
-            <div class="rules-header">⚠️ قواعد هامة جداً قبل التسليم</div>
-            <div class="rule-item"><span class="icon">📱</span> الاتصال من نفس الرقم المسجل.</div>
-            <div class="rule-item"><span class="icon">👤</span> التأكد من الاسم الرباعي الصحيح للحالة.</div>
-            <div class="rule-item"><span class="icon">👪</span> التسليم للحالة أو أقارب درجة أولى (زوج/زوجة/أبناء).</div>
-            <div class="rule-item"><span class="icon">🆔</span> في حالة العزاب: يمكن للأخ/الأخت الاستلام ببطاقة الرقم القومي.</div>
-            <div class="rule-item"><span class="icon">👶</span> الحفيد: يستلم إذا كان يتصل من رقم الحالة + ذكر الاسم الرباعي والرقم القومي.</div>
+<div class="container">
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-barcode"></i> نظام تسليم الأكواد | Code Delivery</h1>
+        <p>ضوابط وقواعد التحقق قبل تسليم كود المساعدة وخيارات الأكشن المعتمدة</p>
+    </header>
+
+    <!-- 1. قواعد هامة جداً قبل التسليم -->
+    <div class="rules-panel">
+        <div class="panel-title">
+            <i class="fa-solid fa-shield-halved"></i> ⚠️ قواعد هامة جداً للتحقق قبل تسليم الكود:
         </div>
-
-        <!-- 2. خيارات الأكشن -->
-        <div class="action-section">
-            <div class="section-title">قائمة "الأكشن" عند التسليم</div>
-            <div class="action-grid">
-                <div class="action-card">تم تسليم الكود</div>
-                <div class="action-card">اختلاف في رقم الهاتف</div>
-                <div class="action-card">لم يتم التوضيح (وفاة الحالة)</div>
-                <div class="action-card">الكود الشهري غير متاح حالياً</div>
-                <div class="action-card">الكود الموسمي غير متاح حالياً</div>
-                <div class="action-card">عدم وجود صاحب الكرتونة</div>
-                <div class="action-card">اختلاف في رقم واحد من الهاتف</div>
-                <div class="action-card">هتعاود الاتصال لاستكمال البيانات</div>
+        <div class="rules-grid">
+            <div class="rule-card">
+                <i class="fa-solid fa-mobile-screen-button rule-icon"></i>
+                <span>الاتصال يجب أن يكون من نفس رقم الهاتف المسجل بالحالة.</span>
+            </div>
+            <div class="rule-card">
+                <i class="fa-solid fa-id-card-clip rule-icon"></i>
+                <span>التأكد ومطابقة الاسم الرباعي الصحيح لصاحب الحالة.</span>
+            </div>
+            <div class="rule-card">
+                <i class="fa-solid fa-people-roof rule-icon"></i>
+                <span>التسليم للحالة نفسها أو أقارب درجة أولى (زوج / زوجة / أبناء).</span>
+            </div>
+            <div class="rule-card">
+                <i class="fa-solid fa-user-check rule-icon"></i>
+                <span>في حالة العزاب: يمكن للأخ / الأخت الاستلام ببطاقة الرقم القومي.</span>
+            </div>
+            <div class="rule-card" style="grid-column: 1 / -1;">
+                <i class="fa-solid fa-baby rule-icon"></i>
+                <span>الحفيد: يستلم فقط بشرط الاتصال من رقم الحالة + ذكر الاسم الرباعي والرقم القومي كاملاً.</span>
             </div>
         </div>
-
-        <!-- 3. استثناء رقم الهاتف -->
-        <div class="phone-exception">
-            <div class="exception-header">🔍 حالة خاصة: اختلاف "رقم واحد فقط" في الهاتف</div>
-            
-            <div class="logic-box">
-                <strong>1. مراجعة الأكشن السابق:</strong>
-                <p>إذا وجد أكشن سابق بتنبيه العميل للتوجه للجمعية لتعديل الرقم:</p>
-                <span class="status-badge badge-no">❌ لا يتم تسليم الكود</span>
-            </div>
-
-            <div class="logic-box">
-                <strong>2. في حالة عدم وجود أكشن سابق:</strong>
-                <p>يتم توضيح وتسليم الكود "كاستثناء لأول مرة فقط" مع التنبيه بضرورة التوجه للجمعية لتعديل الرقم.</p>
-                <span class="status-badge badge-yes">✅ يتم التسليم (مرة واحدة)</span>
-            </div>
-        </div>
-
-        <!-- 
-          =============================================================================
-          🔄 توثيق النظام (System Documentation) - تم إضافته في نهاية الصفحة
-          =============================================================================
-          هذا القسم يوضح الإجراءات البرمجية ومنطق النظام لهذه الصفحة:
-          
-          1. System Action (إجراء النظام): يتم تسجيل مستفيد.
-          2. Call Logs (سجلات المكالمات): يتم تصنيف المكالمة كـ Inquiry/استفسار.
-          3. Call Actions (إجراءات المكالمة): تندرج تحت Inquiry CALLs، والإجراء هو addInquiry - توجيه محتاج.
-          =============================================================================
-        -->
-        <div class="system-info-box">
-            <strong>🛠️ توثيق النظام البرمجي:</strong><br>
-            <strong>System Action:</strong> تسجيل <span class="tag">Beneficiary</span><br>
-            <strong>Call Logs:</strong> نوع المكالمة <span class="tag">Inquiry / استفسار</span><br>
-            <strong>Call Actions:</strong> تصنيف <span class="tag">Beneficiary Call</span> >> إجراء <span class="tag">addBeneficiary Call </span>
-        </div>
-        <!-- نهاية توثيق النظام -->
-
-        <footer style="text-align: center; margin-top: 40px; color: #999; font-size: 13px;">
-            نظام إدارة الأكواد - بنك الطعام المصري
-        </footer>
     </div>
 
-    <script>
-        function toggleTheme() {
-            const body = document.getElementById('pageBody');
-            const btnText = document.getElementById('btnText');
-            const btn = document.getElementById('themeBtn');
-            
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                btn.querySelector('span:first-child').innerText = "☀️";
-                btnText.innerText = "Night Mode";
-                localStorage.setItem('myTheme', 'dark');
-            } else {
-                btn.querySelector('span:first-child').innerText = "🌙";
-                btnText.innerText = "Dark Mode";
-                localStorage.setItem('myTheme', 'light');
-            }
-        }
+    <!-- 2. خيارات الأكشن عند التسليم -->
+    <div class="action-panel">
+        <div class="action-panel-header">
+            <div class="action-panel-title">
+                <i class="fa-solid fa-list-check"></i> قائمة خيارات "الأكشن" عند التسليم (اضغط للنسخ):
+            </div>
+            <input type="text" id="actionSearch" class="action-search" placeholder="🔍 تصفية الأكشن..." onkeyup="filterActions()">
+        </div>
 
-        // استعادة تفضيل الوضع عند تحميل الصفحة
-        window.onload = () => {
-            const savedTheme = localStorage.getItem('myTheme');
-            if (savedTheme === 'dark') {
-                document.getElementById('pageBody').classList.add('dark-mode');
-                document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-                document.getElementById('btnText').innerText = "Night Mode";
+        <div class="action-grid" id="actionGrid">
+            <div class="action-chip" onclick="copyAction(this)">
+                <span>تم تسليم الكود</span>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> نسخ</span>
+            </div>
+            <div class="action-chip" onclick="copyAction(this)">
+                <span>اختلاف في رقم الهاتف</span>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> نسخ</span>
+            </div>
+            <div class="action-chip" onclick="copyAction(this)">
+                <span>لم يتم التوضيح (وفاة الحالة)</span>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> نسخ</span>
+            </div>
+            <div class="action-chip" onclick="copyAction(this)">
+                <span>الكود الشهري غير متاح حالياً</span>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> نسخ</span>
+            </div>
+            <div class="action-chip" onclick="copyAction(this)">
+                <span>الكود الموسمي غير متاح حالياً</span>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> نسخ</span>
+            </div>
+            <div class="action-chip" onclick="copyAction(this)">
+                <span>عدم وجود صاحب الكرتونة</span>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> نسخ</span>
+            </div>
+            <div class="action-chip" onclick="copyAction(this)">
+                <span>اختلاف في رقم واحد من الهاتف</span>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> نسخ</span>
+            </div>
+            <div class="action-chip" onclick="copyAction(this)">
+                <span>هتعاود الاتصال لاستكمال البيانات</span>
+                <span class="copy-badge"><i class="fa-regular fa-copy"></i> نسخ</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. استثناء رقم الهاتف -->
+    <div class="exception-panel">
+        <div class="exception-title">
+            <i class="fa-solid fa-code-branch"></i> 🔍 حالة خاصة: اختلاف "رقم واحد فقط" في الهاتف
+        </div>
+        <p style="font-size: 14px; color: var(--text-muted); margin: 0 0 15px;">
+            يرجى مراجعة سجل مكالمات الحالة على السيستم بعناية قبل اتخاذ القرار:
+        </p>
+
+        <div class="logic-grid">
+            <!-- الحالة الأولى: وجود تنبيه سابق -->
+            <div class="logic-card logic-no">
+                <div class="logic-header">
+                    <i class="fa-solid fa-circle-xmark"></i> 1. في حال وجود أكشن سابق:
+                </div>
+                <p style="font-size: 13.5px; margin: 0; line-height: 1.6;">
+                    إذا وجد أكشن سابق بتنبيه العميل للتوجه للجمعية لتعديل وتحديث الرقم المسجل:
+                </p>
+                <div class="logic-badge badge-danger">❌ لا يتم تسليم الكود نهائياً</div>
+            </div>
+
+            <!-- الحالة الثانية: عدم وجود تنبيه سابق -->
+            <div class="logic-card logic-yes">
+                <div class="logic-header">
+                    <i class="fa-solid fa-circle-check"></i> 2. في حال عدم وجود أكشن سابق:
+                </div>
+                <p style="font-size: 13.5px; margin: 0; line-height: 1.6;">
+                    يتم توضيح وتسليم الكود "كاستثناء لأول مرة فقط" مع التنبيه الصارم بضرورة التوجه للجمعية لتعديل الرقم.
+                </p>
+                <div class="logic-badge badge-success">✅ يتم التسليم (استثناء لمرة واحدة فقط)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. توثيق إجراءات السيستم البرمجي -->
+    <div class="system-doc-panel">
+        <div class="doc-title">
+            <i class="fa-solid fa-gears"></i> 🛠️ توثيق النظام البرمجي (Action System):
+        </div>
+        <div class="doc-tags-wrapper">
+            <div class="tag-item">
+                <b>System Action:</b>
+                <span>تسجيل Beneficiary</span>
+            </div>
+            <div class="tag-item">
+                <b>Call Logs:</b>
+                <span>Inquiry / استفسار</span>
+            </div>
+            <div class="tag-item">
+                <b>Call Actions:</b>
+                <span>Beneficiary Call ➔ addBeneficiary Call</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- توست إشعار النسخ -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--primary-green);"></i>
+    <span id="toastMsg">تم نسخ الأكشن بنجاح!</span>
+</div>
+
+<script>
+    // وظيفة نسخ نص الأكشن
+    function copyAction(element) {
+        const actionText = element.querySelector('span:first-child').innerText.trim();
+        navigator.clipboard.writeText(actionText).then(() => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = `تم نسخ: "${actionText}"`;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        });
+    }
+
+    // تصفية الأكشن بالبحث السريع
+    function filterActions() {
+        const query = document.getElementById('actionSearch').value.toLowerCase().trim();
+        const chips = document.querySelectorAll('.action-chip');
+
+        chips.forEach(chip => {
+            const text = chip.querySelector('span:first-child').innerText.toLowerCase();
+            if (text.includes(query)) {
+                chip.style.display = 'flex';
+            } else {
+                chip.style.display = 'none';
             }
+        });
+    }
+
+    // إدارة الوضع الليلي/النهاري
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
+            localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
         }
-    </script>
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
+        }
+    });
+</script>
 
 </body>
 </html>
