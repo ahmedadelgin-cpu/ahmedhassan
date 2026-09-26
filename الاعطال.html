@@ -1,268 +1,606 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel="stylesheet" href="styles/mystyle.css">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <title>مركز تقارير الأعطال الفنية | بنك الطعام المصري</title>
+
+    <!-- أيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* المتغيرات للوضع المضيء (الألوان الأصلية) */
         :root {
-            --efb-red: #d63031;
-            --efb-green: #00a651;
+            /* درجات الألوان للوضع الفاتح */
+            --primary-red: #d63031;
+            --primary-red-light: #ffebee;
+            --efb-green: #00873e;
+            --efb-green-light: #e8f5e9;
             --warning-orange: #f39c12;
-            --bg-white: #ffffff;
-            --text-dark: #2d3436;
-            --border-color: #eee;
-            --card-bg: #ffffff;
-            --icon-bg: #fff5f5;
-            --response-bg: #f8f9fa;
-            --script-color: #555;
-            --btn-bg: #2d3436;
-            --btn-text: #ffffff;
+            --warning-bg: #fff8e1;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --step-bg: #f8fafc;
         }
 
-        /* المتغيرات للوضع الداكن (الاحتفاظ بالألوان الأصلية مع خلفيات داكنة) */
         body.dark-mode {
-            --efb-red: #d63031;       /* حفظ اللون الأحمر الأصلية */
-            --efb-green: #00a651;     /* حفظ اللون الأخضر الأصلية */
-            --warning-orange: #f39c12;/* حفظ اللون البرتقالي الأصلي */
-            --bg-white: #121212;
-            --text-dark: #f5f6fa;
-            --border-color: #2d3748;
-            --card-bg: #1e1e1e;
-            --icon-bg: #2d1f1f;
-            --response-bg: #1e1e1e;
-            --script-color: #dcdde1;
-            --btn-bg: #ffffff;
-            --btn-text: #121212;
+            /* درجات الألوان للوضع الليلي */
+            --primary-red: #ff5252;
+            --primary-red-light: rgba(255, 82, 82, 0.15);
+            --efb-green: #00e676;
+            --efb-green-light: rgba(0, 230, 118, 0.15);
+            --warning-orange: #ffb74d;
+            --warning-bg: rgba(255, 183, 77, 0.12);
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --step-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 40px 20px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 0;
+            line-height: 1.6;
         }
 
-        /* زر التبديل الجانبي المثبت */
-        .side-theme-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 9999;
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            border: 1px solid var(--border-color);
-            padding: 10px 18px;
-            border-radius: 30px;
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             cursor: pointer;
+            box-shadow: var(--card-shadow);
+        }
+
+        .btn-nav:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--primary-red-light);
+            color: var(--primary-red);
+            border-color: var(--primary-red);
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 900px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* شريط التنبيه الحي عن حالة النظام */
+        .status-alert-bar {
+            background: var(--primary-red-light);
+            border: 2px solid var(--primary-red);
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .status-alert-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--primary-red);
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(214, 48, 49, 0.7);
+            animation: pulse-red 1.5s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(214, 48, 49, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0); }
+        }
+
+        .status-tag {
+            background: var(--primary-red);
+            color: #ffffff;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-weight: bold;
+        }
+
+        /* رأس الصفحة */
+        .page-header {
+            text-align: center;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            border-bottom: 4px solid var(--primary-red);
+            box-shadow: var(--card-shadow);
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary-red);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: var(--text-muted);
             font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+        }
+
+        /* بطاقة تفاصيل العطل الفني */
+        .issue-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--warning-orange);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .issue-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--warning-bg);
+            color: var(--warning-orange);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+
+        .issue-info h3 {
+            margin: 0 0 6px;
+            font-size: 18px;
+            color: var(--text-main);
+        }
+
+        .issue-info p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .badge-live {
+            background: var(--warning-bg);
+            color: var(--warning-orange);
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        /* صندوق نص الرد الموحد للعملاء */
+        .response-container {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+
+        .response-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .response-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-red);
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .side-theme-btn:hover {
-            transform: scale(1.05);
+        .btn-copy {
+            background: var(--primary-red-light);
+            color: var(--primary-red);
+            border: 1px solid var(--primary-red);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12.5px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        .btn-copy:hover {
+            background: var(--primary-red);
+            color: #ffffff;
+            transform: scale(1.03);
         }
 
-        /* رأس الصفحة */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--efb-red);
-            padding-bottom: 20px;
-        }
-
-        header h1 {
-            color: var(--efb-red);
-            margin: 0;
-            font-size: 30px;
-            letter-spacing: 1px;
-        }
-
-        /* نظام البطاقات */
-        .issue-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+        .script-quote {
+            background: var(--step-bg);
             border-radius: 12px;
             padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: 0.3s;
-        }
-
-        .issue-card:hover {
-            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
-            transform: translateY(-3px);
-        }
-
-        .status-icon {
-            font-size: 30px;
-            min-width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--icon-bg);
-            border-radius: 50%;
-        }
-
-        .issue-details {
-            flex-grow: 1;
-        }
-
-        .issue-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--text-dark);
-            margin-bottom: 5px;
-        }
-
-        .action-taken {
-            font-size: 14px;
-            color: var(--efb-green);
-            font-weight: 500;
-        }
-
-        /* صندوق نص الرد الموحد */
-        .response-box {
-            background: var(--response-bg);
-            border-right: 5px solid var(--warning-orange);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            border-left: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 10px;
-            margin-top: 40px;
-        }
-
-        .response-box h3 {
-            margin: 0 0 15px 0;
-            color: var(--warning-orange);
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .script-text {
             font-size: 16px;
-            line-height: 1.8;
-            color: var(--script-color);
+            line-height: 1.9;
+            color: var(--text-main);
+            border: 1px dashed var(--border-color);
+            position: relative;
             font-style: italic;
         }
 
-        .live-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background-color: var(--efb-red);
+        .script-quote::before {
+            content: "“";
+            font-size: 45px;
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            color: var(--primary-red);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        /* صندوق إجراءات السيستم */
+        .system-action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--efb-green);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .system-header {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--efb-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .action-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .action-step-card {
+            background: var(--step-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            margin-left: 8px;
-            animation: pulse 1.5s infinite;
+            background: var(--efb-green);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            flex-shrink: 0;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(214, 48, 49, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(214, 48, 49, 0); }
+        .step-details b {
+            display: block;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
         }
 
+        .step-details span {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .path-breadcrumb {
+            background: var(--step-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            font-size: 13.5px;
+            direction: ltr; /* اتجاه المسار البرمجي */
+        }
+
+        .path-item {
+            background: var(--bg-card);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        .path-item.highlight {
+            background: var(--efb-green);
+            color: #ffffff;
+            border-color: var(--efb-green);
+        }
+
+        .path-arrow {
+            color: var(--efb-green);
+            font-weight: bold;
+        }
+
+        /* رسالة منبثقة عند النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary-red);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .status-alert-bar { flex-direction: column; align-items: flex-start; }
+            .issue-card { flex-direction: column; align-items: flex-start; }
+        }
     </style>
 </head>
 <body id="pageBody">
 
-<!-- زر التبديل الجانبي -->
-<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-    <span>🌙</span> <span id="btnText">Dark Mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
+
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
 
 <div class="container">
-    <header>
-        <h1><span class="live-indicator"></span> مـركـز تـقـارير الأعـطـال</h1>
+
+    <!-- شريط تنبيه الحالة المباشرة -->
+    <div class="status-alert-bar">
+        <div class="status-alert-info">
+            <span class="pulse-dot"></span>
+            <span>حالة النظام: جاري تنفيذ تحديثات في قاعدة البيانات (Live Maintenance)</span>
+        </div>
+        <span class="status-tag">عطل نشط حالياً</span>
+    </div>
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-triangle-exclamation"></i> مـركـز تـقـارير الأعـطـال والـصـيـانـة</h1>
+        <p>دليل التعامل مع الأعطال التقنية الطارئة ونصوص الرد الموحدة على العملاء</p>
     </header>
 
-    <!-- عطل 2 -->
+    <!-- بطاقة العطل الفني الحالي -->
     <div class="issue-card">
-        <div class="status-icon">🗄️</div>
-        <div class="issue-details">
-            <div class="issue-title">تحديث قاعدة البيانات (Database Update)</div>
-            <div class="action-taken">يوجد تحديث فى قاعدة البيانات </div>
+        <div class="issue-icon">
+            <i class="fa-solid fa-database"></i>
+        </div>
+        <div class="issue-info">
+            <h3>تحديث قاعدة البيانات (Database Maintenance & Update)</h3>
+            <p>يوجد حالياً تحديث  لقاعدة البيانات الخاصة بالبورتال  وحل مشاكل الاتصال.</p>
+            <span class="badge-live"><i class="fa-solid fa-clock"></i> التأثير: صعوبة مؤقتة في سحب بعض البيانات بالبورتال</span>
         </div>
     </div>
 
-    <!-- نص الرد للعميل -->
-    <div class="response-box">
-        <h3>💬 نص الرد الموحد للعملاء:</h3>
-        <div class="script-text">
-            "نعتذر لحضرتك، تم توضيح أنه يوجد حالياً تحديثات في قاعدة البيانات الخاصة بالبورتال، وجاري العمل عليها الآن.. سيتم الرد والتواصل مع حضرتك على مدار اليوم بمجرد انتهاء التحديث."
+    <!-- صندوق نص الرد الموحد للعملاء -->
+    <div class="response-container">
+        <div class="response-header">
+            <div class="response-title">
+                <i class="fa-solid fa-headset"></i> نص الرد الموحد للعملاء عند الاستفسار:
+            </div>
+            <button class="btn-copy" onclick="copyResponseScript()">
+                <i class="fa-regular fa-copy"></i>
+                <span id="copyBtnText">نسخ نص الرد</span>
+            </button>
+        </div>
+
+        <div class="script-quote" id="responseScript">
+            "نعتذر لحضرتك جداً، يتم توضيح يوجد ً تحديثات في قاعدة البيانات  جاري العمل عليها ."
         </div>
     </div>
 
+    <!-- إجراءات السيستم المطلوب تسجيلها (Action System) -->
+    <div class="system-action-box">
+        <div class="system-header">
+            <i class="fa-solid fa-gears"></i> إجراءات النظام المطلوبة من الموظف (Action System)
+        </div>
 
-    <!-- 🔄 System Action -->
-    <div class="response-box">
-        <h3> 🔄 System Action</h3>
-        <div class="script-text">
-       <p>يتم التسجل Beneficiary  </p>
+        <div class="action-steps-grid">
+            <div class="action-step-card">
+                <div class="step-num">1</div>
+                <div class="step-details">
+                    <b>نوع تسجيل الحالة:</b>
+                    <span>تسجيل Beneficiary</span>
+                </div>
+            </div>
 
-       <p>CAll Logs بتكون Inquiry/استفسار </p>
+            <div class="action-step-card">
+                <div class="step-num">2</div>
+                <div class="step-details">
+                    <b>تصنيف Call Logs:</b>
+                    <span>Inquiry / استفسار</span>
+                </div>
+            </div>
 
-       <p>  توجية محتاج  ---- CaLL Actions --- Inquiry CALLs --- addInquiry   </p>
-            
+            <div class="action-step-card">
+                <div class="step-num">3</div>
+                <div class="step-details">
+                    <b>نوع الإجراء المنفذ:</b>
+                    <span>توجيه محتاج</span>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size: 13px; font-weight: bold; margin-bottom: 8px; color: var(--text-muted);">
+            المسار البرمجي داخل السيستم (Breadcrumb Path):
+        </p>
+        <div class="path-breadcrumb">
+            <span class="path-item">CaLL Actions</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-item">Inquiry CALLs</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-item highlight">addInquiry</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-item highlight" style="direction: rtl;">توجيه محتاج</span>
         </div>
     </div>
 
+</div>
 
-
-    
+<!-- إشعار النسخ (Toast) -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--efb-green);"></i>
+    <span>تم نسخ نص الرد بنجاح إلى الحافظة!</span>
 </div>
 
 <script>
+    // وظيفة نسخ نص الرد الموحد
+    function copyResponseScript() {
+        const text = document.getElementById('responseScript').innerText.replace(/[“”"]/g, '').trim();
+        navigator.clipboard.writeText(text).then(() => {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        });
+    }
+
+    // تبديل وحفظ الوضع الليلي/النهاري
     function toggleTheme() {
         const body = document.getElementById('pageBody');
-        const btnText = document.getElementById('btnText');
-        const btn = document.getElementById('themeBtn');
-        
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
         body.classList.toggle('dark-mode');
-        
-        if (body.classList.contains('dark-mode')) {
-            btn.querySelector('span:first-child').innerText = "☀️";
-            btnText.innerText = "Night Mode";
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
             localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
         } else {
-            btn.querySelector('span:first-child').innerText = "🌙";
-            btnText.innerText = "Dark Mode";
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
             localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
         }
     }
 
-    // استعادة تفضيل الوضع عند تحميل الصفحة
-    window.onload = () => {
-        const savedTheme = localStorage.getItem('myTheme');
+    // استعادة تفضيل الوضع المختار عند تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.getElementById('pageBody').classList.add('dark-mode');
-            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-            document.getElementById('btnText').innerText = "Night Mode";
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
-    }
+    });
 </script>
 
 </body>
