@@ -1,291 +1,621 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <title>الحالات الموسمية | بنك الطعام المصري</title>
+
+    <!-- أيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-white: #ffffff;
-            --soft-gray: #f8f9fa;
-            --text-dark: #2d3436;
-            --card-bg: #ffffff;
-            --card-border: #eee;
-            --header-bg: #fff5f5;
-            --condition-text: #444444;
-            --btn-bg: #2d3436;
-            --btn-text: #ffffff;
-            --btn-border: #2d3436;
-            --path-bg: #f1f2f6;
+            /* ألوان الوضع النهاري (Light Mode) */
+            --primary: #00873e;
+            --primary-light: #e8f5e9;
+            --primary-red: #d63031;
+            --primary-red-light: #ffebee;
+            --accent-blue: #0984e3;
+            --accent-blue-light: #e1f5fe;
+            --warning-orange: #f39c12;
+            --warning-orange-light: #fff8e1;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
         }
 
         body.dark-mode {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-white: #121212;
-            --soft-gray: #1e1e1e;
-            --text-dark: #f5f6fa;
-            --card-bg: #1e1e1e;
-            --card-border: #333333;
-            --header-bg: #2d1515;
-            --condition-text: #dcdde1;
-            --btn-bg: #ffffff;
-            --btn-text: #121212;
-            --btn-border: #ffffff;
-            --path-bg: #2f3542;
+            /* ألوان الوضع الليلي (Dark Mode) */
+            --primary: #00e676;
+            --primary-light: rgba(0, 230, 118, 0.12);
+            --primary-red: #ff5252;
+            --primary-red-light: rgba(255, 82, 82, 0.15);
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --warning-orange: #ffb74d;
+            --warning-orange-light: rgba(255, 183, 77, 0.15);
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 0;
+            line-height: 1.6;
         }
 
-        .side-theme-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 9999;
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            border: 1px solid var(--btn-border);
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
         }
 
-        .side-theme-btn:hover { transform: scale(1.05); }
-
-        .info-card {
-            max-width: 700px;
-            width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
-            border-top: 6px solid var(--efb-red);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+        .btn-nav:hover {
+            border-color: var(--warning-orange);
+            color: var(--warning-orange);
+            transform: translateY(-2px);
         }
 
-        .card-header {
+        .btn-theme {
+            background: var(--warning-orange-light);
+            color: var(--warning-orange);
+            border-color: var(--warning-orange);
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* رأس الصفحة */
+        .page-header {
             text-align: center;
+            background: var(--bg-card);
+            border-radius: 16px;
             padding: 30px 20px;
-            background: var(--header-bg);
-            transition: background-color 0.3s ease;
+            margin-bottom: 25px;
+            border-bottom: 4px solid var(--warning-orange);
+            box-shadow: var(--card-shadow);
         }
 
-        .card-header h1 {
-            color: var(--efb-red);
-            margin: 0;
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--warning-orange);
             font-size: 26px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
         }
 
-        .icon-large { font-size: 35px; }
+        .page-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14.5px;
+        }
 
-        .card-body { padding: 30px; }
+        /* شبكة مقارنة الحالات الموسمية */
+        .scenarios-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 30px;
+        }
 
-        .condition-box {
+        .condition-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            transition: all 0.25s;
+        }
+
+        .condition-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .card-more-year {
+            border-top: 5px solid var(--primary);
+        }
+
+        .card-less-year {
+            border-top: 5px solid var(--primary-red);
+        }
+
+        .condition-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            background: var(--soft-gray);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border-right: 5px solid var(--efb-green);
-            transition: background-color 0.3s ease;
+            gap: 12px;
         }
 
-        .condition-text { font-size: 18px; font-weight: 500; color: var(--condition-text); }
-
-        .action-box {
-            background: var(--efb-green);
-            color: white;
-            text-align: center;
-            padding: 20px;
+        .condition-icon {
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
-            margin-top: 20px;
-            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .icon-green { background: var(--primary-light); color: var(--primary); }
+        .icon-red { background: var(--primary-red-light); color: var(--primary-red); }
+
+        .condition-title h3 {
+            margin: 0 0 4px;
+            font-size: 17px;
+            color: var(--text-main);
+        }
+
+        .condition-title span {
+            font-size: 12px;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 166, 81, 0.2);
+            color: var(--text-muted);
         }
 
-        /* --- تنسيق قسم System Action الجديد --- */
-        .system-action-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px dashed var(--card-border);
+        .condition-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin: 0;
         }
 
-        .system-title {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: var(--text-dark);
+        /* صندوق الأكشن الناتج */
+        .result-action-box {
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 13.5px;
+        }
+
+        .action-green {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .action-red {
+            background: var(--primary-red-light);
+            color: var(--primary-red);
+            border: 1px solid var(--primary-red);
+        }
+
+        .btn-copy-action {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 11.5px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-copy-action:hover {
+            border-color: currentColor;
+            transform: scale(1.05);
+        }
+
+        /* صندوق إجراءات السيستم البرمجي */
+        .system-action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--warning-orange);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .system-header {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--warning-orange);
             display: flex;
             align-items: center;
             gap: 10px;
-            font-weight: bold;
+            margin-bottom: 18px;
         }
 
-        .system-row { margin-bottom: 10px; font-size: 16px; }
-        .highlight-text { color: var(--efb-red); font-weight: bold; }
+        .system-facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
 
-        .path-container {
-            background: var(--path-bg);
-            padding: 15px;
+        .fact-card {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            margin-top: 15px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fact-card i {
+            font-size: 22px;
+            color: var(--warning-orange);
+        }
+
+        .fact-info b {
+            display: block;
+            font-size: 12.5px;
+            color: var(--text-muted);
+        }
+
+        .fact-info span {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .paths-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .path-row {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .path-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .path-breadcrumb {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 8px;
-            font-size: 14px;
-            direction: ltr; /* لجعل المسار البرمجي من اليسار لليمين */
+            font-size: 13px;
+            direction: ltr; /* اتجاه المسار البرمجي */
         }
 
         .path-node {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            background: var(--bg-card);
             padding: 4px 10px;
             border-radius: 6px;
+            border: 1px solid var(--border-color);
             font-weight: 600;
-            color: var(--text-dark);
         }
 
-        .path-arrow { color: var(--efb-green); font-weight: bold; }
+        .path-node.highlight {
+            background: var(--warning-orange);
+            color: #ffffff;
+            border-color: var(--warning-orange);
+        }
 
-        .path-final {
-            direction: rtl;
-            background: var(--efb-red);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 6px;
+        .path-arrow {
+            color: var(--warning-orange);
             font-weight: bold;
         }
 
+        /* توست النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--warning-orange);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .scenarios-container { grid-template-columns: 1fr; }
+            .path-row { flex-direction: column; align-items: flex-start; }
+        }
     </style>
 </head>
 <body id="pageBody">
 
-<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-    <span>🌙</span> <span id="btnText">Dark Mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
 
-<center>
-<div class="info-card">
-    <div class="card-header">
-        <h1>
-            <span class="icon-large">😊</span>
-            مهم جداً للحالات الموسمية
-        </h1>
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-calendar-days"></i> تعليمات وضوابط الحالات الموسمية</h1>
+        <p>الضوابط الرسمية للتعامل مع انقطاع المساعدات الموسمية (قاعدة الـ 12 شهراً ومسارات السيستم)</p>
+    </header>
+
+    <!-- مقارنة الحالات الموسمية -->
+    <div class="scenarios-container">
+
+        <!-- الحالة الأولى: أكثر من سنة -->
+        <div class="condition-card card-more-year">
+            <div>
+                <div class="condition-header">
+                    <div class="condition-icon icon-green">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <div class="condition-title">
+                        <h3>انقطاع أكثر من سنة</h3>
+                        <span>مرور 12 شهراً فأكثر</span>
+                    </div>
+                </div>
+                <p class="condition-desc" style="margin-top:14px;">
+                    الحالات المسجلة التي <b>لم تستلم أي مساعدات أو كراتين منذ أكثر من سنة (12 شهر أو أكثر)</b>.
+                </p>
+            </div>
+
+            <div class="result-action-box action-green">
+                <span>✅ الإجراء: تقديم طلب مساعدة جديد</span>
+                <button class="btn-copy-action" onclick="copyActionText('تقديم طلب مساعدة جديد (انقطاع أكثر من سنة)')">
+                    <i class="fa-regular fa-copy"></i> نسخ
+                </button>
+            </div>
+        </div>
+
+        <!-- الحالة الثانية: أقل من سنة (الحالات أ) -->
+        <div class="condition-card card-less-year">
+            <div>
+                <div class="condition-header">
+                    <div class="condition-icon icon-red">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <div class="condition-title">
+                        <h3>انقطاع أقل من سنة (أ)</h3>
+                        <span>فترة انقطاع أقل من 12 شهر</span>
+                    </div>
+                </div>
+                <p class="condition-desc" style="margin-top:14px;">
+                    الحالات الموسمية تصنيف <b>( أ )</b> في حالة عدم الاستلام خلال فترة <b>أقل من سنة</b>.
+                </p>
+            </div>
+
+            <div class="result-action-box action-red">
+                <span>📦 الإجراء: تسجيل شكوى انقطاع الخدمة</span>
+                <button class="btn-copy-action" onclick="copyActionText('تسجيل شكوى انقطاع كرتونة (موسمي أ - أقل من سنة)')">
+                    <i class="fa-regular fa-copy"></i> نسخ
+                </button>
+            </div>
+        </div>
+
     </div>
 
-    <div class="card-body">
-        <div class="condition-box">
-            <span class="icon-large">⏳</span>
-            <div class="condition-text">الحالات التي لم تستلم أي مساعدات منذ أكثر من سنة.</div>
+    <!-- صندوق إجراءات السيستم البرمجي -->
+    <div class="system-action-box">
+        <div class="system-header">
+            <i class="fa-solid fa-gears"></i> إجراءات تسجيل مكالمات الحالات الموسمية بالنظام (Action System):
         </div>
 
-        <div class="condition-box">
-            <span class="icon-large">📦</span>
-            <div class="condition-text">الحالات الموسمية ( أ ) في حالة عدم الاستلام خلال فترة أقل من سنة يتم تسجيل شكوى انقطاع كرتونة.</div>
+        <div class="system-facts-grid">
+            <div class="fact-card">
+                <i class="fa-solid fa-user-check"></i>
+                <div class="fact-info">
+                    <b>نوع التسجيل:</b>
+                    <span style="color:var(--primary);">Beneficiary</span>
+                </div>
+            </div>
+
+            <div class="fact-card">
+                <i class="fa-solid fa-phone-volume"></i>
+                <div class="fact-info">
+                    <b>تصنيف Call Logs:</b>
+                    <span style="color:var(--primary);">Inquiry / استفسار</span>
+                </div>
+            </div>
         </div>
 
-        <div class="action-box">
-            ✅ الإجراء: سيتم تقديم طلب مساعدة جديد 
-        </div>
+        <p style="font-size: 13px; font-weight: bold; margin-bottom: 12px; color: var(--text-muted);">
+            مسارات الإجراءات المتاحة داخل السيستم (Breadcrumb Paths):
+        </p>
 
-        <!-- إضافة قسم System Action -->
-        <div class="system-action-section">
-            <div class="system-title">
-                <span style="font-size: 22px;">🔄</span> Action  System 
-            </div>
-            
-            <div class="system-row">
-                <span>يتم التسجيل  : </span>
-                <span class="highlight-text">Beneficiary</span>
-            </div>
-            
-            <div class="system-row">
-                <span>الـ <b>CALL Logs</b> تكون : </span>
-                <span class="highlight-text">Inquiry / استفسار</span>
+        <div class="paths-wrapper">
+            <!-- مسار 1 -->
+            <div class="path-row">
+                <div class="path-title">
+                    <i class="fa-solid fa-arrow-right-arrow-left" style="color:var(--warning-orange);"></i>
+                    <span>1. مسار توجيه محتاج:</span>
+                </div>
+                <div class="path-breadcrumb">
+                    <span class="path-node">CaLL Actions</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node">Inquiry CALLs</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node highlight">add Inquiry</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node highlight" style="direction: rtl;">توجيه محتاج</span>
+                </div>
             </div>
 
-            <div class="path-container">
-                <span class="path-node">CaLL Actions</span>
-                <span class="path-arrow">➔</span>
-                <span class="path-node">Inquiry CALLs</span>
-                <span class="path-arrow">➔</span>
-                <span class="path-node">add Inquiry</span>
-                <span class="path-final">توجيه محتاج</span>
+            <!-- مسار 2 -->
+            <div class="path-row">
+                <div class="path-title">
+                    <i class="fa-solid fa-truck-moving" style="color:var(--accent-blue);"></i>
+                    <span>2. مسار نقل مساعدة:</span>
+                </div>
+                <div class="path-breadcrumb">
+                    <span class="path-node">CaLL Actions</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node">Inquiry CALLs</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node highlight">add Inquiry</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node highlight" style="direction: rtl;">نقل مساعدة</span>
+                </div>
             </div>
-         <div class="path-container">
-                <span class="path-node">CaLL Actions</span>
-                <span class="path-arrow">➔</span>
-                <span class="path-node">Inquiry CALLs</span>
-                <span class="path-arrow">➔</span>
-                <span class="path-node">add Inquiry</span>
-                <span class="path-final">نقل مساعدة</span>
-            </div>
-<div class="path-container">
-                <span class="path-node">CaLL Actions</span>
-                <span class="path-arrow">➔</span>
-                <span class="path-node">Inquiry CALLs</span>
-                <span class="path-arrow">➔</span>
-                <span class="path-node">add Inquiry</span>
-                <span class="path-final">تقديم طلب مستحق </span>
+
+            <!-- مسار 3 -->
+            <div class="path-row">
+                <div class="path-title">
+                    <i class="fa-solid fa-file-circle-plus" style="color:var(--primary);"></i>
+                    <span>3. مسار تقديم طلب جديد:</span>
+                </div>
+                <div class="path-breadcrumb">
+                    <span class="path-node">CaLL Actions</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node">Inquiry CALLs</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node highlight">add Inquiry</span>
+                    <span class="path-arrow">➔</span>
+                    <span class="path-node highlight" style="direction: rtl;">تقديم طلب مستحق</span>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
-</center>
+
+<!-- توست النسخ -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--warning-orange);"></i>
+    <span id="toastMsg">تم النسخ بنجاح!</span>
+</div>
 
 <script>
+    // وظيفة نسخ نص الإجراء
+    function copyActionText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = `تم نسخ: ${text}`;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        });
+    }
+
+    // إدارة الوضع الليلي/النهاري
     function toggleTheme() {
         const body = document.getElementById('pageBody');
-        const btnText = document.getElementById('btnText');
-        const btn = document.getElementById('themeBtn');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
         body.classList.toggle('dark-mode');
-        if (body.classList.contains('dark-mode')) {
-            btn.querySelector('span:first-child').innerText = "☀️";
-            btnText.innerText = "Night Mode";
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
             localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
         } else {
-            btn.querySelector('span:first-child').innerText = "🌙";
-            btnText.innerText = "Dark Mode";
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
             localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
         }
     }
 
-    window.onload = () => {
-        const savedTheme = localStorage.getItem('myTheme');
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.getElementById('pageBody').classList.add('dark-mode');
-            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-            document.getElementById('btnText').innerText = "Night Mode";
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
-    }
+    });
 </script>
 
 </body>
