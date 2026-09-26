@@ -1,332 +1,703 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>help Needy customer</title>
+    <title>تقديم الجمعيات والمؤسسات | بنك الطعام المصري</title>
+
+    <!-- أيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-main: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-dark: #2d3436;
-            --text-doc: #444444;
-            --border-color: #eee;
-            --hover-bg: #f9f9f9;
-            --footer-color: #777;
-            --btn-bg: #2d3436;
-            --btn-text: #ffffff;
-            --path-bg: #f0f2f1;
+            /* ألوان الوضع النهاري (Light Mode) */
+            --primary: #00873e;
+            --primary-light: #e8f5e9;
+            --primary-red: #d63031;
+            --primary-red-light: #ffebee;
+            --accent-blue: #0984e3;
+            --accent-blue-light: #e1f5fe;
+            --whatsapp-green: #25D366;
+            --whatsapp-light: #e8f9ed;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
         }
 
         body.dark-mode {
-            --efb-green: #00a651;
-            --efb-red: #d63031;
-            --bg-main: #121212;
-            --card-bg: #1e1e1e;
-            --text-dark: #f5f6fa;
-            --text-doc: #dcdde1;
-            --border-color: #2d3748;
-            --hover-bg: #262626;
-            --footer-color: #aaaaaa;
-            --btn-bg: #ffffff;
-            --btn-text: #121212;
-            --path-bg: #2d3436;
+            /* ألوان الوضع الليلي (Dark Mode) */
+            --primary: #00e676;
+            --primary-light: rgba(0, 230, 118, 0.12);
+            --primary-red: #ff5252;
+            --primary-red-light: rgba(255, 82, 82, 0.15);
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --whatsapp-green: #25D366;
+            --whatsapp-light: rgba(37, 211, 102, 0.15);
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-dark);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.8;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
         }
 
-        /* زر التبديل الجانبي المثبت */
-        .side-theme-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 9999;
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            border: 1px solid var(--border-color);
-            padding: 10px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
         }
 
-        .side-theme-btn:hover {
-            transform: scale(1.05);
+        .btn-nav:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
         }
 
         .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
+            max-width: 1000px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
         }
 
-        header {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
+        /* رأس الصفحة */
+        .page-header {
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-            border-top: 5px solid var(--efb-green);
-            transition: background-color 0.3s ease;
-        }
-
-        header h1 { color: var(--efb-red); margin: 0; font-size: 28px; }
-        header p { color: var(--text-dark); font-size: 18px; font-weight: bold; margin-top: 10px; }
-
-        .reg-link {
-            display: inline-block;
-            background: var(--efb-red);
-            color: white;
-            text-decoration: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 15px;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(214, 48, 49, 0.3);
-        }
-
-        .reg-link:hover { transform: translateY(-3px); background: #b32d2d; }
-
-        .docs-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: background-color 0.3s ease;
-            margin-bottom: 30px;
-        }
-
-        .docs-card h2 {
-            color: var(--efb-green);
-            border-bottom: 2px solid var(--efb-green);
-            padding-bottom: 10px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 35px 25px;
             margin-bottom: 25px;
-            font-size: 22px;
+            border-bottom: 4px solid var(--primary);
+            box-shadow: var(--card-shadow);
         }
 
-        .doc-item {
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .page-header p {
+            margin: 0 0 20px;
+            color: var(--text-muted);
+            font-size: 14.5px;
+        }
+
+        .portal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-red);
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3);
+            transition: all 0.25s;
+        }
+
+        .portal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(214, 48, 49, 0.4);
+            background: #b32526;
+        }
+
+        /* بطاقة رقم الواتساب */
+        .whatsapp-card {
+            background: var(--whatsapp-light);
+            border: 2px solid var(--whatsapp-green);
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .whatsapp-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .whatsapp-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--whatsapp-green);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .whatsapp-text b {
+            display: block;
+            font-size: 15px;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .whatsapp-text span {
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        .whatsapp-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-wa-copy {
+            background: var(--bg-card);
+            border: 1px solid var(--whatsapp-green);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-wa-copy:hover {
+            background: var(--whatsapp-green);
+            color: #fff;
+        }
+
+        /* حاوية قائمة المستندات */
+        .docs-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .docs-panel-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1.5px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .docs-panel-title {
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .btn-copy-all {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-copy-all:hover {
+            background: var(--primary);
+            color: #ffffff;
+            transform: scale(1.03);
+        }
+
+        .docs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .doc-item-card {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px 18px;
             display: flex;
             align-items: flex-start;
             gap: 15px;
-            padding: 15px;
-            border-bottom: 1px solid var(--border-color);
+            transition: all 0.2s;
         }
 
-        .doc-item:last-child { border-bottom: none; }
-        .doc-number {
-            background: var(--efb-green);
-            color: white;
-            min-width: 30px;
-            height: 30px;
+        .doc-item-card:hover {
+            border-color: var(--primary);
+            background: var(--bg-card);
+            transform: translateX(-3px);
+        }
+
+        .doc-num {
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
+            background: var(--primary);
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
-        /* --- تنسيق System Action الجديد --- */
-        .system-action-card {
-            background: var(--card-bg);
+        .doc-content {
+            flex-grow: 1;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        .doc-tag {
+            display: inline-block;
+            background: var(--primary-red-light);
+            color: var(--primary-red);
+            font-size: 11.5px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-right: 8px;
+        }
+
+        /* صندوق إجراءات السيستم */
+        .system-action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary-red);
+            border-radius: 16px;
             padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-right: 6px solid var(--efb-green);
-            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
         }
 
-        .system-action-card h3 {
-            margin: 0 0 20px 0;
-            color: var(--efb-green);
+        .system-header {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--primary-red);
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 20px;
+            margin-bottom: 18px;
         }
 
-        .action-info-box {
+        .system-facts-grid {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
 
-        .info-row {
+        .fact-card {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 16px;
+            gap: 12px;
         }
 
-        .info-row strong { color: var(--efb-green); min-width: 100px; }
+        .fact-card i {
+            font-size: 22px;
+            color: var(--primary-red);
+        }
 
-        .breadcrumb-path {
+        .fact-info b {
+            display: block;
+            font-size: 12.5px;
+            color: var(--text-muted);
+        }
+
+        .fact-info span {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .path-breadcrumb {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            background: var(--path-bg);
-            padding: 15px;
-            border-radius: 10px;
-            gap: 10px;
-            font-family: 'Segoe UI', Tahoma;
-            direction: ltr; /* لجعل مسار السيستم يظهر بشكل صحيح */
+            gap: 8px;
+            font-size: 13.5px;
+            direction: ltr; /* اتجاه المسار البرمجي */
         }
 
-        .step-item {
-            background: var(--card-bg);
-            padding: 5px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        .path-node {
+            background: var(--bg-card);
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-weight: 600;
         }
 
-        .step-item.highlight {
-            background: var(--efb-green);
-            color: white;
+        .path-node.highlight {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
         }
 
-        .separator { color: var(--efb-green); font-weight: bold; }
-
-        /* --- التذييل --- */
-        .footer-info {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 15px;
-            color: var(--footer-color);
-        }
-
-        .whatsapp-note {
-            background: #25D366;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-top: 10px;
+        .path-arrow {
+            color: var(--primary);
             font-weight: bold;
         }
 
+        /* توست النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .whatsapp-card { flex-direction: column; align-items: flex-start; }
+            .docs-panel-header { flex-direction: column; align-items: flex-start; }
+            .btn-copy-all { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 <body id="pageBody">
 
-<!-- زر التبديل الجانبي -->
-<button class="side-theme-btn" id="themeBtn" onclick="toggleTheme()">
-    <span>🌙</span> <span id="btnText">Dark Mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
+
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
 
 <div class="container">
-    
+
     <!-- رأس الصفحة -->
-    <header>
-        <h1>تقديم الجمعيات والمؤسسات</h1>
-        <p>الأوراق المطلوبة للاشتراك في برامج بنك الطعام</p>
-       <a href="https://portal.efb.eg/" target="_blank" class="reg-link">رابط التسجيل: https://portal.efb.eg/</a>
+    <header class="page-header">
+        <h1><i class="fa-solid fa-building-ngo"></i> تقديم الجمعيات والمؤسسات الأهلية</h1>
+        <p>قائمة المستندات والأوراق الرسمية المطلوبة للاشتراك في برامج بنك الطعام المصري</p>
+        <a href="https://portal.efb.eg/" target="_blank" class="portal-btn">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> رابط بوابة تسجيل الجمعيات: portal.efb.eg
+        </a>
     </header>
 
-    <!-- قائمة الأوراق -->
-    <div class="docs-card">
-        <h2>قائمة المستندات المطلوبة (10 مستندات)</h2>
-        <div class="doc-item"><div class="doc-number">1</div><div class="doc-text">قرار إشهار الجمعية / المؤسسة.</div></div>
-        <div class="doc-item"><div class="doc-number">2</div><div class="doc-text">لائحة النظام الأساسي كاملة معتمدة بخاتم شعار الجمهورية.</div></div>
-        <div class="doc-item"><div class="doc-number">3</div><div class="doc-text">كشف بيانات أعضاء مجلس (الإدارة/الأمناء) الحالي موضح به (الاسم / الصفة بالجهة / الوظيفة خارج الجهة / التليفون) معتمد من الجهة الإدارية.</div></div>
-        <div class="doc-item"><div class="doc-number">4</div><div class="doc-text">مستند شغل المقر (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق من الشهر العقاري.</div></div>
-        <div class="doc-item"><div class="doc-number">5</div><div class="doc-text">آخر حساب ختامي لعام كامل معتمد من محاسب قانوني أو من التضامن الاجتماعي.</div></div>
-        <div class="doc-item"><div class="doc-number">6</div><div class="doc-text">إفادة من التضامن الاجتماعي بأن الجمعية / المؤسسة فاعلة وليست من الجهات المحظور التعامل معها.</div></div>
-        <div class="doc-item"><div class="doc-number">7</div><div class="doc-text">آخر محضر مجلس إدارة/أمناء مختوم بخختم الجهة وخاتم الشعار.</div></div>
-        <div class="doc-item"><div class="doc-number">8</div><div class="doc-text">كشف بأعضاء الجمعية العمومية موقع ومختوم بختم الجهة وخاتم الشعار (للجمعيات فقط).</div></div>
-        <div class="doc-item"><div class="doc-number">9</div><div class="doc-text">قرار مد النشاط موثق من التضامن الاجتماعي في حالة الفروع.</div></div>
-        <div class="doc-item"><div class="doc-number">10</div><div class="doc-text">قرار توفيق الأوضاع.</div></div>
-    </div>
-
-    <!-- قسم System Action الجديد -->
-    <div class="system-action-card">
-        <h3>🔄 إجراءات النظام | Action System </h3>
-        
-        <div class="action-info-box">
-            <div class="info-row">
-                <strong>نوع التسجيل:</strong>
-                <span>يتم تسجيل الجمعيات على السيستم  <b style="color:var(--efb-red)">Contact</b></span>
-            </div>
-            <div class="info-row">
-                <strong>نوع المكالمة:</strong>
-                <span>الـ <b style="color:var(--efb-red)">CALL Logs</b> تكون <b style="color:var(--efb-red)">Inquiry / استفسار</b></span>
+    <!-- بطاقة الواتساب السريع -->
+    <div class="whatsapp-card">
+        <div class="whatsapp-info">
+            <div class="whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="whatsapp-text">
+                <b>إرسال المستندات عبر الواتساب:</b>
+                <span>في حال استفسار مسؤول الجمعية عن إرسال الأوراق رقمياً، يتم تزويده برقم الواتساب الرسمي.</span>
             </div>
         </div>
+        <div class="whatsapp-actions">
+            <button class="btn-wa-copy" onclick="copyWhatsAppNumber()">
+                <i class="fa-regular fa-copy"></i> نسخ الرقم (01152888777)
+            </button>
+            <a href="https://wa.me/201152888777](https://wa.me/201152888777" target="_blank" class="btn-wa-copy" style="text-decoration:none; color:var(--whatsapp-green); border-color:var(--whatsapp-green);">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح شات
+            </a>
 
-        <p style="margin-bottom: 10px; font-weight: bold;">مسار تسجيل الجمعية الخيرية:</p>
-        <div class="breadcrumb-path">
-            <span class="step-item">CaLL Actions</span>  
- <span class="separator">◀</span>
-              <span class="step-item">Inquiry CALLs</span>  
-<span class="separator">◀</span>
-               
-            <span class="step-item highlight">add Inquiry</span>
-<span class="separator">◀</span>
-              <span class="step-item">جمعية خيرية</span>
-           
-            
-            
-            
-           
         </div>
     </div>
 
-    <!-- معلومات إضافية -->
-    <div class="footer-info">
-        <div class="whatsapp-note">فى حالة سوال العميل عن امكانية ارسال المستندات المطلوبة عن طريق الواتساب يتم توضيح رقم الواتساب 01152888777</div>
+    <!-- قائمة المستندات المطلوبة -->
+    <div class="docs-panel">
+        <div class="docs-panel-header">
+            <div class="docs-panel-title">
+                <i class="fa-solid fa-folder-closed"></i> قائمة المستندات المطلوبة (10 مستندات رسمية)
+            </div>
+            <button class="btn-copy-all" onclick="copyAllDocuments()">
+                <i class="fa-regular fa-copy"></i> نسخ قائمة المستندات كاملة
+            </button>
+        </div>
+
+        <div class="docs-list" id="docsList">
+            <div class="doc-item-card">
+                <div class="doc-num">1</div>
+                <div class="doc-content">قرار إشهار الجمعية / المؤسسة.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">2</div>
+                <div class="doc-content">لائحة النظام الأساسي كاملة معتمدة بخاتم شعار الجمهورية.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">3</div>
+                <div class="doc-content">كشف بيانات أعضاء مجلس (الإدارة / الأمناء) الحالي موضح به: (الاسم / الصفة بالجهة / الوظيفة خارج الجهة / التليفون) معتمد من الجهة الإدارية.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">4</div>
+                <div class="doc-content">مستند شغل المقر (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق من الشهر العقاري.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">5</div>
+                <div class="doc-content">آخر حساب ختامي لعام كامل معتمد من محاسب قانوني أو من التضامن الاجتماعي.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">6</div>
+                <div class="doc-content">إفادة من التضامن الاجتماعي بأن الجمعية / المؤسسة فاعلة وليست من الجهات المحظور التعامل معها.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">7</div>
+                <div class="doc-content">آخر محضر مجلس إدارة / أمناء مختوم بختم الجهة وخاتم الشعار.</div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">8</div>
+                <div class="doc-content">
+                    <span class="doc-tag">للجمعيات فقط</span>
+                    كشف بأعضاء الجمعية العمومية موقع ومختوم بختم الجهة وخاتم الشعار.
+                </div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">9</div>
+                <div class="doc-content">
+                    <span class="doc-tag">في حالة الفروع</span>
+                    قرار مد النشاط موثق من التضامن الاجتماعي.
+                </div>
+            </div>
+
+            <div class="doc-item-card">
+                <div class="doc-num">10</div>
+                <div class="doc-content">قرار توفيق الأوضاع الرسمي.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صندوق إجراءات السيستم -->
+    <div class="system-action-box">
+        <div class="system-header">
+            <i class="fa-solid fa-gears"></i> إجراءات تسجيل مكالمات الجمعيات بالنظام (Action System):
+        </div>
+
+        <div class="system-facts-grid">
+            <div class="fact-card">
+                <i class="fa-solid fa-address-book"></i>
+                <div class="fact-info">
+                    <b>نوع تسجيل الجمعية على السيستم:</b>
+                    <span style="color:var(--primary-red);">Contact (وليس Beneficiary)</span>
+                </div>
+            </div>
+
+            <div class="fact-card">
+                <i class="fa-solid fa-phone-volume"></i>
+                <div class="fact-info">
+                    <b>تصنيف Call Logs:</b>
+                    <span style="color:var(--primary-green);">Inquiry / استفسار</span>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size: 13px; font-weight: bold; margin-bottom: 8px; color: var(--text-muted);">
+            مسار تسجيل الجمعية داخل السيستم (Breadcrumb Path):
+        </p>
+        <div class="path-breadcrumb">
+            <span class="path-node">CaLL Actions</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-node">Inquiry CALLs</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-node highlight">add Inquiry</span>
+            <span class="path-arrow">➔</span>
+            <span class="path-node highlight" style="direction: rtl;">جمعية خيرية</span>
+        </div>
     </div>
 
 </div>
 
+<!-- توست النسخ -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--primary);"></i>
+    <span id="toastMsg">تم النسخ بنجاح!</span>
+</div>
+
 <script>
+    // وظيفة نسخ رقم الواتساب
+    function copyWhatsAppNumber() {
+        navigator.clipboard.writeText('01152888777').then(() => {
+            showToast('تم نسخ رقم الواتساب: 01152888777');
+        });
+    }
+
+    // وظيفة نسخ قائمة المستندات الـ 10 كاملة بنص منسق
+    function copyAllDocuments() {
+        const docs = [
+            "قائمة الأوراق المطلوبة لتسجيل الجمعيات والمؤسسات في بنك الطعام المصري:",
+            "1. قرار إشهار الجمعية / المؤسسة.",
+            "2. لائحة النظام الأساسي كاملة معتمدة بخاتم شعار الجمهورية.",
+            "3. كشف بيانات أعضاء مجلس (الإدارة/الأمناء) الحالي موضح به (الاسم / الصفة / الوظيفة / التليفون) معتمد من الجهة الإدارية.",
+            "4. مستند شغل المقر (عقد تمليك أو إيجار أو تخصيص أو هبة أو تبرع) موثق من الشهر العقاري.",
+            "5. آخر حساب ختامي لعام كامل معتمد من محاسب قانوني أو التضامن الاجتماعي.",
+            "6. إفادة من التضامن الاجتماعي بأن الجمعية فاعلة وليست من الجهات المحظورة.",
+            "7. آخر محضر مجلس إدارة/أمناء مختوم بختم الجهة وخاتم الشعار.",
+            "8. كشف بأعضاء الجمعية العمومية موقع ومختوم بخاتم الشعار (للجمعيات فقط).",
+            "9. قرار مد النشاط موثق من التضامن الاجتماعي (في حالة الفروع).",
+            "10. قرار توفيق الأوضاع.",
+            "---",
+            "رابط التسجيل المباشر: https://portal.efb.eg/",
+            "رقم الواتساب لإرسال الأوراق: 01152888777"
+        ].join('\n');
+
+        navigator.clipboard.writeText(docs).then(() => {
+            showToast('تم نسخ قائمة المستندات كاملة بنجاح!');
+        });
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastMsg').innerText = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
+
+    // إدارة الوضع الليلي/النهاري
     function toggleTheme() {
         const body = document.getElementById('pageBody');
-        const btnText = document.getElementById('btnText');
-        const btn = document.getElementById('themeBtn');
-        
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
         body.classList.toggle('dark-mode');
-        
-        if (body.classList.contains('dark-mode')) {
-            btn.querySelector('span:first-child').innerText = "☀️";
-            btnText.innerText = "Night Mode";
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
             localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
         } else {
-            btn.querySelector('span:first-child').innerText = "🌙";
-            btnText.innerText = "Dark Mode";
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
             localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
         }
     }
 
-    window.onload = () => {
-        const savedTheme = localStorage.getItem('myTheme');
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
         if (savedTheme === 'dark') {
             document.getElementById('pageBody').classList.add('dark-mode');
-            document.getElementById('themeBtn').querySelector('span:first-child').innerText = "☀️";
-            document.getElementById('btnText').innerText = "Night Mode";
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
-    }
+    });
 </script>
 
 </body>
