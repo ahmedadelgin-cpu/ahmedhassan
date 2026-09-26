@@ -1,353 +1,618 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<link rel="stylesheet" href="styles/mystyle.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعليمات الحالات الفلسطينية | بنك الطعام</title>
-    <!-- استدعاء أيقونات FontAwesome -->
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>تعليمات الحالات الفلسطينية | بنك الطعام المصري</title>
+
+    <!-- أيقونات FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            /* الألوان الأصلية (الوضع الفاتح الأساسي) */
-            --efb-red: #d63031;
-            --efb-green: #00a651;
-            --warning-bg: #fff5f5;
-            --text-dark: #2d3436;
-            --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
-
-            /* متغيرات النظام للتنقل بين الوضعين */
-            --main-bg: #f0f2f5;
-            --card-bg: #ffffff;
-            --main-text-color: var(--text-dark);
-            --footer-bg: #fff;
-            --toggle-btn-bg: #ffffff;
-            --toggle-btn-border: var(--efb-green);
+            /* ألوان الوضع النهاري (Light Mode) */
+            --primary-green: #00873e;
+            --primary-green-light: #e8f5e9;
+            --primary-red: #d63031;
+            --primary-red-light: #ffebee;
+            --accent-blue: #0984e3;
+            --accent-blue-light: #e1f5fe;
+            --warning-orange: #f39c12;
+            --warning-orange-light: #fff8e1;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
         }
 
-        /* متغيرات الوضع الداكن Dark Mode (مطابقة لألوانك الأصلية) */
-        [data-theme="dark"] {
-            --main-bg: #0a0a0a;
-            --card-bg: #161616;
-            --main-text-color: #ffffff;
-            --warning-bg: #2a1a1a;
-            --footer-bg: #161616;
-            --card-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            --toggle-btn-bg: #161616;
-            --toggle-btn-border: var(--efb-green);
+        body.dark-mode {
+            /* ألوان الوضع الليلي (Dark Mode) */
+            --primary-green: #00e676;
+            --primary-green-light: rgba(0, 230, 118, 0.12);
+            --primary-red: #ff5252;
+            --primary-red-light: rgba(255, 82, 82, 0.15);
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --warning-orange: #ffb74d;
+            --warning-orange-light: rgba(255, 183, 77, 0.15);
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
         }
 
         body {
-            background-color: var(--main-bg);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
-            padding: 20px;
-            color: var(--main-text-color);
-            transition: background-color 0.3s, color 0.3s;
+            padding: 0;
+            line-height: 1.6;
         }
 
-        /* تنسيق وتثبيت زر التبديل */
-        .theme-toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
             z-index: 1000;
-            background-color: var(--toggle-btn-bg);
-            color: var(--main-text-color);
-            border: 2px solid var(--toggle-btn-border);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
         }
 
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
+        .btn-nav:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--primary-green-light);
+            color: var(--primary-green);
+            border-color: var(--primary-green);
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
+            max-width: 1050px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
         }
 
         /* رأس الصفحة */
-        .header {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
+        .page-header {
             text-align: center;
-            box-shadow: var(--card-shadow);
-            border-bottom: 5px solid var(--efb-red);
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
             margin-bottom: 25px;
-            transition: background 0.3s, box-shadow 0.3s;
+            border-bottom: 4px solid var(--primary-red);
+            box-shadow: var(--card-shadow);
         }
 
-        .header h1 {
-            color: var(--efb-red);
-            margin: 0;
-            font-size: 28px;
-            text-decoration: underline;
-        }
-
-        /* صندوق الإجراء العاجل */
-        .urgent-action {
-            background: var(--warning-bg);
-            border: 2px dashed var(--efb-red);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .urgent-action h2 {
-            color: var(--efb-red);
-            font-size: 20px;
-            margin-top: 0;
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary-red);
+            font-size: 26px;
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
-        .urgent-action h2 i { margin-left: 10px; }
-
-        .urgent-action p {
-            font-size: 17px;
-            line-height: 1.8;
-            font-weight: bold;
+        .page-header p {
             margin: 0;
+            color: var(--text-muted);
+            font-size: 14px;
         }
 
-        /* قائمة السيناريوهات */
+        /* شريط التنبيه الذهبي لمشروع Bless */
+        .bless-banner {
+            background: var(--warning-orange-light);
+            border: 2px solid var(--warning-orange);
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .bless-banner i {
+            font-size: 26px;
+            color: var(--warning-orange);
+            flex-shrink: 0;
+        }
+
+        .bless-banner p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .bless-tag {
+            background: var(--warning-orange);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        /* صندوق البحث السريع */
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 50px 14px 20px;
+            font-size: 14.5px;
+            font-family: inherit;
+            color: var(--text-main);
+            outline: none;
+            box-shadow: var(--card-shadow);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-green);
+        }
+
+        /* تصنيف المحاور والسيناريوهات */
+        .category-section {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-right: 5px;
+        }
+
         .scenarios-grid {
             display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
             gap: 15px;
         }
 
         .scenario-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px 20px;
             box-shadow: var(--card-shadow);
             display: flex;
-            align-items: center;
-            border-right: 5px solid var(--efb-green);
-            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            align-items: flex-start;
+            gap: 16px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
         .scenario-card:hover {
-            transform: translateX(-5px);
-            box-shadow: var(--card-shadow);
+            transform: translateY(-2px);
+            border-color: var(--primary-green);
+            box-shadow: 0 8px 20px rgba(0, 135, 62, 0.1);
         }
 
         .scenario-icon {
-            width: 45px;
-            height: 45px;
-            background: rgba(0, 166, 81, 0.1);
-            color: var(--efb-green);
-            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--primary-green-light);
+            color: var(--primary-green);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            margin-left: 20px;
+            font-size: 18px;
             flex-shrink: 0;
         }
 
-        .scenario-text {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--main-text-color);
+        .card-red .scenario-icon { background: var(--primary-red-light); color: var(--primary-red); }
+        .card-blue .scenario-icon { background: var(--accent-blue-light); color: var(--accent-blue); }
+        .card-orange .scenario-icon { background: var(--warning-orange-light); color: var(--warning-orange); }
+
+        .scenario-content {
+            flex-grow: 1;
         }
 
-        /* التذييل */
-        .footer-note {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background: var(--footer-bg);
-            border-radius: 10px;
-            color: var(--efb-green);
+        .scenario-badge {
+            font-size: 11px;
             font-weight: bold;
-            transition: background 0.3s;
+            padding: 2px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 6px;
+            background: var(--item-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
         }
 
-        @media (max-width: 600px) {
-            .header h1 { font-size: 22px; }
-            .urgent-action p { font-size: 15px; }
-            .theme-toggle-btn {
-                top: 10px;
-                left: 10px;
-                padding: 6px 12px;
-                font-size: 12px;
-            }
+        .scenario-text {
+            font-size: 14px;
+            line-height: 1.7;
+            font-weight: 500;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        .copy-btn-hint {
+            font-size: 11px;
+            color: var(--primary-green);
+            opacity: 0;
+            transition: opacity 0.2s;
+            position: absolute;
+            left: 15px;
+            bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: bold;
+        }
+
+        .scenario-card:hover .copy-btn-hint {
+            opacity: 1;
+        }
+
+        /* صندوق إجراءات السيستم */
+        .system-action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary-green);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 35px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .system-header {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .tag-pill {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 8px;
+        }
+
+        .tag-pill b { color: var(--text-muted); }
+        .tag-pill span { color: var(--primary-green); font-family: monospace; font-weight: bold; }
+
+        /* توست النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary-green);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .scenarios-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body>
+<body id="pageBody">
 
-<!-- زر التبديل بين المودات -->
-<button id="themeToggle" class="theme-toggle-btn">
-    <span id="themeIcon">🌙</span>
-    <span id="themeText">Dark mode</span>
-</button>
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
+
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
 
 <div class="container">
-    <!-- العنوان الرئيسي -->
-    <header class="header">
-        <h1>بخصوص الحالات الفلسطينية (مهم جداً)</h1>
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-hand-holding-heart"></i> تعليمات الحالات الفلسطينية (مشروع Bless)</h1>
+        <p>دليل الإجراءات الرسمية، شروط صرف المنحة، وسيناريوهات التعامل مع البريد والمشرفين</p>
     </header>
 
-    <!-- الإجراء العاجل لمشكلة صرف العريش -->
-<!--
-    <div class="urgent-action">
-        <h2><i class="fa-solid fa-triangle-exclamation"></i> تعليمات صرف قسيمة الـ 1500 جنيه:</h2>
+    <!-- شريط التنبيه الذهبي لمشروع Bless -->
+    <div class="bless-banner">
+        <i class="fa-solid fa-triangle-exclamation"></i>
         <p>
-            في حال تواصل أي حالة فلسطينية بخصوص <span style="color:var(--efb-red)">قسيمة الـ 1500 جنيه</span> 
-            المقرر صرفها من بريد العريش، وكان العميل معترضاً لعدم تواجده في العريش؛ 
-            يتم توضيح أن <span style="background: yellow;">موظفاً تابعاً لبنك الطعام سيتواصل معه في أقرب وقت لحل المشكلة.</span>
+            تنبيه هام للموظف: عند تسجيل أي شكوى بخصوص تأخير التسليمات أو عدم رد المشرف للحالات الفلسطينية، يجب كتابة اسم المشروع <span class="bless-tag">Bless</span> داخل نص الشكوى على السيستم.
         </p>
     </div>
--->
 
-    <!-- سيناريوهات الرد السريع -->
-    <div class="scenarios-grid">
-        
-        <!-- الحالة 1 -->
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="scenario-text">فى حالة ان الحالة تستلم اكواد بشكل شهرى و وضحت انها لم تستلم منذ شهر حتى 11 شهر يتم تقديم شكوى قسائم (OTP)</div>
-        </div>
-     <br>
-
-        <!-- الحالة 2 -->
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-phone-flip"></i></div>
-            <div class="scenario-text">في حالة الرغبة في <b>تعديل رقم الهاتف</b>: يتم توجيه الحالة للرجوع إلى مشرف بنك الطعام.</div>
-        </div>
-  <br>
-
-<!-- الحالة 1 -->
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="scenario-text">        ● صرف المنحه بيتم فقط بالباسبور الاصلي و يكون ساري و في حاله عدم توافر الباسبور يتم الحصول علي بيانات شخصية بديل للصرف ( الزوجه او الزوج - الأبناء ) بشرط وجود درجه قرابه من الدرجه الاولي و التأكيد ان الصرف لا يتم بالهوية الفلسطينيه لان غير متاح التعامل بالهوية داخل جمهوريه مصر العربيه 
-                  </div>
-        </div>
-
-  <br>
-
-<!-- الحالة 1 -->
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="scenario-text">                  ● في حاله  توضح ان اسمها غير موجود في البريد المصري رغم ارسال رساله بصرف المنحه يتم توجيه الحاله الي فروع اخري للبريد للتأكد من وجود الاسم و حاله التوجه لأكثر من فرع بريد و الاسم غير موجود يتم تسجيل شكوي تأخير جمعيه في التسليمات و يتم توضيح اسم المشروع Bless و كتابه تفاصيل الشكوي
-        </div>
-        </div>
-
-  <br>
-
-
-<!-- الحالة 3 -->
-
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-            <div class="scenario-text">   ● بالنسبه للحالات اللي البريد رفض صرف المنحه بسبب عدم وجود أقامه يمكن توجيه الاسر للصرف من فروع اخري و حاله الرفض أيضا يتم توجيه العميل لحل مشكله الاقامه      </div>
-        </div>
-<br>
-
-
-
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-            <div class="scenario-text">   بالنسبه للحالات الفلسطينيه اللي بتشتكي ان المشرف تعامل بشكل غير لائق و اغلق الخط بيتم تسجيل شكوي ميثاق شرف ( سوء سلوك )      </div>
-        </div>
-<br>
-
-
-
-
-        <!-- الحالة 3 -->
-
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
-            <div class="scenario-text">   فى حالة العميل اتواصل وضح انى فى رسال بقيمة 1500 و الاستلام من البريد المصرى      </div>
-        </div>
-<br>
-
-
+    <!-- شريط البحث السريع -->
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 اكتب للبحث السريع (مثال: بريد، باسبور، إقامة، مشرف، 1500، Bless)..." onkeyup="filterCards()">
     </div>
- <!-- الحالة 1 -->
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="scenario-text">             لو العميل وضح انى اسمو متسجل بشكل خطاء فى البريد يتم توضيح الرجوع الى مشرف بنك الطعام    </div>
+
+    <!-- المحور الأول: شروط صرف المنحة والإقامة -->
+    <div class="category-section">
+        <div class="category-title" style="color: var(--primary-green);">
+            <i class="fa-solid fa-passport"></i> 1. ضوابط صرف المنحة وإثبات الشخصية
         </div>
-<br>
+        <div class="scenarios-grid">
+            <div class="scenario-card" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">إثبات الشخصية الأصلي</span>
+                    <p class="scenario-text">صرف المنحة يتم <b>فقط بالباسبور الأصلي ويكون سارياً</b>. وفي حالة عدم توافره يتم الحصول على بيانات شخصية لبديل للصرف (الزوج/الزوجة أو الأبناء - قرابة درجة أولى). والتأكيد أن <b>الصرف لا يتم بالهوية الفلسطينية</b> نهائياً لعدم التعامل بها داخل مصر.</p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
 
-<!-- الحالة 1 -->
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="scenario-text">                              فى حاله استفسارالعميل التوجة الى البريد لصرف المنحة وتم توضيح ان لابد من توفير اقامة لصرف المنحة يتم التوضيح للحالة التوجة لفرع اخر و فى حاله رفض الفرع الاخر للبريد الصرف ايضا لابد من حل مشكله الاقامه     </div>
+            <div class="scenario-card card-orange" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-solid fa-file-circle-exclamation"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">مشكلة الإقامة في البريد</span>
+                    <p class="scenario-text">في حال رفض فرع البريد صرف المنحة بسبب عدم وجود إقامة؛ يتم أولاً <b>توجيه الحالة للصرف من فرع بريد آخر</b>. وفي حال رفض الفرع الآخر أيضاً يتم توجيه العميل بضرورة حل وتجديد مشكلة الإقامة.</p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
         </div>
-<br>
-<!-- الحالة 1 -->
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="scenario-text">                         فى حالة لو العميل مش فى جروب الوتساب او المشرف مش بيرد بيتم تسجيل شكوى   تأخير جمعية فى التسليمات   و كتابة  اسم المشروع Bless   </div>
-        </div>
-<br>
-<!-- الحالة 1 -->
-        <div class="scenario-card">
-            <div class="scenario-icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <div class="scenario-text">                        فى حالة العميل تواصل وضح انها يتواصل مع مشرف بنك الطعام و هو لم يتم الرد من خلال يتم تقديم شكوى اسم الشكوى  تأخير جمعية فى التسليمات     وكتابة  اسم المشروع Bless   </div>
-        </div>
-
-
-
-
-
-<div class="note-footer">
-        <center>
-        <h3>🔄 Action  System </h3>
-        <p>  CAll Logs بتكون Inquiry/استفسار</p>
-        <p>  توجية محتاج    ---  CaLL Actions --- Inquiry CALLs --- add Inquiry </p>   
-        </center>       
     </div>
- 
- 
- 
- 
- 
+
+    <!-- المحور الثاني: مشاكل البريد وقسيمة الـ 1500 -->
+    <div class="category-section">
+        <div class="category-title" style="color: var(--accent-blue);">
+            <i class="fa-solid fa-envelopes-bulk"></i> 2. استفسارات ومشاكل البريد المصري وقسائم الصرف
+        </div>
+        <div class="scenarios-grid">
+            <div class="scenario-card card-blue" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-solid fa-user-xmark"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">الاسم غير موجود بالبريد</span>
+                    <p class="scenario-text">إذا وصلته رسالة بالصرف والاسم غير موجود بالبريد؛ يُوجّه لفروع أخرى للتأكد. وإذا توجه لأكثر من فرع والاسم غير موجود، يتم <b>تسجيل شكوى تأخير جمعية في التسليمات</b> مع ذكر اسم المشروع <b>Bless</b> وشرح التفاصيل.</p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
+
+            <div class="scenario-card card-blue" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">رسالة قسيمة الـ 1500 ج</span>
+                    <p class="scenario-text">في حال تواصل العميل ووضح أن هناك رسالة بقيمة 1500 جنيه والاستلام من البريد المصري؛ يتم توضيح التوجه للفرع ومعه الباسبور الساري لاستلام المنحة المالية المخصصة.</p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
+
+            <div class="scenario-card card-orange" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-solid fa-spell-check"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">خطأ في تسجيل الاسم</span>
+                    <p class="scenario-text">إذا وضح العميل أن اسمه مسجل بشكل خاطئ في دفاتر البريد؛ يتم توضيحه بضرورة <b>الرجوع إلى مشرف بنك الطعام</b> لتعديل بيانات الاسم على السيستم.</p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- المحور الثالث: المشرفين ومجموعات الواتساب -->
+    <div class="category-section">
+        <div class="category-title" style="color: var(--primary-red);">
+            <i class="fa-solid fa-users-gear"></i> 3. شكاوى المشرفين، التواصل ومجموعات الواتساب
+        </div>
+        <div class="scenarios-grid">
+            <div class="scenario-card card-red" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">عدم رد المشرف / ليس بالجروب</span>
+                    <p class="scenario-text">في حال كان العميل غير مضاف لجروب الواتساب أو تواصل مع مشرف بنك الطعام ولم يتم الرد عليه؛ يتم <b>تسجيل شكوى تأخير جمعية في التسليمات</b> مع  كتابة اسم المشروع <b>Bless</b>.</p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
+
+            <div class="scenario-card card-red" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">شكوى سلوك ضد المشرف</span>
+                    <p class="scenario-text">إذا اشتكت الحالة من أن المشرف تعامل بأسلوب غير لائق أو أغلق الخط في وجه الحالة؛ يتم <b>تسجيل شكوى ميثاق شرف (سوء سلوك)</b></p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
+
+            <div class="scenario-card" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-solid fa-mobile-retro"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">تعديل رقم الهاتف</span>
+                    <p class="scenario-text">في حال رغبة الحالة الفلسطينية في <b>تعديل رقم الهاتف</b>؛ يتم توجيه الحالة بالرجوع مباشرة إلى مشرف بنك الطعام المسؤول عنها.</p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
+
+            <div class="scenario-card" onclick="copyScenario(this)">
+                <div class="scenario-icon"><i class="fa-solid fa-ticket"></i></div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">انقطاع أكواد OTP الشهرية</span>
+                    <p class="scenario-text">في حال كانت الحالة تستلم أكواداً بشكل شهري ووضحت أنها لم تستلم كود المساعدة لمدة تتراوح بين (شهر إلى 11 شهراً)؛ يتم <b>تقديم شكوى  عدم استقبال رساله الكود </b>.</p>
+                </div>
+                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- صندوق إجراءات السيستم -->
+    <div class="system-action-box">
+        <div class="system-header">
+            <i class="fa-solid fa-gears"></i> إجراءات تسجيل النظام (Action System):
+        </div>
+        <div class="tags-row">
+            <div class="tag-pill">
+                <b>Call Logs:</b> <span>Inquiry / استفسار</span>
+            </div>
+            <div class="tag-pill">
+                <b>Call Actions:</b> <span>CaLL Actions ➔ Inquiry CALLs ➔ addInquiry</span>
+            </div>
+            <div class="tag-pill">
+                <b>الإجراء:</b> <span>توجيه محتاج</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- توست النسخ -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--primary-green);"></i>
+    <span id="toastMsg">تم نسخ الإجراء بنجاح!</span>
 </div>
 
 <script>
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeText = document.getElementById('themeText');
-
-    // التحقق من الوضع المحفوظ مسبقاً
-    const savedTheme = localStorage.getItem('efb_theme');
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeIcon.textContent = '☀️';
-        themeText.textContent = 'Light mode';
+    // نسخ نص السيناريو
+    function copyScenario(element) {
+        const text = element.querySelector('.scenario-text').innerText.trim();
+        navigator.clipboard.writeText(text).then(() => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = `تم نسخ التعليمات بنجاح`;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        });
     }
 
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        
-        if (currentTheme === 'dark') {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('efb_theme', 'light');
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'Dark mode';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
+    // تصفية البطاقات بالبحث الحي
+    function filterCards() {
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.scenario-card');
+        const sections = document.querySelectorAll('.category-section');
+
+        cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            if (text.includes(query)) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        sections.forEach(sec => {
+            const hasVisible = Array.from(sec.querySelectorAll('.scenario-card')).some(c => c.style.display !== 'none');
+            sec.style.display = hasVisible ? 'block' : 'none';
+        });
+    }
+
+    // الوضع الليلي والنهاري
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
             localStorage.setItem('efb_theme', 'dark');
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Light mode';
+            localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
         }
     });
 </script>
