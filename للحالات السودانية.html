@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
     <title>دليل الحالات السودانية | بنك الطعام المصري</title>
-
     <!-- أيقونات FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -551,9 +550,9 @@
             <i class="fa-solid fa-triangle-exclamation"></i> تعليمات هامة جداً للموظف:
         </div>
         <ul class="alert-list">
-            <li>تقديم ومتابعة الحالة السودانية يتم <b>حصراً من خلال الجمعيات الـ 3 الموضحة أدناه</b>.</li>
+            <li>تقديم ومتابعة الحالة السودانية يتم <b>حصراً من خلال الجمعيات الموضحة أدناه</b>.</li>
             <li>الحالة المسجلة على السيستم يتم توجيهها للجمعية الأقرب لمحل سكنها.</li>
-            <li><b style="color:var(--primary-red);">في حالة رفض الجمعية تلقي الطلب:</b> يتم ً تسجيل <b>"شكوى تجاوزات جمعية"</b> على السيستم.</li>
+            <li><b style="color:var(--primary-red);">في حالة رفض الجمعية تلقي الطلب:</b> يتم تسجيل <b>"شكوى تجاوزات جمعية"</b> على السيستم.</li>
         </ul>
     </div>
 
@@ -564,8 +563,6 @@
         </div>
         <div class="filter-tabs">
             <button class="filter-btn active" onclick="filterGov('all', this)">جميع المحافظات</button>
-            <button class="filter-btn" onclick="filterGov('cairo', this)">القاهرة</button>
-            <button class="filter-btn" onclick="filterGov('giza', this)">الجيزة</button>
             <button class="filter-btn" onclick="filterGov('qalyubia', this)">القليوبية</button>
         </div>
     </div>
@@ -573,7 +570,10 @@
     <!-- شبكة بطاقات الجمعيات -->
     <div class="associations-grid" id="assocGrid">
 
-        <!-- الجمعية 1: القاهرة (إسناد) -->
+        <!-- ========================================================
+             الجمعية 1: القاهرة (إسناد) - [مخفية حالياً]
+        ======================================================== -->
+        <!--
         <div class="assoc-card" data-gov="cairo">
             <div class="assoc-main">
                 <div class="assoc-icon icon-cairo">
@@ -589,7 +589,6 @@
                         <span class="address-text">مدينة نصر - 59 شارع حسني أحمد خلف</span>
                     </div>
 
-                    <!-- صيغة التوجيه واضحة ومميزة -->
                     <div class="referral-statement-box box-cairo">
                         <div class="referral-text-wrapper">
                             <i class="fa-solid fa-clipboard-check"></i>
@@ -606,8 +605,12 @@
                 <i class="fa-regular fa-copy"></i> نسخ العنوان
             </button>
         </div>
+        -->
 
-        <!-- الجمعية 2: الجيزة (مؤسسة الكمال) -->
+        <!-- ========================================================
+             الجمعية 2: الجيزة (مؤسسة الكمال) - [مخفية حالياً]
+        ======================================================== -->
+        <!--
         <div class="assoc-card" data-gov="giza">
             <div class="assoc-main">
                 <div class="assoc-icon icon-giza">
@@ -623,7 +626,6 @@
                         <span class="address-text">منطقة أرض اللواء - 5 شارع الطوخي حسن</span>
                     </div>
 
-                    <!-- صيغة التوجيه واضحة ومميزة -->
                     <div class="referral-statement-box box-giza">
                         <div class="referral-text-wrapper">
                             <i class="fa-solid fa-clipboard-check"></i>
@@ -640,8 +642,9 @@
                 <i class="fa-regular fa-copy"></i> نسخ العنوان
             </button>
         </div>
+        -->
 
-        <!-- الجمعية 3: القليوبية (المرأة السودانية) -->
+        <!-- الجمعية 3: القليوبية (المرأة السودانية) - [الظاهرة للمستخدمين] -->
         <div class="assoc-card" data-gov="qalyubia">
             <div class="assoc-main">
                 <div class="assoc-icon icon-qalyubia">
