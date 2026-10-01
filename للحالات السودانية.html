@@ -303,7 +303,7 @@
             gap: 6px;
         }
 
-        /* صندوق صيغة توجيه الحالة الجديد (واضح وبارز) */
+        /* صندوق صيغة توجيه الحالة (واضح وبارز) */
         .referral-statement-box {
             background: var(--item-bg);
             border: 1.5px dashed var(--border-color);
@@ -556,13 +556,15 @@
         </ul>
     </div>
 
-    <!-- شريط التصفية السريعة -->
+    <!-- شريط التصفية السريعة (تم إظهار جميع المحافظات) -->
     <div class="filter-panel">
         <div style="font-weight:bold; font-size:16px;">
             <i class="fa-solid fa-map-location-dot" style="color:var(--primary-red); margin-left:6px;"></i> دليل الجمعيات المعتمدة للتوجيه:
         </div>
         <div class="filter-tabs">
             <button class="filter-btn active" onclick="filterGov('all', this)">جميع المحافظات</button>
+            <button class="filter-btn" onclick="filterGov('cairo', this)">القاهرة</button>
+            <button class="filter-btn" onclick="filterGov('giza', this)">الجيزة</button>
             <button class="filter-btn" onclick="filterGov('qalyubia', this)">القليوبية</button>
         </div>
     </div>
@@ -570,10 +572,7 @@
     <!-- شبكة بطاقات الجمعيات -->
     <div class="associations-grid" id="assocGrid">
 
-        <!-- ========================================================
-             الجمعية 1: القاهرة (إسناد) - [مخفية حالياً]
-        ======================================================== -->
-        <!--
+        <!-- الجمعية 1: القاهرة (إسناد) - [تم إظهارها] -->
         <div class="assoc-card" data-gov="cairo">
             <div class="assoc-main">
                 <div class="assoc-icon icon-cairo">
@@ -605,12 +604,8 @@
                 <i class="fa-regular fa-copy"></i> نسخ العنوان
             </button>
         </div>
-        -->
 
-        <!-- ========================================================
-             الجمعية 2: الجيزة (مؤسسة الكمال) - [مخفية حالياً]
-        ======================================================== -->
-        <!--
+        <!-- الجمعية 2: الجيزة (مؤسسة الكمال) - [تم إظهارها] -->
         <div class="assoc-card" data-gov="giza">
             <div class="assoc-main">
                 <div class="assoc-icon icon-giza">
@@ -642,9 +637,8 @@
                 <i class="fa-regular fa-copy"></i> نسخ العنوان
             </button>
         </div>
-        -->
 
-        <!-- الجمعية 3: القليوبية (المرأة السودانية) - [الظاهرة للمستخدمين] -->
+        <!-- الجمعية 3: القليوبية (المرأة السودانية) -->
         <div class="assoc-card" data-gov="qalyubia">
             <div class="assoc-main">
                 <div class="assoc-icon icon-qalyubia">
@@ -660,7 +654,6 @@
                         <span class="address-text">منطقة منشية الجبل الأصفر - 16 شارع جمال عبد الناصر - الخانكة</span>
                     </div>
 
-                    <!-- صيغة التوجيه واضحة ومميزة -->
                     <div class="referral-statement-box box-qalyubia">
                         <div class="referral-text-wrapper">
                             <i class="fa-solid fa-clipboard-check"></i>
@@ -748,7 +741,6 @@
         navigator.clipboard.writeText(full).then(() => {
             showNotification(`تم نسخ عنوان: ${name}`);
         }).catch(() => {
-            // بديل للمتصفحات القديمة
             const el = document.createElement('textarea');
             el.value = full;
             document.body.appendChild(el);
