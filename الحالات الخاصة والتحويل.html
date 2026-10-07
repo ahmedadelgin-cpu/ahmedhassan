@@ -182,7 +182,7 @@
             color: var(--warning-orange);
         }
 
-        /* شبكة الأقسام المتخصصة للتحويل */
+        /* حاوية الأقسام */
         .departments-container {
             display: flex;
             flex-direction: column;
@@ -270,9 +270,10 @@
         .badge-fin { background: var(--primary); }
         .badge-clo { background: var(--accent-purple); }
 
+        /* تفاصيل القسم وشارة الرقم */
         .dept-details-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 15px;
             margin-bottom: 18px;
         }
@@ -303,6 +304,33 @@
             font-size: 14px;
             font-weight: 700;
             color: var(--text-main);
+        }
+
+        /* بارز: شارة رقم التحويل على السيستم */
+        .system-code-pill {
+            font-size: 17px;
+            font-weight: 900;
+            padding: 2px 12px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .code-blue {
+            background: var(--accent-blue-light);
+            color: var(--accent-blue);
+            border: 1.5px solid var(--accent-blue);
+        }
+
+        .code-green {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+        }
+
+        .code-purple {
+            background: var(--accent-purple-light);
+            color: var(--accent-purple);
+            border: 1.5px solid var(--accent-purple);
         }
 
         /* صندوق صيغة السيستم المعتمدة */
@@ -351,16 +379,6 @@
         .card-medical .btn-copy:hover { border-color: var(--accent-blue); color: var(--accent-blue); background: var(--accent-blue-light); }
         .card-financial .btn-copy:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
         .card-clothing .btn-copy:hover { border-color: var(--accent-purple); color: var(--accent-purple); background: var(--accent-purple-light); }
-
-        .hotline-tag {
-            font-size: 18px;
-            font-weight: 900;
-            color: var(--accent-purple);
-            background: var(--accent-purple-light);
-            padding: 2px 10px;
-            border-radius: 8px;
-            display: inline-block;
-        }
 
         /* صندوق إجراءات السيستم */
         .system-action-box {
@@ -485,7 +503,7 @@
     <!-- رأس الصفحة -->
     <header class="page-header">
         <h1><i class="fa-solid fa-arrows-turn-to-dots"></i> دليل التحويل إلى القسم المختص</h1>
-        <p>دليل تحويل الحالات إلى الشركاء المعتمدين وإجراءات التسجيل بالنظام</p>
+        <p>دليل تحويل الحالات إلى الشركاء المعتمدين وتحديد كود ورقم كل قسم بالنظام</p>
     </header>
 
     <!-- شريط مواعيد العمل الخاصة بجهات التحويل -->
@@ -499,10 +517,10 @@
         </div>
     </div>
 
-    <!-- بطاقات التحويل مقسمة بالقسم المختص -->
+    <!-- بطاقات التحويل مقسمة بالقسم المختص والأرقام -->
     <div class="departments-container">
 
-        <!-- 1. القسم الطبي (بنك الشفاء المصري) -->
+        <!-- 1. بنك الشفاء المصري (رقم 3) -->
         <div class="dept-card card-medical">
             <div class="dept-header">
                 <div class="dept-title-group">
@@ -518,6 +536,13 @@
             </div>
 
             <div class="dept-details-row">
+                <div class="detail-item">
+                    <i class="fa-solid fa-hashtag" style="color:var(--accent-blue);"></i>
+                    <div>
+                        <b>رقم التحويل على السيستم:</b>
+                        <span><strong class="system-code-pill code-blue">رقم 3</strong></span>
+                    </div>
+                </div>
                 <div class="detail-item">
                     <i class="fa-solid fa-stethoscope" style="color:var(--accent-blue);"></i>
                     <div>
@@ -546,7 +571,7 @@
             </div>
         </div>
 
-        <!-- 2. قسم المساعدات المالية والمشاريع (معنا لحياة أفضل) -->
+        <!-- 2. معنا لحياة أفضل (رقم 5) -->
         <div class="dept-card card-financial">
             <div class="dept-header">
                 <div class="dept-title-group">
@@ -563,6 +588,13 @@
 
             <div class="dept-details-row">
                 <div class="detail-item">
+                    <i class="fa-solid fa-hashtag" style="color:var(--primary);"></i>
+                    <div>
+                        <b>رقم التحويل على السيستم:</b>
+                        <span><strong class="system-code-pill code-green">رقم 5</strong></span>
+                    </div>
+                </div>
+                <div class="detail-item">
                     <i class="fa-solid fa-sack-dollar" style="color:var(--primary);"></i>
                     <div>
                         <b>نوع المساعدة:</b>
@@ -570,7 +602,7 @@
                     </div>
                 </div>
                 <div class="detail-item">
-                    <i class="fa-solid fa-chart-line" style="color:var(--primary);"></i>
+                    <i class="fa-solid fa-route" style="color:var(--primary);"></i>
                     <div>
                         <b>نوع الإجراء بالسيستم:</b>
                         <span style="color:var(--primary);">تم التحويل الى القسم المختص</span>
@@ -590,7 +622,7 @@
             </div>
         </div>
 
-        <!-- 3. قسم الدعم العيني والكساء (بنك الكساء المصري) -->
+        <!-- 3. بنك الكساء المصري (الخط الساخن 17014) -->
         <div class="dept-card card-clothing">
             <div class="dept-header">
                 <div class="dept-title-group">
@@ -610,7 +642,7 @@
                     <i class="fa-solid fa-phone-volume" style="color:var(--accent-purple);"></i>
                     <div>
                         <b>الخط الساخن المباشر للاتصال:</b>
-                        <span><strong class="hotline-tag">17014</strong></span>
+                        <span><strong class="system-code-pill code-purple">17014</strong></span>
                     </div>
                 </div>
                 <div class="detail-item">
@@ -618,6 +650,13 @@
                     <div>
                         <b>نوع المساعدة:</b>
                         <span>توفير الملابس والكساء الموسمي والمدرسي</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-route" style="color:var(--accent-purple);"></i>
+                    <div>
+                        <b>نوع الإجراء بالسيستم:</b>
+                        <span style="color:var(--accent-purple);">تم التحويل الى القسم المختص</span>
                     </div>
                 </div>
             </div>
@@ -636,7 +675,7 @@
 
     </div>
 
-    <!-- صندوق إجراءات السيستم -->
+    <!-- صندوق إجراءات السيستم البرمجي المعتمد -->
     <div class="system-action-box">
         <div class="system-header">
             <i class="fa-solid fa-gears"></i> إجراءات تسجيل التحويل بالنظام (Action System):
@@ -654,7 +693,7 @@
             <div class="fact-card">
                 <i class="fa-solid fa-arrows-split-up-and-left"></i>
                 <div class="fact-info">
-                    <b>نوع الإجراء:</b>
+                    <b>نوع الإجراء المطلوب:</b>
                     <span style="color:var(--primary); font-size:16px;">تم التحويل الى القسم المختص</span>
                 </div>
             </div>
@@ -676,7 +715,7 @@
 
 </div>
 
-<!-- توست النسخ -->
+<!-- توست النسخ السريع -->
 <div id="toast" class="toast">
     <i class="fa-solid fa-circle-check" style="color:var(--primary);"></i>
     <span id="toastMsg">تم النسخ بنجاح!</span>
