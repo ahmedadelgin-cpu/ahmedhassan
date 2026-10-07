@@ -306,7 +306,7 @@
             color: var(--text-main);
         }
 
-        /* بارز: شارة رقم التحويل على السيستم */
+        /* شارة رقم التحويل على السيستم */
         .system-code-pill {
             font-size: 17px;
             font-weight: 900;
@@ -331,6 +331,30 @@
             background: var(--accent-purple-light);
             color: var(--accent-purple);
             border: 1.5px solid var(--accent-purple);
+        }
+
+        /* تاجات أنواع المساعدة الإضافية لتجهيز العرائس */
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .service-tag {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .tag-highlight {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
         }
 
         /* صندوق صيغة السيستم المعتمدة */
@@ -571,7 +595,7 @@
             </div>
         </div>
 
-        <!-- 2. معنا لحياة أفضل (رقم 5) -->
+        <!-- 2. معنا لحياة أفضل (رقم 5) - مضاف لها تجهيز عرائس -->
         <div class="dept-card card-financial">
             <div class="dept-header">
                 <div class="dept-title-group">
@@ -580,10 +604,10 @@
                     </div>
                     <div>
                         <h3 class="dept-name">معنا لحياة أفضل</h3>
-                        <span style="font-size:12.5px; color:var(--text-muted); font-weight:600;">الجهة المختصة بالتمكين الاقتصادي والمساعدات المالية</span>
+                        <span style="font-size:12.5px; color:var(--text-muted); font-weight:600;">الجهة المختصة بالتمكين الاقتصادي، تجهيز العرائس، والمساعدات المالية</span>
                     </div>
                 </div>
-                <span class="dept-badge badge-fin">قسم المشاريع والدعم المالي</span>
+                <span class="dept-badge badge-fin">قسم المشاريع والدعم المالي والاجتماعي</span>
             </div>
 
             <div class="dept-details-row">
@@ -594,11 +618,15 @@
                         <span><strong class="system-code-pill code-green">رقم 5</strong></span>
                     </div>
                 </div>
-                <div class="detail-item">
-                    <i class="fa-solid fa-sack-dollar" style="color:var(--primary);"></i>
+                <div class="detail-item" style="grid-column: span 2;">
+                    <i class="fa-solid fa-hand-holding-dollar" style="color:var(--primary);"></i>
                     <div>
-                        <b>نوع المساعدة:</b>
-                        <span>مساعدة مالية في صورة مشاريع أو مساعدة مالية نقدية</span>
+                        <b>أنواع المساعدات المقدمة:</b>
+                        <div class="service-tags">
+                            <span class="service-tag tag-highlight"><i class="fa-solid fa-ring"></i> تجهيز عرائس</span>
+                            <span class="service-tag"><i class="fa-solid fa-briefcase"></i> مشاريع تنموية صغيرة</span>
+                            <span class="service-tag"><i class="fa-solid fa-money-bill-wave"></i> مساعدة مالية نقدية</span>
+                        </div>
                     </div>
                 </div>
                 <div class="detail-item">
