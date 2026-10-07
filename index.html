@@ -18,6 +18,7 @@
             --accent-red: #d63031;
             --accent-blue: #0984e3;
             --accent-orange: #f39c12;
+            --accent-purple: #6c5ce7;
             
             --bg-body: #f4f7f6;
             --bg-card: #ffffff;
@@ -38,6 +39,7 @@
             --accent-red: #ff5252;
             --accent-blue: #40c4ff;
             --accent-orange: #ffd166;
+            --accent-purple: #a29bfe;
             
             --bg-body: #0d1117;
             --bg-card: #161b22;
@@ -365,7 +367,7 @@
             transform: translateX(-4px);
         }
 
-        /* ألوان تمييزية لبعض الأقسام */
+        /* ألوان تمييزية للبطاقات */
         .color-red .card-icon { background: rgba(214, 48, 49, 0.1); color: var(--accent-red); }
         .color-red:hover .card-icon { background: var(--accent-red); color: #fff; }
         .color-red:hover { border-color: var(--accent-red); }
@@ -380,6 +382,11 @@
         .color-orange:hover .card-icon { background: var(--accent-orange); color: #fff; }
         .color-orange:hover { border-color: var(--accent-orange); }
         .color-orange::before { background: var(--accent-orange) !important; }
+
+        .color-purple .card-icon { background: rgba(108, 92, 231, 0.1); color: var(--accent-purple); }
+        .color-purple:hover .card-icon { background: var(--accent-purple); color: #fff; }
+        .color-purple:hover { border-color: var(--accent-purple); }
+        .color-purple::before { background: var(--accent-purple) !important; }
 
         /* رسالة عدم وجود نتائج في البحث */
         .no-results {
@@ -515,7 +522,7 @@
                 <div class="card-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
                 <div class="card-info">
                     <div class="card-title">الحالات السودانية</div>
-                    <div class="card-desc">دليل الجمعيات المعتمدة وإجراءات التوجيه</div>
+                    <div class="card-desc">دليل الجمعيات المعتمدة وإجراءات التوجيه المحدثة</div>
                 </div>
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
@@ -535,9 +542,19 @@
     <div class="section-block">
         <div class="section-header">
             <h2><i class="fa-solid fa-gears"></i> بنك الطعام المصري - العمليات</h2>
-            <span class="section-count">4 أقسام</span>
+            <span class="section-count">5 أقسام</span>
         </div>
         <div class="cards-grid">
+            <!-- البطاقة الجديدة المضافة: التحويل إلى القسم المختص -->
+            <a href="الحالات الخاصة والتحويل.html" class="portal-card color-purple">
+                <div class="card-icon"><i class="fa-solid fa-arrows-turn-to-dots"></i></div>
+                <div class="card-info">
+                    <div class="card-title">التحويل إلى القسم المختص</div>
+                    <div class="card-desc">بنك الشفاء الطبي، معنا لحياة أفضل، وبنك الكساء (17014)</div>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
+            </a>
+
             <a href="الاعطال.html" class="portal-card color-red">
                 <div class="card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
                 <div class="card-info">
@@ -604,8 +621,8 @@
             <a href="الحالات الفلسطينية.html" class="portal-card color-red">
                 <div class="card-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
                 <div class="card-info">
-                    <div class="card-title">الحالات الفلسطينية</div>
-                    <div class="card-desc">صرف منحة البريد، مشروع Bless، وجواز السفر</div>
+                    <div class="card-title">الحالات الفلسطينية والمشاريع</div>
+                    <div class="card-desc">مشاريع UNICEF و Bless وبرامج Free Mart المعتمدة</div>
                 </div>
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
@@ -642,7 +659,6 @@
 </div>
 
 <script>
-    // وظيفة تبديل الوضع الليلي / النهاري مع مزامنة كل مفاتيح LocalStorage المستخدمة
     function toggleAppTheme() {
         const body = document.getElementById('pageBody');
         const icon = document.getElementById('themeIcon');
@@ -654,7 +670,6 @@
         if (isDark) {
             icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
             text.textContent = 'الوضع النهاري';
-            // حفظ التفضيل عبر كل المتغيرات لضمان التوافق مع كافة الصفحات الفرعية
             localStorage.setItem('efb_theme', 'dark');
             localStorage.setItem('myTheme', 'dark');
             localStorage.setItem('theme', 'dark');
@@ -669,7 +684,6 @@
         }
     }
 
-    // استعادة تفضيل الوضع المختار عند فتح الصفحة
     window.addEventListener('DOMContentLoaded', () => {
         const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
         if (savedTheme === 'dark') {
@@ -682,14 +696,12 @@
         setInterval(updateClock, 1000);
     });
 
-    // تحديث الساعة الحية في الشريط السفلي
     function updateClock() {
         const now = new Date();
         const timeString = now.toLocaleTimeString('ar-EG');
         document.getElementById('liveClock').textContent = timeString;
     }
 
-    // تصفية والبحث الفوري في البطاقات
     function filterCards() {
         const input = document.getElementById('searchInput').value.trim().toLowerCase();
         const cards = document.querySelectorAll('.portal-card');
@@ -708,13 +720,11 @@
             }
         });
 
-        // إخفاء العناوين الفارغة أثناء البحث
         sections.forEach(sec => {
             const hasVisibleCard = Array.from(sec.querySelectorAll('.portal-card')).some(c => c.style.display !== 'none');
             sec.style.display = hasVisibleCard ? 'block' : 'none';
         });
 
-        // إظهار رسالة إذا لم توجد نتائج
         document.getElementById('noResults').style.display = (visibleCount === 0) ? 'block' : 'none';
     }
 </script>
