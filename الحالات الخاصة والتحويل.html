@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>دليل التحويل إلى القسم المختص | بنك الطعام المصري</title>
+
+    <!-- خط وتنسيقات الأيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* ألوان الوضع النهاري (Light Mode) */
+            --primary: #00873e;
+            --primary-light: #e8f5e9;
+            --primary-red: #d63031;
+            --accent-blue: #0984e3;
+            --accent-blue-light: #e1f5fe;
+            --accent-purple: #6c5ce7;
+            --accent-purple-light: #f3f0ff;
+            --warning-orange: #f39c12;
+            --warning-orange-light: #fff8e1;
+            
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --item-bg: #f8fafc;
+        }
+
+        body.dark-mode {
+            /* ألوان الوضع الليلي (Dark Mode) */
+            --primary: #00e676;
+            --primary-light: rgba(0, 230, 118, 0.12);
+            --primary-red: #ff5252;
+            --accent-blue: #40c4ff;
+            --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --accent-purple: #a29bfe;
+            --accent-purple-light: rgba(108, 92, 231, 0.15);
+            --warning-orange: #ffb74d;
+            --warning-orange-light: rgba(255, 183, 77, 0.15);
+            
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --item-bg: #21262d;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* شريط التنقل العلوي */
+        .top-navbar {
+            background: var(--bg-header);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-nav {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+        }
+
+        .btn-nav:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
+        }
+
+        /* رأس الصفحة */
+        .page-header {
+            text-align: center;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            border-bottom: 4px solid var(--primary);
+            box-shadow: var(--card-shadow);
+        }
+
+        .page-header h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14.5px;
+        }
+
+        /* شريط مواعيد العمل */
+        .working-hours-banner {
+            background: var(--bg-card);
+            border: 2px solid var(--warning-orange);
+            border-right: 8px solid var(--warning-orange);
+            border-radius: 16px;
+            padding: 16px 24px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .hours-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15.5px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .hours-badge {
+            background: var(--warning-orange-light);
+            color: #d35400;
+            border: 1px solid var(--warning-orange);
+            padding: 6px 16px;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        body.dark-mode .hours-badge {
+            color: var(--warning-orange);
+        }
+
+        /* شبكة الأقسام المتخصصة للتحويل */
+        .departments-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 35px;
+        }
+
+        .dept-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s;
+        }
+
+        .dept-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .dept-card::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 7px;
+        }
+
+        .card-medical::before { background: var(--accent-blue); }
+        .card-financial::before { background: var(--primary); }
+        .card-clothing::before { background: var(--accent-purple); }
+
+        .dept-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dept-title-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .dept-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .icon-med { background: var(--accent-blue-light); color: var(--accent-blue); }
+        .icon-fin { background: var(--primary-light); color: var(--primary); }
+        .icon-clo { background: var(--accent-purple-light); color: var(--accent-purple); }
+
+        .dept-name {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        .dept-badge {
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: #fff;
+        }
+
+        .badge-med { background: var(--accent-blue); }
+        .badge-fin { background: var(--primary); }
+        .badge-clo { background: var(--accent-purple); }
+
+        .dept-details-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .detail-item {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .detail-item i {
+            font-size: 18px;
+            margin-top: 3px;
+        }
+
+        .detail-item div b {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .detail-item div span {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* صندوق صيغة السيستم المعتمدة */
+        .referral-box {
+            background: var(--item-bg);
+            border: 1.5px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .referral-text-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14.5px;
+            font-weight: 800;
+            color: var(--text-main);
+            flex: 1;
+        }
+
+        .btn-copy {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-medical .btn-copy:hover { border-color: var(--accent-blue); color: var(--accent-blue); background: var(--accent-blue-light); }
+        .card-financial .btn-copy:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+        .card-clothing .btn-copy:hover { border-color: var(--accent-purple); color: var(--accent-purple); background: var(--accent-purple-light); }
+
+        .hotline-tag {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--accent-purple);
+            background: var(--accent-purple-light);
+            padding: 2px 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        /* صندوق إجراءات السيستم */
+        .system-action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-right: 6px solid var(--primary);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .system-header {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .system-facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .fact-card {
+            background: var(--item-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fact-card i {
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        .fact-info b {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .fact-info span {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .breadcrumb-box {
+            background: var(--item-bg);
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 600;
+            direction: ltr;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        /* توست النسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2d3436;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+            border: 1px solid var(--primary);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .referral-box { width: 100%; }
+            .btn-copy { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body id="pageBody">
+
+<!-- شريط الملاحة العلوي -->
+<nav class="top-navbar">
+    <a href="index.html" class="btn-nav">
+        <i class="fa-solid fa-arrow-right"></i>
+        <span>العودة للرئيسية</span>
+    </a>
+
+    <div>
+        <button class="btn-nav btn-theme" onclick="toggleTheme()" id="themeBtn">
+            <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+            <span id="themeText">الوضع الليلي</span>
+        </button>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- رأس الصفحة -->
+    <header class="page-header">
+        <h1><i class="fa-solid fa-arrows-turn-to-dots"></i> دليل التحويل إلى القسم المختص</h1>
+        <p>دليل تحويل الحالات إلى الشركاء المعتمدين وإجراءات التسجيل بالنظام</p>
+    </header>
+
+    <!-- شريط مواعيد العمل الخاصة بجهات التحويل -->
+    <div class="working-hours-banner">
+        <div class="hours-title">
+            <i class="fa-solid fa-clock" style="color:var(--warning-orange); font-size:22px;"></i>
+            <span>مواعيد العمل المعتمدة لجهات التحويل:</span>
+        </div>
+        <div class="hours-badge">
+            <i class="fa-regular fa-clock"></i> من 11:00 صباحاً إلى 7:00 مساءً
+        </div>
+    </div>
+
+    <!-- بطاقات التحويل مقسمة بالقسم المختص -->
+    <div class="departments-container">
+
+        <!-- 1. القسم الطبي (بنك الشفاء المصري) -->
+        <div class="dept-card card-medical">
+            <div class="dept-header">
+                <div class="dept-title-group">
+                    <div class="dept-icon icon-med">
+                        <i class="fa-solid fa-hand-holding-medical"></i>
+                    </div>
+                    <div>
+                        <h3 class="dept-name">بنك الشفاء المصري</h3>
+                        <span style="font-size:12.5px; color:var(--text-muted); font-weight:600;">الجهة المختصة بالرعاية والخدمات العلاجية</span>
+                    </div>
+                </div>
+                <span class="dept-badge badge-med">القسم الطبي والصحي</span>
+            </div>
+
+            <div class="dept-details-row">
+                <div class="detail-item">
+                    <i class="fa-solid fa-stethoscope" style="color:var(--accent-blue);"></i>
+                    <div>
+                        <b>نوع المساعدة الطبية:</b>
+                        <span>علاج، عمليات جراحية، فحوصات، وأدوية</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-route" style="color:var(--accent-blue);"></i>
+                    <div>
+                        <b>نوع الإجراء بالسيستم:</b>
+                        <span style="color:var(--accent-blue);">تم التحويل الى القسم المختص</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="referral-box" style="border-right: 4px solid var(--accent-blue);">
+                <div class="referral-text-wrapper">
+                    <i class="fa-solid fa-clipboard-check" style="color:var(--accent-blue); font-size:18px;"></i>
+                    <span>صيغة التحويل بالنظام:</span>
+                    <b class="copy-target" style="color:var(--accent-blue);">تم التحويل إلى: بنك الشفاء المصري</b>
+                </div>
+                <button class="btn-copy" onclick="copyText(this)">
+                    <i class="fa-regular fa-copy"></i> نسخ الصيغة للسيستم
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. قسم المساعدات المالية والمشاريع (معنا لحياة أفضل) -->
+        <div class="dept-card card-financial">
+            <div class="dept-header">
+                <div class="dept-title-group">
+                    <div class="dept-icon icon-fin">
+                        <i class="fa-solid fa-people-roof"></i>
+                    </div>
+                    <div>
+                        <h3 class="dept-name">معنا لحياة أفضل</h3>
+                        <span style="font-size:12.5px; color:var(--text-muted); font-weight:600;">الجهة المختصة بالتمكين الاقتصادي والمساعدات المالية</span>
+                    </div>
+                </div>
+                <span class="dept-badge badge-fin">قسم المشاريع والدعم المالي</span>
+            </div>
+
+            <div class="dept-details-row">
+                <div class="detail-item">
+                    <i class="fa-solid fa-sack-dollar" style="color:var(--primary);"></i>
+                    <div>
+                        <b>نوع المساعدة:</b>
+                        <span>مساعدة مالية في صورة مشاريع أو مساعدة مالية نقدية</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-chart-line" style="color:var(--primary);"></i>
+                    <div>
+                        <b>نوع الإجراء بالسيستم:</b>
+                        <span style="color:var(--primary);">تم التحويل الى القسم المختص</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="referral-box" style="border-right: 4px solid var(--primary);">
+                <div class="referral-text-wrapper">
+                    <i class="fa-solid fa-clipboard-check" style="color:var(--primary); font-size:18px;"></i>
+                    <span>صيغة التحويل بالنظام:</span>
+                    <b class="copy-target" style="color:var(--primary);">تم التحويل إلى: معنا لحياة أفضل</b>
+                </div>
+                <button class="btn-copy" onclick="copyText(this)">
+                    <i class="fa-regular fa-copy"></i> نسخ الصيغة للسيستم
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. قسم الدعم العيني والكساء (بنك الكساء المصري) -->
+        <div class="dept-card card-clothing">
+            <div class="dept-header">
+                <div class="dept-title-group">
+                    <div class="dept-icon icon-clo">
+                        <i class="fa-solid fa-shirt"></i>
+                    </div>
+                    <div>
+                        <h3 class="dept-name">بنك الكساء المصري</h3>
+                        <span style="font-size:12.5px; color:var(--text-muted); font-weight:600;">الجهة المختصة بتوفير الملابس والكساء للأسر المستحقة</span>
+                    </div>
+                </div>
+                <span class="dept-badge badge-clo">قسم الكساء والدعم العيني</span>
+            </div>
+
+            <div class="dept-details-row">
+                <div class="detail-item">
+                    <i class="fa-solid fa-phone-volume" style="color:var(--accent-purple);"></i>
+                    <div>
+                        <b>الخط الساخن المباشر للاتصال:</b>
+                        <span><strong class="hotline-tag">17014</strong></span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-box-open" style="color:var(--accent-purple);"></i>
+                    <div>
+                        <b>نوع المساعدة:</b>
+                        <span>توفير الملابس والكساء الموسمي والمدرسي</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="referral-box" style="border-right: 4px solid var(--accent-purple);">
+                <div class="referral-text-wrapper">
+                    <i class="fa-solid fa-clipboard-check" style="color:var(--accent-purple); font-size:18px;"></i>
+                    <span>صيغة التحويل بالنظام:</span>
+                    <b class="copy-target" style="color:var(--accent-purple);">تم التحويل إلى: بنك الكساء المصري (17014)</b>
+                </div>
+                <button class="btn-copy" onclick="copyText(this)">
+                    <i class="fa-regular fa-copy"></i> نسخ الصيغة للسيستم
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- صندوق إجراءات السيستم -->
+    <div class="system-action-box">
+        <div class="system-header">
+            <i class="fa-solid fa-gears"></i> إجراءات تسجيل التحويل بالنظام (Action System):
+        </div>
+
+        <div class="system-facts-grid">
+            <div class="fact-card">
+                <i class="fa-solid fa-phone-volume"></i>
+                <div class="fact-info">
+                    <b>تصنيف Call Logs:</b>
+                    <span style="color:var(--primary);">Inquiry / استفسار</span>
+                </div>
+            </div>
+
+            <div class="fact-card">
+                <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                <div class="fact-info">
+                    <b>نوع الإجراء:</b>
+                    <span style="color:var(--primary); font-size:16px;">تم التحويل الى القسم المختص</span>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size: 13.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">
+            مسار السيستم المعتمد (System Breadcrumb):
+        </p>
+        <div class="breadcrumb-box">
+            <span>CaLL Actions</span>
+            <span style="color:var(--primary);">➔</span>
+            <span>Inquiry CALLs</span>
+            <span style="color:var(--primary);">➔</span>
+            <span>add Inquiry</span>
+            <span style="color:var(--primary);">➔</span>
+            <span style="color:var(--primary); font-weight:800; direction:rtl; font-size:14.5px;">تم التحويل الى القسم المختص</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- توست النسخ -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color:var(--primary);"></i>
+    <span id="toastMsg">تم النسخ بنجاح!</span>
+</div>
+
+<script>
+    function showNotification(msg) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastMsg').innerText = msg;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2200);
+    }
+
+    // نسخ النص التوجيهي
+    function copyText(btn) {
+        const box = btn.closest('.referral-box');
+        const text = box.querySelector('.copy-target').innerText.trim();
+
+        navigator.clipboard.writeText(text).then(() => {
+            showNotification(`تم نسخ: ${text}`);
+        }).catch(() => {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            showNotification(`تم نسخ: ${text}`);
+        });
+    }
+
+    // إدارة الوضع الليلي/النهاري
+    function toggleTheme() {
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
+            localStorage.setItem('myTheme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            localStorage.setItem('myTheme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
+        }
+    });
+</script>
+
+</body>
+</html>
