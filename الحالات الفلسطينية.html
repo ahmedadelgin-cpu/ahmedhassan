@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
-    <title>تعليمات الحالات الفلسطينية | بنك الطعام المصري</title>
+    <title>دليل المشاريع والتعليمات | بنك الطعام المصري</title>
 
     <!-- أيقونات FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,8 +18,12 @@
             --primary-red-light: #ffebee;
             --accent-blue: #0984e3;
             --accent-blue-light: #e1f5fe;
+            --accent-purple: #6c5ce7;
+            --accent-purple-light: #f3f0ff;
             --warning-orange: #f39c12;
             --warning-orange-light: #fff8e1;
+            --teal: #00cec9;
+            --teal-light: #e0fbfb;
             
             --bg-body: #f4f7f6;
             --bg-card: #ffffff;
@@ -39,8 +43,12 @@
             --primary-red-light: rgba(255, 82, 82, 0.15);
             --accent-blue: #40c4ff;
             --accent-blue-light: rgba(9, 132, 227, 0.15);
+            --accent-purple: #a29bfe;
+            --accent-purple-light: rgba(108, 92, 231, 0.15);
             --warning-orange: #ffb74d;
             --warning-orange-light: rgba(255, 183, 77, 0.15);
+            --teal: #81ecec;
+            --teal-light: rgba(0, 206, 201, 0.15);
             
             --bg-body: #0d1117;
             --bg-card: #161b22;
@@ -141,45 +149,102 @@
             font-size: 14px;
         }
 
-        /* شريط التنبيه الذهبي لمشروع Bless */
-        .bless-banner {
-            background: var(--warning-orange-light);
+        /* شريط التنبيه الإلزامي في أول الصفحة */
+        .critical-alert-card {
+            background: var(--bg-card);
             border: 2px solid var(--warning-orange);
-            border-radius: 14px;
-            padding: 16px 20px;
+            border-right: 8px solid var(--warning-orange);
+            border-radius: 16px;
+            padding: 24px;
             margin-bottom: 25px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+
+        .critical-alert-header {
+            color: var(--warning-orange);
+            font-size: 18px;
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: var(--card-shadow);
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
-        .bless-banner i {
-            font-size: 26px;
-            color: var(--warning-orange);
-            flex-shrink: 0;
+        .critical-alert-main-text {
+            font-size: 15.5px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 0 0 16px 0;
+            line-height: 1.8;
         }
 
-        .bless-banner p {
-            margin: 0;
+        .required-data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .data-item {
+            background: var(--item-bg);
+            border: 1.5px dashed var(--border-color);
+            border-radius: 10px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-main);
         }
 
-        .bless-tag {
-            background: var(--warning-orange);
-            color: #fff;
+        .data-item i {
+            color: var(--primary-green);
+            font-size: 16px;
+        }
+
+        .reply-guide-box {
+            background: var(--primary-green-light);
+            border: 1px solid var(--primary-green);
+            border-radius: 10px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 12px;
+        }
+
+        .storage-location-box {
+            background: var(--accent-blue-light);
+            border: 1px solid var(--accent-blue);
+            border-radius: 10px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .folder-name-badge {
+            background: var(--accent-blue);
+            color: #ffffff;
             padding: 2px 10px;
             border-radius: 6px;
-            font-weight: bold;
-            font-size: 13px;
+            font-weight: 800;
+            display: inline-block;
+            margin: 0 4px;
         }
 
         /* صندوق البحث السريع */
         .search-box {
             position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .search-box i {
@@ -250,21 +315,23 @@
         }
 
         .scenario-icon {
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             border-radius: 12px;
             background: var(--primary-green-light);
             color: var(--primary-green);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             flex-shrink: 0;
         }
 
         .card-red .scenario-icon { background: var(--primary-red-light); color: var(--primary-red); }
         .card-blue .scenario-icon { background: var(--accent-blue-light); color: var(--accent-blue); }
+        .card-purple .scenario-icon { background: var(--accent-purple-light); color: var(--accent-purple); }
         .card-orange .scenario-icon { background: var(--warning-orange-light); color: var(--warning-orange); }
+        .card-teal .scenario-icon { background: var(--teal-light); color: var(--teal); }
 
         .scenario-content {
             flex-grow: 1;
@@ -290,6 +357,19 @@
             margin: 0;
         }
 
+        .project-highlight-badge {
+            display: inline-block;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin: 0 3px;
+            font-size: 13px;
+        }
+
+        .badge-unicef { background: var(--accent-blue-light); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+        .badge-blees { background: var(--warning-orange-light); color: var(--warning-orange); border: 1px solid var(--warning-orange); }
+        .badge-freemart { background: var(--primary-red-light); color: var(--primary-red); border: 1px solid var(--primary-red); }
+
         .copy-btn-hint {
             font-size: 11px;
             color: var(--primary-green);
@@ -306,6 +386,27 @@
 
         .scenario-card:hover .copy-btn-hint {
             opacity: 1;
+        }
+
+        /* تنبيه إجراء فري مارت */
+        .freemart-alert-box {
+            background: var(--primary-red-light);
+            border: 1.5px solid var(--primary-red);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: bold;
+            color: var(--text-main);
+            font-size: 14.5px;
+        }
+
+        .freemart-alert-box i {
+            color: var(--primary-red);
+            font-size: 24px;
+            flex-shrink: 0;
         }
 
         /* صندوق إجراءات السيستم */
@@ -399,126 +500,239 @@
 
     <!-- رأس الصفحة -->
     <header class="page-header">
-        <h1><i class="fa-solid fa-hand-holding-heart"></i> تعليمات الحالات الفلسطينية (مشروع Bless)</h1>
-        <p>دليل الإجراءات الرسمية، شروط صرف المنحة، وسيناريوهات التعامل مع البريد والمشرفين</p>
+        <h1><i class="fa-solid fa-clipboard-list"></i> دليل مشاريع الشكاوى وإجراءات العمل</h1>
+        <p>دليل اختيار Project الشكاوى (Blees / UNICEF / Free Mart) والتوجيهات التشغيلية المعتمدة</p>
     </header>
 
-    <!-- شريط التنبيه الذهبي لمشروع Bless -->
-    <div class="bless-banner">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        <p>
-            تنبيه هام للموظف: عند تسجيل أي شكوى بخصوص تأخير التسليمات أو عدم رد المشرف للحالات الفلسطينية، يجب كتابة اسم المشروع <span class="bless-tag">Bless</span> داخل نص الشكوى على السيستم.
+    <!-- شريط التنبيه الهام جداً: تعذر الوصول للمشرف / تحديث البيانات -->
+    <div class="critical-alert-card">
+        <div class="critical-alert-header">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>📌 نقطة هامة جداً: تعذر الوصول للمشرف / تحديث بيانات الحالات الفلسطينية</span>
+        </div>
+
+        <p class="critical-alert-main-text">
+            لو الحالة فلسطينية وعايزة تحدث البيانات ومش عارفة ترجع للمشرف أو تتواصل مع المشرف، 
+            <b>يتم أخذ البيانات التالية من المتصل:</b>
         </p>
+
+        <!-- كروت البيانات المطلوبة -->
+        <div class="required-data-grid">
+            <div class="data-item">
+                <i class="fa-solid fa-user-check"></i>
+                <span>1. الاسم بالكامل</span>
+            </div>
+            <div class="data-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>2. رقم الموبايل للتواصل</span>
+            </div>
+            <div class="data-item">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>3. سبب تحديث البيانات</span>
+            </div>
+        </div>
+
+        <!-- أسلوب الرد على الحالة -->
+        <div class="reply-guide-box">
+            <i class="fa-solid fa-headset"></i>
+            <div>
+                <b>التوجيه والرد على الحالة:</b> بنوضح للحالة إنه <b>«سيتم التواصل معاها في أقرب وقت»</b>.
+            </div>
+        </div>
+
+        <!-- مكان تسجيل البيانات في الـ Shared للموظف -->
+        <div class="storage-location-box">
+            <i class="fa-solid fa-folder-open"></i>
+            <div>
+                <b>إجراء داخلي للموظف:</b> يتم تسجيل البيانات في فولدر على الـ Shared باسم <span class="folder-name-badge">الحالات الفلسطينية</span>.
+            </div>
+        </div>
     </div>
 
-    <!-- شريط البحث السريع -->
+    <!-- شريط البحث السريع الحي -->
     <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 اكتب للبحث السريع (مثال: بريد، باسبور، إقامة، مشرف، 1500، Bless)..." onkeyup="filterCards()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث هنا باسم المشروع أو الحالة (مثال: UNICEF، Blees، فروع، غزة، منحة، سؤال الحالة...)" onkeyup="filterCards()">
     </div>
 
-    <!-- المحور الأول: شروط صرف المنحة والإقامة -->
+    <!-- المحور 1: مشاريع الشكاوى (Blees + UNICEF) -->
     <div class="category-section">
-        <div class="category-title" style="color: var(--primary-green);">
-            <i class="fa-solid fa-passport"></i> 1. ضوابط صرف المنحة وإثبات الشخصية
+        <div class="category-title">
+            <i class="fa-solid fa-bullhorn" style="color:var(--accent-blue);"></i>
+            <span>1- تصنيف مشاريع الشكوى (Blees + UNICEF):</span>
         </div>
-        <div class="scenarios-grid">
-            <div class="scenario-card" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-solid fa-id-card"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">إثبات الشخصية الأصلي</span>
-                    <p class="scenario-text">صرف المنحة يتم <b>فقط بالباسبور الأصلي ويكون سارياً</b>. وفي حالة عدم توافره يتم الحصول على بيانات شخصية لبديل للصرف (الزوج/الزوجة أو الأبناء - قرابة درجة أولى). والتأكيد أن <b>الصرف لا يتم بالهوية الفلسطينية</b> نهائياً لعدم التعامل بها داخل مصر.</p>
-                </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
-            </div>
 
-            <div class="scenario-card card-orange" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-solid fa-file-circle-exclamation"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">مشكلة الإقامة في البريد</span>
-                    <p class="scenario-text">في حال رفض فرع البريد صرف المنحة بسبب عدم وجود إقامة؛ يتم أولاً <b>توجيه الحالة للصرف من فرع بريد آخر</b>. وفي حال رفض الفرع الآخر أيضاً يتم توجيه العميل بضرورة حل وتجديد مشكلة الإقامة.</p>
-                </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- المحور الثاني: مشاكل البريد وقسيمة الـ 1500 -->
-    <div class="category-section">
-        <div class="category-title" style="color: var(--accent-blue);">
-            <i class="fa-solid fa-envelopes-bulk"></i> 2. استفسارات ومشاكل البريد المصري وقسائم الصرف
-        </div>
         <div class="scenarios-grid">
+
+            <!-- بطاقة UNICEF -->
             <div class="scenario-card card-blue" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-solid fa-user-xmark"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">الاسم غير موجود بالبريد</span>
-                    <p class="scenario-text">إذا وصلته رسالة بالصرف والاسم غير موجود بالبريد؛ يُوجّه لفروع أخرى للتأكد. وإذا توجه لأكثر من فرع والاسم غير موجود، يتم <b>تسجيل شكوى تأخير جمعية في التسليمات</b> مع ذكر اسم المشروع <b>Bless</b> وشرح التفاصيل.</p>
+                <div class="scenario-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
                 </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+                <div class="scenario-content">
+                    <span class="scenario-badge">Project: UNICEF</span>
+                    <p class="scenario-text">
+                        <b>اختيار مشروع <span class="project-highlight-badge badge-unicef">UNICEF</span>:</b><br>
+                        يتم اختياره في حالة إن الحالة <b>بتستلم بشكل شهري</b>.
+                    </p>
+                </div>
+                <div class="copy-btn-hint">
+                    <i class="fa-regular fa-copy"></i> انقر للنسخ
+                </div>
             </div>
 
-            <div class="scenario-card card-blue" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">رسالة قسيمة الـ 1500 ج</span>
-                    <p class="scenario-text">في حال تواصل العميل ووضح أن هناك رسالة بقيمة 1500 جنيه والاستلام من البريد المصري؛ يتم توضيح التوجه للفرع ومعه الباسبور الساري لاستلام المنحة المالية المخصصة.</p>
-                </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
-            </div>
-
+            <!-- بطاقة Blees -->
             <div class="scenario-card card-orange" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-solid fa-spell-check"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">خطأ في تسجيل الاسم</span>
-                    <p class="scenario-text">إذا وضح العميل أن اسمه مسجل بشكل خاطئ في دفاتر البريد؛ يتم توضيحه بضرورة <b>الرجوع إلى مشرف بنك الطعام</b> لتعديل بيانات الاسم على السيستم.</p>
+                <div class="scenario-icon">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
                 </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+                <div class="scenario-content">
+                    <span class="scenario-badge">Project: Blees</span>
+                    <p class="scenario-text">
+                        <b>اختيار مشروع <span class="project-highlight-badge badge-blees">Blees</span>:</b><br>
+                        يتم اختياره في حالة إن الحالة <b>بتستلم فلوس من البريد</b>.
+                    </p>
+                </div>
+                <div class="copy-btn-hint">
+                    <i class="fa-regular fa-copy"></i> انقر للنسخ
+                </div>
             </div>
+
         </div>
     </div>
 
-    <!-- المحور الثالث: المشرفين ومجموعات الواتساب -->
+    <!-- المحور 2: إجراءات برنامج (Free Mart) -->
     <div class="category-section">
-        <div class="category-title" style="color: var(--primary-red);">
-            <i class="fa-solid fa-users-gear"></i> 3. شكاوى المشرفين، التواصل ومجموعات الواتساب
+        <div class="category-title">
+            <i class="fa-solid fa-cart-shopping" style="color:var(--primary-red);"></i>
+            <span>2- إجراءات ومشاريع برنامج (Free Mart):</span>
         </div>
+
+        <!-- الصندوق الإرشادي للشكوى -->
+        <div class="freemart-alert-box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+                لو الحالة تواصلت وطلبت تحديث بيانات لأن <b>الموظف رفض يسلمها</b> ⬅ 
+                الإجراء المتبع: بنسجل شكوى <u>(تجاوزات جمعية)</u> على السيستم، ونختار الـ Project بحسب الآتي:
+            </div>
+        </div>
+
         <div class="scenarios-grid">
+
+            <!-- Free Mart جمعيات -->
+            <div class="scenario-card card-purple" onclick="copyScenario(this)">
+                <div class="scenario-icon">
+                    <i class="fa-solid fa-handshake-angle"></i>
+                </div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">الجمعيات الشريكة</span>
+                    <p class="scenario-text">
+                        <b>اختيار: <span class="project-highlight-badge badge-freemart">Free Mart جمعيات</span></b><br>
+                        في حالة إن الحالة بتستلم على برنامج الـ Free Mart <b>من خلال الجمعيات الشريكة</b> لبنك الطعام.
+                    </p>
+                </div>
+                <div class="copy-btn-hint">
+                    <i class="fa-regular fa-copy"></i> انقر للنسخ
+                </div>
+            </div>
+
+            <!-- Free Mart فروع -->
+            <div class="scenario-card card-teal" onclick="copyScenario(this)">
+                <div class="scenario-icon">
+                    <i class="fa-solid fa-shop"></i>
+                </div>
+                <div class="scenario-content">
+                    <span class="scenario-badge">فروع بنك الطعام</span>
+                    <p class="scenario-text">
+                        <b>اختيار: <span class="project-highlight-badge badge-freemart">Free Mart فروع</span></b><br>
+                        هنسجلها في حالة إن الحالة <b>بتستلم من فروع بنك الطعام المصري مباشرة</b>.
+                    </p>
+                </div>
+                <div class="copy-btn-hint">
+                    <i class="fa-regular fa-copy"></i> انقر للنسخ
+                </div>
+            </div>
+
+            <!-- Free Mart غزة -->
             <div class="scenario-card card-red" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">عدم رد المشرف / ليس بالجروب</span>
-                    <p class="scenario-text">في حال كان العميل غير مضاف لجروب الواتساب أو تواصل مع مشرف بنك الطعام ولم يتم الرد عليه؛ يتم <b>تسجيل شكوى تأخير جمعية في التسليمات</b> مع  كتابة اسم المشروع <b>Bless</b>.</p>
+                <div class="scenario-icon">
+                    <i class="fa-solid fa-flag"></i>
                 </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+                <div class="scenario-content">
+                    <span class="scenario-badge">حالات فلسطينية</span>
+                    <p class="scenario-text">
+                        <b>اختيار: <span class="project-highlight-badge badge-freemart">Free Mart غزة</span></b><br>
+                        في حالة إن الحالة <b>فلسطينية</b> وبتستلم معانا على نفس البرنامج (Free Mart).
+                    </p>
+                </div>
+                <div class="copy-btn-hint">
+                    <i class="fa-regular fa-copy"></i> انقر للنسخ
+                </div>
             </div>
 
-            <div class="scenario-card card-red" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-solid fa-scale-unbalanced"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">شكوى سلوك ضد المشرف</span>
-                    <p class="scenario-text">إذا اشتكت الحالة من أن المشرف تعامل بأسلوب غير لائق أو أغلق الخط في وجه الحالة؛ يتم <b>تسجيل شكوى ميثاق شرف (سوء سلوك)</b></p>
+            <!-- Free Mart سودانيين -->
+            <div class="scenario-card card-orange" onclick="copyScenario(this)">
+                <div class="scenario-icon">
+                    <i class="fa-solid fa-earth-africa"></i>
                 </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+                <div class="scenario-content">
+                    <span class="scenario-badge">حالات سودانية</span>
+                    <p class="scenario-text">
+                        <b>اختيار: <span class="project-highlight-badge badge-freemart">Free Mart سودانيين</span></b><br>
+                        في حالة إن الحالة <b>سودانية</b> وبتستلم معانا على نفس البرنامج (Free Mart).
+                    </p>
+                </div>
+                <div class="copy-btn-hint">
+                    <i class="fa-regular fa-copy"></i> انقر للنسخ
+                </div>
             </div>
 
-            <div class="scenario-card" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-solid fa-mobile-retro"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">تعديل رقم الهاتف</span>
-                    <p class="scenario-text">في حال رغبة الحالة الفلسطينية في <b>تعديل رقم الهاتف</b>؛ يتم توجيه الحالة بالرجوع مباشرة إلى مشرف بنك الطعام المسؤول عنها.</p>
+        </div>
+    </div>
+
+    <!-- المحور 3: توجيهات المنح القادمة وجودة التسجيل على السيستم (جديد) -->
+    <div class="category-section">
+        <div class="category-title">
+            <i class="fa-solid fa-star" style="color:var(--warning-orange);"></i>
+            <span>3- توجيهات المنح القادمة وجودة التسجيل على السيستم:</span>
+        </div>
+
+        <div class="scenarios-grid">
+
+            <!-- بطاقة كشوفات ومنح الفترة القادمة -->
+            <div class="scenario-card card-teal" onclick="copyScenario(this)">
+                <div class="scenario-icon">
+                    <i class="fa-solid fa-gift"></i>
                 </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+                <div class="scenario-content">
+                    <span class="scenario-badge">🎁 المنح القادمة</span>
+                    <p class="scenario-text">
+                        <b>كشوفات ومنح الفترة القادمة:</b><br>
+                        إن شاء الله الفترة الجاية لو في أي منحة هتتقدم، <b>هنكون عارفين قبلها ومعانا Sheet فيه أسماء الحالات المستفيدة</b>.
+                    </p>
+                </div>
+                <div class="copy-btn-hint">
+                    <i class="fa-regular fa-copy"></i> انقر للنسخ
+                </div>
             </div>
 
-            <div class="scenario-card" onclick="copyScenario(this)">
-                <div class="scenario-icon"><i class="fa-solid fa-ticket"></i></div>
-                <div class="scenario-content">
-                    <span class="scenario-badge">انقطاع أكواد OTP الشهرية</span>
-                    <p class="scenario-text">في حال كانت الحالة تستلم أكواداً بشكل شهري ووضحت أنها لم تستلم كود المساعدة لمدة تتراوح بين (شهر إلى 11 شهراً)؛ يتم <b>تقديم شكوى  عدم استقبال رساله الكود </b>.</p>
+            <!-- بطاقة دقة تسجيل سؤال الحالة -->
+            <div class="scenario-card card-blue" onclick="copyScenario(this)">
+                <div class="scenario-icon">
+                    <i class="fa-solid fa-pen-to-square"></i>
                 </div>
-                <span class="copy-btn-hint"><i class="fa-regular fa-copy"></i> نسخ الإجراء</span>
+                <div class="scenario-content">
+                    <span class="scenario-badge">📝 جودة التسجيل والسيستم</span>
+                    <p class="scenario-text">
+                        <b>تسجيل سؤال الحالة بوضوح (توجيه محتاج):</b><br>
+                        محتاجين نركز في إننا <b>نسجل سؤال الحالة صح وواضح</b> (مفهوم للي هيشوفه بعدك) على السيستم لما بنعمل لها توجيه محتاج.
+                    </p>
+                </div>
+                <div class="copy-btn-hint">
+                    <i class="fa-regular fa-copy"></i> انقر للنسخ
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -529,23 +743,26 @@
         </div>
         <div class="tags-row">
             <div class="tag-pill">
-                <b>Call Logs:</b> <span>Inquiry / استفسار</span>
+                <b>نوع الشكوى عند رفض التسليم:</b> <span style="color:var(--primary-red);">تجاوزات جمعية</span>
+            </div>
+            <div class="tag-pill">
+                <b>Call Logs:</b> <span>Inquiry / Complaint</span>
             </div>
             <div class="tag-pill">
                 <b>Call Actions:</b> <span>CaLL Actions ➔ Inquiry CALLs ➔ addInquiry</span>
             </div>
             <div class="tag-pill">
-                <b>الإجراء:</b> <span>توجيه محتاج</span>
+                <b>تنبيه الجودة:</b> <span>كتابة استفسار الحالة بصياغة واضحة ومفهومة</span>
             </div>
         </div>
     </div>
 
 </div>
 
-<!-- توست النسخ -->
+<!-- توست الإشعار عند النسخ -->
 <div id="toast" class="toast">
     <i class="fa-solid fa-circle-check" style="color:var(--primary-green);"></i>
-    <span id="toastMsg">تم نسخ الإجراء بنجاح!</span>
+    <span id="toastMsg">تم النسخ بنجاح!</span>
 </div>
 
 <script>
@@ -583,7 +800,7 @@
         });
     }
 
-    // الوضع الليلي والنهاري
+    // إدارة الوضع الليلي والنهاري
     function toggleTheme() {
         const body = document.getElementById('pageBody');
         const icon = document.getElementById('themeIcon');
