@@ -150,7 +150,7 @@
             padding: 0 20px;
         }
 
-        /* شريط التنبيه والأرقام السريعة */
+        /* شريط التنبيه والأرقام السريعة ومواعيد العمل */
         .quick-banner {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -191,6 +191,15 @@
             padding: 2px 10px;
             border-radius: 20px;
             font-size: 12px;
+        }
+
+        .badge-hours {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid var(--primary);
         }
 
         /* صندوق البحث الحي السريع */
@@ -450,11 +459,12 @@
 
 <div class="container">
     
-    <!-- شريط الإرشادات والأرقام السريعة -->
+    <!-- شريط الإرشادات والأرقام ومواعيد العمل السريعة -->
     <div class="quick-banner">
         <div class="quick-info-items">
+            <span><i class="fa-solid fa-clock"></i> مواعيد العمل: <strong class="badge-hours">من 9:00 صباحاً إلى 10:00 مساءً</strong></span>
             <span><i class="fa-solid fa-phone-volume"></i> الخط الساخن: <strong class="badge-hotline">16060</strong></span>
-            <span><i class="fa-brands fa-whatsapp"></i> واتساب : <strong>01152888777</strong></span>
+            <span><i class="fa-brands fa-whatsapp"></i> واتساب: <strong>01152888777</strong></span>
             <span><i class="fa-solid fa-circle-check"></i> مواعيد متابعة الطلب: <strong>مرة كل 30 يوماً</strong></span>
         </div>
         <div>
