@@ -17,10 +17,10 @@
     <style>
         :root {
             /* باليت ألوان الوضع النهاري العصري */
-            --primary: #059669;
-            --primary-hover: #047857;
+            --primary: #047857;          /* أخضر صريح وواضح */
+            --primary-hover: #065f46;
             --primary-light: #ecfdf5;
-            --primary-glow: rgba(5, 150, 105, 0.15);
+            --primary-glow: rgba(4, 120, 87, 0.2);
             
             --accent-red: #e11d48;
             --accent-red-light: #ffe4e6;
@@ -32,15 +32,15 @@
             --accent-purple-light: #ede9fe;
 
             --bg-base: #f8fafc;
-            --bg-glass: rgba(255, 255, 255, 0.88);
+            --bg-glass: rgba(255, 255, 255, 0.92);
             --bg-card: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --border-subtle: rgba(226, 232, 240, 0.9);
+            --border-subtle: rgba(226, 232, 240, 0.95);
             
-            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
-            --shadow-hover: 0 20px 30px -10px rgba(5, 150, 105, 0.18);
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+            --shadow-hover: 0 20px 30px -10px rgba(4, 120, 87, 0.25);
             
             --radius-lg: 20px;
             --radius-md: 14px;
@@ -48,31 +48,31 @@
         }
 
         body.dark-mode {
-            /* باليت ألوان الوضع الليلي العميق */
+            /* باليت ألوان الوضع الليلي */
             --primary: #10b981;
             --primary-hover: #34d399;
-            --primary-light: rgba(16, 185, 129, 0.12);
-            --primary-glow: rgba(16, 185, 129, 0.25);
+            --primary-light: #064e3b;
+            --primary-glow: rgba(16, 185, 129, 0.35);
 
             --accent-red: #fb7185;
-            --accent-red-light: rgba(251, 113, 133, 0.12);
+            --accent-red-light: rgba(251, 113, 133, 0.15);
             --accent-blue: #38bdf8;
-            --accent-blue-light: rgba(56, 189, 248, 0.12);
+            --accent-blue-light: rgba(56, 189, 248, 0.15);
             --accent-orange: #fbbf24;
-            --accent-orange-light: rgba(251, 191, 36, 0.12);
+            --accent-orange-light: rgba(251, 191, 36, 0.15);
             --accent-purple: #c084fc;
-            --accent-purple-light: rgba(192, 132, 252, 0.12);
+            --accent-purple-light: rgba(192, 132, 252, 0.15);
 
             --bg-base: #090d16;
-            --bg-glass: rgba(15, 23, 42, 0.88);
+            --bg-glass: rgba(15, 23, 42, 0.92);
             --bg-card: #0f172a;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-subtle: rgba(51, 65, 85, 0.6);
+            --border-subtle: rgba(51, 65, 85, 0.7);
 
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-            --shadow-md: 0 12px 25px rgba(0, 0, 0, 0.45);
-            --shadow-hover: 0 20px 35px rgba(16, 185, 129, 0.25);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 12px 25px rgba(0, 0, 0, 0.55);
+            --shadow-hover: 0 20px 35px rgba(16, 185, 129, 0.3);
         }
 
         * {
@@ -89,7 +89,7 @@
             background-color: var(--bg-base);
             background-image: 
                 radial-gradient(at 10% 10%, var(--primary-glow) 0px, transparent 40%),
-                radial-gradient(at 90% 90%, rgba(2, 132, 199, 0.06) 0px, transparent 40%);
+                radial-gradient(at 90% 90%, rgba(2, 132, 199, 0.08) 0px, transparent 40%);
             background-attachment: fixed;
             color: var(--text-main);
             font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -99,7 +99,7 @@
             min-height: 100vh;
         }
 
-        /* الشعار المائي الواضح في الخلفية */
+        /* خلفية الشعار بدون أي شفافية */
         body::before {
             content: '';
             position: fixed;
@@ -112,21 +112,20 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: min(580px, 85vw);
-            opacity: 0.20;
+            opacity: 1 !important;
             pointer-events: none;
             z-index: -1;
         }
 
         body.dark-mode::before {
-            opacity: 0.16;
-            filter: brightness(1.15) contrast(1.1);
+            opacity: 1 !important;
         }
 
         header {
             background: var(--bg-glass);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--border-subtle);
+            border-bottom: 2px solid var(--border-subtle);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -162,7 +161,7 @@
         .brand-text h1 {
             margin: 0;
             font-size: 20px;
-            font-weight: 800;
+            font-weight: 900;
             color: var(--primary);
             letter-spacing: -0.3px;
         }
@@ -171,7 +170,7 @@
             margin: 2px 0 0;
             font-size: 13px;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .header-actions {
@@ -187,7 +186,7 @@
             padding: 9px 18px;
             border-radius: var(--radius-full);
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 13px;
             display: flex;
             align-items: center;
@@ -224,7 +223,7 @@
 
         .efb-time-label {
             font-size: 16px;
-            font-weight: 800;
+            font-weight: 900;
             color: var(--accent-blue);
             font-family: 'Segoe UI', Tahoma, sans-serif;
         }
@@ -301,7 +300,7 @@
             padding: 7px 15px;
             border-radius: var(--radius-full);
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -316,12 +315,12 @@
         .btn-portal-external {
             background: var(--primary-light);
             color: var(--primary);
-            border: 1px solid var(--primary);
+            border: 2px solid var(--primary);
             padding: 8px 18px;
             border-radius: var(--radius-full);
             text-decoration: none;
             font-size: 13px;
-            font-weight: 800;
+            font-weight: 900;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -354,16 +353,15 @@
             font-size: 18px;
         }
 
-        /* الكلمة المكتوبة في البحث باللون الأخضر المميز */
         .search-input {
             width: 100%;
             background: var(--bg-card);
-            color: var(--primary);
-            font-weight: 700;
+            color: var(--primary) !important;
+            font-weight: 800;
             border: 2px solid var(--border-subtle);
             border-radius: 18px;
             padding: 16px 58px 16px 95px;
-            font-size: 16px;
+            font-size: 16.5px;
             font-family: inherit;
             outline: none;
             box-shadow: var(--shadow-sm);
@@ -385,7 +383,7 @@
             border-radius: var(--radius-full);
             padding: 5px 12px;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
             display: none;
             align-items: center;
@@ -401,11 +399,11 @@
             display: none;
             margin-top: 10px;
             background: var(--primary-light);
-            border: 1.5px dashed var(--primary);
-            padding: 11px 20px;
+            border: 2px dashed var(--primary);
+            padding: 12px 20px;
             border-radius: 14px;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 14.5px;
+            font-weight: 800;
             color: var(--primary-hover);
             align-items: center;
             justify-content: space-between;
@@ -421,6 +419,7 @@
         .instant-go-hint:hover #hintTargetTitle {
             background: #ffffff;
             color: var(--primary-hover);
+            border-color: #ffffff;
         }
 
         .instant-go-hint kbd {
@@ -432,29 +431,27 @@
             font-size: 12px;
             border: 1px solid var(--border-subtle);
             margin-right: 5px;
-            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.2);
         }
 
-        /* جعل الكلمة المستهدفة باللون الأخضر الجريء */
         #hintTargetTitle {
-            color: var(--primary);
-            background: var(--bg-card);
-            padding: 2px 10px;
+            color: var(--primary) !important;
+            background: #ffffff !important;
+            padding: 3px 12px;
             border-radius: 8px;
             font-weight: 900;
-            border: 1px solid rgba(5, 150, 105, 0.35);
+            border: 2px solid var(--primary) !important;
             display: inline-block;
             margin: 0 4px;
         }
 
-        /* تمييز الكلمة المبحوث عنها بلون أخضر داخل الكروت */
         .highlight-word {
-            color: var(--primary) !important;
-            background-color: var(--primary-light);
-            padding: 1px 5px;
+            color: #ffffff !important;
+            background-color: var(--primary) !important;
+            padding: 2px 6px;
             border-radius: 6px;
             font-weight: 900;
-            border: 1px solid rgba(5, 150, 105, 0.25);
+            display: inline-block;
         }
 
         .dashboard-tabs-bar {
@@ -508,11 +505,11 @@
             font-size: 11.5px;
             padding: 2px 9px;
             border-radius: var(--radius-full);
-            font-weight: 800;
+            font-weight: 900;
         }
 
         .tab-btn.active .tab-count {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.3);
             color: #ffffff;
         }
 
@@ -532,13 +529,13 @@
             gap: 12px;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-subtle);
+            border-bottom: 2px solid var(--border-subtle);
         }
 
         .section-header h2 {
             margin: 0;
             font-size: 19px;
-            font-weight: 800;
+            font-weight: 900;
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -555,8 +552,8 @@
             font-size: 12px;
             padding: 3px 12px;
             border-radius: var(--radius-full);
-            font-weight: 800;
-            border: 1px solid rgba(5, 150, 105, 0.2);
+            font-weight: 900;
+            border: 1px solid var(--primary);
         }
 
         .cards-grid {
@@ -567,7 +564,7 @@
 
         .portal-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
+            border: 1.5px solid var(--border-subtle);
             border-radius: var(--radius-md);
             padding: 20px;
             text-decoration: none;
@@ -578,7 +575,7 @@
             box-shadow: var(--shadow-sm);
             position: relative;
             overflow: hidden;
-            border-top: 3px solid transparent;
+            border-top: 3.5px solid transparent;
         }
 
         .portal-card:hover {
@@ -605,7 +602,7 @@
             justify-content: center;
             font-size: 22px;
             flex-shrink: 0;
-            box-shadow: inset 0 0 0 1px rgba(5, 150, 105, 0.15);
+            box-shadow: inset 0 0 0 1px var(--primary);
         }
 
         .portal-card:hover .card-icon {
@@ -620,7 +617,7 @@
         }
 
         .card-title {
-            font-size: 15.5px;
+            font-size: 16px;
             font-weight: 800;
             color: var(--text-main);
             margin-bottom: 4px;
@@ -632,13 +629,13 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .card-arrow {
             color: var(--text-muted);
             font-size: 13px;
-            opacity: 0.5;
+            opacity: 0.6;
             transition: all 0.25s;
         }
 
@@ -648,22 +645,22 @@
             transform: translateX(-5px);
         }
 
-        .color-red .card-icon { background: var(--accent-red-light); color: var(--accent-red); box-shadow: inset 0 0 0 1px rgba(225, 29, 72, 0.15); }
+        .color-red .card-icon { background: var(--accent-red-light); color: var(--accent-red); box-shadow: inset 0 0 0 1px rgba(225, 29, 72, 0.2); }
         .color-red:hover .card-icon { background: var(--accent-red); color: #fff; }
         .color-red:hover { border-color: var(--accent-red); border-top-color: var(--accent-red); }
         .color-red:hover .card-arrow { color: var(--accent-red); }
 
-        .color-blue .card-icon { background: var(--accent-blue-light); color: var(--accent-blue); box-shadow: inset 0 0 0 1px rgba(2, 132, 199, 0.15); }
+        .color-blue .card-icon { background: var(--accent-blue-light); color: var(--accent-blue); box-shadow: inset 0 0 0 1px rgba(2, 132, 199, 0.2); }
         .color-blue:hover .card-icon { background: var(--accent-blue); color: #fff; }
         .color-blue:hover { border-color: var(--accent-blue); border-top-color: var(--accent-blue); }
         .color-blue:hover .card-arrow { color: var(--accent-blue); }
 
-        .color-orange .card-icon { background: var(--accent-orange-light); color: var(--accent-orange); box-shadow: inset 0 0 0 1px rgba(217, 119, 6, 0.15); }
+        .color-orange .card-icon { background: var(--accent-orange-light); color: var(--accent-orange); box-shadow: inset 0 0 0 1px rgba(217, 119, 6, 0.2); }
         .color-orange:hover .card-icon { background: var(--accent-orange); color: #fff; }
         .color-orange:hover { border-color: var(--accent-orange); border-top-color: var(--accent-orange); }
         .color-orange:hover .card-arrow { color: var(--accent-orange); }
 
-        .color-purple .card-icon { background: var(--accent-purple-light); color: var(--accent-purple); box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.15); }
+        .color-purple .card-icon { background: var(--accent-purple-light); color: var(--accent-purple); box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.2); }
         .color-purple:hover .card-icon { background: var(--accent-purple); color: #fff; }
         .color-purple:hover { border-color: var(--accent-purple); border-top-color: var(--accent-purple); }
         .color-purple:hover .card-arrow { color: var(--accent-purple); }
@@ -696,7 +693,7 @@
             border-radius: var(--radius-full);
             padding: 8px 24px;
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -729,7 +726,7 @@
             left: -3px;
             bottom: -3px;
             border-radius: 50%;
-            background: rgba(16, 185, 129, 0.4);
+            background: rgba(16, 185, 129, 0.5);
             animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
 
@@ -740,27 +737,32 @@
             }
         }
 
+        /* تنسيق شارات الوقت والتاريخ بالإنجليزية */
         .datetime-group {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            direction: ltr; /* من اليسار لليمين للإنجليزية */
         }
 
         .date-badge, .clock-badge {
             background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            padding: 3px 12px;
+            border: 1.5px solid var(--border-subtle);
+            padding: 4px 14px;
             border-radius: var(--radius-full);
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 800;
             color: var(--primary);
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            letter-spacing: 0.3px;
         }
 
         .clock-badge {
             font-family: 'Segoe UI', monospace;
+            font-weight: 900;
         }
 
         @media (max-width: 860px) {
@@ -865,7 +867,6 @@
             </button>
         </div>
 
-        <!-- تلميح الانتقال والكلمة المستهدفة باللون الأخضر -->
         <div id="instantGoHint" class="instant-go-hint" onclick="goToTopMatch()">
             <span>
                 <i class="fa-solid fa-bolt" style="color: #f59e0b; margin-left:6px;"></i>
@@ -902,7 +903,7 @@
     <!-- رسالة عند عدم وجود نتائج -->
     <div id="noResults" class="no-results">
         <i class="fa-solid fa-circle-exclamation"></i>
-        <p style="font-weight: 700; margin: 0; font-size: 16px;">عفواً، لا توجد نتائج مطابقة لبحثك!</p>
+        <p style="font-weight: 800; margin: 0; font-size: 16px;">عفواً، لا توجد نتائج مطابقة لبحثك!</p>
         <span style="font-size: 13px;">تأكد من كتابة الكلمات بشكل صحيح أو امسح البحث لعرض كل الأقسام.</span>
     </div>
 
@@ -1061,7 +1062,7 @@
 
 </div>
 
-<!-- شريط الحالة السفلي -->
+<!-- شريط الحالة السفلي (الساعة والتاريخ بالإنجليزية) -->
 <footer class="status-footer">
     <div class="status-dot-wrapper">
         <span class="status-dot"></span>
@@ -1069,11 +1070,14 @@
     </div>
     
     <div class="datetime-group">
+        <!-- التاريخ بالإنجليزية -->
         <div id="liveDate" class="date-badge">
             <i class="fa-regular fa-calendar-days"></i>
             <span>--</span>
         </div>
-        <div id="liveClock" class="clock-badge">--:--:--</div>
+
+        <!-- الساعة بالإنجليزية -->
+        <div id="liveClock" class="clock-badge">--:--:-- --</div>
     </div>
 </footer>
 
@@ -1081,7 +1085,6 @@
     let currentActiveTab = 'all';
     let topMatchedCard = null;
 
-    // حفظ النصوص الأصلية للكروت للرجوع إليها عند مسح البحث
     window.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.portal-card').forEach(card => {
             const titleEl = card.querySelector('.card-title');
@@ -1142,7 +1145,6 @@
         document.querySelectorAll('.portal-card').forEach(c => {
             c.style.display = 'flex';
             c.classList.remove('best-match');
-            // استعادة النصوص الأصلية
             const titleEl = c.querySelector('.card-title');
             const descEl = c.querySelector('.card-desc');
             if (c.getAttribute('data-original-title')) titleEl.textContent = c.getAttribute('data-original-title');
@@ -1152,7 +1154,6 @@
         hideInstantHint();
     }
 
-    // دالة تمييز الكلمة بلون أخضر
     function highlightSearchTerm(text, words) {
         if (!words || words.length === 0) return text;
         let highlighted = text;
@@ -1208,7 +1209,6 @@
                     card.style.display = 'flex';
                     matchedCardsWithScores.push({ card, score });
 
-                    // تلوين الكلمة المبحوث عنها بلون أخضر
                     card.querySelector('.card-title').innerHTML = highlightSearchTerm(origTitle, queryWords);
                     card.querySelector('.card-desc').innerHTML = highlightSearchTerm(origDesc, queryWords);
                 } else {
@@ -1292,14 +1292,25 @@
         }
     }
 
+    // دالة تحديث الساعة والتاريخ باللغة الإنجليزية
     function updateDateTime() {
         const now = new Date();
-        document.getElementById('liveClock').textContent = now.toLocaleTimeString('ar-EG');
 
+        // 1. الساعة بالإنجليزية بنظام 12 ساعة مع AM/PM
+        document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+
+        // 2. التاريخ بالإنجليزية الكامل (مثال: Tuesday, October 27, 2026)
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateString = now.toLocaleDateString('en-US', dateOptions);
+
         const dateContainer = document.getElementById('liveDate');
         if (dateContainer) {
-            dateContainer.innerHTML = `<i class="fa-regular fa-calendar-days"></i> <span>${now.toLocaleDateString('ar-EG', dateOptions)}</span>`;
+            dateContainer.innerHTML = `<i class="fa-regular fa-calendar-days"></i> <span>${dateString}</span>`;
         }
     }
 </script>
