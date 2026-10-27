@@ -187,6 +187,71 @@
             padding: 0 24px;
         }
 
+        /* شريط وسائل التواصل الاجتماعي والخط الساخن (المطابق للصورة) */
+        .efb-social-banner {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+        }
+
+        .efb-time-label {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--accent-blue);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        .efb-social-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .efb-social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--text-main);
+            color: var(--bg-card);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 19px;
+            transition: all 0.25s ease;
+        }
+
+        .efb-social-btn:hover {
+            transform: translateY(-3px);
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 6px 15px var(--primary-glow);
+        }
+
+        .efb-hotline-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        .efb-hotline-brand i {
+            font-size: 26px;
+            color: var(--primary);
+        }
+
         /* Bento Quick Banner (شبكة المعلومات السريعة الذكية) */
         .quick-banner {
             background: var(--bg-glass);
@@ -194,12 +259,12 @@
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            padding: 18px 24px;
+            padding: 16px 22px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 14px;
             margin-bottom: 24px;
             box-shadow: var(--shadow-sm);
         }
@@ -227,20 +292,6 @@
         .quick-chip i {
             color: var(--primary);
             font-size: 14px;
-        }
-
-        .badge-hotline {
-            background: var(--accent-red);
-            color: #ffffff;
-            padding: 2px 10px;
-            border-radius: var(--radius-full);
-            font-weight: 800;
-            font-size: 12px;
-        }
-
-        .badge-hours {
-            color: var(--primary);
-            font-weight: 800;
         }
 
         .btn-portal-external {
@@ -610,6 +661,7 @@
         @media (max-width: 860px) {
             .header-content { flex-direction: column; text-align: center; gap: 14px; }
             .brand { flex-direction: column; }
+            .efb-social-banner { justify-content: center; text-align: center; }
             .quick-banner { flex-direction: column; align-items: stretch; }
             .quick-info-items { justify-content: center; }
             .btn-portal-external { justify-content: center; }
@@ -642,17 +694,43 @@
 </header>
 
 <div class="container">
-    
+
+    <!-- شريط وسائل التواصل الاجتماعي والخط الساخن المضاف حديثاً (مطابق للصورة) -->
+    <div class="efb-social-banner">
+        <span class="efb-time-label">9 AM</span>
+
+        <div class="efb-social-group">
+            <a href="https://www.youtube.com/user/egyfoodbank" target="_blank" class="efb-social-btn" title="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://eg.linkedin.com/company/egyptian-food-bank" target="_blank" class="efb-social-btn" title="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+        </div>
+
+        <div class="efb-hotline-brand">
+            <i class="fa-solid fa-headset"></i>
+            <span>16060</span>
+        </div>
+
+        <div class="efb-social-group">
+            <a href="https://www.facebook.com/EgyFoodBank/" target="_blank" class="efb-social-btn" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/egyfoodbank/" target="_blank" class="efb-social-btn" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+
+        <span class="efb-time-label">10 PM</span>
+    </div>
+
     <!-- شريط الإرشادات والأرقام ومواعيد العمل السريعة (Bento Chips) -->
     <div class="quick-banner">
         <div class="quick-info-items">
             <div class="quick-chip">
                 <i class="fa-solid fa-clock"></i>
-                <span>مواعيد العمل: <strong class="badge-hours">من 9:00 صباحاً إلى 10:00 مساءً</strong></span>
-            </div>
-            <div class="quick-chip">
-                <i class="fa-solid fa-phone-volume"></i>
-                <span>الخط الساخن: <strong class="badge-hotline">16060</strong></span>
+                <span>مواعيد العمل: <strong style="color:var(--primary);">من 9:00 صباحاً إلى 10:00 مساءً</strong></span>
             </div>
             <div class="quick-chip">
                 <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i>
