@@ -17,7 +17,7 @@
     <style>
         :root {
             /* باليت ألوان الوضع النهاري العصري */
-            --primary: #047857;          /* أخضر صريح وواضح */
+            --primary: #047857;
             --primary-hover: #065f46;
             --primary-light: #ecfdf5;
             --primary-glow: rgba(4, 120, 87, 0.2);
@@ -99,7 +99,9 @@
             min-height: 100vh;
         }
 
-        /* خلفية الشعار بدون أي شفافية */
+        /* ----------------------------------------------------
+           جعل الكلمة والشعار في الخلفية شفافة وأنيقة (علامة مائية)
+           ---------------------------------------------------- */
         body::before {
             content: '';
             position: fixed;
@@ -112,13 +114,14 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: min(580px, 85vw);
-            opacity: 1 !important;
+            opacity: 0.12 !important; /* شفافية ناعمة ومنسقة */
             pointer-events: none;
             z-index: -1;
         }
 
         body.dark-mode::before {
-            opacity: 1 !important;
+            opacity: 0.10 !important;
+            filter: brightness(1.2);
         }
 
         header {
@@ -436,21 +439,24 @@
 
         #hintTargetTitle {
             color: var(--primary) !important;
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(6px);
             padding: 3px 12px;
             border-radius: 8px;
             font-weight: 900;
-            border: 2px solid var(--primary) !important;
+            border: 1.5px solid rgba(4, 120, 87, 0.4) !important;
             display: inline-block;
             margin: 0 4px;
         }
 
+        /* جعل الكلمة المبحوث عنها شفافة بشكل ناعم وجميل */
         .highlight-word {
-            color: #ffffff !important;
-            background-color: var(--primary) !important;
-            padding: 2px 6px;
+            color: #047857 !important;
+            background-color: rgba(4, 120, 87, 0.15) !important; /* خلفية شفافة ناعمة */
+            padding: 2px 7px;
             border-radius: 6px;
             font-weight: 900;
+            border: 1px solid rgba(4, 120, 87, 0.3);
             display: inline-block;
         }
 
@@ -737,12 +743,11 @@
             }
         }
 
-        /* تنسيق شارات الوقت والتاريخ بالإنجليزية */
         .datetime-group {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            direction: ltr; /* من اليسار لليمين للإنجليزية */
+            direction: ltr;
         }
 
         .date-badge, .clock-badge {
@@ -1070,13 +1075,10 @@
     </div>
     
     <div class="datetime-group">
-        <!-- التاريخ بالإنجليزية -->
         <div id="liveDate" class="date-badge">
             <i class="fa-regular fa-calendar-days"></i>
             <span>--</span>
         </div>
-
-        <!-- الساعة بالإنجليزية -->
         <div id="liveClock" class="clock-badge">--:--:-- --</div>
     </div>
 </footer>
@@ -1292,11 +1294,9 @@
         }
     }
 
-    // دالة تحديث الساعة والتاريخ باللغة الإنجليزية
     function updateDateTime() {
         const now = new Date();
 
-        // 1. الساعة بالإنجليزية بنظام 12 ساعة مع AM/PM
         document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
@@ -1304,7 +1304,6 @@
             hour12: true
         });
 
-        // 2. التاريخ بالإنجليزية الكامل (مثال: Tuesday, October 27, 2026)
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const dateString = now.toLocaleDateString('en-US', dateOptions);
 
