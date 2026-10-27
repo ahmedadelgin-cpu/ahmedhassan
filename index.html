@@ -16,7 +16,6 @@
 
     <style>
         :root {
-            /* باليت ألوان الوضع النهاري العصري */
             --primary: #059669;
             --primary-hover: #047857;
             --primary-light: #ecfdf5;
@@ -48,7 +47,6 @@
         }
 
         body.dark-mode {
-            /* باليت ألوان الوضع الليلي العميق */
             --primary: #10b981;
             --primary-hover: #34d399;
             --primary-light: rgba(16, 185, 129, 0.12);
@@ -98,7 +96,6 @@
             min-height: 100vh;
         }
 
-        /* رأس الصفحة الزجاجي */
         header {
             background: var(--bg-glass);
             backdrop-filter: blur(18px);
@@ -157,7 +154,6 @@
             gap: 12px;
         }
 
-        /* زر الوضع الليلي/النهاري */
         .theme-toggle-btn {
             background: var(--bg-card);
             color: var(--text-main);
@@ -180,14 +176,12 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* الحاوية الرئيسية */
         .container {
             max-width: 1300px;
             margin: 25px auto 110px;
             padding: 0 24px;
         }
 
-        /* شريط وسائل التواصل الاجتماعي والخط الساخن */
         .efb-social-banner {
             background: var(--bg-card);
             border: 2px solid var(--primary);
@@ -252,7 +246,6 @@
             color: var(--primary);
         }
 
-        /* Quick Banner */
         .quick-banner {
             background: var(--bg-glass);
             backdrop-filter: blur(14px);
@@ -316,7 +309,7 @@
             box-shadow: 0 6px 15px var(--primary-glow);
         }
 
-        /* حاوية البحث التفاعلية الذكية */
+        /* حاوية البحث التفاعلية */
         .search-container-box {
             position: relative;
             margin-bottom: 22px;
@@ -353,7 +346,6 @@
             box-shadow: 0 0 0 5px var(--primary-glow), var(--shadow-md);
         }
 
-        /* زر المسح السريع داخل البحث */
         .clear-search-btn {
             position: absolute;
             left: 20px;
@@ -377,15 +369,14 @@
             border-color: var(--accent-red);
         }
 
-        /* شريط التوجيه الفوري السريع أسفل البحث */
         .instant-go-hint {
             display: none;
             margin-top: 10px;
             background: var(--primary-light);
             border: 1px dashed var(--primary);
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-size: 13.5px;
+            padding: 11px 20px;
+            border-radius: 14px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--primary-hover);
             align-items: center;
@@ -411,7 +402,6 @@
             box-shadow: 0 2px 0 rgba(0,0,0,0.15);
         }
 
-        /* شريط التبويبات الذكية */
         .dashboard-tabs-bar {
             display: flex;
             align-items: center;
@@ -471,7 +461,6 @@
             color: #ffffff;
         }
 
-        /* كتلة القسم */
         .section-block {
             margin-bottom: 35px;
             animation: fadeIn 0.3s ease;
@@ -515,14 +504,12 @@
             border: 1px solid rgba(5, 150, 105, 0.2);
         }
 
-        /* شبكة الكروت الحديثة */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
             gap: 20px;
         }
 
-        /* تصميم كرت البوابة */
         .portal-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
@@ -546,14 +533,12 @@
             border-top-color: var(--primary);
         }
 
-        /* تمييز الكرت الأول المطابق للبحث */
         .portal-card.best-match {
             border-color: var(--primary);
             border-top-color: var(--primary);
             box-shadow: 0 0 0 3px var(--primary-glow), var(--shadow-hover);
         }
 
-        /* أيقونة الكرت */
         .card-icon {
             width: 52px;
             height: 52px;
@@ -608,7 +593,6 @@
             transform: translateX(-5px);
         }
 
-        /* سمات الألوان المخصصة */
         .color-red .card-icon { background: var(--accent-red-light); color: var(--accent-red); box-shadow: inset 0 0 0 1px rgba(225, 29, 72, 0.15); }
         .color-red:hover .card-icon { background: var(--accent-red); color: #fff; }
         .color-red:hover { border-color: var(--accent-red); border-top-color: var(--accent-red); }
@@ -629,7 +613,6 @@
         .color-purple:hover { border-color: var(--accent-purple); border-top-color: var(--accent-purple); }
         .color-purple:hover .card-arrow { color: var(--accent-purple); }
 
-        /* رسالة عدم وجود نتائج */
         .no-results {
             display: none;
             text-align: center;
@@ -646,7 +629,6 @@
             margin-bottom: 12px;
         }
 
-        /* شريط الحالة السفلي العائم */
         .status-footer {
             position: fixed;
             bottom: 16px;
@@ -740,7 +722,6 @@
 </head>
 <body id="pageBody">
 
-<!-- الرأس العلوي العصري (Header) -->
 <header>
     <div class="header-content">
         <div class="brand">
@@ -792,7 +773,7 @@
         <span class="efb-time-label">10 PM</span>
     </div>
 
-    <!-- شريط الإرشادات والأرقام ومواعيد العمل السريعة -->
+    <!-- شريط الإرشادات والأرقام ومواعيد العمل -->
     <div class="quick-banner">
         <div class="quick-info-items">
             <div class="quick-chip">
@@ -816,12 +797,12 @@
         </div>
     </div>
 
-    <!-- حاوية البحث الذكي والانتقال المباشر -->
+    <!-- صندوق البحث الذكي والانتقال المباشر -->
     <div class="search-container-box">
         <div class="search-wrapper">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" id="searchInput" class="search-input" 
-                   placeholder="🔍 اكتب سؤالك أو اسم الخدمة (مثل: كيف أقدم طلب، شكوى، أكواد) واضغط Enter للدخول الفوري..." 
+                   placeholder="🔍 ابحث هنا (مثل: تقديم طلب، تقديم شكوى، انقطاع الكرتونة، تقديم دور رعاية) واضغط Enter للدخول..." 
                    onkeyup="handleSearchKey(event)" 
                    autocomplete="off">
             <button id="clearSearchBtn" class="clear-search-btn" onclick="clearSearch()">
@@ -829,7 +810,6 @@
             </button>
         </div>
 
-        <!-- تلميح الانتقال المباشر بالزر السريع -->
         <div id="instantGoHint" class="instant-go-hint" onclick="goToTopMatch()">
             <span>
                 <i class="fa-solid fa-bolt" style="color: #f59e0b; margin-left:6px;"></i>
@@ -839,7 +819,7 @@
         </div>
     </div>
 
-    <!-- شريط التبويبات الذكية -->
+    <!-- شريط التبويبات -->
     <div class="dashboard-tabs-bar" id="tabsBar">
         <button class="tab-btn active" onclick="switchDashboardTab('all', this)">
             <i class="fa-solid fa-table-cells-large"></i>
@@ -863,7 +843,7 @@
         </button>
     </div>
 
-    <!-- رسالة عند عدم وجود نتائج للبحث -->
+    <!-- رسالة عند عدم وجود نتائج -->
     <div id="noResults" class="no-results">
         <i class="fa-solid fa-circle-exclamation"></i>
         <p style="font-weight: 700; margin: 0; font-size: 16px;">عفواً، لا توجد نتائج مطابقة لبحثك!</p>
@@ -877,7 +857,8 @@
             <span class="section-count">4 أقسام</span>
         </div>
         <div class="cards-grid">
-            <a href="تقديم طلب مستحق.html" class="portal-card" data-keywords="كيف اقدم طلب ازاي اقدم تسجيل طلب فتح طلب استعجال الطلب تقديم مستحق جديد كرتونة شروط التقديم ورق التقديم متابعة الطلب بحث اجتماعي شهري">
+            <!-- تقديم طلب مستحق: تم إضافة تقيدم طلب وتقديم طلب -->
+            <a href="تقديم طلب مستحق.html" class="portal-card" data-keywords="تقديم طلب تقيدم طلب كيف اقدم طلب ازاي اقدم تسجيل طلب فتح طلب استعجال الطلب تقديم مستحق جديد كرتونة شروط التقديم ورق التقديم متابعة الطلب بحث اجتماعي شهري">
                 <div class="card-icon"><i class="fa-solid fa-user-plus"></i></div>
                 <div class="card-info">
                     <div class="card-title">تقديم طلب مستحق</div>
@@ -886,7 +867,8 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="تقديم الجمعيات والمؤسسات.html" class="portal-card" data-keywords="كيف تقدم الجمعية شروط تسجيل جمعية اوراق الجمعيات 10 مستندات مؤسسة اهلية اشهار اعتماد جمعيات">
+            <!-- تقديم الجمعيات: تم إضافة تقديم جمعيات خيرية -->
+            <a href="تقديم الجمعيات والمؤسسات.html" class="portal-card" data-keywords="تقديم جمعيات خيرية تقديم جمعيات تسجيل جمعيات جمعية خيرية مؤسسة اهلية 10 مستندات شروط الجمعيات اعتماد جمعيات">
                 <div class="card-icon"><i class="fa-solid fa-building-ngo"></i></div>
                 <div class="card-info">
                     <div class="card-title">تقديم الجمعيات</div>
@@ -895,7 +877,8 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="تقديم دور رعاية.html" class="portal-card" data-keywords="كيف اقدم دار ايتام دار مسنين دور رعاية ايتام 5 مستندات دور الرعاية شروط رعاية">
+            <!-- تقديم دور رعاية: تم إضافة تقديم دور رعاية -->
+            <a href="تقديم دور رعاية.html" class="portal-card" data-keywords="تقديم دور رعاية دور رعاية دار ايتام دار مسنين 5 مستندات دور الرعاية شروط رعاية ايتام">
                 <div class="card-icon"><i class="fa-solid fa-house-chimney-medical"></i></div>
                 <div class="card-info">
                     <div class="card-title">تقديم دور رعاية</div>
@@ -904,7 +887,8 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="للحالات السودانية.html" class="portal-card color-blue" data-keywords="سودانيين سودان اخوتنا السودانيين لاجئين كرت اصفر مفوضية توجيه السودانيين جمعيات معتمدة">
+            <!-- الحالات السودانية: تم إضافة تقديم طلب سودانى وسوداني -->
+            <a href="للحالات السودانية.html" class="portal-card color-blue" data-keywords="تقديم طلب سودانى تقديم طلب سوداني سودانيين سودان اخوتنا السودانيين لاجئين كرت اصفر مفوضية توجيه السودانيين جمعيات معتمدة">
                 <div class="card-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
                 <div class="card-info">
                     <div class="card-title">الحالات السودانية</div>
@@ -949,7 +933,8 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="الشكاوى.html" class="portal-card color-red" data-keywords="ازاي اعمل شكوى عايز اشتكي الجمعية مخدتش كرتونة انقطاع الكرتونة جودة الاكل بايظ ميثاق الشرف تظلم">
+            <!-- دليل الشكاوى: تم تزويده بكافة طلبات الشكاوى المذكورة بدقة -->
+            <a href="الشكاوى.html" class="portal-card color-red" data-keywords="تقديم شكوى تقديم شكوي شكوت العميل يشتكى من انقطاع الكرتونة شكوت انقطاع كرتون انقطاع الكرتونة شكوت جودة منتجات جودة منتجات شكوت سوء سلوك الجمعية سو سلوك سوء سلوك الجمعية شكوت نقص مكونات نقص مكونات ميثاق الشرف تظلم عايز اشتكي">
                 <div class="card-icon"><i class="fa-solid fa-file-shield"></i></div>
                 <div class="card-info">
                     <div class="card-title">دليل الشكاوى الموحد</div>
@@ -958,7 +943,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="طلب نقل مساعدة.html" class="portal-card color-blue" data-keywords="نقل جمعية غيرت سكني عزلت مسافة بعيدة انهاء تعامل تغيير المحافظة تحويل مكان الصرف">
+            <a href="طلب نقل مساعدة.html" class="portal-card color-blue" data-keywords="نقل مساعدة نقل جمعية غيرت سكني عزلت مسافة بعيدة انهاء تعامل تغيير المحافظة تحويل مكان الصرف">
                 <div class="card-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
                 <div class="card-info">
                     <div class="card-title">طلب نقل مساعدة</div>
@@ -1025,7 +1010,7 @@
 
 </div>
 
-<!-- شريط الحالة العائم -->
+<!-- شريط الحالة السفلي -->
 <footer class="status-footer">
     <div class="status-dot-wrapper">
         <span class="status-dot"></span>
@@ -1043,9 +1028,9 @@
 
 <script>
     let currentActiveTab = 'all';
-    let topMatchedCard = null; // يحفظ الكرت الأول الأكثر تطابقاً
+    let topMatchedCard = null;
 
-    // دالة لتنظيف وتوحيد الكلمات العربية للبحث الذكي
+    // تطهير النص وتوحيد الحروف العربية مع معالجة الكلمات الشائعة
     function normalizeArabic(text) {
         if (!text) return '';
         return text
@@ -1054,14 +1039,14 @@
             .replace(/[أإآ]/g, 'ا')          // توحيد الألف
             .replace(/ة/g, 'ه')              // توحيد التاء المربوطة
             .replace(/ى/g, 'ي')              // توحيد الياء
+            .replace(/وء|ؤ/g, 'و')           // توحيد سوء -> سو
             .toLowerCase()
             .trim();
     }
 
-    // كلمات الاستفهام الشائعة التي يتم تجاهلها للتركيز على جوهر السؤال
-    const stopWords = ['كيف', 'ازاي', 'طريقة', 'عايز', 'اريد', 'هل', 'ماهو', 'ما', 'هي', 'في', 'من', 'الى', 'علي', 'عن'];
+    // كلمات الاستفهام والربط التي يتم تجاهلها للوصول للهدف مباشرة
+    const stopWords = ['كيف', 'ازاي', 'طريقة', 'عايز', 'اريد', 'هل', 'ماهو', 'ما', 'هي', 'في', 'من', 'الى', 'علي', 'عن', 'او'];
 
-    // التعامل مع ضغطات المفاتيح في حقل البحث
     function handleSearchKey(event) {
         if (event.key === 'Enter') {
             goToTopMatch();
@@ -1070,7 +1055,6 @@
         }
     }
 
-    // التبديل بين التبويبات
     function switchDashboardTab(targetId, btn) {
         currentActiveTab = targetId;
         
@@ -1094,64 +1078,67 @@
         hideInstantHint();
     }
 
-    // فلترة وتصفية الكروت أثناء الكتابة مع دعم الكلمات المفتاحية
+    // خوارزمية الفلترة وترتيب أفضل النتائج بحسب الكلمات المدخلة
     function filterCards() {
         const rawInput = document.getElementById('searchInput').value;
         const clearBtn = document.getElementById('clearSearchBtn');
         let query = normalizeArabic(rawInput);
 
-        // إظهار أو إخفاء زر المسح
         clearBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
 
-        // استخراج الكلمات الأساسية من جملة المستخدم
         const queryWords = query
             .split(/\s+/)
             .filter(word => word.length > 1 && !stopWords.includes(word));
 
         const cards = document.querySelectorAll('.portal-card');
         const sections = document.querySelectorAll('.section-block');
-        let visibleCards = [];
+        let matchedCardsWithScores = [];
 
         if (query.length > 0) {
-            // فتح كل الأقسام للبحث الشامل
             sections.forEach(sec => sec.style.display = 'block');
 
             cards.forEach(card => {
                 const title = normalizeArabic(card.querySelector('.card-title').textContent);
                 const desc = normalizeArabic(card.querySelector('.card-desc').textContent);
                 const keywords = normalizeArabic(card.getAttribute('data-keywords') || '');
-                const fullCardContent = `${title} ${desc} ${keywords}`;
+                const fullText = `${title} ${desc} ${keywords}`;
 
-                let isMatch = false;
+                let score = 0;
 
-                // 1. فحص التطابق المباشر مع النص
-                if (fullCardContent.includes(query)) {
-                    isMatch = true;
-                } else if (queryWords.length > 0) {
-                    // 2. فحص تطابق الكلمات المفتاحية الرئيسية
-                    isMatch = queryWords.some(word => fullCardContent.includes(word));
+                // إذا كانت الجملة الكاملة مطابقة تماماً (تطابق تام)
+                if (fullText.includes(query)) {
+                    score += 100;
                 }
 
-                if (isMatch) {
+                // حساب عدد الكلمات المتطابقة
+                queryWords.forEach(w => {
+                    if (title.includes(w)) score += 30;
+                    else if (keywords.includes(w)) score += 20;
+                    else if (desc.includes(w)) score += 10;
+                });
+
+                if (score > 0) {
                     card.style.display = 'flex';
-                    visibleCards.push(card);
+                    matchedCardsWithScores.push({ card, score });
                 } else {
                     card.style.display = 'none';
                     card.classList.remove('best-match');
                 }
             });
 
-            // إخفاء الأقسام التي لا تحتوي على كروت ظاهرة
+            // إخفاء الأقسام الفارغة
             sections.forEach(sec => {
                 const hasVisible = Array.from(sec.querySelectorAll('.portal-card')).some(c => c.style.display !== 'none');
                 sec.style.display = hasVisible ? 'block' : 'none';
             });
 
-            if (visibleCards.length > 0) {
+            if (matchedCardsWithScores.length > 0) {
                 document.getElementById('noResults').style.display = 'none';
                 
-                // تحديد أفضل وأول نتيجة للانتقال المباشر
-                topMatchedCard = visibleCards[0];
+                // ترتيب النتائج حسب الأعلى دقة وتطابق
+                matchedCardsWithScores.sort((a, b) => b.score - a.score);
+                topMatchedCard = matchedCardsWithScores[0].card;
+
                 cards.forEach(c => c.classList.remove('best-match'));
                 topMatchedCard.classList.add('best-match');
 
@@ -1163,7 +1150,6 @@
                 hideInstantHint();
             }
         } else {
-            // مسح البحث والعودة للتبويب السابق
             topMatchedCard = null;
             hideInstantHint();
             const activeBtn = document.querySelector(`.tab-btn[onclick*="'${currentActiveTab}'"]`);
@@ -1171,26 +1157,23 @@
         }
     }
 
-    // إظهار تلميح الانتقال السريع
     function showInstantHint(title) {
         const hint = document.getElementById('instantGoHint');
         document.getElementById('hintTargetTitle').textContent = title;
         hint.style.display = 'flex';
     }
 
-    // إخفاء تلميح الانتقال السريع
     function hideInstantHint() {
         document.getElementById('instantGoHint').style.display = 'none';
     }
 
-    // الانتقال المباشر إلى الصفحة الأولى الأكثر تطابقاً
+    // الانتقال المباشر لصفحة أول نتيجة
     function goToTopMatch() {
         if (topMatchedCard && topMatchedCard.href) {
             window.location.href = topMatchedCard.href;
         }
     }
 
-    // مسح البحث
     function clearSearch() {
         const input = document.getElementById('searchInput');
         input.value = '';
@@ -1198,7 +1181,6 @@
         filterCards();
     }
 
-    // التحكم بالوضع الليلي والنهاري وحفظ الإعدادات
     function toggleAppTheme() {
         const body = document.getElementById('pageBody');
         const icon = document.getElementById('themeIcon');
@@ -1220,7 +1202,6 @@
         }
     }
 
-    // استعادة الإعدادات وتشغيل الوقت والتاريخ
     window.addEventListener('DOMContentLoaded', () => {
         const savedTheme = localStorage.getItem('efb_theme');
         if (savedTheme === 'dark') {
@@ -1233,7 +1214,6 @@
         setInterval(updateDateTime, 1000);
     });
 
-    // تحديث الساعة والتاريخ
     function updateDateTime() {
         const now = new Date();
         document.getElementById('liveClock').textContent = now.toLocaleTimeString('ar-EG');
