@@ -661,9 +661,14 @@
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث بالاسم، الكود، نوع الشكوى، أو اسم الصفحة للوصول الفوري..." onkeyup="filterCards()">
     </div>
 
-    <!-- شريط التبويبات الذكية (Smart Dashboard Tabs) -->
+    <!-- شريط التبويبات الذكية (Smart Dashboard Tabs) - "عرض كل الأقسام" أولاً على أقصى اليمين -->
     <div class="dashboard-tabs-bar" id="tabsBar">
-        <button class="tab-btn active" onclick="switchDashboardTab('sec-orders', this)">
+        <button class="tab-btn active" onclick="switchDashboardTab('all', this)">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>عرض كل الأقسام</span>
+            <span class="tab-count">14</span>
+        </button>
+        <button class="tab-btn" onclick="switchDashboardTab('sec-orders', this)">
             <i class="fa-solid fa-folder-open"></i>
             <span>الطلبات والتسجيل</span>
             <span class="tab-count">4</span>
@@ -678,11 +683,6 @@
             <span>البرامج والروابط</span>
             <span class="tab-count">5</span>
         </button>
-        <button class="tab-btn" onclick="switchDashboardTab('all', this)">
-            <i class="fa-solid fa-table-cells-large"></i>
-            <span>عرض كل الأقسام</span>
-            <span class="tab-count">14</span>
-        </button>
     </div>
 
     <!-- رسالة عند عدم وجود نتائج للبحث -->
@@ -692,7 +692,7 @@
         <span style="font-size: 13px;">تأكد من كتابة الكلمات بشكل صحيح أو امسح البحث لعرض كل الأقسام.</span>
     </div>
 
-    <!-- 1. قسم الطلبات والتسجيل (مضاف إليه تقديم دور الرعاية بجانب تقديم الجمعيات) -->
+    <!-- 1. قسم الطلبات والتسجيل -->
     <div class="section-block" id="sec-orders">
         <div class="section-header">
             <h2><i class="fa-solid fa-folder-open"></i> بنك الطعام المصري - الطلبات</h2>
@@ -717,7 +717,6 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <!-- تم النقل هنا: تقديم دور رعاية بجانب تقديم الجمعيات -->
             <a href="تقديم دور رعاية.html" class="portal-card">
                 <div class="card-icon"><i class="fa-solid fa-house-chimney-medical"></i></div>
                 <div class="card-info">
@@ -739,7 +738,7 @@
     </div>
 
     <!-- 2. قسم العمليات وإدارة الحالات -->
-    <div class="section-block" id="sec-operations" style="display: none;">
+    <div class="section-block" id="sec-operations">
         <div class="section-header">
             <h2><i class="fa-solid fa-gears"></i> بنك الطعام المصري - العمليات</h2>
             <span class="section-count">5 أقسام</span>
@@ -792,8 +791,8 @@
         </div>
     </div>
 
-    <!-- 3. قسم البرامج والروابط الهامة (مضاف إليه الحالات الموسمية بجانب الحالات الفلسطينية) -->
-    <div class="section-block" id="sec-programs" style="display: none;">
+    <!-- 3. قسم البرامج والروابط الهامة -->
+    <div class="section-block" id="sec-programs">
         <div class="section-header">
             <h2><i class="fa-solid fa-cubes-stacked"></i> بنك الطعام المصري - البرامج والروابط</h2>
             <span class="section-count">5 أقسام</span>
@@ -826,7 +825,6 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <!-- تم النقل هنا: الحالات الموسمية بجانب الحالات الفلسطينية -->
             <a href="للحالات الموسمية.html" class="portal-card color-orange">
                 <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
                 <div class="card-info">
@@ -859,7 +857,8 @@
 </footer>
 
 <script>
-    let currentActiveTab = 'sec-orders';
+    // جعل التبويب الافتراضي هو "عرض كل الأقسام"
+    let currentActiveTab = 'all';
 
     // التبديل بين التبويبات
     function switchDashboardTab(targetId, btn) {
