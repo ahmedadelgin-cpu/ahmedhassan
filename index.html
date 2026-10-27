@@ -6,80 +6,113 @@
     <link rel="icon" type="image/jpeg" href="photo (3).jpg">
     <title>بوابة بنك الطعام المصري | خدمات ودعم المستحقين</title>
 
-    <!-- خط وتنسيقات الأيقونات الحديثة FontAwesome -->
+    <!-- خط Cairo الحديث من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- مكتبة الأيقونات FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            /* درجات الألوان للوضع الفاتح */
-            --primary: #00873e;
-            --primary-light: #e8f5e9;
-            --primary-hover: #006b31;
-            --accent-red: #d63031;
-            --accent-blue: #0984e3;
-            --accent-orange: #f39c12;
-            --accent-purple: #6c5ce7;
+            /* باليت ألوان الوضع النهاري العصري */
+            --primary: #059669;
+            --primary-hover: #047857;
+            --primary-light: #ecfdf5;
+            --primary-glow: rgba(5, 150, 105, 0.15);
             
-            --bg-body: #f4f7f6;
+            --accent-red: #e11d48;
+            --accent-red-light: #ffe4e6;
+            --accent-blue: #0284c7;
+            --accent-blue-light: #e0f2fe;
+            --accent-orange: #d97706;
+            --accent-orange-light: #fef3c7;
+            --accent-purple: #7c3aed;
+            --accent-purple-light: #ede9fe;
+
+            --bg-base: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.85);
             --bg-card: #ffffff;
-            --bg-header: #ffffff;
-            --text-main: #2d3436;
-            --text-muted: #636e72;
-            --border-color: #e4e7eb;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            --card-shadow-hover: 0 10px 25px rgba(0, 135, 62, 0.15);
-            --badge-bg: #eef2f5;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-subtle: rgba(226, 232, 240, 0.9);
+            
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+            --shadow-hover: 0 20px 30px -10px rgba(5, 150, 105, 0.18);
+            
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-full: 9999px;
         }
 
         body.dark-mode {
-            /* درجات الألوان للوضع الداكن المريح للعين */
-            --primary: #00e676;
-            --primary-light: rgba(0, 230, 118, 0.12);
-            --primary-hover: #00c853;
-            --accent-red: #ff5252;
-            --accent-blue: #40c4ff;
-            --accent-orange: #ffd166;
-            --accent-purple: #a29bfe;
-            
-            --bg-body: #0d1117;
-            --bg-card: #161b22;
-            --bg-header: #161b22;
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --border-color: #30363d;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            --card-shadow-hover: 0 10px 25px rgba(0, 230, 118, 0.2);
-            --badge-bg: #21262d;
+            /* باليت ألوان الوضع الليلي العميق (Deep Slate/Obsidian) */
+            --primary: #10b981;
+            --primary-hover: #34d399;
+            --primary-light: rgba(16, 185, 129, 0.12);
+            --primary-glow: rgba(16, 185, 129, 0.25);
+
+            --accent-red: #fb7185;
+            --accent-red-light: rgba(251, 113, 133, 0.12);
+            --accent-blue: #38bdf8;
+            --accent-blue-light: rgba(56, 189, 248, 0.12);
+            --accent-orange: #fbbf24;
+            --accent-orange-light: rgba(251, 191, 36, 0.12);
+            --accent-purple: #c084fc;
+            --accent-purple-light: rgba(192, 132, 252, 0.12);
+
+            --bg-base: #090d16;
+            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-card: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-subtle: rgba(51, 65, 85, 0.6);
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 12px 25px rgba(0, 0, 0, 0.45);
+            --shadow-hover: 0 20px 35px rgba(16, 185, 129, 0.25);
         }
 
         * {
             box-sizing: border-box;
-            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+            transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                        color 0.2s ease,
+                        box-shadow 0.25s ease,
+                        transform 0.25s ease;
         }
 
         body {
-            background-color: var(--bg-body);
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(at 10% 10%, var(--primary-glow) 0px, transparent 40%),
+                radial-gradient(at 90% 90%, rgba(2, 132, 199, 0.06) 0px, transparent 40%);
+            background-attachment: fixed;
             color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* رأس الصفحة (Header) */
+        /* رأس الصفحة الزجاجي الفاخر (Glass Header) */
         header {
-            background-color: var(--bg-header);
-            border-bottom: 2px solid var(--border-color);
+            background: var(--bg-glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border-subtle);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
         .header-content {
-            max-width: 1250px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 15px 25px;
+            padding: 14px 25px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -89,17 +122,18 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
         .system-logo {
-            width: 55px;
-            height: 55px;
+            width: 52px;
+            height: 52px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 2px solid var(--primary);
             background: #fff;
-            padding: 3px;
+            padding: 2px;
+            box-shadow: 0 4px 12px var(--primary-glow);
         }
 
         .brand-text h1 {
@@ -107,7 +141,7 @@
             font-size: 20px;
             font-weight: 800;
             color: var(--primary);
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
 
         .brand-text p {
@@ -123,99 +157,126 @@
             gap: 12px;
         }
 
-        /* زر الوضع الليلي/النهاري */
+        /* زر الوضع الليلي/النهاري الحديث */
         .theme-toggle-btn {
-            background: var(--primary-light);
-            color: var(--primary);
-            border: 1.5px solid var(--primary);
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-subtle);
             padding: 9px 18px;
-            border-radius: 30px;
+            border-radius: var(--radius-full);
             cursor: pointer;
             font-weight: 700;
             font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
+            gap: 9px;
+            box-shadow: var(--shadow-sm);
         }
 
         .theme-toggle-btn:hover {
             transform: translateY(-2px);
-            background: var(--primary);
-            color: #fff;
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
         }
 
         /* الحاوية الرئيسية */
         .container {
-            max-width: 1250px;
-            margin: 25px auto 80px;
-            padding: 0 20px;
+            max-width: 1300px;
+            margin: 25px auto 110px;
+            padding: 0 24px;
         }
 
-        /* شريط التنبيه والأرقام السريعة ومواعيد العمل */
+        /* Bento Quick Banner (شبكة المعلومات السريعة الذكية) */
         .quick-banner {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-right: 6px solid var(--primary);
-            border-radius: 16px;
-            padding: 16px 22px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 18px 24px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
+            gap: 16px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
         }
 
         .quick-info-items {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            font-size: 14px;
-            font-weight: 600;
+            gap: 12px;
+            align-items: center;
         }
 
-        .quick-info-items span {
+        .quick-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 7px 15px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
         }
 
-        .quick-info-items i {
+        .quick-chip i {
             color: var(--primary);
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .badge-hotline {
             background: var(--accent-red);
             color: #ffffff;
             padding: 2px 10px;
-            border-radius: 20px;
+            border-radius: var(--radius-full);
+            font-weight: 800;
             font-size: 12px;
         }
 
         .badge-hours {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .btn-portal-external {
             background: var(--primary-light);
             color: var(--primary);
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 13px;
             border: 1px solid var(--primary);
+            padding: 8px 18px;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
         }
 
-        /* صندوق البحث الحي السريع */
+        .btn-portal-external:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--primary-glow);
+        }
+
+        /* مربع البحث العصري على نمط Command Palette */
         .search-wrapper {
             position: relative;
-            margin-bottom: 35px;
+            margin-bottom: 22px;
         }
 
-        .search-wrapper i {
+        .search-wrapper i.search-icon {
             position: absolute;
-            right: 20px;
+            right: 22px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
+            color: var(--primary);
             font-size: 18px;
         }
 
@@ -223,117 +284,174 @@
             width: 100%;
             background: var(--bg-card);
             color: var(--text-main);
-            border: 2px solid var(--border-color);
-            border-radius: 14px;
-            padding: 15px 52px 15px 20px;
-            font-size: 15px;
+            border: 2px solid var(--border-subtle);
+            border-radius: 18px;
+            padding: 16px 58px 16px 22px;
+            font-size: 15.5px;
             font-family: inherit;
             outline: none;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
 
         .search-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px var(--primary-light);
+            box-shadow: 0 0 0 5px var(--primary-glow), var(--shadow-md);
         }
 
-        /* الأقسام والشبكة */
+        /* شريط التبويبات الذكية (Smart Dashboard Tabs) */
+        .dashboard-tabs-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 8px 12px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-sm);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 800;
+            font-family: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+            background: var(--bg-card);
+            border-color: var(--border-subtle);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 14px var(--primary-glow);
+        }
+
+        .tab-count {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 11.5px;
+            padding: 2px 9px;
+            border-radius: var(--radius-full);
+            font-weight: 800;
+        }
+
+        .tab-btn.active .tab-count {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+
+        /* كتلة القسم */
         .section-block {
-            margin-bottom: 40px;
+            margin-bottom: 35px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .section-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 18px;
-            padding-bottom: 8px;
-            border-bottom: 1.5px solid var(--border-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .section-header h2 {
             margin: 0;
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .section-count {
-            background: var(--badge-bg);
-            color: var(--text-muted);
-            font-size: 12px;
-            padding: 2px 9px;
-            border-radius: 20px;
-            font-weight: bold;
+        .section-header h2 i {
+            color: var(--primary);
         }
 
+        .section-count {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 12px;
+            padding: 3px 12px;
+            border-radius: var(--radius-full);
+            font-weight: 800;
+            border: 1px solid rgba(5, 150, 105, 0.2);
+        }
+
+        /* شبكة الكروت الحديثة */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+            gap: 20px;
         }
 
-        /* تصميم البطاقات المطور */
+        /* تصميم كرت البوابة (Bento Card 2026/2027) */
         .portal-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 18px 20px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 20px;
             text-decoration: none;
             color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 16px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
             position: relative;
             overflow: hidden;
-        }
-
-        .portal-card::before {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--primary);
-            opacity: 0;
-            transition: opacity 0.25s;
+            border-top: 3px solid transparent;
         }
 
         .portal-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
             border-color: var(--primary);
-            box-shadow: var(--card-shadow-hover);
+            border-top-color: var(--primary);
         }
 
-        .portal-card:hover::before {
-            opacity: 1;
-        }
-
+        /* أيقونة الكرت */
         .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
             background: var(--primary-light);
             color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
             flex-shrink: 0;
-            transition: all 0.25s;
+            box-shadow: inset 0 0 0 1px rgba(5, 150, 105, 0.15);
         }
 
         .portal-card:hover .card-icon {
             background: var(--primary);
             color: #ffffff;
-            transform: scale(1.05);
+            transform: scale(1.08) rotate(-4deg);
         }
 
         .card-info {
@@ -342,108 +460,151 @@
         }
 
         .card-title {
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 15.5px;
+            font-weight: 800;
             color: var(--text-main);
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .card-desc {
-            font-size: 12px;
+            font-size: 12.5px;
             color: var(--text-muted);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-weight: 500;
         }
 
         .card-arrow {
-            color: var(--border-color);
-            font-size: 14px;
-            transition: transform 0.2s, color 0.2s;
+            color: var(--text-muted);
+            font-size: 13px;
+            opacity: 0.5;
+            transition: all 0.25s;
         }
 
         .portal-card:hover .card-arrow {
             color: var(--primary);
-            transform: translateX(-4px);
+            opacity: 1;
+            transform: translateX(-5px);
         }
 
-        /* ألوان تمييزية للبطاقات */
-        .color-red .card-icon { background: rgba(214, 48, 49, 0.1); color: var(--accent-red); }
+        /* سمات الألوان المخصصة للكروت */
+        .color-red .card-icon { background: var(--accent-red-light); color: var(--accent-red); box-shadow: inset 0 0 0 1px rgba(225, 29, 72, 0.15); }
         .color-red:hover .card-icon { background: var(--accent-red); color: #fff; }
-        .color-red:hover { border-color: var(--accent-red); }
-        .color-red::before { background: var(--accent-red) !important; }
+        .color-red:hover { border-color: var(--accent-red); border-top-color: var(--accent-red); }
+        .color-red:hover .card-arrow { color: var(--accent-red); }
 
-        .color-blue .card-icon { background: rgba(9, 132, 227, 0.1); color: var(--accent-blue); }
+        .color-blue .card-icon { background: var(--accent-blue-light); color: var(--accent-blue); box-shadow: inset 0 0 0 1px rgba(2, 132, 199, 0.15); }
         .color-blue:hover .card-icon { background: var(--accent-blue); color: #fff; }
-        .color-blue:hover { border-color: var(--accent-blue); }
-        .color-blue::before { background: var(--accent-blue) !important; }
+        .color-blue:hover { border-color: var(--accent-blue); border-top-color: var(--accent-blue); }
+        .color-blue:hover .card-arrow { color: var(--accent-blue); }
 
-        .color-orange .card-icon { background: rgba(243, 156, 18, 0.1); color: var(--accent-orange); }
+        .color-orange .card-icon { background: var(--accent-orange-light); color: var(--accent-orange); box-shadow: inset 0 0 0 1px rgba(217, 119, 6, 0.15); }
         .color-orange:hover .card-icon { background: var(--accent-orange); color: #fff; }
-        .color-orange:hover { border-color: var(--accent-orange); }
-        .color-orange::before { background: var(--accent-orange) !important; }
+        .color-orange:hover { border-color: var(--accent-orange); border-top-color: var(--accent-orange); }
+        .color-orange:hover .card-arrow { color: var(--accent-orange); }
 
-        .color-purple .card-icon { background: rgba(108, 92, 231, 0.1); color: var(--accent-purple); }
+        .color-purple .card-icon { background: var(--accent-purple-light); color: var(--accent-purple); box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.15); }
         .color-purple:hover .card-icon { background: var(--accent-purple); color: #fff; }
-        .color-purple:hover { border-color: var(--accent-purple); }
-        .color-purple::before { background: var(--accent-purple) !important; }
+        .color-purple:hover { border-color: var(--accent-purple); border-top-color: var(--accent-purple); }
+        .color-purple:hover .card-arrow { color: var(--accent-purple); }
 
-        /* رسالة عدم وجود نتائج في البحث */
+        /* رسالة عدم وجود نتائج */
         .no-results {
             display: none;
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             color: var(--text-muted);
             background: var(--bg-card);
-            border-radius: 14px;
-            border: 1px dashed var(--border-color);
+            border-radius: var(--radius-lg);
+            border: 2px dashed var(--border-subtle);
         }
 
-        /* شريط الحالة السفلي (Footer Status) */
+        .no-results i {
+            font-size: 38px;
+            color: var(--accent-orange);
+            margin-bottom: 12px;
+        }
+
+        /* شريط الحالة السفلي العائم (Floating Bottom Dock) */
         .status-footer {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-header);
-            border-top: 1px solid var(--border-color);
-            padding: 10px 25px;
-            font-size: 12px;
-            color: var(--text-muted);
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            padding: 10px 28px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 20px;
             z-index: 999;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-md);
+            white-space: nowrap;
+        }
+
+        .status-dot-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #00e676;
+            width: 9px;
+            height: 9px;
+            background: #10b981;
             border-radius: 50%;
-            margin-left: 6px;
-            animation: pulse 2s infinite;
+            position: relative;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 230, 118, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            left: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.4);
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
 
-        @media (max-width: 768px) {
-            .header-content { flex-direction: column; text-align: center; gap: 12px; }
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .clock-badge {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 3px 12px;
+            border-radius: var(--radius-full);
+            font-family: 'Segoe UI', monospace;
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        @media (max-width: 820px) {
+            .header-content { flex-direction: column; text-align: center; gap: 14px; }
             .brand { flex-direction: column; }
-            .quick-banner { flex-direction: column; align-items: flex-start; }
-            .status-footer { flex-direction: column; gap: 5px; text-align: center; }
+            .quick-banner { flex-direction: column; align-items: stretch; }
+            .quick-info-items { justify-content: center; }
+            .btn-portal-external { justify-content: center; }
+            .status-footer { width: calc(100% - 30px); justify-content: space-between; padding: 10px 18px; font-size: 11.5px; }
         }
     </style>
 </head>
 <body id="pageBody">
 
-<!-- الرأس العلوي (Header) -->
+<!-- الرأس العلوي العصري (Header) -->
 <header>
     <div class="header-content">
         <div class="brand">
@@ -466,35 +627,73 @@
 
 <div class="container">
     
-    <!-- شريط الإرشادات والأرقام ومواعيد العمل السريعة -->
+    <!-- شريط الإرشادات والأرقام ومواعيد العمل السريعة (Bento Chips) -->
     <div class="quick-banner">
         <div class="quick-info-items">
-            <span><i class="fa-solid fa-clock"></i> مواعيد العمل: <strong class="badge-hours">من 9:00 صباحاً إلى 10:00 مساءً</strong></span>
-            <span><i class="fa-solid fa-phone-volume"></i> الخط الساخن: <strong class="badge-hotline">16060</strong></span>
-            <span><i class="fa-brands fa-whatsapp"></i> واتساب: <strong>01152888777</strong></span>
-            <span><i class="fa-solid fa-circle-check"></i> مواعيد متابعة الطلب: <strong>مرة كل 30 يوماً</strong></span>
+            <div class="quick-chip">
+                <i class="fa-solid fa-clock"></i>
+                <span>مواعيد العمل: <strong class="badge-hours">من 9:00 صباحاً إلى 10:00 مساءً</strong></span>
+            </div>
+            <div class="quick-chip">
+                <i class="fa-solid fa-phone-volume"></i>
+                <span>الخط الساخن: <strong class="badge-hotline">16060</strong></span>
+            </div>
+            <div class="quick-chip">
+                <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i>
+                <span>واتساب: <strong>01152888777</strong></span>
+            </div>
+            <div class="quick-chip">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>مواعيد متابعة الطلب: <strong>مرة كل 30 يوماً</strong></span>
+            </div>
         </div>
         <div>
-            <a href="https://portal.efb.eg/" target="_blank" style="color:var(--primary); text-decoration:none; font-size:13px; font-weight:bold;">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> فتح البورتال الخارجي
+            <a href="https://portal.efb.eg/" target="_blank" class="btn-portal-external">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>فتح البورتال الخارجي</span>
             </a>
         </div>
     </div>
 
-    <!-- شريط البحث الحي السريع -->
+    <!-- شريط البحث الحي السريع الفائق -->
     <div class="search-wrapper">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 اكتب هنا للبحث السريع عن أي صفحة، إجراء، كود، أو شكوى..." onkeyup="filterCards()">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث بالاسم، الكود، نوع الشكوى، أو اسم الصفحة للوصول الفوري..." onkeyup="filterCards()">
+    </div>
+
+    <!-- شريط التبويبات الذكية (Smart Dashboard Tabs) -->
+    <div class="dashboard-tabs-bar" id="tabsBar">
+        <button class="tab-btn active" onclick="switchDashboardTab('sec-orders', this)">
+            <i class="fa-solid fa-folder-open"></i>
+            <span>الطلبات والتسجيل</span>
+            <span class="tab-count">4</span>
+        </button>
+        <button class="tab-btn" onclick="switchDashboardTab('sec-operations', this)">
+            <i class="fa-solid fa-gears"></i>
+            <span>العمليات وإدارة الحالات</span>
+            <span class="tab-count">5</span>
+        </button>
+        <button class="tab-btn" onclick="switchDashboardTab('sec-programs', this)">
+            <i class="fa-solid fa-cubes-stacked"></i>
+            <span>البرامج والروابط</span>
+            <span class="tab-count">5</span>
+        </button>
+        <button class="tab-btn" onclick="switchDashboardTab('all', this)">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>عرض كل الأقسام</span>
+            <span class="tab-count">14</span>
+        </button>
     </div>
 
     <!-- رسالة عند عدم وجود نتائج للبحث -->
     <div id="noResults" class="no-results">
-        <i class="fa-solid fa-circle-exclamation" style="font-size: 30px; margin-bottom: 10px;"></i>
-        <p>عفواً، لا توجد نتائج مطابقة لبحثك!</p>
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p style="font-weight: 700; margin: 0; font-size: 16px;">عفواً، لا توجد نتائج مطابقة لبحثك!</p>
+        <span style="font-size: 13px;">تأكد من كتابة الكلمات بشكل صحيح أو امسح البحث لعرض كل الأقسام.</span>
     </div>
 
-    <!-- 1. قسم الطلبات والتسجيل -->
-    <div class="section-block">
+    <!-- 1. قسم الطلبات والتسجيل (مضاف إليه تقديم دور الرعاية بجانب تقديم الجمعيات) -->
+    <div class="section-block" id="sec-orders">
         <div class="section-header">
             <h2><i class="fa-solid fa-folder-open"></i> بنك الطعام المصري - الطلبات</h2>
             <span class="section-count">4 أقسام</span>
@@ -518,6 +717,16 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
+            <!-- تم النقل هنا: تقديم دور رعاية بجانب تقديم الجمعيات -->
+            <a href="تقديم دور رعاية.html" class="portal-card">
+                <div class="card-icon"><i class="fa-solid fa-house-chimney-medical"></i></div>
+                <div class="card-info">
+                    <div class="card-title">تقديم دور رعاية</div>
+                    <div class="card-desc">قائمة الـ 5 مستندات الرسمية لدور الرعاية</div>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
+            </a>
+
             <a href="للحالات السودانية.html" class="portal-card color-blue">
                 <div class="card-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
                 <div class="card-info">
@@ -526,26 +735,16 @@
                 </div>
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
-
-            <a href="للحالات الموسمية.html" class="portal-card color-orange">
-                <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                <div class="card-info">
-                    <div class="card-title">الحالات الموسمية</div>
-                    <div class="card-desc">ضوابط الانقطاع أكثر من سنة وطلب جديد</div>
-                </div>
-                <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
-            </a>
         </div>
     </div>
 
     <!-- 2. قسم العمليات وإدارة الحالات -->
-    <div class="section-block">
+    <div class="section-block" id="sec-operations" style="display: none;">
         <div class="section-header">
             <h2><i class="fa-solid fa-gears"></i> بنك الطعام المصري - العمليات</h2>
             <span class="section-count">5 أقسام</span>
         </div>
         <div class="cards-grid">
-            <!-- البطاقة الجديدة المضافة: التحويل إلى القسم المختص -->
             <a href="الحالات الخاصة والتحويل.html" class="portal-card color-purple">
                 <div class="card-icon"><i class="fa-solid fa-arrows-turn-to-dots"></i></div>
                 <div class="card-info">
@@ -593,8 +792,8 @@
         </div>
     </div>
 
-    <!-- 3. قسم البرامج والروابط الهامة -->
-    <div class="section-block">
+    <!-- 3. قسم البرامج والروابط الهامة (مضاف إليه الحالات الموسمية بجانب الحالات الفلسطينية) -->
+    <div class="section-block" id="sec-programs" style="display: none;">
         <div class="section-header">
             <h2><i class="fa-solid fa-cubes-stacked"></i> بنك الطعام المصري - البرامج والروابط</h2>
             <span class="section-count">5 أقسام</span>
@@ -627,11 +826,12 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="تقديم دور رعاية.html" class="portal-card">
-                <div class="card-icon"><i class="fa-solid fa-house-chimney-medical"></i></div>
+            <!-- تم النقل هنا: الحالات الموسمية بجانب الحالات الفلسطينية -->
+            <a href="للحالات الموسمية.html" class="portal-card color-orange">
+                <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
                 <div class="card-info">
-                    <div class="card-title">تقديم دور رعاية</div>
-                    <div class="card-desc">قائمة الـ 5 مستندات الرسمية لدور الرعاية</div>
+                    <div class="card-title">الحالات الموسمية</div>
+                    <div class="card-desc">ضوابط الانقطاع أكثر من سنة وطلب جديد</div>
                 </div>
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
@@ -649,16 +849,40 @@
 
 </div>
 
-<!-- شريط الحالة السفلي -->
-<div class="status-footer">
-    <div>
+<!-- شريط الحالة العائم (Floating Modern Dock) -->
+<footer class="status-footer">
+    <div class="status-dot-wrapper">
         <span class="status-dot"></span>
-        <span>بوابة بنك الطعام المصري | النظام جاهز ومكتمل</span>
+        <span>بوابة بنك الطعام المصري | النظام متصل ومكتمل</span>
     </div>
-    <div id="liveClock" style="font-family: monospace;">--:--:--</div>
-</div>
+    <div id="liveClock" class="clock-badge">--:--:--</div>
+</footer>
 
 <script>
+    let currentActiveTab = 'sec-orders';
+
+    // التبديل بين التبويبات
+    function switchDashboardTab(targetId, btn) {
+        currentActiveTab = targetId;
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+
+        const sections = document.querySelectorAll('.section-block');
+        sections.forEach(sec => {
+            if (targetId === 'all' || sec.id === targetId) {
+                sec.style.display = 'block';
+            } else {
+                sec.style.display = 'none';
+            }
+        });
+
+        // إظهار كافة الكروت والتأكد من إخفاء رسالة لا توجد نتائج
+        document.querySelectorAll('.portal-card').forEach(c => c.style.display = 'flex');
+        document.getElementById('noResults').style.display = 'none';
+    }
+
+    // التحكم بالوضع الليلي والنهاري وحفظ الإعدادات
     function toggleAppTheme() {
         const body = document.getElementById('pageBody');
         const icon = document.getElementById('themeIcon');
@@ -684,6 +908,7 @@
         }
     }
 
+    // استعادة الإعدادات المخزنة عند التحميل
     window.addEventListener('DOMContentLoaded', () => {
         const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
         if (savedTheme === 'dark') {
@@ -696,36 +921,48 @@
         setInterval(updateClock, 1000);
     });
 
+    // تحديث الساعة الحية
     function updateClock() {
         const now = new Date();
         const timeString = now.toLocaleTimeString('ar-EG');
         document.getElementById('liveClock').textContent = timeString;
     }
 
+    // فلترة وتصفية الكروت أثناء الكتابة في البحث مع دعم التبويبات
     function filterCards() {
         const input = document.getElementById('searchInput').value.trim().toLowerCase();
         const cards = document.querySelectorAll('.portal-card');
         const sections = document.querySelectorAll('.section-block');
         let visibleCount = 0;
 
-        cards.forEach(card => {
-            const title = card.querySelector('.card-title').textContent.toLowerCase();
-            const desc = card.querySelector('.card-desc').textContent.toLowerCase();
-            
-            if (title.includes(input) || desc.includes(input)) {
-                card.style.display = 'flex';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
+        if (input.length > 0) {
+            // أثناء البحث نفتح كل الأقسام للبحث الشامل
+            sections.forEach(sec => sec.style.display = 'block');
 
-        sections.forEach(sec => {
-            const hasVisibleCard = Array.from(sec.querySelectorAll('.portal-card')).some(c => c.style.display !== 'none');
-            sec.style.display = hasVisibleCard ? 'block' : 'none';
-        });
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+                
+                if (title.includes(input) || desc.includes(input)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
 
-        document.getElementById('noResults').style.display = (visibleCount === 0) ? 'block' : 'none';
+            // إخفاء الأقسام التي لا تحتوي على كروت مطابقة
+            sections.forEach(sec => {
+                const hasVisibleCard = Array.from(sec.querySelectorAll('.portal-card')).some(c => c.style.display !== 'none');
+                sec.style.display = hasVisibleCard ? 'block' : 'none';
+            });
+
+            document.getElementById('noResults').style.display = (visibleCount === 0) ? 'block' : 'none';
+        } else {
+            // عند مسح البحث نرجع للتبويب الذي كان مفعلاً
+            const activeBtn = document.querySelector(`.tab-btn[onclick*="'${currentActiveTab}'"]`);
+            switchDashboardTab(currentActiveTab, activeBtn);
+        }
     }
 </script>
 
