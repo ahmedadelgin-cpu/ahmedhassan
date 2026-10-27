@@ -48,7 +48,7 @@
         }
 
         body.dark-mode {
-            /* باليت ألوان الوضع الليلي العميق (Deep Slate/Obsidian) */
+            /* باليت ألوان الوضع الليلي العميق */
             --primary: #10b981;
             --primary-hover: #34d399;
             --primary-light: rgba(16, 185, 129, 0.12);
@@ -98,7 +98,7 @@
             min-height: 100vh;
         }
 
-        /* رأس الصفحة الزجاجي الفاخر (Glass Header) */
+        /* رأس الصفحة الزجاجي */
         header {
             background: var(--bg-glass);
             backdrop-filter: blur(18px);
@@ -157,7 +157,7 @@
             gap: 12px;
         }
 
-        /* زر الوضع الليلي/النهاري الحديث */
+        /* زر الوضع الليلي/النهاري */
         .theme-toggle-btn {
             background: var(--bg-card);
             color: var(--text-main);
@@ -187,7 +187,7 @@
             padding: 0 24px;
         }
 
-        /* شريط وسائل التواصل الاجتماعي والخط الساخن (المطابق للصورة) */
+        /* شريط وسائل التواصل الاجتماعي والخط الساخن */
         .efb-social-banner {
             background: var(--bg-card);
             border: 2px solid var(--primary);
@@ -252,7 +252,7 @@
             color: var(--primary);
         }
 
-        /* Bento Quick Banner (شبكة المعلومات السريعة الذكية) */
+        /* Quick Banner */
         .quick-banner {
             background: var(--bg-glass);
             backdrop-filter: blur(14px);
@@ -316,10 +316,14 @@
             box-shadow: 0 6px 15px var(--primary-glow);
         }
 
-        /* مربع البحث العصري على نمط Command Palette */
-        .search-wrapper {
+        /* حاوية البحث التفاعلية الذكية */
+        .search-container-box {
             position: relative;
             margin-bottom: 22px;
+        }
+
+        .search-wrapper {
+            position: relative;
         }
 
         .search-wrapper i.search-icon {
@@ -337,7 +341,7 @@
             color: var(--text-main);
             border: 2px solid var(--border-subtle);
             border-radius: 18px;
-            padding: 16px 58px 16px 22px;
+            padding: 16px 58px 16px 95px;
             font-size: 15.5px;
             font-family: inherit;
             outline: none;
@@ -349,7 +353,65 @@
             box-shadow: 0 0 0 5px var(--primary-glow), var(--shadow-md);
         }
 
-        /* شريط التبويبات الذكية (Smart Dashboard Tabs) */
+        /* زر المسح السريع داخل البحث */
+        .clear-search-btn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-base);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            border-radius: var(--radius-full);
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .clear-search-btn:hover {
+            color: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+
+        /* شريط التوجيه الفوري السريع أسفل البحث */
+        .instant-go-hint {
+            display: none;
+            margin-top: 10px;
+            background: var(--primary-light);
+            border: 1px dashed var(--primary);
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--primary-hover);
+            align-items: center;
+            justify-content: space-between;
+            animation: fadeIn 0.25s ease;
+            cursor: pointer;
+        }
+
+        .instant-go-hint:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .instant-go-hint kbd {
+            background: var(--bg-card);
+            color: var(--text-main);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 12px;
+            border: 1px solid var(--border-subtle);
+            margin-right: 5px;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+        }
+
+        /* شريط التبويبات الذكية */
         .dashboard-tabs-bar {
             display: flex;
             align-items: center;
@@ -460,7 +522,7 @@
             gap: 20px;
         }
 
-        /* تصميم كرت البوابة (Bento Card 2026/2027) */
+        /* تصميم كرت البوابة */
         .portal-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
@@ -482,6 +544,13 @@
             box-shadow: var(--shadow-hover);
             border-color: var(--primary);
             border-top-color: var(--primary);
+        }
+
+        /* تمييز الكرت الأول المطابق للبحث */
+        .portal-card.best-match {
+            border-color: var(--primary);
+            border-top-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow), var(--shadow-hover);
         }
 
         /* أيقونة الكرت */
@@ -539,7 +608,7 @@
             transform: translateX(-5px);
         }
 
-        /* سمات الألوان المخصصة للكروت */
+        /* سمات الألوان المخصصة */
         .color-red .card-icon { background: var(--accent-red-light); color: var(--accent-red); box-shadow: inset 0 0 0 1px rgba(225, 29, 72, 0.15); }
         .color-red:hover .card-icon { background: var(--accent-red); color: #fff; }
         .color-red:hover { border-color: var(--accent-red); border-top-color: var(--accent-red); }
@@ -577,7 +646,7 @@
             margin-bottom: 12px;
         }
 
-        /* شريط الحالة السفلي العائم (Floating Bottom Dock) */
+        /* شريط الحالة السفلي العائم */
         .status-footer {
             position: fixed;
             bottom: 16px;
@@ -634,7 +703,6 @@
             }
         }
 
-        /* شارات التاريخ والساعة في الشريط السفلي */
         .datetime-group {
             display: inline-flex;
             align-items: center;
@@ -684,7 +752,6 @@
         </div>
 
         <div class="header-actions">
-            <!-- زر تبديل الوضع الليلي والنهاري -->
             <button class="theme-toggle-btn" id="themeBtn" onclick="toggleAppTheme()">
                 <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
                 <span id="themeText">الوضع الليلي</span>
@@ -695,7 +762,7 @@
 
 <div class="container">
 
-    <!-- شريط وسائل التواصل الاجتماعي والخط الساخن المضاف حديثاً (مطابق للصورة) -->
+    <!-- شريط وسائل التواصل الاجتماعي والخط الساخن -->
     <div class="efb-social-banner">
         <span class="efb-time-label">9 AM</span>
 
@@ -725,7 +792,7 @@
         <span class="efb-time-label">10 PM</span>
     </div>
 
-    <!-- شريط الإرشادات والأرقام ومواعيد العمل السريعة (Bento Chips) -->
+    <!-- شريط الإرشادات والأرقام ومواعيد العمل السريعة -->
     <div class="quick-banner">
         <div class="quick-info-items">
             <div class="quick-chip">
@@ -749,13 +816,30 @@
         </div>
     </div>
 
-    <!-- شريط البحث الحي السريع الفائق -->
-    <div class="search-wrapper">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث بالاسم، الكود، نوع الشكوى، أو اسم الصفحة للوصول الفوري..." onkeyup="filterCards()">
+    <!-- حاوية البحث الذكي والانتقال المباشر -->
+    <div class="search-container-box">
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" 
+                   placeholder="🔍 اكتب سؤالك أو اسم الخدمة (مثل: كيف أقدم طلب، شكوى، أكواد) واضغط Enter للدخول الفوري..." 
+                   onkeyup="handleSearchKey(event)" 
+                   autocomplete="off">
+            <button id="clearSearchBtn" class="clear-search-btn" onclick="clearSearch()">
+                <i class="fa-solid fa-xmark"></i> مسح
+            </button>
+        </div>
+
+        <!-- تلميح الانتقال المباشر بالزر السريع -->
+        <div id="instantGoHint" class="instant-go-hint" onclick="goToTopMatch()">
+            <span>
+                <i class="fa-solid fa-bolt" style="color: #f59e0b; margin-left:6px;"></i>
+                اضغط <kbd>Enter ↵</kbd> للانتقال المباشر إلى: <strong id="hintTargetTitle">--</strong>
+            </span>
+            <span>فتح الصفحة الآن <i class="fa-solid fa-arrow-left"></i></span>
+        </div>
     </div>
 
-    <!-- شريط التبويبات الذكية (Smart Dashboard Tabs) - "عرض كل الأقسام" أولاً على أقصى اليمين -->
+    <!-- شريط التبويبات الذكية -->
     <div class="dashboard-tabs-bar" id="tabsBar">
         <button class="tab-btn active" onclick="switchDashboardTab('all', this)">
             <i class="fa-solid fa-table-cells-large"></i>
@@ -793,7 +877,7 @@
             <span class="section-count">4 أقسام</span>
         </div>
         <div class="cards-grid">
-            <a href="تقديم طلب مستحق.html" class="portal-card">
+            <a href="تقديم طلب مستحق.html" class="portal-card" data-keywords="كيف اقدم طلب ازاي اقدم تسجيل طلب فتح طلب استعجال الطلب تقديم مستحق جديد كرتونة شروط التقديم ورق التقديم متابعة الطلب بحث اجتماعي شهري">
                 <div class="card-icon"><i class="fa-solid fa-user-plus"></i></div>
                 <div class="card-info">
                     <div class="card-title">تقديم طلب مستحق</div>
@@ -802,7 +886,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="تقديم الجمعيات والمؤسسات.html" class="portal-card">
+            <a href="تقديم الجمعيات والمؤسسات.html" class="portal-card" data-keywords="كيف تقدم الجمعية شروط تسجيل جمعية اوراق الجمعيات 10 مستندات مؤسسة اهلية اشهار اعتماد جمعيات">
                 <div class="card-icon"><i class="fa-solid fa-building-ngo"></i></div>
                 <div class="card-info">
                     <div class="card-title">تقديم الجمعيات</div>
@@ -811,7 +895,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="تقديم دور رعاية.html" class="portal-card">
+            <a href="تقديم دور رعاية.html" class="portal-card" data-keywords="كيف اقدم دار ايتام دار مسنين دور رعاية ايتام 5 مستندات دور الرعاية شروط رعاية">
                 <div class="card-icon"><i class="fa-solid fa-house-chimney-medical"></i></div>
                 <div class="card-info">
                     <div class="card-title">تقديم دور رعاية</div>
@@ -820,7 +904,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="للحالات السودانية.html" class="portal-card color-blue">
+            <a href="للحالات السودانية.html" class="portal-card color-blue" data-keywords="سودانيين سودان اخوتنا السودانيين لاجئين كرت اصفر مفوضية توجيه السودانيين جمعيات معتمدة">
                 <div class="card-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
                 <div class="card-info">
                     <div class="card-title">الحالات السودانية</div>
@@ -838,7 +922,7 @@
             <span class="section-count">5 أقسام</span>
         </div>
         <div class="cards-grid">
-            <a href="الحالات الخاصة والتحويل.html" class="portal-card color-purple">
+            <a href="الحالات الخاصة والتحويل.html" class="portal-card color-purple" data-keywords="علاج كشف طبي عمليات مستشفى دواء بنك الشفاء بنك الكساء ملابس لبس كساء 17014 تحويل قسم مختص">
                 <div class="card-icon"><i class="fa-solid fa-arrows-turn-to-dots"></i></div>
                 <div class="card-info">
                     <div class="card-title">التحويل إلى القسم المختص</div>
@@ -847,7 +931,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="الاعطال.html" class="portal-card color-red">
+            <a href="الاعطال.html" class="portal-card color-red" data-keywords="السيستم عطلان النظام واقع مشكلة تقنية نصوص الرد اسكريبت العطل بلاغ عطل فني صيانة">
                 <div class="card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
                 <div class="card-info">
                     <div class="card-title">مركز تقارير الأعطال</div>
@@ -856,7 +940,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="الاكواد.html" class="portal-card">
+            <a href="الاكواد.html" class="portal-card" data-keywords="كود رسالة الكود استلام الكود ضياع الكود كود الصرف تسليم اقارب استثناء رقم تليفون sms">
                 <div class="card-icon"><i class="fa-solid fa-barcode"></i></div>
                 <div class="card-info">
                     <div class="card-title">نظام تسليم الأكواد</div>
@@ -865,7 +949,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="الشكاوى.html" class="portal-card color-red">
+            <a href="الشكاوى.html" class="portal-card color-red" data-keywords="ازاي اعمل شكوى عايز اشتكي الجمعية مخدتش كرتونة انقطاع الكرتونة جودة الاكل بايظ ميثاق الشرف تظلم">
                 <div class="card-icon"><i class="fa-solid fa-file-shield"></i></div>
                 <div class="card-info">
                     <div class="card-title">دليل الشكاوى الموحد</div>
@@ -874,7 +958,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="طلب نقل مساعدة.html" class="portal-card color-blue">
+            <a href="طلب نقل مساعدة.html" class="portal-card color-blue" data-keywords="نقل جمعية غيرت سكني عزلت مسافة بعيدة انهاء تعامل تغيير المحافظة تحويل مكان الصرف">
                 <div class="card-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
                 <div class="card-info">
                     <div class="card-title">طلب نقل مساعدة</div>
@@ -892,7 +976,7 @@
             <span class="section-count">5 أقسام</span>
         </div>
         <div class="cards-grid">
-            <a href="استفسارات المستحقين.html" class="portal-card">
+            <a href="استفسارات المستحقين.html" class="portal-card" data-keywords="اسئلة مستحقين استفسار ردود جاهزة مكالمات بحوث مواعيد الصرف الرد على العميل">
                 <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
                 <div class="card-info">
                     <div class="card-title">استفسارات المستحقين</div>
@@ -901,7 +985,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="برنامج فرى مارت.html" class="portal-card color-orange">
+            <a href="برنامج فرى مارت.html" class="portal-card color-orange" data-keywords="فري مارت free mart بونات كوبونات تموين سوبر ماركت نقاط التموين حصص دعم مالي صرف غذائي">
                 <div class="card-icon"><i class="fa-solid fa-basket-shopping"></i></div>
                 <div class="card-info">
                     <div class="card-title">برنامج فري مارت</div>
@@ -910,7 +994,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="الحالات الفلسطينية.html" class="portal-card color-red">
+            <a href="الحالات الفلسطينية.html" class="portal-card color-red" data-keywords="فلسطين غزة اهل غزة حالات فلسطينية يونيسف unicef bless اغاثة دعم فلسطين">
                 <div class="card-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
                 <div class="card-info">
                     <div class="card-title">الحالات الفلسطينية والمشاريع</div>
@@ -919,7 +1003,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="للحالات الموسمية.html" class="portal-card color-orange">
+            <a href="للحالات الموسمية.html" class="portal-card color-orange" data-keywords="موسمي رمضان كرتونة رمضان لحوم اضاحي مواسم انقطاع اكثر من سنة عيد الاضحى فئات موسمية">
                 <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
                 <div class="card-info">
                     <div class="card-title">الحالات الموسمية</div>
@@ -928,7 +1012,7 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <a href="قسم الروابط الهامة.html" class="portal-card color-blue">
+            <a href="قسم الروابط الهامة.html" class="portal-card color-blue" data-keywords="روابط لينك بورتال crm aheeva اتصال تسجيل دخول نظام سستم ايميلات">
                 <div class="card-icon"><i class="fa-solid fa-link"></i></div>
                 <div class="card-info">
                     <div class="card-title">الروابط الهامة والدخول</div>
@@ -941,7 +1025,7 @@
 
 </div>
 
-<!-- شريط الحالة العائم (Floating Modern Dock) مع تاريخ اليوم المحدّث تلقائياً والساعة -->
+<!-- شريط الحالة العائم -->
 <footer class="status-footer">
     <div class="status-dot-wrapper">
         <span class="status-dot"></span>
@@ -949,20 +1033,42 @@
     </div>
     
     <div class="datetime-group">
-        <!-- تاريخ اليوم التلقائي -->
         <div id="liveDate" class="date-badge">
             <i class="fa-regular fa-calendar-days"></i>
             <span>--</span>
         </div>
-
-        <!-- الساعة الرقمية المباشرة -->
         <div id="liveClock" class="clock-badge">--:--:--</div>
     </div>
 </footer>
 
 <script>
-    // جعل التبويب الافتراضي هو "عرض كل الأقسام"
     let currentActiveTab = 'all';
+    let topMatchedCard = null; // يحفظ الكرت الأول الأكثر تطابقاً
+
+    // دالة لتنظيف وتوحيد الكلمات العربية للبحث الذكي
+    function normalizeArabic(text) {
+        if (!text) return '';
+        return text
+            .toString()
+            .replace(/[\u064B-\u065F]/g, '') // إزالة التشكيل
+            .replace(/[أإآ]/g, 'ا')          // توحيد الألف
+            .replace(/ة/g, 'ه')              // توحيد التاء المربوطة
+            .replace(/ى/g, 'ي')              // توحيد الياء
+            .toLowerCase()
+            .trim();
+    }
+
+    // كلمات الاستفهام الشائعة التي يتم تجاهلها للتركيز على جوهر السؤال
+    const stopWords = ['كيف', 'ازاي', 'طريقة', 'عايز', 'اريد', 'هل', 'ماهو', 'ما', 'هي', 'في', 'من', 'الى', 'علي', 'عن'];
+
+    // التعامل مع ضغطات المفاتيح في حقل البحث
+    function handleSearchKey(event) {
+        if (event.key === 'Enter') {
+            goToTopMatch();
+        } else {
+            filterCards();
+        }
+    }
 
     // التبديل بين التبويبات
     function switchDashboardTab(targetId, btn) {
@@ -980,9 +1086,116 @@
             }
         });
 
-        // إظهار كافة الكروت والتأكد من إخفاء رسالة لا توجد نتائج
-        document.querySelectorAll('.portal-card').forEach(c => c.style.display = 'flex');
+        document.querySelectorAll('.portal-card').forEach(c => {
+            c.style.display = 'flex';
+            c.classList.remove('best-match');
+        });
         document.getElementById('noResults').style.display = 'none';
+        hideInstantHint();
+    }
+
+    // فلترة وتصفية الكروت أثناء الكتابة مع دعم الكلمات المفتاحية
+    function filterCards() {
+        const rawInput = document.getElementById('searchInput').value;
+        const clearBtn = document.getElementById('clearSearchBtn');
+        let query = normalizeArabic(rawInput);
+
+        // إظهار أو إخفاء زر المسح
+        clearBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
+
+        // استخراج الكلمات الأساسية من جملة المستخدم
+        const queryWords = query
+            .split(/\s+/)
+            .filter(word => word.length > 1 && !stopWords.includes(word));
+
+        const cards = document.querySelectorAll('.portal-card');
+        const sections = document.querySelectorAll('.section-block');
+        let visibleCards = [];
+
+        if (query.length > 0) {
+            // فتح كل الأقسام للبحث الشامل
+            sections.forEach(sec => sec.style.display = 'block');
+
+            cards.forEach(card => {
+                const title = normalizeArabic(card.querySelector('.card-title').textContent);
+                const desc = normalizeArabic(card.querySelector('.card-desc').textContent);
+                const keywords = normalizeArabic(card.getAttribute('data-keywords') || '');
+                const fullCardContent = `${title} ${desc} ${keywords}`;
+
+                let isMatch = false;
+
+                // 1. فحص التطابق المباشر مع النص
+                if (fullCardContent.includes(query)) {
+                    isMatch = true;
+                } else if (queryWords.length > 0) {
+                    // 2. فحص تطابق الكلمات المفتاحية الرئيسية
+                    isMatch = queryWords.some(word => fullCardContent.includes(word));
+                }
+
+                if (isMatch) {
+                    card.style.display = 'flex';
+                    visibleCards.push(card);
+                } else {
+                    card.style.display = 'none';
+                    card.classList.remove('best-match');
+                }
+            });
+
+            // إخفاء الأقسام التي لا تحتوي على كروت ظاهرة
+            sections.forEach(sec => {
+                const hasVisible = Array.from(sec.querySelectorAll('.portal-card')).some(c => c.style.display !== 'none');
+                sec.style.display = hasVisible ? 'block' : 'none';
+            });
+
+            if (visibleCards.length > 0) {
+                document.getElementById('noResults').style.display = 'none';
+                
+                // تحديد أفضل وأول نتيجة للانتقال المباشر
+                topMatchedCard = visibleCards[0];
+                cards.forEach(c => c.classList.remove('best-match'));
+                topMatchedCard.classList.add('best-match');
+
+                const titleText = topMatchedCard.querySelector('.card-title').textContent;
+                showInstantHint(titleText);
+            } else {
+                topMatchedCard = null;
+                document.getElementById('noResults').style.display = 'block';
+                hideInstantHint();
+            }
+        } else {
+            // مسح البحث والعودة للتبويب السابق
+            topMatchedCard = null;
+            hideInstantHint();
+            const activeBtn = document.querySelector(`.tab-btn[onclick*="'${currentActiveTab}'"]`);
+            switchDashboardTab(currentActiveTab, activeBtn);
+        }
+    }
+
+    // إظهار تلميح الانتقال السريع
+    function showInstantHint(title) {
+        const hint = document.getElementById('instantGoHint');
+        document.getElementById('hintTargetTitle').textContent = title;
+        hint.style.display = 'flex';
+    }
+
+    // إخفاء تلميح الانتقال السريع
+    function hideInstantHint() {
+        document.getElementById('instantGoHint').style.display = 'none';
+    }
+
+    // الانتقال المباشر إلى الصفحة الأولى الأكثر تطابقاً
+    function goToTopMatch() {
+        if (topMatchedCard && topMatchedCard.href) {
+            window.location.href = topMatchedCard.href;
+        }
+    }
+
+    // مسح البحث
+    function clearSearch() {
+        const input = document.getElementById('searchInput');
+        input.value = '';
+        input.focus();
+        filterCards();
     }
 
     // التحكم بالوضع الليلي والنهاري وحفظ الإعدادات
@@ -998,22 +1211,18 @@
             icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
             text.textContent = 'الوضع النهاري';
             localStorage.setItem('efb_theme', 'dark');
-            localStorage.setItem('myTheme', 'dark');
-            localStorage.setItem('theme', 'dark');
             document.documentElement.setAttribute('data-theme', 'dark');
         } else {
             icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
             text.textContent = 'الوضع الليلي';
             localStorage.setItem('efb_theme', 'light');
-            localStorage.setItem('myTheme', 'light');
-            localStorage.setItem('theme', 'light');
             document.documentElement.removeAttribute('data-theme');
         }
     }
 
-    // استعادة الإعدادات المخزنة عند التحميل وتشغيل الوقت والتاريخ
+    // استعادة الإعدادات وتشغيل الوقت والتاريخ
     window.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('efb_theme') || localStorage.getItem('myTheme') || localStorage.getItem('theme');
+        const savedTheme = localStorage.getItem('efb_theme');
         if (savedTheme === 'dark') {
             document.getElementById('pageBody').classList.add('dark-mode');
             document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
@@ -1024,58 +1233,15 @@
         setInterval(updateDateTime, 1000);
     });
 
-    // تحديث الساعة الرقمية وتاريخ اليوم تلقائياً
+    // تحديث الساعة والتاريخ
     function updateDateTime() {
         const now = new Date();
+        document.getElementById('liveClock').textContent = now.toLocaleTimeString('ar-EG');
 
-        // 1. تحديث الساعة
-        const timeString = now.toLocaleTimeString('ar-EG');
-        document.getElementById('liveClock').textContent = timeString;
-
-        // 2. تحديث التاريخ العربي (اليوم، اليوم بالرقم، اسم الشهر، السنة)
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const dateString = now.toLocaleDateString('ar-EG', dateOptions);
-        
         const dateContainer = document.getElementById('liveDate');
         if (dateContainer) {
-            dateContainer.innerHTML = `<i class="fa-regular fa-calendar-days"></i> <span>${dateString}</span>`;
-        }
-    }
-
-    // فلترة وتصفية الكروت أثناء الكتابة في البحث مع دعم التبويبات
-    function filterCards() {
-        const input = document.getElementById('searchInput').value.trim().toLowerCase();
-        const cards = document.querySelectorAll('.portal-card');
-        const sections = document.querySelectorAll('.section-block');
-        let visibleCount = 0;
-
-        if (input.length > 0) {
-            // أثناء البحث نفتح كل الأقسام للبحث الشامل
-            sections.forEach(sec => sec.style.display = 'block');
-
-            cards.forEach(card => {
-                const title = card.querySelector('.card-title').textContent.toLowerCase();
-                const desc = card.querySelector('.card-desc').textContent.toLowerCase();
-                
-                if (title.includes(input) || desc.includes(input)) {
-                    card.style.display = 'flex';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // إخفاء الأقسام التي لا تحتوي على كروت مطابقة
-            sections.forEach(sec => {
-                const hasVisibleCard = Array.from(sec.querySelectorAll('.portal-card')).some(c => c.style.display !== 'none');
-                sec.style.display = hasVisibleCard ? 'block' : 'none';
-            });
-
-            document.getElementById('noResults').style.display = (visibleCount === 0) ? 'block' : 'none';
-        } else {
-            // عند مسح البحث نرجع للتبويب الذي كان مفعلاً
-            const activeBtn = document.querySelector(`.tab-btn[onclick*="'${currentActiveTab}'"]`);
-            switchDashboardTab(currentActiveTab, activeBtn);
+            dateContainer.innerHTML = `<i class="fa-regular fa-calendar-days"></i> <span>${now.toLocaleDateString('ar-EG', dateOptions)}</span>`;
         }
     }
 </script>
