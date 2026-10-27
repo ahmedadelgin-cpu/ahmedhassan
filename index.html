@@ -16,6 +16,7 @@
 
     <style>
         :root {
+            /* باليت ألوان الوضع النهاري العصري */
             --primary: #059669;
             --primary-hover: #047857;
             --primary-light: #ecfdf5;
@@ -31,7 +32,7 @@
             --accent-purple-light: #ede9fe;
 
             --bg-base: #f8fafc;
-            --bg-glass: rgba(255, 255, 255, 0.85);
+            --bg-glass: rgba(255, 255, 255, 0.88);
             --bg-card: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
@@ -47,6 +48,7 @@
         }
 
         body.dark-mode {
+            /* باليت ألوان الوضع الليلي العميق */
             --primary: #10b981;
             --primary-hover: #34d399;
             --primary-light: rgba(16, 185, 129, 0.12);
@@ -62,7 +64,7 @@
             --accent-purple-light: rgba(192, 132, 252, 0.12);
 
             --bg-base: #090d16;
-            --bg-glass: rgba(15, 23, 42, 0.85);
+            --bg-glass: rgba(15, 23, 42, 0.88);
             --bg-card: #0f172a;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
@@ -83,6 +85,7 @@
         }
 
         body {
+            position: relative;
             background-color: var(--bg-base);
             background-image: 
                 radial-gradient(at 10% 10%, var(--primary-glow) 0px, transparent 40%),
@@ -94,6 +97,29 @@
             padding: 0;
             line-height: 1.6;
             min-height: 100vh;
+        }
+
+        /* الشعار المائي الواضح في الخلفية */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            background-image: url('لوجو بنك الطعام.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: min(580px, 85vw);
+            opacity: 0.20;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body.dark-mode::before {
+            opacity: 0.16;
+            filter: brightness(1.15) contrast(1.1);
         }
 
         header {
@@ -309,7 +335,7 @@
             box-shadow: 0 6px 15px var(--primary-glow);
         }
 
-        /* حاوية البحث التفاعلية */
+        /* صندوق البحث */
         .search-container-box {
             position: relative;
             margin-bottom: 22px;
@@ -328,14 +354,16 @@
             font-size: 18px;
         }
 
+        /* الكلمة المكتوبة في البحث باللون الأخضر المميز */
         .search-input {
             width: 100%;
             background: var(--bg-card);
-            color: var(--text-main);
+            color: var(--primary);
+            font-weight: 700;
             border: 2px solid var(--border-subtle);
             border-radius: 18px;
             padding: 16px 58px 16px 95px;
-            font-size: 15.5px;
+            font-size: 16px;
             font-family: inherit;
             outline: none;
             box-shadow: var(--shadow-sm);
@@ -373,7 +401,7 @@
             display: none;
             margin-top: 10px;
             background: var(--primary-light);
-            border: 1px dashed var(--primary);
+            border: 1.5px dashed var(--primary);
             padding: 11px 20px;
             border-radius: 14px;
             font-size: 14px;
@@ -390,6 +418,11 @@
             color: #ffffff;
         }
 
+        .instant-go-hint:hover #hintTargetTitle {
+            background: #ffffff;
+            color: var(--primary-hover);
+        }
+
         .instant-go-hint kbd {
             background: var(--bg-card);
             color: var(--text-main);
@@ -400,6 +433,28 @@
             border: 1px solid var(--border-subtle);
             margin-right: 5px;
             box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+        }
+
+        /* جعل الكلمة المستهدفة باللون الأخضر الجريء */
+        #hintTargetTitle {
+            color: var(--primary);
+            background: var(--bg-card);
+            padding: 2px 10px;
+            border-radius: 8px;
+            font-weight: 900;
+            border: 1px solid rgba(5, 150, 105, 0.35);
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        /* تمييز الكلمة المبحوث عنها بلون أخضر داخل الكروت */
+        .highlight-word {
+            color: var(--primary) !important;
+            background-color: var(--primary-light);
+            padding: 1px 5px;
+            border-radius: 6px;
+            font-weight: 900;
+            border: 1px solid rgba(5, 150, 105, 0.25);
         }
 
         .dashboard-tabs-bar {
@@ -802,7 +857,7 @@
         <div class="search-wrapper">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" id="searchInput" class="search-input" 
-                   placeholder="🔍 ابحث هنا (مثل: تقديم طلب، تقديم شكوى، انقطاع الكرتونة، تقديم دور رعاية) واضغط Enter للدخول..." 
+                   placeholder="🔍 ابحث هنا (مثل: تقيدم طلب، تقديم شكوى، انقطاع الكرتونة، سوء سلوك، تقديم دور رعاية) واضغط Enter..." 
                    onkeyup="handleSearchKey(event)" 
                    autocomplete="off">
             <button id="clearSearchBtn" class="clear-search-btn" onclick="clearSearch()">
@@ -810,6 +865,7 @@
             </button>
         </div>
 
+        <!-- تلميح الانتقال والكلمة المستهدفة باللون الأخضر -->
         <div id="instantGoHint" class="instant-go-hint" onclick="goToTopMatch()">
             <span>
                 <i class="fa-solid fa-bolt" style="color: #f59e0b; margin-left:6px;"></i>
@@ -857,7 +913,6 @@
             <span class="section-count">4 أقسام</span>
         </div>
         <div class="cards-grid">
-            <!-- تقديم طلب مستحق: تم إضافة تقيدم طلب وتقديم طلب -->
             <a href="تقديم طلب مستحق.html" class="portal-card" data-keywords="تقديم طلب تقيدم طلب كيف اقدم طلب ازاي اقدم تسجيل طلب فتح طلب استعجال الطلب تقديم مستحق جديد كرتونة شروط التقديم ورق التقديم متابعة الطلب بحث اجتماعي شهري">
                 <div class="card-icon"><i class="fa-solid fa-user-plus"></i></div>
                 <div class="card-info">
@@ -867,7 +922,6 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <!-- تقديم الجمعيات: تم إضافة تقديم جمعيات خيرية -->
             <a href="تقديم الجمعيات والمؤسسات.html" class="portal-card" data-keywords="تقديم جمعيات خيرية تقديم جمعيات تسجيل جمعيات جمعية خيرية مؤسسة اهلية 10 مستندات شروط الجمعيات اعتماد جمعيات">
                 <div class="card-icon"><i class="fa-solid fa-building-ngo"></i></div>
                 <div class="card-info">
@@ -877,7 +931,6 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <!-- تقديم دور رعاية: تم إضافة تقديم دور رعاية -->
             <a href="تقديم دور رعاية.html" class="portal-card" data-keywords="تقديم دور رعاية دور رعاية دار ايتام دار مسنين 5 مستندات دور الرعاية شروط رعاية ايتام">
                 <div class="card-icon"><i class="fa-solid fa-house-chimney-medical"></i></div>
                 <div class="card-info">
@@ -887,7 +940,6 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <!-- الحالات السودانية: تم إضافة تقديم طلب سودانى وسوداني -->
             <a href="للحالات السودانية.html" class="portal-card color-blue" data-keywords="تقديم طلب سودانى تقديم طلب سوداني سودانيين سودان اخوتنا السودانيين لاجئين كرت اصفر مفوضية توجيه السودانيين جمعيات معتمدة">
                 <div class="card-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
                 <div class="card-info">
@@ -933,7 +985,6 @@
                 <div class="card-arrow"><i class="fa-solid fa-chevron-left"></i></div>
             </a>
 
-            <!-- دليل الشكاوى: تم تزويده بكافة طلبات الشكاوى المذكورة بدقة -->
             <a href="الشكاوى.html" class="portal-card color-red" data-keywords="تقديم شكوى تقديم شكوي شكوت العميل يشتكى من انقطاع الكرتونة شكوت انقطاع كرتون انقطاع الكرتونة شكوت جودة منتجات جودة منتجات شكوت سوء سلوك الجمعية سو سلوك سوء سلوك الجمعية شكوت نقص مكونات نقص مكونات ميثاق الشرف تظلم عايز اشتكي">
                 <div class="card-icon"><i class="fa-solid fa-file-shield"></i></div>
                 <div class="card-info">
@@ -1030,21 +1081,39 @@
     let currentActiveTab = 'all';
     let topMatchedCard = null;
 
-    // تطهير النص وتوحيد الحروف العربية مع معالجة الكلمات الشائعة
+    // حفظ النصوص الأصلية للكروت للرجوع إليها عند مسح البحث
+    window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.portal-card').forEach(card => {
+            const titleEl = card.querySelector('.card-title');
+            const descEl = card.querySelector('.card-desc');
+            card.setAttribute('data-original-title', titleEl.textContent);
+            card.setAttribute('data-original-desc', descEl.textContent);
+        });
+
+        const savedTheme = localStorage.getItem('efb_theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    });
+
     function normalizeArabic(text) {
         if (!text) return '';
         return text
             .toString()
-            .replace(/[\u064B-\u065F]/g, '') // إزالة التشكيل
-            .replace(/[أإآ]/g, 'ا')          // توحيد الألف
-            .replace(/ة/g, 'ه')              // توحيد التاء المربوطة
-            .replace(/ى/g, 'ي')              // توحيد الياء
-            .replace(/وء|ؤ/g, 'و')           // توحيد سوء -> سو
+            .replace(/[\u064B-\u065F]/g, '')
+            .replace(/[أإآ]/g, 'ا')
+            .replace(/ة/g, 'ه')
+            .replace(/ى/g, 'ي')
+            .replace(/وء|ؤ/g, 'و')
             .toLowerCase()
             .trim();
     }
 
-    // كلمات الاستفهام والربط التي يتم تجاهلها للوصول للهدف مباشرة
     const stopWords = ['كيف', 'ازاي', 'طريقة', 'عايز', 'اريد', 'هل', 'ماهو', 'ما', 'هي', 'في', 'من', 'الى', 'علي', 'عن', 'او'];
 
     function handleSearchKey(event) {
@@ -1073,12 +1142,29 @@
         document.querySelectorAll('.portal-card').forEach(c => {
             c.style.display = 'flex';
             c.classList.remove('best-match');
+            // استعادة النصوص الأصلية
+            const titleEl = c.querySelector('.card-title');
+            const descEl = c.querySelector('.card-desc');
+            if (c.getAttribute('data-original-title')) titleEl.textContent = c.getAttribute('data-original-title');
+            if (c.getAttribute('data-original-desc')) descEl.textContent = c.getAttribute('data-original-desc');
         });
         document.getElementById('noResults').style.display = 'none';
         hideInstantHint();
     }
 
-    // خوارزمية الفلترة وترتيب أفضل النتائج بحسب الكلمات المدخلة
+    // دالة تمييز الكلمة بلون أخضر
+    function highlightSearchTerm(text, words) {
+        if (!words || words.length === 0) return text;
+        let highlighted = text;
+        words.forEach(w => {
+            if (w.length > 1) {
+                const regex = new RegExp(`(${w})`, 'gi');
+                highlighted = highlighted.replace(regex, '<span class="highlight-word">$1</span>');
+            }
+        });
+        return highlighted;
+    }
+
     function filterCards() {
         const rawInput = document.getElementById('searchInput').value;
         const clearBtn = document.getElementById('clearSearchBtn');
@@ -1098,35 +1184,41 @@
             sections.forEach(sec => sec.style.display = 'block');
 
             cards.forEach(card => {
-                const title = normalizeArabic(card.querySelector('.card-title').textContent);
-                const desc = normalizeArabic(card.querySelector('.card-desc').textContent);
+                const origTitle = card.getAttribute('data-original-title') || card.querySelector('.card-title').textContent;
+                const origDesc = card.getAttribute('data-original-desc') || card.querySelector('.card-desc').textContent;
+
+                const normTitle = normalizeArabic(origTitle);
+                const normDesc = normalizeArabic(origDesc);
                 const keywords = normalizeArabic(card.getAttribute('data-keywords') || '');
-                const fullText = `${title} ${desc} ${keywords}`;
+                const fullText = `${normTitle} ${normDesc} ${keywords}`;
 
                 let score = 0;
 
-                // إذا كانت الجملة الكاملة مطابقة تماماً (تطابق تام)
                 if (fullText.includes(query)) {
                     score += 100;
                 }
 
-                // حساب عدد الكلمات المتطابقة
                 queryWords.forEach(w => {
-                    if (title.includes(w)) score += 30;
+                    if (normTitle.includes(w)) score += 35;
                     else if (keywords.includes(w)) score += 20;
-                    else if (desc.includes(w)) score += 10;
+                    else if (normDesc.includes(w)) score += 10;
                 });
 
                 if (score > 0) {
                     card.style.display = 'flex';
                     matchedCardsWithScores.push({ card, score });
+
+                    // تلوين الكلمة المبحوث عنها بلون أخضر
+                    card.querySelector('.card-title').innerHTML = highlightSearchTerm(origTitle, queryWords);
+                    card.querySelector('.card-desc').innerHTML = highlightSearchTerm(origDesc, queryWords);
                 } else {
                     card.style.display = 'none';
                     card.classList.remove('best-match');
+                    card.querySelector('.card-title').textContent = origTitle;
+                    card.querySelector('.card-desc').textContent = origDesc;
                 }
             });
 
-            // إخفاء الأقسام الفارغة
             sections.forEach(sec => {
                 const hasVisible = Array.from(sec.querySelectorAll('.portal-card')).some(c => c.style.display !== 'none');
                 sec.style.display = hasVisible ? 'block' : 'none';
@@ -1135,14 +1227,13 @@
             if (matchedCardsWithScores.length > 0) {
                 document.getElementById('noResults').style.display = 'none';
                 
-                // ترتيب النتائج حسب الأعلى دقة وتطابق
                 matchedCardsWithScores.sort((a, b) => b.score - a.score);
                 topMatchedCard = matchedCardsWithScores[0].card;
 
                 cards.forEach(c => c.classList.remove('best-match'));
                 topMatchedCard.classList.add('best-match');
 
-                const titleText = topMatchedCard.querySelector('.card-title').textContent;
+                const titleText = topMatchedCard.getAttribute('data-original-title');
                 showInstantHint(titleText);
             } else {
                 topMatchedCard = null;
@@ -1167,7 +1258,6 @@
         document.getElementById('instantGoHint').style.display = 'none';
     }
 
-    // الانتقال المباشر لصفحة أول نتيجة
     function goToTopMatch() {
         if (topMatchedCard && topMatchedCard.href) {
             window.location.href = topMatchedCard.href;
@@ -1201,18 +1291,6 @@
             document.documentElement.removeAttribute('data-theme');
         }
     }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('efb_theme');
-        if (savedTheme === 'dark') {
-            document.getElementById('pageBody').classList.add('dark-mode');
-            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
-            document.getElementById('themeText').textContent = 'الوضع النهاري';
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
-    });
 
     function updateDateTime() {
         const now = new Date();
