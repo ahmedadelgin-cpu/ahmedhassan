@@ -255,6 +255,7 @@
         .bg-otp { background: var(--accent-blue); }
         .bg-bless { background: #2d3436; }
         .bg-inquiry { background: var(--warning-orange); }
+        .bg-followup { background: #00b894; }
 
         .card-body {
             padding: 20px;
@@ -328,7 +329,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            transition: all 0.2s;
+            transition: all 0.25s;
         }
 
         .btn-copy-template:hover {
@@ -461,7 +462,7 @@
     <!-- شريط البحث السريع -->
     <div class="search-box">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث في أنواع الشكاوى وصيغها (ميثاق شرف، انقطاع، جودة، نقص، OTP، Bless، سودانية)..." onkeyup="filterComplaints()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث في أنواع الشكاوى وصيغها (ميثاق شرف، انقطاع، جودة، نقص، OTP، Bless، سودانية، رد الشكوى، متابعة)..." onkeyup="filterComplaints()">
     </div>
 
     <!-- شبكة بطاقات الشكاوى -->
@@ -535,8 +536,8 @@
                         </button>
                     </div>
                     <p class="template-text"> الحالة [اسم الحالة] من جمعية [اسم الجمعية] تشتكي من نقص المكونات.. المستلم هو [..] والناقص هو [ذكر الأصناف الناقصة]  الحالة تستلم [شهري / موسمي]محافظة [   ]   </p>
-                   <br>
-                   <p class="template-text"> الحالة [اسم الحالة] من جمعية [اسم الجمعية] تشتكي من جودة المنتجات المستلمة هى  [   ]   الحالة تستلم [شهري / موسمي]محافظة [  ]   </p>             
+                    <br>
+                    <p class="template-text"> الحالة [اسم الحالة] من جمعية [اسم الجمعية] تشتكي من جودة المنتجات المستلمة هى  [   ]   الحالة تستلم [شهري / موسمي]محافظة [  ]   </p>             
                 </div>
             </div>
         </div>
@@ -589,15 +590,14 @@
             </div>
         </div>
 
-        <!-- 6. متابعة الشكاوى والشكاوى السودانية -->
+        <!-- 6. استفسارات الشكاوى والحالات السودانية -->
         <div class="complaint-card">
             <div class="card-header bg-inquiry">
-                <span><i class="fa-solid fa-list-check"></i> 6. استفسارات الشكاوى والحالات السودانية</span>
-                <small>متابعة الردود والتجاوزات</small>
+                <span><i class="fa-solid fa-list-check"></i> 6. الحالات السودانية وتجاوزات الجمعيات</span>
+                <small>متابعة التجاوزات والرفض</small>
             </div>
             <div class="card-body">
                 <ul class="rules-list">
-                    <li><b>متابعة الشكاوى:</b> (تم توضيح رد الشكوى / العميل له شكوى لم يتم الرد حتى الآن / تم عمل متابعة  للشكوى).</li>
                     <li><b>الحالات السودانية:</b> عند رفض الجمعيات المعتمدة (الكمال، المرأة السودانية، إسناد) تلقي الطلب 👈 يتم فوراً تقديم <b>شكوى تجاوزات جمعية</b>.</li>
                 </ul>
                 <div class="template-box">
@@ -612,22 +612,46 @@
             </div>
         </div>
 
+        <!-- 7. توضيح رد الشكوى ومتابعة الشكاوى -->
+        <div class="complaint-card">
+            <div class="card-header bg-followup">
+                <span><i class="fa-solid fa-headset"></i> 7. توضيح رد الشكوى ومتابعة الشكاوى</span>
+                <small>استفسار ومتابعة السيستم</small>
+            </div>
+            <div class="card-body">
+                <ul class="rules-list">
+                    <li><b>توضيح رد الشكوى:</b> عند استفسار العميل عن شكوى سابقة وتوضيح الرد المسجل له 👈 يتم اختيار الأكشن <b>استفسار</b>.</li>
+                    <li><b>متابعة شكوى قائمة:</b> عند اتصال العميل لمتابعة شكوى لم يتم الرد عليها حتى الآن 👈 يتم اختيار الأكشن <b>متابعة شكوى</b>.</li>
+                    <li><b>Call Logs الإلزامية:</b> يتم اختيار <b>شكوى</b> و <b>متابعة شكوى</b> في سجل المكالمات.</li>
+                </ul>
+                <div class="template-box">
+                    <div class="template-header">
+                        <span>📋 صيغة توضيح الرد / المتابعة:</span>
+                        <button class="btn-copy-template" onclick="copyTemplate(this)">
+                            <i class="fa-regular fa-copy"></i> نسخ الصيغة
+                        </button>
+                    </div>
+                    <p class="template-text">تم توضيح رد الشكوى للعميل الخاص بـ [موضوع الشكوى].. أو (العميل يستفسر عن متابعة الشكوى رقم [..] ولم يتم الرد عليها حتى الآن وتطلب المتابعة).</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- صندوق إجراءات السيستم -->
     <div class="system-action-box">
         <div class="system-header">
-            <i class="fa-solid fa-gears"></i> إجراءات تسجيل الشكوى بالنظام (Action System):
+            <i class="fa-solid fa-gears"></i> إجراءات تسجيل الشكوى والمتابعة بالنظام (Action System):
         </div>
         <div class="tags-row">
             <div class="tag-pill">
                 <b>System Action:</b> <span>تسجيل Beneficiary</span>
             </div>
             <div class="tag-pill">
-                <b>Call Logs:</b> <span>Complaint / شكوى</span>
+                <b>Call Logs:</b> <span>Complaint / شكوى - متابعة شكوى</span>
             </div>
             <div class="tag-pill">
-                <b>Call Actions:</b> <span>Complaint Call ➔ addComplaint</span>
+                <b>Call Actions:</b> <span>Complaint Call ➔ addComplaint / استفسار / متابعة شكوى</span>
             </div>
         </div>
     </div>
