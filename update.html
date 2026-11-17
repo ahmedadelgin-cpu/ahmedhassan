@@ -265,6 +265,26 @@
             font-weight: 600;
         }
 
+        .intro-badges-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .update-date-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            padding: 7px 18px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .program-tag-badge {
             background: var(--accent-orange-light);
             color: var(--accent-orange);
@@ -372,8 +392,12 @@
 
         .update-date {
             font-size: 13px;
-            font-weight: 700;
-            color: var(--text-muted);
+            font-weight: 800;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(4, 120, 87, 0.25);
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -640,9 +664,15 @@
                 <p>تحديثات تسليمات نوفمبر، الجمعيات، ومكونات الكراتين</p>
             </div>
         </div>
-        <div class="program-tag-badge">
-            <i class="fa-solid fa-basket-shopping"></i>
-            <span>فري مارت و كراتين</span>
+        <div class="intro-badges-group">
+            <div class="update-date-badge">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>تاريخ التحديث: 17 / 11 / 2026</span>
+            </div>
+            <div class="program-tag-badge">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span>فري مارت و كراتين</span>
+            </div>
         </div>
     </div>
 
@@ -661,7 +691,7 @@
                     <span class="badge-new">هام</span>
                 </div>
                 <span class="update-date">
-                    <i class="fa-regular fa-calendar"></i> تسليمات نوفمبر
+                    <i class="fa-regular fa-calendar"></i> تاريخ التحديث: 17 / 11 / 2026
                 </span>
             </div>
 
@@ -709,7 +739,7 @@
                     <span class="badge-new">انتبه قبل تسجيل شكوى</span>
                 </div>
                 <span class="update-date">
-                    <i class="fa-solid fa-box-open"></i> مراجعة المكونات
+                    <i class="fa-regular fa-calendar"></i> تاريخ التحديث: 17 / 11 / 2026
                 </span>
             </div>
 
