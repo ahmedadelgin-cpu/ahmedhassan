@@ -27,6 +27,8 @@
             --accent-blue-light: #e0f2fe;
             --accent-orange: #d97706;
             --accent-orange-light: #fef3c7;
+            --accent-purple: #7c3aed;
+            --accent-purple-light: #ede9fe;
 
             --bg-base: #f8fafc;
             --bg-glass: rgba(255, 255, 255, 0.92);
@@ -56,6 +58,8 @@
             --accent-blue-light: rgba(56, 189, 248, 0.15);
             --accent-orange: #fbbf24;
             --accent-orange-light: rgba(251, 191, 36, 0.15);
+            --accent-purple: #c084fc;
+            --accent-purple-light: rgba(192, 132, 252, 0.15);
 
             --bg-base: #090d16;
             --bg-glass: rgba(15, 23, 42, 0.92);
@@ -261,14 +265,14 @@
             font-weight: 600;
         }
 
-        .last-sync-badge {
-            background: var(--primary-light);
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            padding: 7px 16px;
+        .program-tag-badge {
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            border: 1.5px solid var(--accent-orange);
+            padding: 7px 18px;
             border-radius: var(--radius-full);
-            font-size: 13px;
-            font-weight: 800;
+            font-size: 14px;
+            font-weight: 900;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -277,7 +281,7 @@
         .updates-list {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 22px;
         }
 
         .update-card {
@@ -290,9 +294,12 @@
             animation: fadeIn 0.3s ease;
         }
 
-        .update-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
+        .update-card.card-urgent {
+            border-right-color: var(--accent-red);
+        }
+
+        .update-card.card-alert {
+            border-right-color: var(--accent-orange);
         }
 
         @keyframes fadeIn {
@@ -306,7 +313,7 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             padding-bottom: 12px;
             border-bottom: 1px solid var(--border-subtle);
         }
@@ -326,8 +333,32 @@
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            background: var(--primary-light);
-            color: var(--primary);
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+        }
+
+        .badge-program {
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12.5px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+        }
+
+        .badge-purple {
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12.5px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--accent-purple-light);
+            color: var(--accent-purple);
         }
 
         .badge-new {
@@ -349,75 +380,137 @@
         }
 
         .update-title {
-            margin: 0 0 16px;
-            font-size: 19px;
+            margin: 0 0 18px;
+            font-size: 19.5px;
             font-weight: 900;
             color: var(--text-main);
         }
 
-        .section-sub-label {
-            font-size: 14px;
+        /* بلوكات التفاصيل */
+        .rule-box {
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            border: 1.5px solid var(--border-subtle);
+        }
+
+        .rule-box:last-child {
+            margin-bottom: 0;
+        }
+
+        .rule-general {
+            background: var(--accent-orange-light);
+            border-color: rgba(217, 119, 6, 0.35);
+        }
+
+        .rule-group-1 {
+            background: var(--primary-light);
+            border-color: rgba(4, 120, 87, 0.35);
+        }
+
+        .rule-group-2 {
+            background: var(--accent-blue-light);
+            border-color: rgba(2, 132, 199, 0.35);
+        }
+
+        .rule-group-purple {
+            background: var(--accent-purple-light);
+            border-color: rgba(124, 58, 237, 0.35);
+        }
+
+        .rule-warning-red {
+            background: var(--accent-red-light);
+            border: 2px dashed var(--accent-red);
+        }
+
+        .rule-text {
+            font-size: 16px;
             font-weight: 800;
-            color: var(--text-muted);
-            margin-bottom: 10px;
+            color: var(--text-main);
+            margin: 0;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            align-items: flex-start;
+            gap: 10px;
         }
 
-        .section-sub-label i {
-            color: var(--primary);
+        .rule-text i {
+            margin-top: 5px;
+            flex-shrink: 0;
         }
 
-        /* شبكة المحافظات */
-        .gov-grid {
+        .rule-general .rule-text i { color: var(--accent-orange); }
+        .rule-group-1 .rule-text i { color: var(--primary); }
+        .rule-group-2 .rule-text i { color: var(--accent-blue); }
+        .rule-group-purple .rule-text i { color: var(--accent-purple); }
+        .rule-warning-red .rule-text i { color: var(--accent-red); }
+
+        .gov-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 22px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .gov-chip {
-            background: var(--accent-blue-light);
-            color: var(--accent-blue);
-            border: 1.5px solid rgba(2, 132, 199, 0.3);
-            padding: 9px 20px;
-            border-radius: var(--radius-full);
-            font-size: 15px;
-            font-weight: 900;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* صندوق المخصصات المستلمة */
-        .items-box {
-            background: var(--primary-light);
-            border: 2px dashed var(--primary);
-            border-radius: var(--radius-md);
-            padding: 18px 22px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .delivery-item {
             background: var(--bg-card);
-            border: 1.5px solid var(--primary);
-            border-radius: 12px;
-            padding: 12px 20px;
-            font-size: 16px;
+            border: 1.5px solid var(--border-subtle);
+            padding: 5px 15px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
             font-weight: 900;
-            color: var(--primary);
             display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rule-group-1 .gov-chip {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .rule-group-2 .gov-chip {
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .assoc-list {
+            margin: 12px 0 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .assoc-item {
+            background: var(--bg-card);
+            border: 1.5px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 15.5px;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: var(--shadow-sm);
         }
 
-        .delivery-item i {
-            font-size: 18px;
+        .assoc-item i {
+            color: var(--accent-purple);
+            font-size: 17px;
+            flex-shrink: 0;
+        }
+
+        .warning-highlight {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(225, 29, 72, 0.35);
+            font-size: 16.5px;
+            font-weight: 900;
+            color: var(--accent-red);
+            display: flex;
+            align-items: center;
+            gap: 9px;
         }
 
         .status-footer {
@@ -540,65 +633,116 @@
     <div class="page-intro-banner">
         <div class="intro-title-box">
             <div class="intro-icon">
-                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-bullhorn"></i>
             </div>
             <div>
                 <h2>سجل آخر التحديثات</h2>
-                <p>متابعة أحدث التحديثات والتعليمات الخاصة بصرف المستحقين</p>
+                <p>تحديثات تسليمات نوفمبر، الجمعيات، ومكونات الكراتين</p>
             </div>
         </div>
-        <div class="last-sync-badge">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>محدث</span>
+        <div class="program-tag-badge">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span>فري مارت و كراتين</span>
         </div>
     </div>
 
     <div class="updates-list">
 
-        <!-- ====== بداية كارت التحديث (انسخ هذا الكارت عند إضافة تحديث جديد مستقبلاً) ====== -->
-        <div class="update-card">
+        <!-- ====== الكارت الأول: تغييرات تسليمات نوفمبر ====== -->
+        <div class="update-card card-urgent">
             <div class="update-header">
                 <div class="update-tags">
                     <span class="badge-category">
-                        <i class="fa-solid fa-box-open"></i> تحديث الصرف والتوزيع
+                        <i class="fa-solid fa-bell"></i> تغييرات تسليمات نوفمبر
                     </span>
-                    <span class="badge-new">جديد</span>
+                    <span class="badge-program">
+                        <i class="fa-solid fa-boxes-packing"></i> فري مارت و كراتين
+                    </span>
+                    <span class="badge-new">هام</span>
                 </div>
                 <span class="update-date">
-                    <i class="fa-regular fa-calendar"></i> 17 / 11 / 2026
+                    <i class="fa-regular fa-calendar"></i> تسليمات نوفمبر
                 </span>
             </div>
 
-            <h3 class="update-title">تفاصيل الصرف للمحافظات المحددة</h3>
+            <h3 class="update-title">يا شباب ناخد بالنا عشان في تغيرات في تسليمات نوفمبر 📢📢</h3>
 
-            <div class="section-sub-label">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>المحافظات:</span>
-            </div>
-            <div class="gov-grid">
-                <span class="gov-chip"><i class="fa-solid fa-map-pin"></i> الغربية</span>
-                <span class="gov-chip"><i class="fa-solid fa-map-pin"></i> المنوفية</span>
-                <span class="gov-chip"><i class="fa-solid fa-map-pin"></i> بني سويف</span>
-                <span class="gov-chip"><i class="fa-solid fa-map-pin"></i> الفيوم</span>
+            <div class="rule-box rule-general">
+                <p class="rule-text">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>▪️ تسليمات هذا الشهر في شنط بدلاً من الكراتين</span>
+                </p>
             </div>
 
-            <div class="section-sub-label">
-                <i class="fa-solid fa-basket-shopping"></i>
-                <span>تفاصيل الاستلام:</span>
-            </div>
-            <div class="items-box">
-                <span style="font-weight: 800; font-size: 15px;">هيستلموا:</span>
-                <div class="delivery-item">
-                    <i class="fa-solid fa-bowl-rice"></i>
-                    <span>٣ كيس أرز</span>
+            <div class="rule-box rule-group-1">
+                <div class="gov-badges">
+                    <span class="gov-chip"><i class="fa-solid fa-location-dot"></i> المنوفيه</span>
+                    <span class="gov-chip"><i class="fa-solid fa-location-dot"></i> الغربيه</span>
+                    <span class="gov-chip"><i class="fa-solid fa-location-dot"></i> بني سويف</span>
+                    <span class="gov-chip"><i class="fa-solid fa-location-dot"></i> الفيوم</span>
                 </div>
-                <div class="delivery-item">
-                    <i class="fa-solid fa-drumstick-bite"></i>
-                    <span>١ كيلو لحمة</span>
+                <p class="rule-text">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>▪️ المنوفيه و الغربيه و بني سويف و الفيوم هيستلموا ٣ كيس ارز و كيلو لحمه لكل مستفيد فقط</span>
+                </p>
+            </div>
+
+            <div class="rule-box rule-group-2">
+                <div class="gov-badges">
+                    <span class="gov-chip"><i class="fa-solid fa-location-dot"></i> بورسعيد</span>
+                    <span class="gov-chip"><i class="fa-solid fa-location-dot"></i> السويس</span>
+                </div>
+                <p class="rule-text">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>▪️ بورسعيد و السويس يحصل كل مستفيد علي كيلو لحوم بالاضافه الي الشنطه المخصصه لة</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- ====== الكارت الثاني: الجمعيات + كرتونة سما ====== -->
+        <div class="update-card card-alert">
+            <div class="update-header">
+                <div class="update-tags">
+                    <span class="badge-purple">
+                        <i class="fa-solid fa-building-ngo"></i> تنبيهات الجمعيات والكراتين
+                    </span>
+                    <span class="badge-new">انتبه قبل تسجيل شكوى</span>
+                </div>
+                <span class="update-date">
+                    <i class="fa-solid fa-box-open"></i> مراجعة المكونات
+                </span>
+            </div>
+
+            <!-- جمعيات استلمت 1 كجم لحمة + 3 أرز -->
+            <div class="rule-box rule-group-purple">
+                <p class="rule-text">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>في جمعيات استلمت ( ١ كجم لحمه + ٣ ارز ) ومنها:</span>
+                </p>
+                <ul class="assoc-list">
+                    <li class="assoc-item">
+                        <i class="fa-solid fa-building"></i>
+                        <span>نهضة وتنمية شنشور</span>
+                    </li>
+                    <li class="assoc-item">
+                        <i class="fa-solid fa-building"></i>
+                        <span>الجمعية الشرعية لتعاون العاملين بالكتاب والسنة بتفهنا العزب محافظة الغربية</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- تنبيه كرتونة سما -->
+            <div class="rule-box rule-warning-red">
+                <p class="rule-text">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <span>ويرجى العلم أيضاً: كرتونة سما بها ١ كيس سكر وزن ٨٠٠ جرام وهو ما يعادل عدد ٢ كيس وزن كل منهم ٤٠٠ جرام</span>
+                </p>
+                <div class="warning-highlight">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>ناخد بالنا يا شباب قبل ما نسجل شكوى عدم مطابقة المكونات</span>
                 </div>
             </div>
         </div>
-        <!-- ====== نهاية كارت التحديث ====== -->
 
     </div>
 </div>
