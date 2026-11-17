@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="photo (3).jpg">
+    <title>آخر التحديثات | بوابة بنك الطعام المصري</title>
+
+    <!-- خط Cairo الحديث من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- مكتبة الأيقونات FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #047857;
+            --primary-hover: #065f46;
+            --primary-light: #ecfdf5;
+            --primary-glow: rgba(4, 120, 87, 0.2);
+
+            --accent-red: #e11d48;
+            --accent-red-light: #ffe4e6;
+            --accent-blue: #0284c7;
+            --accent-blue-light: #e0f2fe;
+            --accent-orange: #d97706;
+            --accent-orange-light: #fef3c7;
+
+            --bg-base: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.92);
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-subtle: rgba(226, 232, 240, 0.95);
+
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+            --shadow-hover: 0 20px 30px -10px rgba(4, 120, 87, 0.2);
+
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-full: 9999px;
+        }
+
+        body.dark-mode {
+            --primary: #10b981;
+            --primary-hover: #34d399;
+            --primary-light: #064e3b;
+            --primary-glow: rgba(16, 185, 129, 0.35);
+
+            --accent-red: #fb7185;
+            --accent-red-light: rgba(251, 113, 133, 0.15);
+            --accent-blue: #38bdf8;
+            --accent-blue-light: rgba(56, 189, 248, 0.15);
+            --accent-orange: #fbbf24;
+            --accent-orange-light: rgba(251, 191, 36, 0.15);
+
+            --bg-base: #090d16;
+            --bg-glass: rgba(15, 23, 42, 0.92);
+            --bg-card: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-subtle: rgba(51, 65, 85, 0.7);
+
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 12px 25px rgba(0, 0, 0, 0.55);
+            --shadow-hover: 0 20px 35px rgba(16, 185, 129, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                        border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                        color 0.2s ease,
+                        box-shadow 0.25s ease,
+                        transform 0.25s ease;
+        }
+
+        body {
+            position: relative;
+            background-color: var(--bg-base);
+            background-image:
+                radial-gradient(at 10% 10%, var(--primary-glow) 0px, transparent 40%),
+                radial-gradient(at 90% 90%, rgba(2, 132, 199, 0.08) 0px, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            background-image: url('لوجو بنك الطعام.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: min(580px, 85vw);
+            opacity: 0.12 !important;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body.dark-mode::before {
+            opacity: 0.10 !important;
+            filter: brightness(1.2);
+        }
+
+        header {
+            background: var(--bg-glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 2px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 14px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .system-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 2px solid var(--primary);
+            background: #fff;
+            padding: 2px;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        .brand-text h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -0.3px;
+        }
+
+        .brand-text p {
+            margin: 2px 0 0;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-subtle);
+            padding: 9px 18px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 13px;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-home-btn {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+        }
+
+        .back-home-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 28px auto 110px;
+            padding: 0 24px;
+        }
+
+        .page-intro-banner {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 20px 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .intro-title-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .intro-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border: 1px solid var(--primary);
+        }
+
+        .intro-title-box h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--text-main);
+        }
+
+        .intro-title-box p {
+            margin: 3px 0 0;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .last-sync-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 7px 16px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .updates-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .update-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-subtle);
+            border-right: 5px solid var(--primary);
+            border-radius: var(--radius-md);
+            padding: 24px 26px;
+            box-shadow: var(--shadow-sm);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .update-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .update-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .update-tags {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge-category {
+            padding: 5px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12.5px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .badge-new {
+            background: var(--accent-red);
+            color: #ffffff;
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            font-weight: 900;
+        }
+
+        .update-date {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .update-title {
+            margin: 0 0 16px;
+            font-size: 19px;
+            font-weight: 900;
+            color: var(--text-main);
+        }
+
+        .section-sub-label {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-sub-label i {
+            color: var(--primary);
+        }
+
+        /* شبكة المحافظات */
+        .gov-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .gov-chip {
+            background: var(--accent-blue-light);
+            color: var(--accent-blue);
+            border: 1.5px solid rgba(2, 132, 199, 0.3);
+            padding: 9px 20px;
+            border-radius: var(--radius-full);
+            font-size: 15px;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* صندوق المخصصات المستلمة */
+        .items-box {
+            background: var(--primary-light);
+            border: 2px dashed var(--primary);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .delivery-item {
+            background: var(--bg-card);
+            border: 1.5px solid var(--primary);
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .delivery-item i {
+            font-size: 18px;
+        }
+
+        .status-footer {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            padding: 8px 24px;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            z-index: 999;
+            box-shadow: var(--shadow-md);
+            white-space: nowrap;
+        }
+
+        .status-dot-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            background: #10b981;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            left: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.5);
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            75%, 100% { transform: scale(2); opacity: 0; }
+        }
+
+        .datetime-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            direction: ltr;
+        }
+
+        .date-badge, .clock-badge {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-subtle);
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12.5px;
+            font-weight: 800;
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .clock-badge {
+            font-family: 'Segoe UI', monospace;
+            font-weight: 900;
+        }
+
+        @media (max-width: 860px) {
+            .header-content { flex-direction: column; text-align: center; gap: 14px; }
+            .brand { flex-direction: column; }
+            .status-footer { width: calc(100% - 24px); flex-direction: column; gap: 6px; padding: 8px 14px; border-radius: 18px; font-size: 11.5px; }
+            .datetime-group { justify-content: center; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body id="pageBody">
+
+<header>
+    <div class="header-content">
+        <div class="brand">
+            <img src="photo.jpg" alt="EFB Logo" class="system-logo" onerror="this.src='photo (3).jpg'">
+            <div class="brand-text">
+                <h1>بنك الطعام المصري | آخر التحديثات</h1>
+                <p>التعليمات اليومية وتحديثات الصرف والتوزيع</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="theme-toggle-btn back-home-btn" onclick="goBackHome()">
+                <i class="fa-solid fa-arrow-right"></i>
+                <span>العودة للرئيسية</span>
+            </button>
+
+            <button class="theme-toggle-btn" id="themeBtn" onclick="toggleAppTheme()">
+                <span id="themeIcon"><i class="fa-solid fa-moon"></i></span>
+                <span id="themeText">الوضع الليلي</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- بانر تعريف الصفحة -->
+    <div class="page-intro-banner">
+        <div class="intro-title-box">
+            <div class="intro-icon">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+            <div>
+                <h2>سجل آخر التحديثات</h2>
+                <p>متابعة أحدث التحديثات والتعليمات الخاصة بصرف المستحقين</p>
+            </div>
+        </div>
+        <div class="last-sync-badge">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>محدث</span>
+        </div>
+    </div>
+
+    <div class="updates-list">
+
+        <!-- ====== بداية كارت التحديث (انسخ هذا الكارت عند إضافة تحديث جديد مستقبلاً) ====== -->
+        <div class="update-card">
+            <div class="update-header">
+                <div class="update-tags">
+                    <span class="badge-category">
+                        <i class="fa-solid fa-box-open"></i> تحديث الصرف والتوزيع
+                    </span>
+                    <span class="badge-new">جديد</span>
+                </div>
+                <span class="update-date">
+                    <i class="fa-regular fa-calendar"></i> 17 / 11 / 2026
+                </span>
+            </div>
+
+            <h3 class="update-title">تفاصيل الصرف للمحافظات المحددة</h3>
+
+            <div class="section-sub-label">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>المحافظات:</span>
+            </div>
+            <div class="gov-grid">
+                <span class="gov-chip"><i class="fa-solid fa-map-pin"></i> الغربية</span>
+                <span class="gov-chip"><i class="fa-solid fa-map-pin"></i> المنوفية</span>
+                <span class="gov-chip"><i class="fa-solid fa-map-pin"></i> بني سويف</span>
+                <span class="gov-chip"><i class="fa-solid fa-map-pin"></i> الفيوم</span>
+            </div>
+
+            <div class="section-sub-label">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span>تفاصيل الاستلام:</span>
+            </div>
+            <div class="items-box">
+                <span style="font-weight: 800; font-size: 15px;">هيستلموا:</span>
+                <div class="delivery-item">
+                    <i class="fa-solid fa-bowl-rice"></i>
+                    <span>٣ كيس أرز</span>
+                </div>
+                <div class="delivery-item">
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                    <span>١ كيلو لحمة</span>
+                </div>
+            </div>
+        </div>
+        <!-- ====== نهاية كارت التحديث ====== -->
+
+    </div>
+</div>
+
+<footer class="status-footer">
+    <div class="status-dot-wrapper">
+        <span class="status-dot"></span>
+        <span>بوابة بنك الطعام المصري | سجل التحديثات</span>
+    </div>
+
+    <div class="datetime-group">
+        <div id="liveDate" class="date-badge">
+            <i class="fa-regular fa-calendar-days"></i>
+            <span>--</span>
+        </div>
+        <div id="liveClock" class="clock-badge">--:--:-- --</div>
+    </div>
+</footer>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('efb_theme');
+        if (savedTheme === 'dark') {
+            document.getElementById('pageBody').classList.add('dark-mode');
+            document.getElementById('themeIcon').innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('themeText').textContent = 'الوضع النهاري';
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    });
+
+    function goBackHome() {
+        if (window.history.length > 1 && document.referrer !== '') {
+            window.history.back();
+        } else {
+            window.location.href = 'index.html';
+        }
+    }
+
+    function toggleAppTheme() {
+        const body = document.getElementById('pageBody');
+        const icon = document.getElementById('themeIcon');
+        const text = document.getElementById('themeText');
+
+        body.classList.toggle('dark-mode');
+
+        const isDark = body.classList.contains('dark-mode');
+        if (isDark) {
+            icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            text.textContent = 'الوضع النهاري';
+            localStorage.setItem('efb_theme', 'dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            text.textContent = 'الوضع الليلي';
+            localStorage.setItem('efb_theme', 'light');
+            document.documentElement.removeAttribute('data-theme');
+        }
+    }
+
+    function updateDateTime() {
+        const now = new Date();
+        document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateString = now.toLocaleDateString('en-US', dateOptions);
+        const dateContainer = document.getElementById('liveDate');
+        if (dateContainer) {
+            dateContainer.innerHTML = `<i class="fa-regular fa-calendar-days"></i> <span>${dateString}</span>`;
+        }
+    }
+</script>
+
+</body>
+</html>
